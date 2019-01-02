@@ -1,0 +1,12 @@
+{
+	"extends": "English",
+	"dictionaries": {
+		"doodad": {
+			"modAddContentsLuminousMushroom": ["Mycena chlorophos", "A tool with which to say hello."]
+		},
+		"item": {
+			"modAddContentsLuminousMushroom": ["Mycena chlorophos", "A tool with which to say hello."],
+			"modAddContentsLuminousMushroomLamp": ["lamp", "A tool with which to say hello."]
+		}
+	}
+}

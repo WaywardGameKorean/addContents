@@ -1,0 +1,18 @@
+{
+	"name": "Add Contents",
+	"description": "Hello World is an example mod, shown in the Modding Guide, located here: https://waywardgame.github.io/",
+	"version": "1.0.0",
+	"author": "Your Name Here",
+	"compatibleMinorVersions": [
+		7
+	],
+	"unloadable": true,
+	"file": "out/addContents.js",
+	"languages": [
+		"lang/english",
+		"lang/korean"
+	],
+	"tags": [
+		"Item"
+	]
+}

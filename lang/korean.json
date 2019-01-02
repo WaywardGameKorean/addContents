@@ -1,0 +1,12 @@
+{
+	"extends": "Full-Korean",
+	"dictionaries": {
+		"doodad": {
+			"modAddContentsLuminousMushroom": ["받침애주름버섯", "밝게 빛나고 있는 버섯입니다.\n먹을수 있는지는 모르겟습니다."]
+		},
+		"item": {
+			"modAddContentsLuminousMushroom": ["받침애주름버섯", "심으면 밝은 빛이 나는 버섯입니다."],
+			"modAddContentsLuminousMushroomLamp": ["발광버섯램프", "옅게 빛이 나고있습니다."]
+		}
+	}
+}
