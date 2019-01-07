@@ -1,4 +1,4 @@
-import { DamageType, SkillType, DoodadType, ItemType, ItemTypeGroup, RecipeLevel, EquipType } from "Enums";
+import { DamageType, SkillType, DoodadType, ItemType, ItemTypeGroup, RecipeLevel, EquipType, TerrainType, GrowingStage } from "Enums";
 import { ActionType } from "action/IAction";
 import { itemGroupDescriptions, RecipeComponent } from "item/Items";
 import Mod from "mod/Mod";
@@ -10,7 +10,6 @@ export default class AddContents extends Mod {
 	 */
 	public onLoad(): void {
 		itemGroupDescriptions[ItemTypeGroup.Food].types.push(this.itemLuminousMushroom)
-		itemGroupDescriptions[ItemTypeGroup.LightSource].types.push(this.itemLuminousMushroomLamp)
 	}
 
 	/**
@@ -18,9 +17,7 @@ export default class AddContents extends Mod {
 	 */
 	public onUnload(): void {
 		const foodItems = itemGroupDescriptions[ItemTypeGroup.Food].types;
-		const lightSourceItems = itemGroupDescriptions[ItemTypeGroup.LightSource].types;
 		foodItems.splice(foodItems.indexOf(this.itemLuminousMushroom), 1);
-		lightSourceItems.splice(foodItems.indexOf(this.itemLuminousMushroomLamp), 1);
 	}
 
 	////////////////////////////////////
@@ -30,7 +27,7 @@ export default class AddContents extends Mod {
 		use: [ActionType.Eat, ActionType.Plant],
 		onUse : {
 			[ActionType.Eat]: [-2, 2, 2, -2],
-			[ActionType.Plant]: DoodadType[18]//Registry<AddContents, DoodadType>().get("doodadLuminousMushroom")
+			[ActionType.Plant]: Registry<AddContents, DoodadType>().get("doodadLuminousMushroom")
 		},
 		skillUse : SkillType.Mycology,
 		decayMax : 20000,
@@ -69,27 +66,25 @@ export default class AddContents extends Mod {
 	//
 
 	@Register.doodad("LuminousMushroom", {
-		decayMax : 20000,
-		allowedTiles : [8, 29, 6, 24],
-		canGrow : true,
-		canGrowInCaves : true,
-		canTrampleWhenMature : true,
-		gather : {
-			4 : [
-				{type : this.itemLuminousMushroom}
+		skillUse:SkillType.Mycology,
+		allowedTiles:[TerrainType.Dirt, TerrainType.FertileSoil, TerrainType.Grass, TerrainType.WoodenFlooring],
+		canTrampleWhenMature:true,
+		canGrowInCaves:true,
+		isFlammable:true,
+		graphicVariation:true,
+		particles: {r: 243, g: 219, b: 202},
+		canGrow:true,
+		decayMax:750,
+		isFungi:true,
+		spreadMax:3, 
+		gather: {
+			[GrowingStage.Flowering]:[
+				{type: Registry<AddContents, ItemType>().get("itemLuminousMushroom")},
 			],
-			5 : [
-				{type : this.itemLuminousMushroom}
+			[GrowingStage.Ripening]:[
+				{type: Registry<AddContents, ItemType>().get("itemLuminousMushroom")}
 			]
 		},
-		gatherSkillUse : SkillType.Mycology,
-		graphicVariation : true,
-		isFlammable : true,
-		isFungi : true,
-		particles : {r: 132, g: 96, b:44},
-		spreadMax : 3,
-		providesLight : 1
 	})
-
 	public doodadLuminousMushroom: DoodadType;
 }
