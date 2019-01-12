@@ -4,26 +4,18 @@ import { itemGroupDescriptions, RecipeComponent } from "item/Items";
 import Mod from "mod/Mod";
 import Register, { Registry } from "mod/ModRegistry";
 
-export default class AddContents extends Mod {
-	/**
-	 * Executed when a save is loaded.
-	 */
-	public onLoad(): void {
-		itemGroupDescriptions[ItemTypeGroup.Food].types.push(this.itemLuminousMushroom)
-	}
+interface IAddContentsData {
+	seed: number;
+}
 
-	/**
-	 * Executed when a save is unloaded.
-	 */
-	public onUnload(): void {
-		const foodItems = itemGroupDescriptions[ItemTypeGroup.Food].types;
-		foodItems.splice(foodItems.indexOf(this.itemLuminousMushroom), 1);
-	}
+export default class AddContents extends Mod {
+	@Mod.instance<AddContents>("AddContents")
+	public static readonly INSTANCE: AddContents;
 
 	////////////////////////////////////
 	// Items
 	//
-	@Register.item("LuminousMushroom", {
+	@Register.item("LuminousMushroom", { //받침애주름버섯
 		use: [ActionType.Eat, ActionType.Plant],
 		onUse : {
 			[ActionType.Eat]: [-2, 2, 2, -2],
@@ -38,7 +30,7 @@ export default class AddContents extends Mod {
 	})
 	public itemLuminousMushroom: ItemType;
 
-	@Register.item("LuminousMushroomLamp", {
+	@Register.item("LuminousMushroomLamp", { //형광버섯램프
 		attack : 1,
 		damageType : DamageType.Blunt,
 		decayMax : 50000,
@@ -61,11 +53,16 @@ export default class AddContents extends Mod {
 	})
 	public itemLuminousMushroomLamp: ItemType;
 
+	// @Register.item("Pomegranate", { //석류
+	// 	use : []
+	// })
+	// public itemPomegranate: ItemType;
+
 	////////////////////////////////////
 	// Doodads
 	//
 
-	@Register.doodad("LuminousMushroom", {
+	@Register.doodad("LuminousMushroom", { //받침에주름버섯 - gather 에러
 		skillUse:SkillType.Mycology,
 		allowedTiles:[TerrainType.Dirt, TerrainType.FertileSoil, TerrainType.Grass, TerrainType.WoodenFlooring],
 		canTrampleWhenMature:true,
@@ -81,10 +78,29 @@ export default class AddContents extends Mod {
 			[GrowingStage.Flowering]:[
 				{type: Registry<AddContents, ItemType>().get("itemLuminousMushroom")},
 			],
-			[GrowingStage.Ripening]:[
-				{type: Registry<AddContents, ItemType>().get("itemLuminousMushroom")}
-			]
-		},
+			//[GrowingStage.Ripening]:[
+			//	{type: Registry<AddContents, ItemType>().get("itemLuminousMushroom")}
+			//]
+		}
 	})
 	public doodadLuminousMushroom: DoodadType;
+
+	@Mod.saveData<AddContents>("AddContents")
+	public data: IAddContentsData;
+	public firstLoad = true;
+
+	/**
+	 * Executed when a save is loaded.
+	 */
+	public onLoad(): void {
+		itemGroupDescriptions[ItemTypeGroup.Food].types.push(this.itemLuminousMushroom)
+	}
+
+	/**
+	 * Executed when a save is unloaded.
+	 */
+	public onUnload(): void {
+		const foodItems = itemGroupDescriptions[ItemTypeGroup.Food].types;
+		foodItems.splice(foodItems.indexOf(this.itemLuminousMushroom), 1);
+	}
 }

@@ -1072,16 +1072,7 @@ define("player/IMessageManager",["require","exports"],function(e,t){var a;Object
 define("multiplayer/packets/client/AddPlayerPacket",["require","exports","language/dictionary/Message","language/Translation","multiplayer/packets/ClientPacket","multiplayer/packets/IPacket","player/IMessageManager","player/MessageManager","utilities/Log"],function(e,t,a,i,n,o,r,s,l){Object.defineProperty(t,"__esModule",{value:!0});class u extends n.default{process(){const e=game.addPlayer(this.playerOptions);return e.isConnecting=!0,e.wasAbsentPlayer||e.setup(this.playerOptions.completedMilestones),l.default.info(l.LogSource.Chat)(i.default.message(a.default.MultiplayerPlayerConnected).getString(e.getName())),s.default.toAll((t,i)=>i!==e&&t.source(r.Source.Multiplayer).send(a.default.MultiplayerPlayerConnected,e.getName())),multiplayer.updateGlobalServerDirectory(),e.id}}__decorate([o.NetworkProperty(o.NetworkPropertyType.Generic)],u.prototype,"playerOptions",void 0),__decorate([Override],u.prototype,"process",null),t.default=u}),
 
 define("multiplayer/packets/client/PausePacket",["require","exports","multiplayer/packets/ClientPacket","multiplayer/packets/IPacket"],function(e,t,a,i){Object.defineProperty(t,"__esModule",{value:!0});class n extends a.default{process(){game.setPaused(this.paused,this.showChatMessage),this.paused||multiplayer.clearSyncPacketsWaiting()}}__decorate([i.NetworkProperty(i.NetworkPropertyType.Bool)],n.prototype,"paused",void 0),__decorate([i.NetworkProperty(i.NetworkPropertyType.Bool)],n.prototype,"showChatMessage",void 0),__decorate([Override],n.prototype,"process",null),t.default=n}),
-/**
- * Copyright Unlok, Vaughn Royko 2011-2018
- * http://www.unlok.ca
- *
- * Credits & Thanks:
- * http://www.unlok.ca/credits-thanks/
- *
- * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
- */
+
 define("mod/IHookManager",["require","exports"],function(e,t){var a,i;Object.defineProperty(t,"__esModule",{value:!0}),function(e){e.CanClientMove="canClientMove",e.CanConsumeItem="canConsumeItem",e.CanCreatureAttack="canCreatureAttack",e.CanCreatureMove="canCreatureMove",e.CanCreatureSpawn="canCreatureSpawn",e.CanDoodadSpawn="canDoodadSpawn",e.CanDropItem="canDropItem",e.CanNPCAttack="canNPCAttack",e.CanNPCMove="canNPCMove",e.CanNPCSpawn="canNPCSpawn",e.CanPickupDoodad="canPickupDoodad",e.CanPlayerAttack="canPlayerAttack",e.CanSeeCreature="canSeeCreature",e.CanSeeNPC="canSeeNPC",e.GetAmbientColor="getAmbientColor",e.GetAmbientColorCave="getAmbientColorCave",e.GetAmbientColorDay="getAmbientColorDay",e.GetAmbientColorNight="getAmbientColorNight",e.GetFogColor="getFogColor",e.GetAmbientLightLevel="getAmbientLightLevel",e.GetCreatureSpriteBatchLayer="getCreatureSpriteBatchLayer",e.GetMaxSpritesForLayer="getMaxSpritesForLayer",e.GetPlayerFieldOfViewRadius="getPlayerFieldOfViewRadius",e.GetPlayerMaxHealth="getPlayerMaxHealth",e.GetPlayerMaxWeight="getPlayerMaxWeight",e.GetPlayerMovementIntent="getPlayerMovementIntent",e.GetPlayerSpriteBatchLayer="getPlayerSpriteBatchLayer",e.GetPlayerWeightMovementPenalty="getPlayerWeightMovementPenalty",e.GetPlayerWeightStatus="getPlayerWeightStatus",e.GetCameraPosition="getCameraPosition",e.GetTileLightLevel="getTileLightLevel",e.GetTilePenalty="getTilePenalty",e.GetZoomLevel="getZoomLevel",e.IsHumanSwimming="isHumanSwimming",e.IsTileBlocked="isTileBlocked",e.OnBindLoop="onBindLoop",e.OnBuild="onBuild",e.OnContainerItemAdd="onContainerItemAdd",e.OnContainerItemRemove="onContainerItemRemove",e.OnContainerItemUpdate="onContainerItemUpdate",e.OnCraft="onCraft",e.OnCreateWorld="onCreateWorld",e.OnCreatureDamage="onCreatureDamage",e.OnCreatureDeath="onCreatureDeath",e.OnCreatureSpawn="onCreatureSpawn",e.OnDigTreasure="onDigTreasure",e.OnDisplayMessage="onDisplayMessage",e.OnDoodadSpawn="onDoodadSpawn",e.OnGameEnd="onGameEnd",e.OnGameScreenVisible="onGameScreenVisible",e.OnGameStart="onGameStart",e.OnGameTickEnd="onGameTickEnd",e.OnGameTickStart="onGameTickStart",e.OnEntityKill="onEntityKill",e.OnHumanSkillChange="onHumanSkillChange",e.OnInventoryItemAdd="onInventoryItemAdd",e.OnInventoryItemRemove="onInventoryItemRemove",e.OnInventoryItemUpdate="onInventoryItemUpdate",e.OnItemDamage="onItemDamage",e.OnItemEquip="onItemEquip",e.OnItemQuickslot="onItemQuickslot",e.OnLanguageLoad="onLanguageLoad",e.OnMove="onMove",e.OnMoveComplete="onMoveComplete",e.OnMoveDirectionUpdate="onMoveDirectionUpdate",e.OnNoInputReceived="onNoInputReceived",e.OnNPCDamage="onNPCDamage",e.OnNPCDeath="onNPCDeath",e.OnNPCSpawn="onNPCSpawn",e.OnOpenBook="onOpenBook",e.OnPickupDoodad="onPickupDoodad",e.OnPlayerDamage="onPlayerDamage",e.OnPlayerDeath="onPlayerDeath",e.OnPlayerJoin="onPlayerJoin",e.OnPlayerLeave="onPlayerLeave",e.OnPlayerTickEnd="onPlayerTickEnd",e.OnPlayerTickStart="onPlayerTickStart",e.OnPlayerWalkToTilePath="onPlayerWalkToTilePath",e.OnQueueSoundEffect="onQueueSoundEffect",e.OnReadMap="onReadMap",e.OnRenderOverlay="onRenderOverlay",e.OnSailToCivilization="onSailToCivilization",e.OnSpawnCreatureFromGroup="onSpawnCreatureFromGroup",e.OnTileUpdate="onTileUpdate",e.OnTurnEnd="onTurnEnd",e.OnTurnStart="onTurnStart",e.OnUpdateWeight="onUpdateWeight",e.OnWriteNote="onWriteNote",e.OnWrittenNote="onWrittenNote",e.PostExecuteAction="postExecuteAction",e.PostFieldOfView="postFieldOfView",e.PostGenerateWorld="postGenerateWorld",e.PostRender="postRender",e.PostRenderPostProcess="postRenderPostProcess",e.PostRenderWorld="postRenderWorld",e.PostSaveGame="postSaveGame",e.PreExecuteAction="preExecuteAction",e.PreExecuteCommand="preExecuteCommand",e.PreLoadWorldDifferences="preLoadWorldDifferences",e.PreRender="preRender",e.PreRenderPostProcess="preRenderPostProcess",e.PreRenderWorld="preRenderWorld",e.PreSaveGame="preSaveGame",e.ProcessInput="processInput",e.ShouldDisplayMessage="shouldDisplayMessage",e.ShouldRender="shouldRender",e.ShouldStopWalkToTileMovement="shouldStopWalkToTileMovement",e.OnCreatureTamed="onCreatureTamed"}(a=t.Hook||(t.Hook={})),t.globalHooks=[a.OnQueueSoundEffect],function(e){e[e.Lowest=-2e3]="Lowest",e[e.Low=-1e3]="Low",e[e.Normal=0]="Normal",e[e.High=1e3]="High",e[e.Highest=2e3]="Highest"}(i=t.HookPriority||(t.HookPriority={}))}),
 
 define("multiplayer/packets/PlayerTargetedClientPacket",["require","exports","multiplayer/packets/ClientPacket"],function(e,t,a){Object.defineProperty(t,"__esModule",{value:!0});class i extends a.default{preProcess(){void 0!==this.pid&&void 0===this.player&&(this.player=players[this.pid])}preWriteData(){this.writeUint8(this.pid)}preReadData(){this.pid=this.readUint8()}}__decorate([Override],i.prototype,"preProcess",null),__decorate([Override],i.prototype,"preWriteData",null),__decorate([Override],i.prototype,"preReadData",null),t.default=i}),
@@ -4786,16 +4777,27 @@ define("item/Items", ["require", "exports", "action/IAction", "creature/ICreatur
         }
         , flammable:!0, worth:5
     }
-    , o(n.ItemType.SwitchgrassSeeds, n.ItemTypeGroup.Seed), t.itemDescriptions[n.ItemType.Apple]= {
-        use:[a.ActionType.Eat], decaysInto:n.ItemType.RottingVegetation, decayMax:8e3, returnOnUse:[n.ItemType.AppleSeeds, !0], skillUse:n.SkillType.Botany, weight:.4, onBurn:[n.ItemType.PileOfAsh], onUse: {
+    , o(n.ItemType.SwitchgrassSeeds, n.ItemTypeGroup.Seed), 
+    t.itemDescriptions[n.ItemType.Apple]= {
+        use:[a.ActionType.Eat], 
+        decaysInto:n.ItemType.RottingVegetation, 
+        decayMax:8e3, 
+        returnOnUse:[n.ItemType.AppleSeeds, !0], 
+        skillUse:n.SkillType.Botany, 
+        weight:.4, 
+        onBurn:[n.ItemType.PileOfAsh], 
+        onUse: {
             [a.ActionType.Eat]: [1, 8, 2, 1]
         }
         , dismantle: {
-            items: [[n.ItemType.AppleSeeds, 1]], skill: n.SkillType.Botany, required: n.ItemTypeGroup.Sharpened
+            items: [[n.ItemType.AppleSeeds, 1]], 
+            skill: n.SkillType.Botany, 
+            required: n.ItemTypeGroup.Sharpened
         }
         , worth:5
     }
-    , o(n.ItemType.Apple, n.ItemTypeGroup.Food, n.ItemTypeGroup.Fruit), t.itemDescriptions[n.ItemType.SpiderEggs]= {
+    , o(n.ItemType.Apple, n.ItemTypeGroup.Food, n.ItemTypeGroup.Fruit), 
+    t.itemDescriptions[n.ItemType.SpiderEggs]= {
         decaysInto:n.ItemType.SpiderSilk, spawnOnDecay:n.CreatureType.GiantSpider, spawnOnBreak:n.CreatureType.GiantSpider, spawnableTiles:i.SpawnableTiles.Ground, use:[a.ActionType.Eat], weight:.3, onBurn:[n.ItemType.PileOfAsh], decayMax:3e3, onUse: {
             [a.ActionType.Eat]: [-1, -2, 2, -1]
         }
@@ -6920,7 +6922,2451 @@ define("ui/functional/IFunctionalSortable",["require","exports"],function(e,t){O
 
 define("ui/screens/BaseScreen",["require","exports"],function(e,t){Object.defineProperty(t,"__esModule",{value:!0});class a{constructor(){this.element=$(this.selector()),this.visible=!1,this.bindElements()}selector(){throw new Error("Not implemented")}bindElements(){}unbindElements(){}isVisible(){return this.visible}show(e){this.visible||(this.visible=!0,ui.hideContextMenu(),this.doShow(),this.onShow(e))}doShow(){this.element.quickShow()}hide(){this.visible&&(this.visible=!1,this.doHide(),this.onHide())}doHide(){this.element.quickHide()}onMouseDown(e){}onMouseUpOrLeave(e){}onMouseMove(e){}onMouseScroll(e){}onKeyDown(e,t,a){}onKeyUp(e,t,a){}onShow(e){}onHide(){}}t.default=a}),
 
-define("ui/screens/InGameScreen",["require","exports","action/ActionExecutor","action/IAction","creature/Creature","doodad/Doodads","doodad/doodads/Doodad","entity/IEntity","entity/IStats","Enums","item/IItem","item/ItemRecipeRequirementChecker","item/Items","language/Dictionaries","language/dictionary/Message","language/dictionary/UiTranslation","language/Messages","language/Translation","mod/IHookManager","newui/BindingManager","newui/INewUi","newui/screen/IScreen","newui/screen/screens/game/component/Dialog","player/IMessageManager","player/Skills","steamworks/ISteamworks","tile/Terrains","ui/screens/BaseScreen","utilities/Arrays","utilities/Async","utilities/enum/Enums","utilities/iterable/Collectors","utilities/Log","utilities/math/Math2","utilities/Objects","utilities/TileHelpers"],function(e,t,a,i,n,o,r,s,l,u,d,p,c,m,h,y,g,f,T,S,I,v,w,M,b,k,C,D,A,P,G,R,x,B,E,L){var O;Object.defineProperty(t,"__esModule",{value:!0}),function(e){e[e.Weight=0]="Weight",e[e.Attack=1]="Attack",e[e.Defense=2]="Defense",e[e.Reputation=3]="Reputation"}(O=t.TextElementId||(t.TextElementId={}));const F=[u.Bindable.GameContextMenu1,u.Bindable.GameContextMenu2,u.Bindable.GameContextMenu3,u.Bindable.GameContextMenu4,u.Bindable.GameContextMenu5,u.Bindable.GameContextMenu6,u.Bindable.GameContextMenu7,u.Bindable.GameContextMenu8,u.Bindable.GameContextMenu9,u.Bindable.GameContextMenu10,u.Bindable.GameContextMenu11,u.Bindable.GameContextMenu12,u.Bindable.GameContextMenu13,u.Bindable.GameContextMenu14,u.Bindable.GameContextMenu15,u.Bindable.GameContextMenu16,u.Bindable.GameContextMenu17,u.Bindable.GameContextMenu18,u.Bindable.GameContextMenu19,u.Bindable.GameContextMenu20,u.Bindable.GameContextMenu21,u.Bindable.GameContextMenu22,u.Bindable.GameContextMenu23,u.Bindable.GameContextMenu24];var _;!function(e){e[e.WaitingForDelay=0]="WaitingForDelay",e[e.HasDelay=1]="HasDelay",e[e.NoDelay=2]="NoDelay"}(_||(_={}));class H extends D.default{constructor(){super(...arguments),this.shouldResetMovement=!1,this.shouldCancelSorting=!1,this.isQuickmoving=!1,this.blockedByNewUi=!1,this.elementContainerDialogs=[],this.elementOtherDialogs=[],this.sortingCancelled=!1,this.onInterrupt=((e,t)=>{x.default.info(x.LogSource.Ui)("Interrupt opened"),game.paused||!game.playing||!game.isRealTimeMode()||multiplayer.isConnected()||localPlayer.isResting()||game.setPaused(!0),game.playing&&localPlayer&&(this.shouldResetMovement=!0,this.shouldCancelSorting=!0)}),this.onInterruptClosed=((e,t)=>{x.default.info(x.LogSource.Ui)("Interrupt closed"),this.element[0].focus();const a=newui.getScreen(v.ScreenId.Interrupt);a&&a.visibleMenu||!game.paused||this.isOverlayVisible()||multiplayer.isConnected()||game.setPaused(!1,game.getTurnMode()===u.TurnMode.RealTime),S.bindingManager.removeAllPressStates()})}selector(){return"#screen-in-game"}bindElements(){this.elementCanvas=$("canvas#game"),this.elementVisibleInGame=$(".visible-in-game"),this.elementStats=$("#stats"),this.elementStatHealth=$("[data-stat='Health']").children(".bar"),this.elementStatStamina=$("[data-stat='Stamina']").children(".bar"),this.elementStatHunger=$("[data-stat='Hunger']").children(".bar"),this.elementStatThirst=$("[data-stat='Thirst']").children(".bar"),this.elementStatBurn=$(".status-effects").find(".burn"),this.elementStatBleed=$(".status-effects").find(".bleed"),this.elementStatPoison=$(".status-effects").find(".poison"),this.elementAttributeWeight=$("[data-attribute='Weight']").children(".attribute"),this.elementAttributeAttack=$("[data-attribute='Attack']").children(".attribute"),this.elementAttributeDefense=$("[data-attribute='Defense']").children(".attribute"),this.elementAttributeReputation=$("[data-attribute='Reputation']").children(".attribute"),this.elementReputationBenignity=$("[data-attribute='Reputation']").find(".benignity"),this.elementReputationMalignity=$("[data-attribute='Reputation']").find(".malignity"),this.elementQuickSlotsContainer=$("#quick-slots");const e=this;this.elementActions=$("#actions"),this.elementDialogs=$("#dialogs"),this.elementDialogInventory=$("#inventory"),this.elementDialogInventoryContainer=this.elementDialogInventory.children("#container-inventory"),this.elementDialogCrafting=$("#crafting"),this.elementDialogCraftingContainer=this.elementDialogCrafting.find("#container-crafting"),this.elementDialogCraftingContainer.on("click",".item",function(t){localPlayer.hasDelay()||(e.onCraftingItemClick($(this)),e.unSelectElements()),t.preventDefault(),t.stopPropagation()}),this.elementDialogDismantleContainer=this.elementDialogCrafting.find("#container-dismantle"),this.elementDialogDismantleContainer.on("click",".item",function(t){if(!localPlayer.hasDelay()){const t=itemManager.getItemForHuman(localPlayer,parseInt($(this).data("item-type"),10));e.onDismantleItemClick(t),e.unSelectElements()}t.preventDefault(),t.stopPropagation()}),this.elementDialogCraftingButton=this.elementDialogCrafting.find(".tabs .crafting-tab"),this.elementDialogDismantleButton=this.elementDialogCrafting.find(".tabs .dismantle-tab"),this.elementDialogCraftingButton.click(this.toggleCraftingTab.bind(this,"crafting",!1)),this.elementDialogDismantleButton.click(this.toggleCraftingTab.bind(this,"dismantle",!1)),this.toggleCraftingTabElements("crafting"),this.elementDialogEquipment=$("#equipment"),this.elementDialogEquipmentContainer=this.elementDialogEquipment.children("#container-equipment"),this.elementDialogEquipment.on("mouseup","div[data-checkbox-id]",function(t){e.changeEquipmentOption($(this).data("checkbox-id"))});const t=(e,t)=>{const a=e.data("checkbox-id"),i=this.elementDialogEquipmentContainer.find(`ul[data-equip-slot="${a}"]`);t?i.addClass("highlight"):i.removeClass("highlight")};this.elementDialogEquipment.on({mouseenter:function(){t($(this),!0)},mouseleave:function(){t($(this),!1)}},"div[data-checkbox-id]"),this.element.on("input change",".filter",function(){e.onFilterInput($(this).parent().find(".container"))}),$(document).functionalTooltip({selector:".item:not(.sortable-helper),[data-tooltip],.container[data-attribute='Reputation'],.container[data-attribute='Attack'],.container[data-attribute='Defense']",trackMouse:!0,position:{topOffset:15,leftOffset:20},onClose(){e.unSelectElements()},content(){return e.getTooltipHtml(this)}}),this.elementVersion=$("#version"),$(".ui-helper-hidden-accessible").remove(),$(document).contextmenu(this.setupContextMenu()),this.bindSortable($(".sortable, #game, .quick-slot"))}changeEquipmentOption(e){const t="leftHand"===e,a=t?!saveDataGlobal.options.leftHand:!saveDataGlobal.options.rightHand;game.updateOption(localPlayer,e,a),ui.setCheckboxValue(this.elementDialogEquipment,e,a),localPlayer.messages.source(M.Source.Meta).send(h.default.YouHaveEnabledDisabled,f.default.message(a?h.default.Enabled:h.default.Disabled),f.default.message(t?h.default.LeftHand:h.default.RightHand))}toggleCraftingTab(e,t=!0){if(this.elementDialogCrafting.isVisible()){if(t){const t=this.elementDialogCraftingContainer.isVisible();if(t&&"crafting"===e||!t&&"dismantle"===e)return void this.toggleDialog(this.elementDialogCrafting)}}else this.toggleDialog(this.elementDialogCrafting);this.toggleCraftingTabElements(e)}toggleCraftingTabElements(e){"crafting"===e?(this.elementDialogDismantleButton.removeClass("active"),this.elementDialogCraftingButton.addClass("active"),this.elementDialogCraftingContainer.show(),this.elementDialogDismantleContainer.hide()):(this.elementDialogDismantleButton.addClass("active"),this.elementDialogCraftingButton.removeClass("active"),this.elementDialogCraftingContainer.hide(),this.elementDialogDismantleContainer.show())}unbindElements(){}bindSortable(e){const t=(e,t,a=!1)=>{this.highlightItemElementByItemId(e,t,a)};e.functionalSortable({connectWith:".sortable, #game, .quick-slot",appendTo:$("#screen-in-game"),zIndex:999999,distance:10,cursorAt:{top:18,left:18},onlyReceive:!0,onStart:e=>{window.getSelection().removeAllRanges(),this.tooltipDisable(),this.sortableElement=e.item?e.item.get(0):void 0,this.sortableElementPosition=void 0,this.sortableElementTargetContainer=void 0,this.sortingCancelled=!1,this.onSortableAction=void 0,ui.getBody().addClass("dragging"),$(".item[data-selected-count]").each(function(){t($(this).data("item-id"),!1,!0)}),this.blurInputs()},onOver:e=>{e.targetContainer&&(this.sortableElementTargetContainer=e.targetContainer)},onChange:e=>{e.placeholder&&(this.sortableElementPosition=e.placeholder.index()-1)},onOut:e=>{this.sortableElementTargetContainer=void 0},onReceive:e=>{this.onSortableItemReceive(e)},onStop:e=>{const t=e.initialContainer;this.sortingCancelled||(this.onSortableAction?this.onSortableAction():e.item&&this.insertItemStringToContainer(e.item,t),this.saveItemOrder(t)),this.tooltipEnable(),this.sortableElement=void 0,this.sortableElementPosition=void 0,this.sortableElementTargetContainer=void 0,this.sortingCancelled=!1,this.onSortableAction=void 0,ui.getBody().removeClass("dragging")}})}pressHotKey(e){if(this.contextMenuOpen&&this.contextMenu&&this.contextMenuTarget){let t=!1;for(let a=0;a<this.contextMenu.actions.length;a++)if(void 0!==this.contextMenu.actions[a].keybind&&(t=!0,this.contextMenu.actions[a].keybind===e))return this.onContextMenuAction(this.contextMenuTarget,this.contextMenu.actions[a]),$(document).contextmenu("close"),!0;if(!t&&this.contextMenu.actions.length>e)return this.onContextMenuAction(this.contextMenuTarget,this.contextMenu.actions[e]),$(document).contextmenu("close"),!0}return!1}useQuickSlot(e){const t=this.getQuickSlotItemElement(e);if(t.hasClass("disabled"))return!1;const a=t.children("li").first();if(a&&1===a.length){const t=a.getItemType();if(t){let n=game.items[a.data("item-id")];if(!n||!itemManager.isInInventory(n)){const e=itemManager.getItemsInContainerByType(localPlayer.inventory,t,!0);if(!(e.length>0))return!1;n=e[0]}const o=c.itemDescriptions[t];if(!o)return!1;if(this.cancelSorting(),!localPlayer.hasDelay()){const t=localPlayer.quickSlotInfo[e];if(t&&t.action)return this.runContextMenuAction(n.id,t.action,!0);{const e=o.use?o.use[0]:i.ActionType.Throw,t={action:o.use?"Use":"Throw",text:new f.default(m.Dictionary.Action,e).getString(),data:{actionType:e}};return this.runContextMenuAction(n.id,t,!0)}}}}return!1}isSorting(){return $(document).find(".sortable-helper").length>0}runSortableAction(e,t,...a){e.functionalSortable(t,...a)}runGlobalSortableAction(e,...t){$(".sortable").functionalSortable(e,...t)}cancelSorting(){this.isSorting()&&(this.sortingCancelled=!0,this.runGlobalSortableAction("cancel"),this.sortingCancelled=!1)}setupContextMenu(){const e=(e,t,a)=>this.onContextMenuAction(e,t,a);return{delegate:".item,.sort,#actions",autoFocus:!0,autoTrigger:!1,preventContextMenuForPopup:!0,preventSelect:!0,taphold:!0,show:!1,hide:!1,position:(e,t)=>{let a;return this.actionsMenuOpen?a=t.target:this.touchEvent?((a=this.touchEvent).pageX=a.originalEvent.touches[0].pageX,a.pageY=a.originalEvent.touches[0].pageY):a={pageX:this.mouseX,pageY:this.mouseY,preventDefault:!0},this.lastContextMenuPosition={my:"left-5 top-5",at:"center bottom",of:a,collision:"fit fit"},this.lastContextMenuPosition},menu:[],select:(t,a)=>e(a.target,a.item.data(),$(t.toElement)),beforeOpen:(e,t)=>{this.contextMenuTarget=t.target,this.updateContextMenu(t.extraData),this.lastContextMenuPosition&&(t.menu.position(this.lastContextMenuPosition),this.lastContextMenuPosition=void 0),this.contextMenuOpen=!0,this.contextMenuBlocking=!0,this.tooltipDisable()},close:()=>{this.contextMenuOpen&&(this.contextMenuOpen=!1,this.contextMenuBlocking=!0,this.tooltipEnable(),this.hideActionsMenu())}}}hasDelay(){return localPlayer.hasDelay()?(this.delayState=_.HasDelay,!0):(this.delayState===_.HasDelay&&(this.delayState=_.NoDelay),this.delayState===_.WaitingForDelay)}onShow(){this.canUseQuickslot=!0,this.elementVisibleInGame.quickShow(),this.elementDialogInventory.dialog(this.setupDialog(u.DialogId.Inventory)),this.elementDialogCrafting.dialog(this.setupDialog(u.DialogId.Crafting)),this.elementDialogEquipment.dialog(this.setupDialog(u.DialogId.Equipment)),[this.elementDialogInventory,this.elementDialogCrafting,this.elementDialogEquipment].forEach(this.makeTopDialog);const e=this.elementDialogCrafting.closest("[aria-describedby='crafting']");e.find(".ui-dialog-title").remove(),$("#crafting-tab-buttons").prependTo(e.find(".ui-dialog-titlebar")),modManager.getHook(T.Hook.OnGameScreenVisible).call(),this.clampDialogs(),this.blurInputs(),this.tooltipEnable(),newui.on(I.UiApiEvent.Interrupt,this.onInterrupt),newui.on(I.UiApiEvent.InterruptClose,this.onInterruptClosed),steamworks.on(k.SteamworksEvent.OverlayShown,this.onInterrupt),steamworks.on(k.SteamworksEvent.OverlayHidden,this.onInterruptClosed),this.element[0].addEventListener("click",e=>{e.target!==this.elementCanvas[0]&&e.target!==this.element[0]||this.element[0].focus()})}makeTopDialog(e){const t=e[0].parentElement;t&&t.matches(".ui-dialog")&&(w.default.makeTopDialog(t),t.addEventListener("click",()=>{w.default.makeTopDialog(t)}))}onHide(){newui.cancel(I.UiApiEvent.Interrupt,this.onInterrupt),newui.cancel(I.UiApiEvent.InterruptClose,this.onInterruptClosed),steamworks.cancel(k.SteamworksEvent.OverlayShown,this.onInterrupt),steamworks.cancel(k.SteamworksEvent.OverlayHidden,this.onInterruptClosed),this.initializeGameState(),$("#crafting-tab-buttons").prependTo("#crafting"),this.elementVisibleInGame.quickHide(),this.elementDialogInventory.dialog("destroy"),this.elementDialogCrafting.dialog("destroy"),this.elementDialogEquipment.dialog("destroy"),this.closeAllContainers();for(let e=0;e<this.elementOtherDialogs.length;e++){try{this.elementOtherDialogs[e].dialog("destroy")}catch(e){}try{this.elementOtherDialogs[e].remove()}catch(e){}}this.elementOtherDialogs=[],this.onGameEnd()}initializeGameState(){$(".item").remove(),$(".in-use").removeClass("in-use"),$(".disabled").removeClass("disabled"),$("#stats").find(".container").removeClass("flash"),$("input[type='search']").val(""),this.elementCanvas.removeClass("death respawn-on-death"),this.cancelSorting(),this.craftableItemTypes=void 0,this.nonCraftableItemTypes=void 0,this.lastStats=[]}onGameEnd(){this.tooltipHide(),this.hideContextMenu(),this.hideActionsMenu(),this.cancelSorting()}getDialogIndex(e,t){return e===u.DialogId.Custom&&t?`Custom_${t.id}`:e.toString()}setupDialog(e,t,n){let o=this.getDialogIndex(e,n),r=localPlayer.getDialogInfo(o),s=!1;if(e===u.DialogId.Container&&void 0!==t){const e=game.items[t];e&&itemManager.isContainer(e)&&(s=!0,o=t,r=localPlayer.dialogContainerInfo[o])}if(r)e===u.DialogId.Custom&&n&&(r.title=n.title,r.width=n.width,r.height=n.height,r.minWidth=n.minWidth,r.minHeight=n.minHeight,r.open=n.open,r.onOpen=n.onOpen,r.onClose=n.onClose,r.onResizeStop=n.onResizeStop,r.resizable=n.resizable);else switch(r=s&&void 0!==t?localPlayer.dialogContainerInfo[o]={}:e===u.DialogId.Custom&&n?localPlayer.dialogInfo[o]=n:localPlayer.dialogInfo[o]={},e){case u.DialogId.Inventory:r.open=!0,r.width=440,r.height=210,r.x=ui.getWidth()-r.width-20,r.y=80;break;case u.DialogId.Container:r.open=!0,r.width=340,r.height=310,r.x=ui.getWidth()-r.width-20-440-10,r.y=80;let a=!1;for(;this.isContainerDialogOver(r.x,r.y);)if(a?(r.x+=r.width+10,r.x+r.width+10>ui.getWidth()&&(a=!a,r.x=ui.getWidth()-r.width-10,r.y+=r.height+10)):(r.x-=r.width+10,r.x<10&&(a=!a,r.x=10,r.y+=r.height+10)),r.y+r.height+10>ui.getHeight()){r.y=ui.getHeight()-r.height-10;break}break;case u.DialogId.Crafting:r.width=440,r.height=205,r.x=ui.getWidth()-r.width-20,r.y=445;break;case u.DialogId.Equipment:r.width=440,r.height=135,r.x=ui.getWidth()-r.width-20,r.y=300}const l=(e,t,a=!1)=>{this.highlightItemElementByItemId(e,t,a)},d={position:{my:`left+${r.x} top+${r.y}`,at:"left top"},width:r.width,height:r.height,minWidth:210,appendTo:"#screen-in-game",autoOpen:!1,closeOnEscape:!1,open(){r.open=!0,r.onOpen&&r.onOpen.apply(this),$(this).parent().find(".ui-dialog-titlebar-close").removeAttr("title"),localPlayer.updateDialogInfo(o)},close(){r.open=!1,r.onClose&&r.onClose.apply(this),void 0!==t&&l(t,!1,!0),localPlayer.updateDialogInfo(o)},dragStart(){w.default.makeTopDialog(this.closest(".ui-dialog")),void 0!==t&&l(t,!0)},dragStop(){void 0!==t&&l(t,!1),r.x=$(this).parent().offset().left,r.y=$(this).parent().offset().top,localPlayer.updateDialogInfo(o)},resizeStart(){w.default.makeTopDialog(this.closest(".ui-dialog"))},resizeStop(){r.onResizeStop&&r.onResizeStop.apply(this),r.x=$(this).parent().offset().left,r.y=$(this).parent().offset().top,r.width=$(this).parent().width(),r.height=$(this).parent().height(),localPlayer.updateDialogInfo(o),ui.getBody().removeAttr("style")}};r.title&&(d.title=r.title),!1===r.resizable?d.resizable=!1:d.resizable=!0,r.minWidth&&(d.minWidth=r.minWidth),r.minHeight&&(d.minHeight=r.minHeight);const p=d.open,c=d.close,m=(e,t)=>{this.showSortContextMenu(e,t===h.default.Inventory?this.elementDialogInventoryContainer:t===h.default.Container?e.parent().parent().parent().find(".sortable"):this.elementDialogCraftingContainer,t)},y=e=>{this.closeContainerDialog(e)};switch(e){case u.DialogId.Container:d.autoOpen=!0,d.minWidth=300,d.buttons=[{text:f.default.message(h.default.Sort).getString(),click(){m($(this).parent().find(".sort"),h.default.Container)},class:"sort clickable"},{text:f.default.message(h.default.GrabAll).getString(),click(){a.default.get(i.ActionType.MoveItem).execute(localPlayer,void 0,$(this).data("container"),localPlayer.inventory)},class:"grab-all clickable"}],d.close=function(e,t){c&&c(e,ui),y($(this))};break;case u.DialogId.Inventory:d.buttons=[{text:f.default.message(h.default.Sort).getString(),click(){m($(this).parent().find(".sort"),h.default.Inventory)},class:"sort clickable"}];break;case u.DialogId.Crafting:d.buttons=[{text:f.default.message(h.default.Sort).getString(),click(){m($(this).parent().find(".sort"),h.default.Crafts)},class:"sort clickable"}];break;case u.DialogId.Equipment:d.resizable=!1,d.width=d.minWidth=d.maxWidth=440,d.height=d.minHeight=d.maxHeight=135,d.buttons=[{text:f.default.message(h.default.UnEquipAll).getString(),click(){a.default.get(i.ActionType.Unequip).execute(localPlayer)},class:"unequip-all clickable"}],d.open=((e,t)=>{p&&p(e,t),ui.setCheckboxValue(this.elementDialogEquipment,"leftHand",saveDataGlobal.options.leftHand),ui.setCheckboxValue(this.elementDialogEquipment,"rightHand",saveDataGlobal.options.rightHand)})}return d}onMouseMove(e){"touchmove"===e.type&&e.preventDefault();let t=e.pageX,a=e.pageY;"touchmove"===e.type&&(t=e.originalEvent.touches[0].pageX,a=e.originalEvent.touches[0].pageY),this.mouseX=t,this.mouseY=a,game.playing}highlightItemElementByItemId(e,t,a=!1,i=!1){this.highlightItemElementBySelector(`.item[data-item-id="${e}"]`,t,a,i)}highlightItemElementByItemType(e,t,a=!1,i=!1){this.highlightItemElementBySelector(`.item[data-item-type="${e}"]`,t,a,i)}highlightItemElementByItemTypeWithNoItemId(e,t,a=!1,i=!1){this.highlightItemElementBySelector(`.item[data-item-type="${e}"]:not([data-item-id])`,t,a,i)}highlightItemElementBySelector(e,t,a=!1,i=!1){$(e).each(function(){if(i)return void(t?($(this).addClass("selected"),$(this).hasClass("damaged")&&$(this).addClass("highlighted")):($(this).removeClass("selected"),$(this).removeClass("highlighted")));let e=parseInt($(this).attr("data-selected-count"),10);if((void 0===e||isNaN(e))&&(e=0),t?e++:e--,t)e>0&&($(this).addClass("selected"),$(this).hasClass("damaged")&&$(this).addClass("highlighted"));else if(e<=0||a)return $(this).removeClass("selected"),$(this).removeClass("highlighted"),void $(this).removeAttr("data-selected-count");$(this).attr("data-selected-count",e)})}getMovementDirection(e,t){let a=u.Direction.None;const i=renderer.screenToTile(e,t);if(localPlayer.x===i.x&&localPlayer.y===i.y)return a;const n=(270-180*Math.atan2(localPlayer.y-i.y,localPlayer.x-i.x)/Math.PI)%360;switch(n){case 315:localPlayer.facingDirection!==u.Direction.South&&localPlayer.facingDirection!==u.Direction.West||(a=localPlayer.facingDirection);break;case 225:localPlayer.facingDirection!==u.Direction.West&&localPlayer.facingDirection!==u.Direction.North||(a=localPlayer.facingDirection);break;case 135:localPlayer.facingDirection!==u.Direction.North&&localPlayer.facingDirection!==u.Direction.East||(a=localPlayer.facingDirection);break;case 45:localPlayer.facingDirection!==u.Direction.East&&localPlayer.facingDirection!==u.Direction.South||(a=localPlayer.facingDirection)}return a===u.Direction.None&&(a=225>=n&&n>=135?u.Direction.North:135>=n&&n>=45?u.Direction.East:45>=n||n>=315?u.Direction.South:u.Direction.West),a}canUseHotkeys(){if(this.contextMenuBlocking){this.contextMenuBlocking=!1;for(let e=0;e<F.length;e++){const t=F[e];if(S.bindingManager.isPressed(t))return this.contextMenuBlocking=!0,!1}}return!localPlayer.isMovingClientside}refreshStats(){const e=localPlayer.getStat(l.Stat.Stamina),t=localPlayer.getStat(l.Stat.Health),a=localPlayer.getStat(l.Stat.Hunger),i=localPlayer.getStat(l.Stat.Thirst),n=[{element:this.elementStatHealth,value:t.value,max:localPlayer.getMaxHealth()},{element:this.elementStatStamina,value:e.value,max:e.max},{element:this.elementStatThirst,value:i.value,max:i.max},{element:this.elementStatHunger,value:a.value,max:a.max}];for(let e=0;e<n.length;e++){const t=n[e];let a=B.default.roundNumber(t.value/t.max*100,0);a<=0&&(a=0);const i=`${t.value}/${t.max} (${a}%)`;if(this.lastStats[e]===i)continue;this.lastStats[e]=i,t.element.find(".stat").text(i),t.element.find(".fill").width(`${a}%`);const o=t.element.parent();a<=10?o.addClass("flash"):o.removeClass("flash")}localPlayer.hasStatus(u.StatusType.Burned)?this.elementStatBurn.quickShow():this.elementStatBurn.quickHide(),localPlayer.hasStatus(u.StatusType.Bleeding)?this.elementStatBleed.quickShow():this.elementStatBleed.quickHide(),localPlayer.hasStatus(u.StatusType.Poisoned)?this.elementStatPoison.quickShow():this.elementStatPoison.quickHide()}blurInputs(){$(".dialog-input, input[type='text'], input[type='number']").trigger("blur")}toggleDialog(e){return!!this.openDialog(e)||(this.closeDialog(e),!1)}openDialog(e){return!e.isVisible()&&(e.dialog("open"),this.onOpenDialog(e),!0)}onOpenDialog(e){this.blurInputs(),$(".ui-dialog").attr("intercept","all").click(e=>{e.target.matches("select")||(this.focus(),setTimeout(this.focus,5))});const t=()=>{this.focus(),setTimeout(()=>{this.focus()},10)};$(".ui-dialog").removeAttr("tabindex"),$(".ui-dialog button").attr("tabindex","-1").blur().click(t).focus(t),this.focus(),e.find("input[type='search'], input[type='text']").click(function(){this.classList.add("can-focus"),setTimeout(()=>{this.focus()},10)}).blur(function(){this.classList.remove("can-focus")}),this.makeTopDialog(e)}focus(){document.activeElement!==this.element[0]&&this.element[0].focus()}closeDialog(e){return!!e.isVisible()&&(e.dialog("close"),this.blurInputs(),!0)}closeAllDialogs(){let e=!1;e=this.closeDialog(this.elementDialogInventory)||e,e=this.closeDialog(this.elementDialogCrafting)||e,e=this.closeDialog(this.elementDialogEquipment)||e,e=this.closeAllContainers()||e;for(let t=0;t<this.elementOtherDialogs.length;t++)e=this.closeDialog(this.elementOtherDialogs[t])||e;return e}autoOpenDialog(e,t){const a=localPlayer.getDialogInfo(e);return!(!a||!a.open)&&this.openDialog(t)}openDialogs(){this.autoOpenDialog(u.DialogId.Inventory,this.elementDialogInventory),this.autoOpenDialog(u.DialogId.Crafting,this.elementDialogCrafting),this.autoOpenDialog(u.DialogId.Equipment,this.elementDialogEquipment);for(const e of this.elementOtherDialogs){const t=e.data("dialog-index");t&&this.autoOpenDialog(t,e)&&e.css("height","")}}clampDialogs(){const e=ui.getBody(),t=ui.getWidth(),a=ui.getHeight();$(".ui-dialog-content").each(function(){const i=$(this).parent().position(),n=i.left,o=i.top,r=$(this).dialog("option","width"),s=$(this).dialog("option","height");n+r>t&&($(this).dialog("option","position",{my:"right top",at:`right top+${o}`,of:e,collision:"fit fit"}),r>t&&$(this).dialog("option","width",t)),o+s>a&&($(this).dialog("option","position",{my:"left bottom",at:`left+${n} bottom`,of:e,collision:"fit fit"}),s>a&&$(this).dialog("option","height",a))})}getItemClass(e,t){if(e&&!t&&(t=e.type),!t)return"";let a="";e&&e.quality&&(a=` ${u.ItemQuality[e.quality].toLowerCase()}`);let i="";for(const e of itemManager.getGroups(t))i+=` group-${u.ItemTypeGroup[e]}`;return`item-${t}${a}${i}`}createItemString(e,t,a=""){return`<li class="tooltip item ${this.getItemClass(t,e)} ${a}" data-item-type="${e}"${t?` data-item-id="${t.id}"`:""}></li>`}syncItemElements(e,t){const a=game.items[e];if(!a)return;const i=t||$(`.item[data-item-id="${e}"]`);let n=!1;i.each((e,t)=>{const i=$(t);a.type!==i.getItemType()&&(n=!0,a.quickSlot&&this.removeItemFromQuickSlot(a.id,!0),i.attr("data-item-type",a.type),i.removeClass((e,t)=>(t.match(/\bitem-\S+/g)||[]).join(" ")),i.removeClass((e,t)=>(t.match(/\bgroup-\S+/g)||[]).join(" ")),i.get(0).className+=` ${this.getItemClass(a,a.type)}`),a.quickSlot?i.getQuickSlot()&&0!==i.children("span.number").length||(i.attr("data-quick-slot",a.quickSlot),i.append(`<span class="number">${a.quickSlot}</span>`)):(i.getQuickSlot()||i.children("span.number").length>0)&&(i.removeAttr("data-quick-slot"),i.children("span.number").remove());const o=a.getEquipSlot();void 0!==o?i.getEquipSlot()&&0!==i.children("span.equipped").length||(i.attr("data-equip-slot",u.EquipType[o].toString()),i.prepend('<span class="equipped">E</span>')):(i.getEquipSlot()||i.children("span.equipped").length>0)&&(i.removeAttr("data-equip-slot"),i.children("span.equipped").remove()),a.legendary?i.addClass("legendary"):i.removeClass("legendary"),this.syncDamagedDecayed(a,i)}),n&&this.refreshQuickSlots()}syncDamagedDecayed(e,t){const a=!!e&&e.isDamaged(),i=!!e&&e.isDecayed();a||i?t.addClass("damaged"):t.removeClass("damaged")}addItemToContainer(e,t,a=!1,i=!1){let n,o;const r=t===localPlayer.inventory;r?n=this.elementDialogInventoryContainer:(o=this.getDialogElementForContainer(t))&&(n=o.find(".container")),void 0!==n&&(void 0!==e?(this.insertItemStringToContainer(this.createItemString(e.type,e),n),this.syncItemElements(e.id),i||(this.saveItemOrder(n),this.onAddItemsToContainer(n,o,r))):x.default.info(x.LogSource.Ui)("Attempted to add invalid item to container",t,t.itemOrders))}insertItemStringToContainer(e,t){if(void 0!==this.sortableElementPosition){if(-1===this.sortableElementPosition)t.prepend(e);else{const a=t.children(),i=a.eq(this.sortableElementPosition);0===i.length?t.append(e):i.after(e)}this.sortableElementPosition=void 0}else t.append(e)}onAddItemsToContainer(e,t,a){!a&&t&&this.updateContainerName(t),this.onUpdateContainer(e,!0),localPlayer.updateTables(),this.isSorting()&&this.runGlobalSortableAction("refreshItems"),this.refreshQuickSlots()}afterAddingMultipleItemsToContainer(e){let t,a;const i=e===localPlayer.inventory;i?t=this.elementDialogInventoryContainer:(a=this.getDialogElementForContainer(e))&&(t=a.find(".container")),void 0!==t&&(this.saveItemOrder(t),this.onAddItemsToContainer(t,a,i))}removeItemFromContainer(e,t){const a=e.id;let i,n;const o=t===localPlayer.inventory;o?i=this.elementDialogInventoryContainer:(n=this.getDialogElementForContainer(t))&&(i=n.find(".container")),void 0!==i&&(i.children(`[data-item-id="${a}"]`).first().trigger("remove").remove(),n&&this.updateContainerName(n))}refreshContainerName(e){const t=this.getDialogElementForContainer(e);void 0!==t&&this.updateContainerName(t)}refreshQuickSlots(){let e=!1;for(let t=1;t<10;t++)this.updateQuickSlotItem(t)&&(e=!0);e&&this.onUpdateQuickSlotsOrEquips()}getInventoryItemsInOrder(){const e=[];return this.elementDialogInventoryContainer.children().each(function(){const t=$(this).data("item-id"),a=game.items[t];e.push({type:a.type,id:t,quality:a.quality,minDur:a.minDur,maxDur:a.maxDur})}),e}loadQuickSlots(){for(let e=1;e<10;e++){const t=localPlayer.quickSlotInfo[e];if(t&&t.itemType){const a=this.getItemIdInQuickSlot(e);void 0===a&&this.setQuickSlotByItemType(e,t.itemType,!0)}}this.refreshQuickSlots()}saveItemOrder(e){if(!game.playing)return;let t=e.parent().data("container");if(!t){if(!e.is("#container-inventory"))return;t=localPlayer.inventory}const a=[];e.children().each(function(){const e=$(this).data("item-id");void 0!==e&&a.push(e)});let i=!1;for(let e=0;e<a.length;e++)if(t.containedItems[e]!==game.items[a[e]]){i=!0;break}let n=!1,o;if(i)if(void 0===t.itemOrders)n=!0,o=a;else{if(!(n=a.length!==t.itemOrders.length))for(let e=0;e<a.length;e++)if(a[e]!==t.itemOrders[e]){n=!0;break}o=a}else n=!0;n&&(localPlayer.queueSoundEffect(u.SfxType.PickUp),multiplayer.isConnected()?setTimeout(()=>{itemManager.updateItemOrder(t,o)},1):itemManager.updateItemOrder(t,o))}showItemContextMenu(e){if(this.isSorting())return;const t=e.data("item-id"),a=e.getItemType(),n=e.getQuickSlot(),o=e.parent().parent().data("container"),r=[],s=game.items[t];if(!s)return;const l=s.isInTradeContainer(),p=c.itemDescriptions[a];let y;const T=itemManager.getItemsInContainerByType(o||localPlayer.inventory,a),S=T.length;let I=0,v=!1;for(y=0;y<S;y++){const e=T[y];e.quality===s.quality?I++:v=!0}if(!l&&p&&p.use)for(y=0;y<p.use.length;y++){const e=p.use[y];p.use[y]===i.ActionType.OpenContainer&&ui.isContainerOpen(s)||r.push({action:"Use",text:new f.default(m.Dictionary.Action,e).getString(),data:{actionType:e}})}if(ui.isContainerOpen(s)&&r.push({action:"CloseContainer",text:f.default.message(h.default.CloseContainer).getString()}),!l)if(p&&p.equip&&(s.isEquipped()?r.push({action:"EquipOrUnEquip",text:f.default.message(h.default.UnEquip).getString()}):p.equip===u.EquipType.Held?(r.push({action:"EquipLeftHand",text:f.default.message(h.default.EquipTo).getString()+f.default.message(g.equipTypeToMessage[u.EquipType.LeftHand]).getString()}),r.push({action:"EquipRightHand",text:f.default.message(h.default.EquipTo).getString()+f.default.message(g.equipTypeToMessage[u.EquipType.RightHand]).getString()})):r.push({action:"EquipOrUnEquip",text:f.default.message(h.default.EquipTo).getString()+f.default.message(g.equipTypeToMessage[p.equip]).getString()})),n)r.push({action:"QuickSlotRemove",text:f.default.message(h.default.RemoveFromQuickslot).getString()});else{const e=this.getFreeQuickSlots();e.length>0&&r.push({action:"QuickSlotAdd",text:f.default.message(h.default.AddToQuickslot).getString()})}if(o?(o.containerType===d.ContainerType.Trade?r.push({action:"MoveToInventory",text:f.default.message(h.default.TradeBarterCreditForItem).getString()}):r.push({action:"MoveToInventory",text:f.default.message(h.default.MoveToInventory).getString()}),l||(S>1&&r.push({action:"MoveAllToInventory",text:f.default.message(h.default.MoveAllToInventory).getString()}),v&&I>1&&r.push({action:"MoveAllOfSameQualityToInventory",text:f.default.message(h.default.MoveAllOfSameQualityToInventory).getString()}))):void 0!==this.activeContainer&&(this.activeContainer.containerType===d.ContainerType.Trade?r.push({action:"MoveToOpenedContainer",text:f.default.message(h.default.TradeItemForBarterCredit).getString()}):(r.push({action:"MoveToOpenedContainer",text:f.default.message(this.multipleContainersOpened?h.default.MoveToLastOpenedContainer:h.default.MoveToOpenedContainer).getString()}),S>1&&r.push({action:"MoveAllToOpenedContainer",text:f.default.message(this.multipleContainersOpened?h.default.MoveAllToLastOpenedContainer:h.default.MoveAllToOpenedContainer).getString()}),v&&I>1&&r.push({action:"MoveAllOfSameQualityToOpenedContainer",text:f.default.message(this.multipleContainersOpened?h.default.MoveAllOfSameQualityToLastOpenedContainer:h.default.MoveAllOfSameQualityToOpenedContainer).getString()}))),!o){const e=localPlayer.getFacingTile().doodad;if(e){const t=e;itemManager.isContainer(e)&&t!==this.activeContainer&&(r.push({action:"MoveToFacingContainer",text:f.default.message(h.default.MoveToFacingContainer).getString(),data:{facingContainer:!0}}),S>1&&r.push({action:"MoveAllToFacingContainer",text:f.default.message(h.default.MoveAllToFacingContainer).getString(),data:{facingContainer:!0}}),v&&I>1&&r.push({action:"MoveAllOfSameQualityToFacingContainer",text:f.default.message(h.default.MoveAllOfSameQualityToFacingContainer).getString(),data:{facingContainer:!0}}))}}if(!l&&(r.push({action:"Throw",text:f.default.message(h.default.Throw).getString()}),r.push({action:"Rename",text:new f.default(m.Dictionary.Action,i.ActionType.Rename).getString()}),r.push({action:"Offer",text:f.default.message(h.default.Offer).getString()}),r.push({action:"Drop",text:f.default.message(h.default.Drop).getString()}),S>1&&r.push({action:"DropAll",text:f.default.message(h.default.DropAll).getString()}),v&&I>1&&r.push({action:"DropAllOfSameQuality",text:f.default.message(h.default.DropAllOfSameQuality).getString()}),p)){if(p.durability&&void 0!==s.minDur&&void 0!==s.maxDur&&s.minDur<s.maxDur&&!1!==p.repairable){const e=itemManager.getItemInInventoryByGroup(localPlayer,u.ItemTypeGroup.Repair,t);e&&r.push({action:"Repair",text:`${f.default.nameOf(m.Dictionary.ItemGroup,u.ItemTypeGroup.Repair,!1).inContext(3).getString()} ${f.default.message(h.default.With).getString()} ${e.getName().inContext(3).getString()}`})}const e=itemManager.getItemInInventoryByGroup(localPlayer,u.ItemTypeGroup.Transmogrify);if(e&&r.push({action:"Transmogrify",text:`${f.default.nameOf(m.Dictionary.ItemGroup,u.ItemTypeGroup.Transmogrify,!1).inContext(3).getString()} ${f.default.message(h.default.With).getString()} ${e.getName().inContext(3).getString()}`}),p.durability){const e=itemManager.getItemInInventoryByGroup(localPlayer,u.ItemTypeGroup.Reinforce);e&&r.push({action:"Reinforce",text:`${f.default.nameOf(m.Dictionary.ItemGroup,u.ItemTypeGroup.Reinforce,!1).inContext(3).getString()} ${f.default.message(h.default.With).getString()} ${e.getName().inContext(3).getString()}`})}if(p.decayMax&&p.use&&p.use.indexOf(i.ActionType.Eat)>-1&&-1===p.use.indexOf(i.ActionType.Preserve)){const e=itemManager.getItemInInventoryByGroup(localPlayer,u.ItemTypeGroup.Preservative);e&&r.push({action:"Preserve",text:`${f.default.message(h.default.Preserve).getString()} ${f.default.message(h.default.With).getString()} ${e.getName().inContext(3).getString()}`})}if(p.revert){const e=itemManager.getItemInInventoryByGroup(localPlayer,u.ItemTypeGroup.Fuel);e&&r.push({action:"Add-Fuel",text:`${f.default.message(h.default.AddFuel).getString()} ${f.default.message(h.default.With).getString()} ${e.getName().inContext(3).getString()}`})}if(p.lit){const e=itemManager.getItemInInventoryByGroup(localPlayer,u.ItemTypeGroup.FireStarter);e&&r.push({action:"Ignite",text:`${f.default.message(h.default.Ignite).getString()} ${f.default.message(h.default.With).getString()} ${e.getName().inContext(3).getString()}`})}p.disassemble&&r.push({action:"Disassemble",text:f.default.message(h.default.DisassembleAction).getString()}),p.dismantle&&r.push({action:"Dismantle",text:f.default.message(h.default.DismantleAction).getString()})}const w={actions:r,quickSlot:n};ui.playClickSound(),$(document).contextmenu("open",e,w),$(".ui-contextmenu").removeAttr("tabindex")}onContextMenuAction(e,t,a){const i=e.data("item-id"),n=e.getQuickSlot();return a&&a.is(".quick-slot-action-select")?(a.parent().parent().parent().find(".selected").removeClass("selected"),a.addClass("selected"),localPlayer.updateQuickSlotInfo(n,void 0,t),ui.playClickSound(),!1):this.runContextMenuAction(i,t)}runContextMenuAction(e,t,a){return this.runAction(e,t,a)}onCraftingItemClick(e){const t=c.itemDescriptions[e.data("item-type")];if(!t||!t.recipe)return;const n=new p.default(localPlayer,t.recipe,!0);if(n.process(),n&&n.requirementsMet()){if(saveDataGlobal.options.warnWhenBreakingItemsOnCraft){let t=!1;for(const e of n.itemComponentsRequired)if(void 0!==e.minDur&&e.minDur<=0){t=!0;break}if(!t)for(const e of n.itemComponentsConsumed)if(void 0!==e.minDur&&e.minDur<=0){t=!0;break}if(t)return void newui.interruptWithConfirmation(y.default.GameInterruptItemMayBeDestroyedInCraft,y.default.GameInterruptItemMayBeDestroyedInCraftDescription).then(t=>{t&&(a.default.get(i.ActionType.Craft).execute(localPlayer,e.getItemType(),n.itemComponentsRequired,n.itemComponentsConsumed,n.itemBaseComponent,n.itemComponentsCanBurn),this.tooltipHide())})}a.default.get(i.ActionType.Craft).execute(localPlayer,e.getItemType(),n.itemComponentsRequired,n.itemComponentsConsumed,n.itemBaseComponent,n.itemComponentsCanBurn),this.tooltipHide()}}onDismantleItemClick(e){if(e){if(saveDataGlobal.options.warnWhenBreakingItemsOnCraft){let t;const n=c.itemDescriptions[e.type];if(n){const e=n.dismantle;if(e){const a=e.required;a&&(t=itemManager.getItemForHuman(localPlayer,a))}}if(t&&void 0!==t.minDur&&t.minDur<=0)return void newui.interruptWithConfirmation(y.default.GameInterruptItemMayBeDestroyedInCraft,y.default.GameInterruptItemMayBeDestroyedInCraftDescription).then(t=>{t&&(a.default.get(i.ActionType.Dismantle).execute(localPlayer,e),this.tooltipHide())})}a.default.get(i.ActionType.Dismantle).execute(localPlayer,e)}this.tooltipHide()}getTooltipHtml(e){const t=e.attr("data-tooltip"),a=e.data("attribute");if(void 0!==t){if(void 0!==e.getEquipSlot()){const t=e.children();if(t.length>0){const a=t.first();return this.getTooltipHtmlForItem(game.items[a.data("item-id")],a.getItemType(),a.hasClass("is-quick-slot"),e.hasClass("is-dismantle"),e.parent().hasClass("is-npc"))}}return t}if(e.hasClass("item")){const t=e.getItemType(),a=c.itemDescriptions[t],i=game.items[e.data("item-id")];if(!i&&a&&a.recipe){const a=!game.isChallenge&&game.crafted[t];a&&a.newUnlock&&(a.newUnlock=!1,e.removeClass("highlighted"))}return this.getTooltipHtmlForItem(i,t,e.hasClass("is-quick-slot"),e.hasClass("is-dismantle"),e.parent().hasClass("is-npc"))}return f.default.message(h.default.NotAvailable).getString()}tooltipEnable(){$(document).functionalTooltip("enable")}tooltipRefresh(){$(document).functionalTooltip("refresh")}tooltipDisable(){$(document).functionalTooltip("disable")}tooltipHide(){$(document).functionalTooltip("hide")}unSelectElements(){$(".selected").each(function(){void 0!==$(this).data("selected-count")||$(this).hasClass("quick-slot-action-select")||($(this).removeClass("selected"),$(this).parent("#container-crafting").length||$(this).parent("#container-dismantle").length||$(this).removeClass("highlighted"))})}getTooltipHtmlForItem(e,t,a,n,r){const s=c.itemDescriptions[t];if(!s)return f.default.message(h.default.AnUnknownItem).inContext(3).getString();const d=e?e.getName():f.default.nameOf(m.Dictionary.Item,t);d.inContext(3);let T=`<h3>${d.getString()}</h3>`;if(e){if(r){const t=e.getWorth();void 0!==t&&(T+=`<p><strong>${f.default.ui(y.default.GameItemBarterCreditTrade).getString()}</strong>${Math.round(1.5*t)}`,e.legendary&&e.legendary.type===u.LegendaryType.Worth&&(T+=` <span class="legendary">+${e.legendary.value}</span>`),T+="</p>")}if(e.quality){if(T+=`<p><span class="${u.ItemQuality[e.quality].toLowerCase()}"> ${new f.default(m.Dictionary.ItemQuality,e.quality).inContext(3).getString()}`,e.legendary){const{type:t,skill:a,stat:i}=e.legendary,n=void 0!==a?new f.default(m.Dictionary.Skill,a):void 0!==i?new f.default(m.Dictionary.Stat,i):void 0;T+=` (${new f.default(m.Dictionary.LegendaryType,t).inContext(3).getString(n)})`}T+="</span></p>"}saveDataGlobal.options.protectedCraftingItems&&(e.isEquipped()||e.quickSlot)&&(T+=`<p><span class="protected">${f.default.message(h.default.LabelProtected).getString()}</span></p>`),T+=`<p><strong>${f.default.message(h.default.LabelDurability).getString()}</strong><span`,void 0!==e.minDur&&e.minDur<=2&&(T+=' class="damaged"'),T+=`>${e.minDur}</span>/`,T+="<span",e.quality&&(T+=` class="${u.ItemQuality[e.quality].toLowerCase()}"`),T+=">",T+=`${e.maxDur}</span>`,s.decayMax&&(T+=` <strong>${f.default.message(h.default.LabelDecay).getString()}</strong> ${e.decay}`),T+="</p>",T+="<p><strong>";let t=e&&itemManager.isContainer(e);if(t){const a=itemManager.computeContainerWeight(e);a>0?(T+=`${f.default.message(h.default.LabelWeight).getString()}</strong> ${e.weight} + `,itemManager.isInInventory(e)?T+=`<span class="strikethrough">${B.default.roundNumber(a,1)}</span> ${B.default.roundNumber(a*e.getContainerWeightReduction(),1)}`:T+=`${B.default.roundNumber(a,1)}`):t=!1}if(t||(T+=`${f.default.message(h.default.LabelWeight).getString()}</strong> ${e.weight}`,e.legendary&&e.legendary.type===u.LegendaryType.ItemWeight&&(T+=` <span class="legendary">-${e.legendary.value}</span>`)),s.doodadContainer){const e=o.doodadDescriptions[s.doodadContainer];e&&(T+=` <strong>${f.default.message(h.default.LabelWeightCapacity).getString()}</strong> ${e.weightCapacity}`)}T+="</p>"}T+=`<p><strong>${new f.default(m.Dictionary.Item,t,1).getString()}</strong></p>`;let I="";if(s.use){I+="<strong>",s.use.length>1?I+=f.default.message(h.default.LabelUses).getString():I+=f.default.message(h.default.LabelUse).getString(),I+="</strong><span>";for(const e of s.use)I+=`${new f.default(m.Dictionary.Action,e).getString()}, `;I=`${I.slice(0,-2)}</span>`}const v=[i.ActionType.Eat,i.ActionType.Heal,i.ActionType.HealOther,i.ActionType.DrinkItem,i.ActionType.DrinkCure];if(s.onUse&&localPlayer.revealedItems[t])for(const t of v){let a=s.onUse[t];Array.isArray(a)||void 0===a||(a=[a]);const n=s.skillUse;let o="";const r=localPlayer.getConsumeBonus(e,n);if(r>=1&&(o=` +(0-${r})`),a){let n=h.default.None;switch(t){case i.ActionType.Eat:n=h.default.LabelOnEat;break;case i.ActionType.Heal:n=h.default.LabelOnHeal;break;case i.ActionType.HealOther:n=h.default.LabelOnOtherHeal;break;case i.ActionType.DrinkItem:n=h.default.LabelOnDrink;break;case i.ActionType.DrinkCure:n=h.default.LabelOnCure}I+=`<span class="consume"><strong>${f.default.message(n).getString()}</strong>`;const r=["health"];t!==i.ActionType.HealOther&&r.push("stamina","hunger","thirst");let s=0;for(const t of r)0!==a[s]&&(I+=`<span class="stat ${t}">${a[s]>0?"+":""}${a[s]}${a[s]>=1?o:""}</span>`,a[s]>=1&&e&&e.legendary&&e.legendary.type===u.LegendaryType.UseBenefits&&(I+=` <span class="legendary">+${e.legendary.value}</span>`),I+=", "),s++;I=`${I.slice(0,-2)}</span>`}}const[w,M]=itemManager.getGroups(t).collect(R.default.hasAny);if(w&&(I+=`<strong>${f.default.message(h.default.LabelGrouping).getString()}</strong>`,I+=`<span>${M.map(e=>f.default.nameOf(m.Dictionary.ItemGroup,e,!1).inContext(3)).collect(f.default.formatList,!1).getString()}</span>`),s.onUse&&s.onUse[i.ActionType.StokeFire]){let t="";if(e){const a=e.getOnUseBonus();a&&e.quality&&(t=` <span class="${u.ItemQuality[e.quality].toLowerCase()}">+${a}</span>`)}I+=`<strong>${f.default.message(h.default.LabelStokeFireStrength).getString()}</strong><span>${s.onUse[i.ActionType.StokeFire]}${t}</span>`}if(s.lit){const t=c.itemDescriptions[s.lit];if(t){const a=t.onEquipEffect;a&&(I+=`<strong>${f.default.message(h.default.LabelLightSourceWhenLit).getString()}</strong><span>+${a[1]}`,e&&e.legendary&&e.legendary.type===u.LegendaryType.Illumination&&(I+=` <span class="legendary">+${e.legendary.value}</span>`),I+="</span>")}}if(s.onUse&&!s.lit){const e=s.onUse[i.ActionType.Build],t=o.doodadDescriptions[e];if(e&&t){const e=t.lit;if(e){const t=o.doodadDescriptions[e];t&&t.providesLight&&(I+=`<strong>${f.default.message(h.default.LabelLightSourceWhenLit).getString()}</strong><span>+${t.providesLight}</span>`)}}}if(s.weightCapacity&&(I+=`<strong>${f.default.message(h.default.LabelWeightCapacity).getString()}</strong><span>${s.weightCapacity}`,e&&e.legendary&&e.legendary.type===u.LegendaryType.WeightCapacity&&(I+=` <span class="legendary">+${e.legendary.value}</span>`),I+=`</span><strong>${f.default.message(h.default.LabelWeightReduction).getString()}</strong><span>-50%`,e&&e.legendary&&e.legendary.type===u.LegendaryType.ContainerWeight&&(I+=` <span class="legendary">-${e.legendary.value}%</span>`),I+="</span>"),s.recipe&&s.recipe.reputation){if(I+=`<strong>${f.default.message(h.default.LabelCraftingReputation).getString()}</strong><span>${s.recipe.reputation}`,s.recipe.skill){const e=b.skillDescriptions[s.recipe.skill];e&&e.reputation&&(I+=` (${f.default.message(h.default.LabelCraftingSkillReputation).getString(e.reputation,new f.default(m.Dictionary.Skill,s.recipe.skill).inContext(3).getString())})`)}I+="</span>"}if(s.worth&&void 0!==e){const t=e.getWorth();void 0!==t&&(I+=`<strong>${f.default.message(h.default.LabelWorth).getString()}</strong><span>${t}`,e.legendary&&e.legendary.type===u.LegendaryType.Worth&&(I+=` <span class="legendary">+${e.legendary.value}</span>`),I+="</span>")}I&&(T+=`<p class="info-line">${I}</p>`);let k="";if(s.equip){const e=g.equipTypeToMessage[s.equip];k+=`<strong>${f.default.message(h.default.LabelEquip).getString()}</strong> <span>${f.default.message(e).getString()}</span>`}if(s.attack?(s.equip||(k+=`<strong>${f.default.message(h.default.LabelRangedDamage).getString()}</strong> `),k+=`<span>(+${s.attack} `,e&&e.legendary&&e.legendary.type===u.LegendaryType.Attack&&(k+=`<span class="legendary">+${e.legendary.value}</span> `),s.damageType&&(k+=g.fullDamageType([s.damageType]).getString()),k+=` ${f.default.message(h.default.Attack).getString()})</span>`):k+=`<strong>${f.default.message(h.default.LabelThrowDamageType).getString()}</strong><span>${g.fullDamageType([s.damageType?s.damageType:u.DamageType.Blunt]).getString()}</span>`,s.onUse){const t=s.onUse[i.ActionType.Build],a=o.doodadDescriptions[t];t&&a&&a.trapDamage&&(k+=`<strong>${f.default.message(h.default.LabelTrapDamage).getString()}</strong> <span>${a.trapDamage}`,e&&e.legendary&&e.legendary.type===u.LegendaryType.TrapDamage&&(k+=` <span class="legendary">+${e.legendary.value}</span>`),k+="</span>")}k&&(T+=`<p class="info-line">${k}</p>`);let C="",D;if(s.onEquipEffect&&(C+=`+${s.onEquipEffect[1]} `,e&&e.legendary&&e.legendary.type===u.LegendaryType.Illumination&&(C+=`<span class="legendary">+${e.legendary.value}</span> `),C+=new f.default(m.Dictionary.OnEquip,s.onEquipEffect[0]).getString()),s.equip&&e&&e.legendary&&e.legendary.type!==u.LegendaryType.Worth&&e.legendary.type!==u.LegendaryType.ItemWeight&&e.legendary.type!==u.LegendaryType.Illumination&&e.legendary.type!==u.LegendaryType.WeightCapacity&&e.legendary.type!==u.LegendaryType.Range&&e.legendary.type!==u.LegendaryType.UseBenefits&&e.legendary.type!==u.LegendaryType.ContainerWeight){if(C&&(C+=", "),C+=`<span class="legendary">+${e.legendary.value}`,void 0!==e.legendary.skill){const t=b.skillDescriptions[e.legendary.skill];t&&(C+=`% ${new f.default(m.Dictionary.Skill,e.legendary.skill).inContext(3).getString()}`)}else if(void 0!==e.legendary.stat)C+=` ${new f.default(m.Dictionary.Stat,e.legendary.stat).inContext(3).getString()}`;else if(e.legendary.type===u.LegendaryType.MaxWeight)C+=` ${f.default.ui(y.default.GameTooltipLegendaryMaxWeightLabel).getString()}`;else{let t;switch(e.legendary.type){case u.LegendaryType.Benignity:t=l.Stat.Benignity;break;case u.LegendaryType.Malignity:t=l.Stat.Malignity;break;case u.LegendaryType.Attack:t=l.Stat.Attack;break;case u.LegendaryType.Defense:t=l.Stat.Defense}void 0!==t&&(C+=` ${new f.default(m.Dictionary.Stat,t).inContext(3).getString()}`)}C+="</span>"}if(C&&(T+=`<p><strong>${f.default.message(h.default.LabelOnEquip).getString()}</strong> ${C}</p>`),s.defense){let t=`<ul><li><strong>${f.default.message(h.default.LabelBase).getString()}</strong>${s.defense.base}`;if(e&&e.legendary&&e.legendary.type===u.LegendaryType.Defense&&(t+=` <span class="legendary">+${e.legendary.value}</span>`),t+="</li>",Object.keys(s.defense.resist).length>0){t+=`<li><strong>${f.default.message(h.default.LabelResists).getString()}</strong>`;for(const e in s.defense.resist)t+=`${new f.default(m.Dictionary.DamageType,e).inContext(3).getString()} (${s.defense.resist[e]}), `;t=t.substr(0,t.length-2),t+="</li>"}if(Object.keys(s.defense.vulnerable).length>0){t+=`<li><strong>${f.default.message(h.default.LabelVulnerabilities).getString()}</strong>`;for(const e in s.defense.vulnerable)t+=`${new f.default(m.Dictionary.DamageType,e).inContext(3).getString()} (${s.defense.vulnerable[e]}), `;t=t.substr(0,t.length-2),t+="</li>"}t+="</ul>",T+=`<p class="no-space"><strong>${f.default.message(h.default.LabelDefense).getString()}</strong></p>${t}`}if(s.ranged){let t="";t=`+${s.ranged.attack}`,0===s.ranged.attack&&(t=f.default.message(h.default.NotAvailable).getString()),T+=`<p><strong>${f.default.message(h.default.LabelRanged).getString()}</strong> (${f.default.message(h.default.LabelRange).getString()} ${s.ranged.range}`,e&&e.legendary&&e.legendary.type===u.LegendaryType.Range&&(T+=` <span class="legendary">+${e.legendary.value}</span>`),T+=`, ${f.default.message(h.default.LabelRangedAttack).getString()} ${t}`,e&&e.legendary&&e.legendary.type===u.LegendaryType.Attack&&(T+=` <span class="legendary">+${e.legendary.value}</span>`),T+=")</p>"}if(s.dismantle){let e='<ul class="dismantle"><li>';for(const t of s.dismantle.items)e+=`<span class="item item-preview item-${t[0]}"></span>${f.default.nameOf(m.Dictionary.Item,t[0]).inContext(3).getString()} x${t[1]}, `;if(e=e.substr(0,e.length-2),e+="</li>",s.dismantle.required){e+=`<li><strong>${f.default.message(h.default.LabelRequires).getString()}</strong>`;const t=f.default.nameOf(m.Dictionary.ItemGroup,s.dismantle.required).inContext(3).getString(),a=itemManager.getItemForHuman(localPlayer,s.dismantle.required);e+=a?t:`<span class="recipe-missing-items">${t}</span>`,e+="</li>"}e+="</ul>",T+=`<p class="no-space"><strong>${f.default.message(h.default.DismantleLabel).getString()}</strong></p>${e}`}if(e){if((s.recipe||s.requiredForDisassembly)&&(T+='<p class="info-line">'),s.requiredForDisassembly){let e="",a=0;for(const t of s.requiredForDisassembly){a++;const i=!!itemManager.getItemForHuman(localPlayer,t);let n="";a>=s.requiredForDisassembly.length&&(n=" last"),e+='<span class="disassembly',i||(e+=" recipe-missing-items"),e+=`${n}">${itemManager.getItemTypeGroupName(t).inContext(3).getString()}`,e+="</span>",a<s.requiredForDisassembly.length&&(e+=", ")}T+=`<strong>${f.default.message(h.default.RequiredForDisassembleLabel).getString()}</strong>${e}`,s.recipe&&(s.recipe.requiredDoodad||s.recipe.requiresFire)&&(T+=`${this.additionalRequirements(t,s.recipe,!0)}`)}(s.recipe||s.requiredForDisassembly)&&(T+="</p>")}if(e&&this.craftableItemTypes&&this.nonCraftableItemTypes){const a=this.craftableItemTypes.concat(this.nonCraftableItemTypes);for(const i of a){const a=c.itemDescriptions[i];if(!a)continue;if(!(D=a.recipe))continue;let n=!1;if(void 0!==D.baseComponent&&itemManager.isGroup(D.baseComponent)?itemManager.isInGroup(t,D.baseComponent)&&(n=!0):D.baseComponent===e.type&&(n=!0),!n)for(const t of D.components){const a=t.type;if(itemManager.isGroup(a)&&itemManager.isInGroup(e.type,a)||e.type===a){n=!0;break}}n&&this.highlightItemElementByItemTypeWithNoItemId(i,!0,!1,!0)}}if(D=s.recipe,!e&&D&&!a&&!n){let e="<ul>";const a=new p.default(localPlayer,D,!0);a.process();const i=a.itemBaseComponent,n=a.itemComponentsRequired,o=a.itemComponentsConsumed;for(let e=0;e<n.length;e++)this.highlightItemElementByItemId(n[e].id,!0,!1,!0);for(let e=0;e<o.length;e++)this.highlightItemElementByItemId(o[e].id,!0,!1,!0);D.baseComponent&&(i?this.highlightItemElementByItemId(i.id,!0,!1,!0):e+='<span class="recipe-missing-items">',e+=`<li>x1 ${itemManager.getItemTypeGroupName(D.baseComponent).inContext(3).getString()}</li>`,i||(e+="</span>"));const r=itemManager.getAdjacentContainers(localPlayer),s=[localPlayer.inventory,...r],l=D.components;for(let t=0;t<l.length;t++){const i=l[t],n=i.type,o=i.requiredAmount,r=i.consumedAmount,u=itemManager.isGroup(n)?itemManager.countItemsInContainerByGroup(s,n):itemManager.countItemsInContainer(s,n),d=a.amountNeededForComponent(t);d>0&&(e+='<span class="recipe-missing-items">'),e+=`<li>x${o} ${itemManager.getItemTypeGroupName(n,!1).inContext(3).getString()}`,r>0&&(e+=` (x${r} ${f.default.message(h.default.Consumed).getString()})`);const p=d>0?o-d:u;e+=` (${f.default.message(h.default.LabelHave).getString()} ${p}/${o})</li>`,d>0&&(e+="</span>")}(D.requiredDoodad||D.requiresFire)&&(e+=`<li>${this.additionalRequirements(t,D)}</li>`),e+="</ul>";const u=g.recipeLevelToMessage[D.level];let d="";d=localPlayer.getSkill(D.skill)<=b.skillChance(D.level)-40?`<span class="skill-warning">${f.default.message(u).getString()}</span>`:f.default.message(u).getString();const c=b.skillDescriptions[D.skill];T+=`<p><strong>${f.default.message(h.default.LabelSkill).getString()}</strong> ${c?new f.default(m.Dictionary.Skill,D.skill).inContext(3).getString():f.default.message(h.default.Unknown).getString()} <strong>${f.default.message(h.default.LabelLevel).getString()}</strong> ${d}</p>\n\t\t\t\t<p class="no-space"><strong>${f.default.message(h.default.LabelRequires).inContext(3).getString()}</strong> ${e}</p>`}if(n){const e=itemManager.getItemForHuman(localPlayer,t);if(e&&this.highlightItemElementByItemId(e.id,!0,!1,!0),s.dismantle&&s.dismantle.required){const e=itemManager.getItemForHuman(localPlayer,s.dismantle.required);e&&this.highlightItemElementByItemId(e.id,!0,!1,!0)}}if(S.bindingManager.isPressed(u.Bindable.GameMoreInformation)||saveDataGlobal.options.alwaysShowMoreInformation){if(s.use)for(const e of s.use)T+=`<p><strong>${new f.default(m.Dictionary.Action,e).getString()}:</strong> ${new f.default(m.Dictionary.Action,e,1).getString()}</p>`}else s.use&&(T+=`<p><em>${f.default.message(h.default.MoreInformation).getString(S.bindingManager.getBindingsTranslation(u.Bindable.GameMoreInformation))}</em></p>`);return T}createDialog(e,t){const a=e.dialog(this.setupDialog(u.DialogId.Custom,void 0,t));return a.data("dialog-index",this.getDialogIndex(u.DialogId.Custom,t)),this.elementOtherDialogs.push(a),a}getUsedQuickSlots(){const e=[];return this.elementQuickSlotsContainer.children(".in-use").each(function(){e.push($(this).getQuickSlot())}),e}getFreeQuickSlots(){const e=[];return this.elementQuickSlotsContainer.children().not(".in-use, #numbers").each(function(){e.push($(this).getQuickSlot())}),e}getQuickSlotItemElement(e){return this.elementQuickSlotsContainer.children(`[data-quick-slot="${e}"]`).first()}getItemIdInQuickSlot(e){const t=this.getQuickSlotItemElement(e);if(t.hasClass("in-use")&&!t.hasClass("disabled"))return t.children("li").data("item-id")}setQuickSlot(e,t,n=!1){if(void 0===t)return!1;const o=game.items[t];if(!o||o.isInTradeContainer())return!1;if(!itemManager.isInInventory(o)){let t=!1;for(let e=0;e<this.elementContainerDialogs.length;e++){const a=this.elementContainerDialogs[e].data("container");if(itemManager.isContainableInContainer(o,a)){t=!0;break}}if(!t)return this.setQuickSlotByItemType(e,o.type,!0),!1;a.default.get(i.ActionType.MoveItem).execute(localPlayer,o,void 0,localPlayer.inventory)}let r;const s=localPlayer.quickSlotInfo[e];return s&&s.itemType===o.type&&(r=s.action),o.quickSlot&&(localPlayer.quickSlotInfo[o.quickSlot]&&(r=localPlayer.quickSlotInfo[o.quickSlot].action),this.clearQuickSlot(o.quickSlot,!0)),this.setItemQuickslot(o,e),localPlayer.updateQuickSlotInfo(e,o.type,r),this.setQuickSlotByItemType(e,o.type,!1,o),this.syncItemElements(t),n||(localPlayer.queueSoundEffect(u.SfxType.PickUp),this.onUpdateQuickSlotsOrEquips()),!0}setQuickSlotByItemType(e,t,a,i){let n;const o=localPlayer.quickSlotInfo[e];o&&o.itemType===t&&(n=o.action),this.clearQuickSlot(e,!0),localPlayer.updateQuickSlotInfo(e,t,n);const r=this.getQuickSlotItemElement(e);r.attr("data-item-type",t),r.addClass("in-use"),a?r.addClass("disabled"):r.removeClass("disabled"),r.prepend(this.createItemString(t,i,"is-quick-slot"))}addItemToFreeQuickSlot(e){const t=this.getFreeQuickSlots();0!==t.length&&this.setQuickSlot(t[0],e)}clearQuickSlot(e,t=!1){const a=this.getQuickSlotItemElement(e);if(!a.hasClass("in-use"))return;const i=this.getItemIdInQuickSlot(e);this.removeItemFromQuickSlot(i),localPlayer.updateQuickSlotInfo(e),a.removeClass("in-use"),a.removeClass("disabled"),a.removeAttr("data-item-type"),a.children("li").trigger("remove").remove(),t||localPlayer.queueSoundEffect(u.SfxType.PickUp)}removeItemFromQuickSlot(e,t){if(void 0===e)return;const a=game.items[e];a&&a.quickSlot&&(this.getQuickSlotItemElement(a.quickSlot).children("li").removeAttr("data-item-id").removeData("item-id"),this.setItemQuickslot(a,void 0),t||this.syncItemElements(e),this.onUpdateQuickSlotsOrEquips())}setItemQuickslot(e,t){multiplayer.isConnected()?setTimeout(()=>{e.isValid()&&e.setQuickSlot(localPlayer,t)},1):e.setQuickSlot(localPlayer,t)}updateQuickSlotItem(e){const t=this.getQuickSlotItemElement(e);if(!t.hasClass("in-use"))return!1;const a=this.getItemIdInQuickSlot(e);if(void 0!==a){const i=game.items[a];if(i&&itemManager.isInInventory(i)&&i.quickSlot===e)return t.removeClass("disabled"),!1}let i=!1;const n=t.getItemType(),o=itemManager.getItemsInContainerByType(localPlayer.inventory,n,!0);if(o.length>0)for(let n=0;n<o.length;n++){const r=o[n];if(r&&r.id!==a){if(!r.quickSlot)return this.setQuickSlot(e,r.id,!0);{i=!0;const e=t.children("li").attr("data-item-id",r.id).addClass(this.getItemClass(r));this.syncItemElements(r.id,e)}}}return void 0!==a?this.setQuickSlotByItemType(e,n,!i):i?t.removeClass("disabled"):t.addClass("disabled"),!1}onUpdateQuickSlotsOrEquips(){game.playing&&saveDataGlobal.options.protectedCraftingItems&&localPlayer.updateTables()}onSortableItemReceive(e){if(!e.item||!e.targetContainer)return;const t=e.item,n=t.data("item-id"),o=t.getQuickSlot(),r=parseInt(u.EquipType[t.getEquipSlot()],10),s=e.initialContainer.data("sortable"),l=e.targetContainer,d=l.getQuickSlot(),p=parseInt(u.EquipType[l.getEquipSlot()],10),c=l.data("sortable"),m=l.parent().data("container"),h=game.items[n];this.onSortableAction=(()=>{switch(c){case"quick-slot":switch(s){case"quick-slot":l.hasClass("in-use")&&this.setQuickSlot(o,this.getItemIdInQuickSlot(d))}if(void 0!==n)this.setQuickSlot(d,n);else{const e=t.getItemType();this.clearQuickSlot(t.parent().getQuickSlot()),this.setQuickSlotByItemType(d,e,!0),this.updateQuickSlotItem(d)}break;case"equip-slot":if(h.isInTradeContainer())break;if("equip-slot"===s&&l.hasClass("in-use")){const e=this.getItemIdInEquipSlot(p);if(void 0!==e){const t=!(p!==u.EquipType.Held&&p!==u.EquipType.LeftHand&&p!==u.EquipType.RightHand||r!==u.EquipType.Held&&r!==u.EquipType.LeftHand&&r!==u.EquipType.RightHand);a.default.get(i.ActionType.Equip).execute(localPlayer,game.items[e],r,!0,!!t||void 0)}}a.default.get(i.ActionType.Equip).execute(localPlayer,h,p);break;case"inventory":switch(s){case"quick-slot":this.clearQuickSlot(o);break;case"equip-slot":a.default.get(i.ActionType.Unequip).execute(localPlayer,game.items[n]);break;case"container":h&&(h.containedWithin&&S.bindingManager.isPressed(u.Bindable.GameItemQuickMoveAll)?a.default.get(i.ActionType.MoveItem).execute(localPlayer,void 0,h.containedWithin,localPlayer.inventory,h.type):a.default.get(i.ActionType.MoveItem).execute(localPlayer,h,void 0,localPlayer.inventory));break;default:this.setQuickSlot(d,n)}break;case"container":switch(s){case"inventory":case"container":h&&m&&(h.containedWithin&&S.bindingManager.isPressed(u.Bindable.GameItemQuickMoveAll)?a.default.get(i.ActionType.MoveItem).execute(localPlayer,void 0,h.containedWithin,m,h.type):a.default.get(i.ActionType.MoveItem).execute(localPlayer,h,void 0,m))}break;case void 0:h&&!h.isInTradeContainer()?a.default.get(i.ActionType.Drop).execute(localPlayer,h,S.bindingManager.isPressed(u.Bindable.GameItemDropAll)):"quick-slot"===s&&this.clearQuickSlot(o)}this.blurInputs()})}getEquipSlotItemElement(e){return this.elementDialogEquipmentContainer.children(`[data-equip-slot="${u.EquipType[e].toString()}"]`).first()}getItemIdInEquipSlot(e){const t=this.getEquipSlotItemElement(e);if(t.hasClass("in-use"))return t.children("li").data("item-id")}setEquipSlot(e,t,a=!1){if(void 0===t)return;const i=game.items[t];if(!i)return;const n=this.getEquipSlotItemElement(e);n.addClass("in-use"),n.prepend(this.createItemString(i.type,i)),this.syncItemElements(t),!a&&this.isVisible()&&this.openDialog(this.elementDialogEquipment),this.onUpdateQuickSlotsOrEquips()}removeItemFromEquipSlot(e){if(!e)return;const t=this.getItemIdInEquipSlot(e);if(void 0===t)return;const a=this.getEquipSlotItemElement(e);a.hasClass("in-use")&&(a.removeClass("in-use"),a.children("li").trigger("remove").remove(),this.syncItemElements(t),this.onUpdateQuickSlotsOrEquips())}sortSkills(e){return e.sort((e,t)=>new f.default(m.Dictionary.Skill,e).getString().localeCompare(new f.default(m.Dictionary.Skill,t).getString()))}updateCraftingDialog(e,t){this.craftableItemTypes&&this.nonCraftableItemTypes&&A.default.equals(this.craftableItemTypes,e)&&A.default.equals(this.nonCraftableItemTypes,t)||(this.craftableItemTypes=e,this.nonCraftableItemTypes=t,this.onUpdateContainer(this.elementDialogCraftingContainer,!1))}updateDismantleTab(e){let t="";for(const a in e)t+=`<li class="tooltip is-dismantle item item-${a}" data-item-type="${a}"></li>`;this.elementDialogDismantleContainer.html(t),this.onFilterInput(this.elementDialogDismantleContainer)}createCraftItemElements(e){let t="";const a=this.craftableItemTypes?this.craftableItemTypes.slice():void 0,i=this.nonCraftableItemTypes?this.nonCraftableItemTypes.slice():void 0;if(a&&a.sort((t,a)=>this.determineSort(e,void 0,t,void 0,a)),i&&i.sort((t,a)=>this.determineSort(e,void 0,t,void 0,a)),e.sortType===u.SortType.Category||e.sortType===u.SortType.Skill){const n=[];switch(e.sortType){case u.SortType.Category:const t=G.default.values(u.ItemTypeGroup).filter(e=>e!==u.ItemTypeGroup.Invalid&&e!==u.ItemTypeGroup.Last).collect(R.default.toArray);t.sort((e,t)=>new f.default(m.Dictionary.ItemGroup,e).getString().localeCompare(new f.default(m.Dictionary.ItemGroup,t).getString())),e.reverse&&t.reverse();for(const e of t){const t=(t,a)=>!!itemManager.isInGroup(t,e)||e===u.ItemTypeGroup.Other&&!itemManager.getGroups(t).collect(R.default.first()),a=c.itemGroupDescriptions[e];a&&n.push({name:f.default.nameOf(m.Dictionary.ItemGroup,e,!1).inContext(3).getString(),matcher:t})}break;case u.SortType.Skill:let a=G.default.values(u.SkillType).collect(R.default.toArray);a=this.sortSkills(a),e.reverse&&a.reverse();for(const e of a){const t=(t,a)=>{const i=a.recipe;return i?i.skill===e:-1===e};n.push({name:(-1===e?f.default.message(h.default.NotAvailable):new f.default(m.Dictionary.Skill,e).inContext(3)).getString(),matcher:t})}}for(const e of n){let n=!1;const o=()=>{n||(n=!0,t+=`<div data-section="${e.name}">${e.name}</div>`)};if(a)for(let i=0;i<a.length;i++){const n=a[i],r=c.itemDescriptions[n];if(r&&e.matcher(n,r)){o();const e=!game.isChallenge&&game.crafted[n];t+=this.createItemString(n,void 0,e&&e.newUnlock?"highlighted":"")}}if(i)for(let a=0;a<i.length;a++){const n=i[a],r=c.itemDescriptions[n];if(r&&e.matcher(n,r)){o();const e=!game.isChallenge&&game.crafted[n];t+=this.createItemString(n,void 0,e&&e.newUnlock?"highlighted non-craftable":"non-craftable")}}n&&(t+='<div class="clear-fix"></div>')}}else{if(a)for(const e of a){const a=!game.isChallenge&&game.crafted[e];t+=this.createItemString(e,void 0,a&&a.newUnlock?"highlighted":"")}if(t+='<div class="clear-fix clear-fix-bordered"></div>',i)for(const e of i){const a=!game.isChallenge&&game.crafted[e];t+=this.createItemString(e,void 0,a&&a.newUnlock?"highlighted non-craftable":"non-craftable")}}const n=this.elementDialogCraftingContainer.get(0);n.innerHTML=t,this.onFilterInput(this.elementDialogCraftingContainer)}updateItem(e){this.syncItemElements(e.id);const t=e.containedWithin;void 0!==t&&void 0!==t.weightCapacity&&this.refreshContainerName(t)}onMove(){this.hideActionsMenu(),this.closeStaticContainers()}refreshWorldTooltips(){}getDialogElementForContainer(e){for(let t=0;t<this.elementContainerDialogs.length;t++){const a=this.elementContainerDialogs[t];if(a.data("container")===e)return a}}isContainerOpen(e){return void 0!==this.getDialogElementForContainer(e)}openContainer(e,t){let a=this.getDialogElementForContainer(e);if(void 0!==a)return void(void 0!==t&&(a.data("container-name",t),this.refreshContainerName(e)));const i=$("#container").clone().removeAttr("id");let n;i.appendTo(this.elementDialogs);const o=itemManager.getContainerReference(e);o&&o.type===d.ContainerReferenceType.Item&&(n=o.id),(a=i.dialog(this.setupDialog(u.DialogId.Container,n)).data("container",e).data("container-name",t).data("cloned",i)).parent().hover(()=>{!this.isSorting()&&n&&this.highlightItemElementByItemId(n,!0)},()=>{n&&this.highlightItemElementByItemId(n,!1,!0)}),e.containerType===d.ContainerType.Trade&&(a.parent().find(".grab-all").remove(),a.find(".container").addClass("is-npc")),this.elementContainerDialogs.push(a),a.find(".filter").val("");const r=a.find(".container").addClass("is-container-container");for(const t of itemManager.getOrderedContainerItems(e))e.containerType===d.ContainerType.Trade&&t.isEquipped()||this.addItemToContainer(t,e,!0,!0);this.onAddItemsToContainer(r,a,!1),this.bindSortable(r),this.updateActiveContainer(),this.onOpenDialog(a),this.clampDialogs()}closeContainer(e){this.closeContainerDialog(this.getDialogElementForContainer(e))}closeContainerDialog(e){if(void 0===e)return;const t=e.data("container");if(t){const t=e.find(".container");this.sortableElementTargetContainer&&this.sortableElementTargetContainer.get(0)===t.get(0)&&this.cancelSorting();const a=this.sortableElement,i=()=>{this.cancelSorting()};e.find(".item").each(function(){a&&this===a&&i(),$(this).trigger("remove").remove()})}for(let t=0;t<this.elementContainerDialogs.length;t++){const a=this.elementContainerDialogs[t];a.get(0)===e.get(0)&&(this.elementContainerDialogs.splice(t,1),this.updateActiveContainer())}e.dialog("close").remove()}closeStaticContainers(){for(let e=0;e<this.elementContainerDialogs.length;e++){const t=this.elementContainerDialogs[e].data("container");if(!itemManager.isInInventory(t))return this.closeContainer(t),void this.closeStaticContainers()}}closeAllContainers(){return this.elementContainerDialogs.length>0&&(this.closeContainerDialog(this.elementContainerDialogs[0]),this.closeAllContainers(),!0)}updateContainerName(e){const t=e.data("container");if(t){let a=e.data("container-name");if(a){if(t.containerType===d.ContainerType.Trade){const e=itemManager.getNPCFromInventoryContainer(t);if(void 0!==e){const t=e.getProperty(s.Property.Credit);if(void 0!==t){const e=t.get(localPlayer.identifier)||0;a+=` [${f.default.ui(y.default.GameItemBarterCredit).getString()}${e}]`}}}if(void 0!==t.weightCapacity){a+=` (${B.default.roundNumber(itemManager.computeContainerWeight(t),1)}/${t.weightCapacity}`;const e=itemManager.getContainerReference(t,void 0,!1);if(e.type===d.ContainerReferenceType.Item){const e=t;e.legendary&&e.legendary.type===u.LegendaryType.WeightCapacity&&(a+=` +${e.legendary.value}`)}a+=")"}e.dialog("option","title",a)}t.containedWithin&&t.containedWithin!==localPlayer.inventory&&this.refreshContainerName(t.containedWithin)}}updateActiveContainer(){this.elementContainerDialogs.length>0?(this.activeContainer=this.elementContainerDialogs[this.elementContainerDialogs.length-1].data("container"),this.multipleContainersOpened=this.elementContainerDialogs.length>1):this.activeContainer=void 0}hideContextMenu(){return!(!$(document).contextmenu("instance")||!$(document).contextmenu("isOpen"))&&($(document).contextmenu("close"),!0)}hideActionsMenu(){this.actionsMenuOpen&&(this.hideContextMenu(),this.elementActions.quickHide(),this.actionsMenuOpen=!1)}toggleActionsMenu(e=!1){this.actionsMenuOpen?this.hideActionsMenu():this.showActionsMenu(e),this.actionsMenuCentered=e}showActionsMenu(e=!1,t=!0,a){if(localPlayer.isResting())return;const n=[],o=localPlayer.getFacingTile();if(!o)return;const r=localPlayer.getTile();if(!o)return;t&&(e||this.actionsMenuCentered?(this.elementActions.css("left",ui.getWidth()/2),this.elementActions.css("top",ui.getHeight()/2)):(this.elementActions.css("left",this.mouseX),this.elementActions.css("top",this.mouseY))),this.elementActions.quickShow(),this.actionsMenuOpen=!0;const s=C.default[L.default.getType(o)];if(void 0!==o.doodad&&o.doodad.canPickup(localPlayer)&&n.push({action:"CollectObjectWithHands",text:f.default.message(h.default.CollectObjectWithHands).getString(),keybind:0}),localPlayer.isFacingCarvableTile()&&void 0!==localPlayer.getDefaultCarveTool()&&n.push({action:"CarveWithTool",text:f.default.message(h.default.CarveWithTool).getString(),keybind:1}),void 0!==o.containedItems){const e=o.containedItems.length;e>0&&n.push({action:"PickUpItem",text:f.default.message(h.default.PickupItem).getString(),keybind:2}),e>1&&n.push({action:"PickUpAllItems",text:f.default.message(h.default.PickupAllItems).getString(),keybind:3})}void 0!==o.doodad&&o.doodad.canHarvest()?n.push({action:"HarvestWithHands",text:f.default.message(h.default.HarvestWithHands).getString(),keybind:4}):s&&s.gather||void 0!==o.doodad&&o.doodad.isGatherable()||tileEventManager.canGather(o)?n.push({action:"GatherWithHands",text:f.default.message(h.default.GatherWithHands).getString(),keybind:4}):!s||!s.passable||s.water||void 0!==o.doodad||void 0!==o.containedItems&&0!==o.containedItems.length||void 0!==o.corpses||void 0!==o.events||n.push({action:"DigWithHands",text:f.default.message(h.default.DigWithHands).getString(),keybind:4});const l=o.doodad;l&&(l.type===u.DoodadType.WoodenDoor||l.type===u.DoodadType.WoodenGate?n.push({action:"OpenDoor",text:f.default.message(h.default.OpenDoor).getString(),keybind:5}):l.type!==u.DoodadType.WoodenDoorOpen&&l.type!==u.DoodadType.WoodenGateOpen||n.push({action:"CloseDoor",text:f.default.message(h.default.CloseDoor).getString(),keybind:5}));const d=localPlayer.getTile(),p=C.default[L.default.getType(d)];if(p&&p.passable){const e=d.doodad&&d.doodad.getActions(),t=e&&e.some(e=>e===i.ActionType.Rest||e===i.ActionType.Sleep);t||n.push({action:"RestOnGround",text:f.default.message(h.default.RestOnGround).getString(),keybind:6})}localPlayer.canJump()&&n.push({action:"Jump",text:f.default.message(h.default.Jump).getString(),keybind:7});const c=o.creature;if(c&&(c.isTamed()?localPlayer.hasTamedCreature(c)&&n.push({action:"Release",text:f.default.message(h.default.Release).getString(),keybind:8}):n.push({action:"Tame",text:f.default.message(h.default.Tame).getString(),keybind:8})),c&&void 0!==c.hitchedTo)n.push({action:"Unhitch",text:f.default.message(h.default.Unhitch).getString(),keybind:9});else if(c){const e=[[c.x+1,c.y],[c.x-1,c.y],[c.x,c.y+1],[c.x,c.y-1]];for(let t=0;t<e.length;t++){const a=game.getTile(e[t][0],e[t][1],c.z);if(a&&a.doodad){const e=a.doodad.description();if(e&&e.group===u.DoodadTypeGroup.Hitch){n.push({action:"Hitch",text:f.default.message(h.default.Hitch).getString(),keybind:9});break}}}}s&&(s.water||s.shallowWater||L.default.getType(o)===u.TerrainType.Snow)&&n.push({action:"Drink",text:f.default.message(h.default.Drink).getString(),keybind:10}),void 0!==o.creature&&o.creature.isTamed()?n.push({action:"Rename",text:new f.default(m.Dictionary.Action,i.ActionType.Rename).getString(),data:o.creature,keybind:11}):void 0!==o.doodad&&n.push({action:"Rename",text:new f.default(m.Dictionary.Action,i.ActionType.Rename).getString(),data:o.doodad,keybind:11});let y=12;if(void 0!==o.npc){const e=o.npc.getActions();if(void 0!==e)for(const t of e)n.push({action:t.toString(),text:new f.default(m.Dictionary.Action,t).getString(),data:o.npc,keybind:y++});o.npc.isHostile()||n.push({action:"Attack",text:f.default.message(h.default.Attack).getString(),keybind:y++})}else{if(void 0!==o.doodad){const e=o.doodad.getActions();if(void 0!==e)for(const t of e)n.push({action:t.toString(),text:new f.default(m.Dictionary.Action,t).getString(),data:o.doodad,keybind:y++})}if(void 0!==r.doodad){const e=r.doodad.getActions();if(void 0!==e)for(const t of e)n.push({action:t.toString(),text:new f.default(m.Dictionary.Action,t).getString(),data:r.doodad,keybind:y++})}}const g={actions:n};a||ui.playClickSound(),$(document).contextmenu("open",this.elementActions,g),$(".ui-contextmenu").removeAttr("tabindex")}onCopySelectedText(){document.execCommand("copy"),window.getSelection().removeAllRanges()}onFilterInput(e){const t=2===e.length||e===this.elementDialogDismantleContainer||e===this.elementDialogCraftingContainer?e.parent().parent().parent().find(".filter"):e.parent().parent().find(".filter"),a=t.val(),i=e.children();if(a.length>0)t.addClass("filtering"),t.parent().addClass("filtered");else{if(!t.hasClass("filtering"))return;t.removeClass("filtering"),t.parent().removeClass("filtered")}let n=!1;if($.each(i,function(){const e=$(this).data("section");void 0!==e&&(n=!0);const t=$(this).getItemType();if(!t)return;const i=c.itemDescriptions[t];if(!i)return;const o=[f.default.nameOf(m.Dictionary.Item,t,!1).getString()];for(const e of itemManager.getGroups(t))o.push(new f.default(m.Dictionary.ItemGroup,e).getString());if(i.recipe&&void 0!==i.recipe.skill&&o.push(new f.default(m.Dictionary.Skill,i.recipe.skill).inContext(3).getString()),i.dismantle&&i.dismantle.items)for(const[e]of i.dismantle.items)o.push(new f.default(m.Dictionary.Item,e).getString());const r=o.reduce((e,t)=>e||t.toLocaleLowerCase().indexOf(a.toLocaleLowerCase())>-1,!1);$(this).toggle(r)}),n)$.each(i,function(){const e=$(this).data("section");if(void 0===e)return;let t=!1,a=$(this).next();for(;a.is("li");){if(a.isVisible()){t=!0,a=a.nextAll(".clear-fix:first");break}a=a.next()}$(this).add(a).toggle(t)});else if(e.is("#container-crafting")){const t=e.find(".clear-fix-bordered"),a=t.prevAll(":not([style*='display: none'])"),i=t.nextAll(":not([style*='display: none'])");t.toggle(a.length>0&&i.length>0)}}showSortContextMenu(e,t,a){const i=[];i.push({action:"SortName",text:f.default.message(h.default.Name).getString(),data:{sortType:u.SortType.Name,container:t,messageType:a}}),a===h.default.Crafts?(i.push({action:"SortSkill",text:f.default.message(h.default.Skill).getString(),data:{sortType:u.SortType.Skill,container:t,messageType:a}}),i.push({action:"SortCategory",text:f.default.message(h.default.Category).getString(),data:{sortType:u.SortType.Category,container:t,messageType:a}}),i.push({action:"SortUnlockedTime",text:f.default.message(h.default.UnlockedTime).getString(),data:{sortType:u.SortType.DiscoveredTime,container:t,messageType:a}})):(i.push({action:"SortDecay",text:f.default.message(h.default.Decay).getString(),data:{sortType:u.SortType.Decay,container:t,messageType:a}}),i.push({action:"SortDurability",text:f.default.message(h.default.Durability).getString(),data:{sortType:u.SortType.Durability,container:t,messageType:a}}),i.push({action:"SortGroup",text:f.default.message(h.default.Group).getString(),data:{sortType:u.SortType.Group,container:t,messageType:a}}),i.push({action:"SortRecent",text:f.default.message(h.default.Recent).getString(),data:{sortType:u.SortType.Recent,container:t,messageType:a}}),i.push({action:"SortQuality",text:f.default.message(h.default.Quality).getString(),data:{sortType:u.SortType.Quality,container:t,messageType:a}}),i.push({action:"SortWeight",text:f.default.message(h.default.Weight).getString(),data:{sortType:u.SortType.Weight,container:t,messageType:a}}),i.push({action:"SortBest",text:f.default.message(h.default.Best).getString(),data:{sortType:u.SortType.Best,container:t,messageType:a}}));const n={actions:i};$(document).contextmenu("open",e,n),$(".ui-contextmenu").removeAttr("tabindex")}getContainerId(e){const t=e.parent(),a=t.data("container");return a?JSON.stringify(itemManager.getContainerReference(a)):t.attr("id")}sortItems(e,t,a,i=!0){const n=this.getContainerId(e);let o=localPlayer.containerSortInfo[n];if(o&&o.sortType===t?i&&void 0!==a&&(o.reverse=!o.reverse):(o=localPlayer.containerSortInfo[n]={sortType:t},t!==u.SortType.Quality&&t!==u.SortType.Decay||(o.reverse=!0)),e===this.elementDialogCraftingContainer)this.createCraftItemElements(o);else{let t;const a=e.children(".clear-fix");if(0===a.length)t=[e.children()];else{if(1!==a.length)return;t=[a.prevAll(),a.nextAll()]}for(let i=0;i<t.length;i++){let n=t[i];this.sortItemElements(n,o),n=n.detach(),2===t.length?0===i?n.insertBefore(a):n.insertAfter(a):n.appendTo(e)}0===a.length&&this.saveItemOrder(e)}if(void 0===a)return;let r=h.default.None;switch(t){case u.SortType.Name:r=h.default.SortedByName;break;case u.SortType.Group:r=h.default.SortedByGroup;break;case u.SortType.Weight:r=h.default.SortedByWeight;break;case u.SortType.Recent:r=h.default.SortedByRecent;break;case u.SortType.Skill:r=h.default.SortedBySkill;break;case u.SortType.Decay:r=h.default.SortedByDecay;break;case u.SortType.Quality:r=h.default.SortedByQuality;break;case u.SortType.Durability:r=h.default.SortedByDurability;break;case u.SortType.Category:r=h.default.SortedByCategory;break;case u.SortType.DiscoveredTime:r=h.default.SortedByUnlockedTime;break;case u.SortType.Best:r=h.default.SortedByBest}localPlayer.messages.send(r,f.default.message(a))}sortItemElements(e,t){e.sort((e,a)=>{const i=$(e).getItemType(),n=$(a).getItemType();return this.determineSort(t,$(e).data("item-id"),i,$(a).data("item-id"),n)})}updateInventorySort(){this.onUpdateContainer(this.elementDialogInventoryContainer,!0)}onUpdateContainer(e,t){this.updateSort(e,t),this.onFilterInput(e)}updateSort(e,t){if(t&&!saveDataGlobal.options.keepSortActive)return;const a=this.getContainerId(e);let i;const n=localPlayer.containerSortInfo[a];i=n&&void 0!==n.sortType?n.sortType:e===this.elementDialogCraftingContainer?u.SortType.Name:u.SortType.Recent,this.sortItems(e,i,void 0,!1)}isContainerDialogOver(e,t){for(let a=0;a<this.elementContainerDialogs.length;a++){const i=this.elementContainerDialogs[a],n=i.parent().offset().left,o=i.parent().offset().top,r=i.parent().width(),s=i.parent().height();if(!(e<n||t<o)&&!(e>n+r||t>o+s))return!0}return!1}onUpdateDirection(){this.actionsMenuOpen?(this.hideActionsMenu(),this.showActionsMenu(!1,!0,!0)):this.contextMenuOpen&&this.contextMenuTarget&&this.showItemContextMenu(this.contextMenuTarget)}onBindLoop(e,t){function n(){return!1!==t}let o;document.activeElement&&"INPUT"===document.activeElement.tagName&&document.activeElement.matches(".ui-dialog input")&&!document.activeElement.classList.contains("can-focus")&&this.element[0].focus(),this.mouseX=e.mouseX,this.mouseY=e.mouseY,t=t||void 0!==this.isCurrentlySorting||this.isOverlayVisible();const r=()=>(void 0===o&&(o=this.getHoveredItem(e)),o);if(e.wasPressed(u.Bindable.GameItemMenu)&&!n()&&r()&&(this.showItemContextMenu($(r())),t=u.Bindable.GameItemMenu,P.sleep(50).then(()=>{e.removePressState(u.Bindable.GameItemMenu)})),!e.wasPressed(u.Bindable.GameItemQuickMove)&&!e.wasPressed(u.Bindable.GameItemQuickMoveAll)||n())(e.wasReleased(u.Bindable.GameItemQuickMove)||e.wasReleased(u.Bindable.GameItemQuickMoveAll))&&(this.isQuickmoving=!1);else if(r()){const n=game.items[$(r()).data("item-id")];if(n){const o=e.wasPressed(u.Bindable.GameItemQuickMoveAll);let r;if(t=o?u.Bindable.GameItemQuickMoveAll:u.Bindable.GameItemQuickMove,n.containedWithin===localPlayer.inventory)if(this.activeContainer)r=this.activeContainer;else{const e=localPlayer.getFacingTile().doodad;e&&itemManager.isContainer(e)&&(r=e)}else r=localPlayer.inventory;r&&(o?a.default.get(i.ActionType.MoveItem).execute(localPlayer,void 0,n.containedWithin,r,n.type):a.default.get(i.ActionType.MoveItem).execute(localPlayer,n,void 0,r))}this.isQuickmoving=!0}if(e.wasPressed(u.Bindable.GameItemMove)&&!n()&&r()&&(this.isCurrentlySorting=r(),this.runSortableAction($([r().parentElement]),"mouseDown",{type:"mousedown",which:1,target:r(),pageX:e.mouseX,pageY:e.mouseY,stopPropagation(){},preventDefault(){}}),t=u.Bindable.GameItemMove),this.shouldCancelSorting&&(this.shouldCancelSorting=!1,e.removePressState(u.Bindable.GameItemMove)),e.wasReleased(u.Bindable.GameItemMove)&&this.isCurrentlySorting&&(this.runSortableAction($([this.isCurrentlySorting.parentElement]),"mouseUp",{type:"mouseup",which:1,target:this.isCurrentlySorting,pageX:e.mouseX,pageY:e.mouseY,stopPropagation(){},preventDefault(){}}),this.isCurrentlySorting=void 0),e.wasPressed(u.Bindable.GameItemEquipToggle)&&!n()&&r()){const e=game.items[$(r()).data("item-id")];if(e){if(e.isEquipped())a.default.get(i.ActionType.Unequip).execute(localPlayer,e);else if(!e.isInTradeContainer()){const t=c.itemDescriptions[e.type];t&&t.equip&&a.default.get(i.ActionType.Equip).execute(localPlayer,e,t.equip)}t=u.Bindable.GameItemEquipToggle}}if(this.contextMenuOpen)for(let a=1;a<25;a++){const i=u.Bindable[`GameContextMenu${a}`];e.wasPressed(i)&&!n()&&(this.pressHotKey(a-1)&&(t=i),this.canUseQuickslot=!1)}for(let a=1;a<10;a++){const i=u.Bindable[`GameQuickSlotToggle${a}`],o=e.wasPressed(i);this.contextMenuOpen||!o&&!e.isDown(i)||n()||!r()||this.quickSlotToggleBindPressed(e,r(),a,i,o)&&(t=i),e.wasReleased(i)&&(this.canUseQuickslot=!0)}for(let a=1;a<10;a++){const i=u.Bindable[`GameQuickSlot${a}`],o=e.wasPressed(i);this.contextMenuOpen||!(o||!this.hasDelay()&&e.isDown(i))||n()||this.quickSlotBindPressed(e,a,i)&&(t=i),e.wasReleased(i)&&(this.canUseQuickslot=!0),(this.contextMenuOpen||this.isOverlayVisible()||!this.canUseQuickslot)&&e.removePressState(i)}if(e.wasPressed(u.Bindable.GameQuickSlotClear)&&!n()){let a=!1;if($("#quick-slots > .quick-slot").each((t,i)=>{const n=i;return!e.isMouseWithin(n)||(this.clearQuickSlot(+n.dataset.quickSlot),a=!0,!1)}),!a&&r()){const e=game.items[$(r()).data("item-id")];e&&e.quickSlot&&(this.clearQuickSlot(e.quickSlot,!0),a=!0)}a&&(t=u.Bindable.GameQuickSlotClear)}if((e.wasPressed(u.Bindable.GameItemDrop)||e.wasPressed(u.Bindable.GameItemDropAll))&&!n()){const n=r()?game.items[$(r()).data("item-id")]:void 0;if(n&&!n.isInTradeContainer()){const o=e.wasPressed(u.Bindable.GameItemDropAll);a.default.get(i.ActionType.Drop).execute(localPlayer,n,o),t=o?u.Bindable.GameItemDropAll:u.Bindable.GameItemDrop}}return e.wasPressed(u.Bindable.MenuCancel)&&!n()&&this.contextMenuOpen&&(t=u.Bindable.MenuCancel),e.wasPressed(u.Bindable.DialogCloseAll)&&!n()&&this.closeAllDialogs()&&(t=u.Bindable.DialogCloseAll),!e.wasPressed(u.Bindable.GameMoreInformation)&&!e.wasReleased(u.Bindable.GameMoreInformation)||n()||ui.tooltipRefresh(),e.wasPressed(u.Bindable.DialogDismantle)&&!n()&&(this.toggleCraftingTab("dismantle"),t=u.Bindable.DialogDismantle),e.wasPressed(u.Bindable.GameHandToggleLeft)&&!n()&&(this.changeEquipmentOption("leftHand"),t=u.Bindable.GameHandToggleLeft),e.wasPressed(u.Bindable.GameHandToggleRight)&&!n()&&(this.changeEquipmentOption("rightHand"),t=u.Bindable.GameHandToggleRight),!this.contextMenuOpen||!t&&!e.isDown("Mouse0")||e.isDown(u.Bindable.GameActions)||e.isDown(u.Bindable.GameItemMenu)||e.isMouseWithin(document.getElementsByClassName("ui-contextmenu")[0],!1)||(this.hideActionsMenu(),this.hideContextMenu()),t}additionalRequirements(e,t,a){const i=c.itemDescriptions[e];let n=`<strong>${f.default.message(h.default.LabelAdditionalRequirements).getString()}</strong> `;const o=itemManager.hasAdditionalRequirements(localPlayer,e,void 0,void 0,a);if((t.requiresFire||a&&i&&i.repairAndDisassemblyRequiresFire)&&(o.fireRequirementMet||(n+='<span class="recipe-missing-items">'),n+=f.default.message(h.default.FireSource).getString(),o.fireRequirementMet||(n+="</span>")),t.requiredDoodad){(t.requiresFire||a&&i&&i.repairAndDisassemblyRequiresFire)&&(n+=", "),o.doodadRequirementMet||(n+='<span class="recipe-missing-items">');const e=doodadManager.isDoodadTypeGroup(t.requiredDoodad);n+=f.default.nameOf(e?m.Dictionary.DoodadGroup:m.Dictionary.ItemGroup,t.requiredDoodad).inContext(3).getString(),o.doodadRequirementMet||(n+="</span>")}return n}runAction(e,t,o){let s,l,d,p,m;if(void 0!==e&&(d=game.items[e])&&(s=d.type,l=d.quickSlot),t.data&&t.data.facingContainer){const e=localPlayer.getFacingTile().doodad;e&&(m=e)}switch(t.action){case"Attack":a.default.get(i.ActionType.Attack).execute(localPlayer);break;case"CollectObjectWithHands":a.default.get(i.ActionType.Pickup).execute(localPlayer,void 0);break;case"CarveWithTool":const o=localPlayer.getDefaultCarveTool();o&&a.default.get(i.ActionType.Carve).execute(localPlayer,o);break;case"PickUpItem":a.default.get(i.ActionType.PickupItem).execute(localPlayer);break;case"PickUpAllItems":a.default.get(i.ActionType.PickupAllItems).execute(localPlayer);break;case"OpenDoor":a.default.get(i.ActionType.OpenDoor).execute(localPlayer);break;case"CloseDoor":a.default.get(i.ActionType.CloseDoor).execute(localPlayer);break;case"Drink":a.default.get(i.ActionType.DrinkInFront).execute(localPlayer);break;case"GatherWithHands":this.confirmAction(i.ActionType.Gather,[void 0,!0],!1);break;case"HarvestWithHands":this.confirmAction(i.ActionType.Harvest,[void 0,!0],!1);break;case"DigWithHands":a.default.get(i.ActionType.Dig).execute(localPlayer);break;case"RestOnGround":a.default.get(i.ActionType.Rest).execute(localPlayer);break;case"Jump":a.default.get(i.ActionType.Jump).execute(localPlayer);break;case"Tame":a.default.get(i.ActionType.Tame).execute(localPlayer);break;case"Release":const h=localPlayer.getFacingTile();if(h&&(p=h.creature)){const e=p.getName();newui.interrupt(()=>f.default.ui(y.default.GameInterruptReleaseCreature).get(e)).withDescription(()=>f.default.ui(y.default.GameInterruptReleaseCreatureDescription).get(e)).withConfirmation().then(e=>{e&&a.default.get(i.ActionType.Release).execute(localPlayer)})}break;case"Use":if(d){const e=t.data.actionType;this.confirmAction(e,[d,e])}break;case"EquipLeftHand":if(d&&s){const e=c.itemDescriptions[s];e&&e.equip&&a.default.get(i.ActionType.Equip).execute(localPlayer,d,u.EquipType.LeftHand)}break;case"EquipRightHand":if(d&&s){const e=c.itemDescriptions[s];e&&e.equip&&a.default.get(i.ActionType.Equip).execute(localPlayer,d,u.EquipType.RightHand)}break;case"EquipOrUnEquip":if(d)if(d.isEquipped())a.default.get(i.ActionType.Unequip).execute(localPlayer,d);else if(s){const e=c.itemDescriptions[s];e&&e.equip&&a.default.get(i.ActionType.Equip).execute(localPlayer,d,e.equip)}break;case"QuickSlotAdd":this.addItemToFreeQuickSlot(e);break;case"QuickSlotRemove":void 0!==l&&this.clearQuickSlot(l);break;case"Throw":d&&a.default.get(i.ActionType.Throw).execute(localPlayer,d);break;case"Offer":d&&a.default.get(i.ActionType.Offer).execute(localPlayer,d);break;case"Drop":d&&a.default.get(i.ActionType.Drop).execute(localPlayer,d);break;case"DropAll":d&&a.default.get(i.ActionType.Drop).execute(localPlayer,d,!0);break;case"DropAllOfSameQuality":d&&a.default.get(i.ActionType.Drop).execute(localPlayer,d,!0,!0);break;case"MoveToOpenedContainer":d&&this.activeContainer&&a.default.get(i.ActionType.MoveItem).execute(localPlayer,d,void 0,this.activeContainer);break;case"MoveAllToOpenedContainer":d&&this.activeContainer&&a.default.get(i.ActionType.MoveItem).execute(localPlayer,void 0,localPlayer.inventory,this.activeContainer,d.type);break;case"MoveAllOfSameQualityToOpenedContainer":d&&this.activeContainer&&a.default.get(i.ActionType.MoveItem).execute(localPlayer,void 0,localPlayer.inventory,this.activeContainer,d.type,d.quality);break;case"MoveToFacingContainer":d&&m&&a.default.get(i.ActionType.MoveItem).execute(localPlayer,d,void 0,m);break;case"MoveAllToFacingContainer":d&&m&&a.default.get(i.ActionType.MoveItem).execute(localPlayer,void 0,localPlayer.inventory,m,d.type);break;case"MoveAllOfSameQualityToFacingContainer":d&&m&&a.default.get(i.ActionType.MoveItem).execute(localPlayer,void 0,localPlayer.inventory,m,d.type,d.quality);break;case"MoveToInventory":d&&a.default.get(i.ActionType.MoveItem).execute(localPlayer,d,void 0,localPlayer.inventory);break;case"MoveAllToInventory":d&&d.containedWithin&&a.default.get(i.ActionType.MoveItem).execute(localPlayer,void 0,d.containedWithin,localPlayer.inventory,d.type);break;case"MoveAllOfSameQualityToInventory":d&&d.containedWithin&&a.default.get(i.ActionType.MoveItem).execute(localPlayer,void 0,d.containedWithin,localPlayer.inventory,d.type,d.quality);break;case"Repair":const g=itemManager.getItemInInventoryByGroup(localPlayer,u.ItemTypeGroup.Repair,e);g&&a.default.get(i.ActionType.Repair).execute(localPlayer,g,d);break;case"Transmogrify":const T=itemManager.getItemInInventoryByGroup(localPlayer,u.ItemTypeGroup.Transmogrify);T&&a.default.get(i.ActionType.Transmogrify).execute(localPlayer,T,d);break;case"Reinforce":const S=itemManager.getItemInInventoryByGroup(localPlayer,u.ItemTypeGroup.Reinforce);S&&a.default.get(i.ActionType.Reinforce).execute(localPlayer,S,d);break;case"Preserve":const I=itemManager.getItemInInventoryByGroup(localPlayer,u.ItemTypeGroup.Preservative);I&&a.default.get(i.ActionType.Preserve).execute(localPlayer,I,d);break;case"Add-Fuel":const v=itemManager.getItemInInventoryByGroup(localPlayer,u.ItemTypeGroup.Fuel);v&&d&&a.default.get(i.ActionType.AddFuel).execute(localPlayer,v,d);break;case"Ignite":const w=itemManager.getItemInInventoryByGroup(localPlayer,u.ItemTypeGroup.FireStarter);w&&d&&a.default.get(i.ActionType.StartFire).execute(localPlayer,w,d);break;case"Rename":let M,b,k,C,D,A;if(ui.hideActionsMenu(),d){M=d.renamed||"";const e=d.renamed;delete d.renamed,b=d.getName().inContext(3),k=d.getName(!1).inContext(3),d.renamed=e,D=y.default.GameInterruptRenameItem,A=y.default.GameInterruptRenameItemDescription}else{const e=t.data;if(e instanceof r.default){M=(C=e).renamed||"";const t=C.renamed;delete C.renamed,b=C.getName().inContext(3),k=C.getName(!1).inContext(3),C.renamed=t,D=y.default.GameInterruptRenameDoodad,A=y.default.GameInterruptRenameDoodadDescription}else if(e instanceof n.default){M=(p=e).renamed||"";const t=p.renamed;delete p.renamed,b=p.getName().inContext(3),k=p.getName(!1).inContext(3),p.renamed=t,D=y.default.GameInterruptRenameCreature,A=y.default.GameInterruptRenameCreatureDescription}}const P=d||C||p;if(void 0===M||void 0===b||void 0===A||void 0===P)break;newui.interrupt(()=>f.default.ui(D).get(k)).withDescription(A).setCanCancel().withInput(e=>e.setMaxLength(64).setClearTo(()=>b&&b.getString()||"").setPlaceholder(f.default.generator(b&&b.getString()||"")).setDefault(()=>(f.default.isSerializedTranslation(M)?f.default.deserialize(M).getString():M)||"")).then(e=>{void 0!==e&&(e===(b&&b.getString()||"")&&(e=""),a.default.get(i.ActionType.Rename).execute(localPlayer,P,e))});break;case"Disassemble":a.default.get(i.ActionType.Disassemble).execute(localPlayer,d);break;case"Dismantle":this.onDismantleItemClick(d);break;case"CloseContainer":a.default.get(i.ActionType.CloseContainer).execute(localPlayer,d);break;case"Hitch":a.default.get(i.ActionType.Hitch).execute(localPlayer);break;case"Unhitch":a.default.get(i.ActionType.Unhitch).execute(localPlayer);break;case"SortName":this.sortItems(t.data.container,u.SortType.Name,t.data.messageType);break;case"SortGroup":this.sortItems(t.data.container,u.SortType.Group,t.data.messageType);break;case"SortWeight":this.sortItems(t.data.container,u.SortType.Weight,t.data.messageType);break;case"SortRecent":this.sortItems(t.data.container,u.SortType.Recent,t.data.messageType);break;case"SortSkill":this.sortItems(t.data.container,u.SortType.Skill,t.data.messageType);break;case"SortDecay":this.sortItems(t.data.container,u.SortType.Decay,t.data.messageType);break;case"SortQuality":this.sortItems(t.data.container,u.SortType.Quality,t.data.messageType);break;case"SortDurability":this.sortItems(t.data.container,u.SortType.Durability,t.data.messageType);break;case"SortCategory":this.sortItems(t.data.container,u.SortType.Category,t.data.messageType);break;case"SortUnlockedTime":this.sortItems(t.data.container,u.SortType.DiscoveredTime,t.data.messageType);break;case"SortBest":this.sortItems(t.data.container,u.SortType.Best,t.data.messageType);break;default:const G=parseInt(t.action,10);if(isNaN(G))return x.default.warn(x.LogSource.Ui)(`Missing case for action ${t.action}`),!1;{const e=a.default.get(G);if(e){const a=[localPlayer];for(const n of e.action.argumentTypes)switch(Array.isArray(n)?n[0]:n){case i.ActionArgument.Doodad:case i.ActionArgument.NPC:a.push(t.data);break;default:a.push(void 0)}e.execute.call(e,...a)}else x.default.warn(x.LogSource.Ui)(`Missing action executor for ${G}`)}}return o||ui.playClickSound(),!0}updateContextMenu(e){const t=[];for(let a=0;a<e.actions.length;a++){const i=e.actions[a];let n="";F[a]&&(n=void 0!==i.keybind?S.bindingManager.getBindingsTranslation(F[i.keybind]):S.bindingManager.getBindingsTranslation(F[a]));let o=`<span class="context-menu-title">${n} ${i.text}</span>`;if(void 0!==e.quickSlot&&!isNaN(e.quickSlot)){const t=localPlayer.quickSlotInfo[e.quickSlot];if(t){let e="";const n=c.itemDescriptions[t.itemType];n&&(!t.action&&!n.use&&"Throw"===i.action||!t.action&&n.use&&0===a||t.action&&t.action.action===i.action&&(!t.action.data||t.action.data.actionType===i.data.actionType))&&(e=" selected"),o=`<span class="quick-slot-action-select${e}"></span> ${o}`}}t.push({title:o,cmd:i.action,data:i})}this.contextMenu=e,this.contextMenuOpen=!1,$(document).contextmenu("replaceMenu",t),this.contextMenuOpen=!0}async confirmAction(e,t,n=!0){let o,r;switch(e){case i.ActionType.Gather:case i.ActionType.Harvest:{const t=localPlayer.options.warnOnDangerousActions?localPlayer.checkForGatherFire():void 0,a=localPlayer.checkForGather();void 0!==t?(o=f.default.ui(y.default.GameInterruptConfirmationActionOnFire).addArgs(t,f.default.message(e===i.ActionType.Harvest?h.default.Harvest:h.default.Gather)),r=f.default.ui(y.default.GameInterruptConfirmationActionOnFireDescription).addArgs(t,f.default.message(e===i.ActionType.Harvest?h.default.Harvest:h.default.Gather))):void 0!==a&&(o=f.default.ui(y.default.GameInterruptConfirmationDestroyOnGather).inContext(4).addArgs(f.default.message(h.default.The).addArgs(a.getName(!1))),r=f.default.ui(y.default.GameInterruptConfirmationDestroyOnGatherDescription).inContext(4).addArgs(f.default.message(h.default.The).addArgs(a.getName(!1))));break}case i.ActionType.Pour:{const e=t[0];!itemManager.isInGroup(e.type,u.ItemTypeGroup.ContainerOfSeawater)&&localPlayer.checkForStill()&&(o=y.default.GameInterruptDesalinationNoNeed,r=y.default.GameInterruptDesalinationNoNeedDescription),itemManager.isInGroup(e.type,u.ItemTypeGroup.ContainerOfSeawater)&&localPlayer.checkForWell()&&(o=y.default.GameInterruptWellConvert,r=y.default.GameInterruptWellConvertDescription);break}case i.ActionType.Heal:case i.ActionType.HealOther:{let t,a;if(e===i.ActionType.Heal)t=localPlayer.getStat(l.Stat.Health),a=localPlayer;else{const e=localPlayer.getFacingTile();if(!e)break;const i=e.creature,n=e.npc,o=game.getPlayersAtTile(e);if(!(a=o&&o.length>0?o[0]:i||n))break;t=a.getStat(l.Stat.Health)}if(t.value<t.max||a.hasStatus(u.StatusType.Bleeding))break;o=y.default.GameInterruptNoHealingRequired,r=y.default.GameInterruptNoHealingRequiredDescription;break}}if(o){const e=await newui.interrupt(o).withDescription(r).withConfirmation();if(!e)return}n&&e!==i.ActionType.Sling&&e!==i.ActionType.Shoot&&e!==i.ActionType.Fire&&(n=!1,t.pop()),a.default.get(n?i.ActionType.UseItem:e).execute(localPlayer,...t)}isOverlayVisible(){return newui.isScreenVisible(v.ScreenId.Interrupt)}getHoveredItem(e){const t=document.elementFromPoint(e.mouseX,e.mouseY);return t&&t.matches("\n\t\t\t\t.ui-dialog:not([style*='display: none']):not([aria-describedby='crafting']) li.item,\n\t\t\t\t.quick-slot li.item\n\t\t\t")?t:null}quickSlotBindPressed(e,t,a){return this.delayState=_.WaitingForDelay,this.useQuickSlot(t)}quickSlotToggleBindPressed(e,t,a,i,n){if(t&&n){const e=game.items[$(t).data("item-id")];return e&&e.quickSlot!==a?(this.setQuickSlot(a,e.id),this.canUseQuickslot=!1):this.clearQuickSlot(a,!0),!0}return!1}determineSort(e,t,a,i,n){if(void 0===a||void 0===n)return 0;let o=0,r=0;const s=void 0!==t?game.items[t]:void 0,l=void 0!==i?game.items[i]:void 0;switch(e.sortType){case u.SortType.Name:o=s&&s.renamed?s.renamed:(u.ItemType[a]||f.default.message(h.default.Unknown).getString()).toString(),r=l&&l.renamed?l.renamed:(u.ItemType[n]||f.default.message(h.default.Unknown).getString()).toString();break;case u.SortType.Group:const t=itemManager.getGroups(a).collect(R.default.first());o=t?new f.default(m.Dictionary.ItemGroup,t).getString():"z";const i=itemManager.getGroups(n).collect(R.default.first());r=i?new f.default(m.Dictionary.ItemGroup,i).getString():"z";break;case u.SortType.Weight:s&&(o=s.legendary&&s.legendary.type===u.LegendaryType.ItemWeight?s.weight-s.legendary.value:s.weight),l&&(r=l.legendary&&l.legendary.type===u.LegendaryType.ItemWeight?l.weight-l.legendary.value:l.weight);break;case u.SortType.Recent:s&&s.containedWithin&&(o=s.containedWithin.containedItems.indexOf(s)),l&&l.containedWithin&&(r=l.containedWithin.containedItems.indexOf(l));break;case u.SortType.Decay:if(o=0,r=0,s&&void 0!==s.decay){const e=c.itemDescriptions[s.type];e&&e.decayMax&&(o=s.decay)}if(l&&void 0!==l.decay){const e=c.itemDescriptions[l.type];e&&e.decayMax&&(r=l.decay)}break;case u.SortType.Quality:s&&(o=u.itemQualitySortOrder[s.quality||u.ItemQuality.None]),l&&(r=u.itemQualitySortOrder[l.quality||u.ItemQuality.None]);break;case u.SortType.Durability:s&&(o=s.minDur),l&&(r=l.minDur);break;case u.SortType.DiscoveredTime:const d=game.crafted[a];d&&(o=d.unlockTime);const p=game.crafted[n];p&&(r=p.unlockTime);break;case u.SortType.Best:s&&(o=4*u.itemQualitySortOrder[s.quality||u.ItemQuality.None]+(s.minDur?s.minDur/4:0)-10*(s.legendary&&s.legendary.type===u.LegendaryType.ItemWeight?s.weight-s.legendary.value:s.weight)),l&&(r=4*u.itemQualitySortOrder[l.quality||u.ItemQuality.None]+(l.minDur?l.minDur/4:0)-10*(l.legendary&&l.legendary.type===u.LegendaryType.ItemWeight?l.weight-l.legendary.value:l.weight))}o===r&&e.sortType!==u.SortType.Name&&(o=s&&s.renamed?s.renamed:(u.ItemType[a]||f.default.message(h.default.Unknown).getString()).toString(),r=l&&l.renamed?l.renamed:(u.ItemType[n]||f.default.message(h.default.Unknown).getString()).toString()),o===r&&(o=t,r=i);let d=e.reverse;return e.sortType!==u.SortType.Skill&&e.sortType!==u.SortType.Category||(d=!1),(d?r>o:o>r)?1:-1}}__decorate([Override],H.prototype,"selector",null),__decorate([Override],H.prototype,"bindElements",null),__decorate([Override],H.prototype,"unbindElements",null),__decorate([Override],H.prototype,"onShow",null),__decorate([E.Bound],H.prototype,"makeTopDialog",null),__decorate([Override],H.prototype,"onHide",null),__decorate([Override],H.prototype,"onMouseMove",null),__decorate([E.Bound],H.prototype,"focus",null),t.default=H}),
+define("ui/screens/InGameScreen", ["require", "exports", "action/ActionExecutor", "action/IAction", "creature/Creature", "doodad/Doodads", "doodad/doodads/Doodad", "entity/IEntity", "entity/IStats", "Enums", "item/IItem", "item/ItemRecipeRequirementChecker", "item/Items", "language/Dictionaries", "language/dictionary/Message", "language/dictionary/UiTranslation", "language/Messages", "language/Translation", "mod/IHookManager", "newui/BindingManager", "newui/INewUi", "newui/screen/IScreen", "newui/screen/screens/game/component/Dialog", "player/IMessageManager", "player/Skills", "steamworks/ISteamworks", "tile/Terrains", "ui/screens/BaseScreen", "utilities/Arrays", "utilities/Async", "utilities/enum/Enums", "utilities/iterable/Collectors", "utilities/Log", "utilities/math/Math2", "utilities/Objects", "utilities/TileHelpers"], function(e, t, a, i, n, o, r, s, l, u, d, p, c, m, h, y, g, f, T, S, I, v, w, M, b, k, C, D, A, P, G, R, x, B, E, L) {
+    var O;
+    Object.defineProperty(t, "__esModule", {
+            value: !0
+        }),
+        function(e) {
+            e[e.Weight = 0] = "Weight", e[e.Attack = 1] = "Attack", e[e.Defense = 2] = "Defense", e[e.Reputation = 3] = "Reputation"
+        }(O = t.TextElementId || (t.TextElementId = {}));
+    const F = [u.Bindable.GameContextMenu1, u.Bindable.GameContextMenu2, u.Bindable.GameContextMenu3, u.Bindable.GameContextMenu4, u.Bindable.GameContextMenu5, u.Bindable.GameContextMenu6, u.Bindable.GameContextMenu7, u.Bindable.GameContextMenu8, u.Bindable.GameContextMenu9, u.Bindable.GameContextMenu10, u.Bindable.GameContextMenu11, u.Bindable.GameContextMenu12, u.Bindable.GameContextMenu13, u.Bindable.GameContextMenu14, u.Bindable.GameContextMenu15, u.Bindable.GameContextMenu16, u.Bindable.GameContextMenu17, u.Bindable.GameContextMenu18, u.Bindable.GameContextMenu19, u.Bindable.GameContextMenu20, u.Bindable.GameContextMenu21, u.Bindable.GameContextMenu22, u.Bindable.GameContextMenu23, u.Bindable.GameContextMenu24];
+    var _;
+    ! function(e) {
+        e[e.WaitingForDelay = 0] = "WaitingForDelay", e[e.HasDelay = 1] = "HasDelay", e[e.NoDelay = 2] = "NoDelay"
+    }(_ || (_ = {}));
+    class H extends D.default {
+        constructor() {
+            super(...arguments), this.shouldResetMovement = !1, this.shouldCancelSorting = !1, this.isQuickmoving = !1, this.blockedByNewUi = !1, this.elementContainerDialogs = [], this.elementOtherDialogs = [], this.sortingCancelled = !1, this.onInterrupt = ((e, t) => {
+                x.default.info(x.LogSource.Ui)("Interrupt opened"), game.paused || !game.playing || !game.isRealTimeMode() || multiplayer.isConnected() || localPlayer.isResting() || game.setPaused(!0), game.playing && localPlayer && (this.shouldResetMovement = !0, this.shouldCancelSorting = !0)
+            }), this.onInterruptClosed = ((e, t) => {
+                x.default.info(x.LogSource.Ui)("Interrupt closed"), this.element[0].focus();
+                const a = newui.getScreen(v.ScreenId.Interrupt);
+                a && a.visibleMenu || !game.paused || this.isOverlayVisible() || multiplayer.isConnected() || game.setPaused(!1, game.getTurnMode() === u.TurnMode.RealTime), S.bindingManager.removeAllPressStates()
+            })
+        }
+        selector() {
+            return "#screen-in-game"
+        }
+        bindElements() {
+            this.elementCanvas = $("canvas#game"), this.elementVisibleInGame = $(".visible-in-game"), this.elementStats = $("#stats"), this.elementStatHealth = $("[data-stat='Health']").children(".bar"), this.elementStatStamina = $("[data-stat='Stamina']").children(".bar"), this.elementStatHunger = $("[data-stat='Hunger']").children(".bar"), this.elementStatThirst = $("[data-stat='Thirst']").children(".bar"), this.elementStatBurn = $(".status-effects").find(".burn"), this.elementStatBleed = $(".status-effects").find(".bleed"), this.elementStatPoison = $(".status-effects").find(".poison"), this.elementAttributeWeight = $("[data-attribute='Weight']").children(".attribute"), this.elementAttributeAttack = $("[data-attribute='Attack']").children(".attribute"), this.elementAttributeDefense = $("[data-attribute='Defense']").children(".attribute"), this.elementAttributeReputation = $("[data-attribute='Reputation']").children(".attribute"), this.elementReputationBenignity = $("[data-attribute='Reputation']").find(".benignity"), this.elementReputationMalignity = $("[data-attribute='Reputation']").find(".malignity"), this.elementQuickSlotsContainer = $("#quick-slots");
+            const e = this;
+            this.elementActions = $("#actions"), this.elementDialogs = $("#dialogs"), this.elementDialogInventory = $("#inventory"), this.elementDialogInventoryContainer = this.elementDialogInventory.children("#container-inventory"), this.elementDialogCrafting = $("#crafting"), this.elementDialogCraftingContainer = this.elementDialogCrafting.find("#container-crafting"), this.elementDialogCraftingContainer.on("click", ".item", function(t) {
+                localPlayer.hasDelay() || (e.onCraftingItemClick($(this)), e.unSelectElements()), t.preventDefault(), t.stopPropagation()
+            }), this.elementDialogDismantleContainer = this.elementDialogCrafting.find("#container-dismantle"), this.elementDialogDismantleContainer.on("click", ".item", function(t) {
+                if (!localPlayer.hasDelay()) {
+                    const t = itemManager.getItemForHuman(localPlayer, parseInt($(this).data("item-type"), 10));
+                    e.onDismantleItemClick(t), e.unSelectElements()
+                }
+                t.preventDefault(), t.stopPropagation()
+            }), this.elementDialogCraftingButton = this.elementDialogCrafting.find(".tabs .crafting-tab"), this.elementDialogDismantleButton = this.elementDialogCrafting.find(".tabs .dismantle-tab"), this.elementDialogCraftingButton.click(this.toggleCraftingTab.bind(this, "crafting", !1)), this.elementDialogDismantleButton.click(this.toggleCraftingTab.bind(this, "dismantle", !1)), this.toggleCraftingTabElements("crafting"), this.elementDialogEquipment = $("#equipment"), this.elementDialogEquipmentContainer = this.elementDialogEquipment.children("#container-equipment"), this.elementDialogEquipment.on("mouseup", "div[data-checkbox-id]", function(t) {
+                e.changeEquipmentOption($(this).data("checkbox-id"))
+            });
+            const t = (e, t) => {
+                const a = e.data("checkbox-id"),
+                    i = this.elementDialogEquipmentContainer.find(`ul[data-equip-slot="${a}"]`);
+                t ? i.addClass("highlight") : i.removeClass("highlight")
+            };
+            this.elementDialogEquipment.on({
+                mouseenter: function() {
+                    t($(this), !0)
+                },
+                mouseleave: function() {
+                    t($(this), !1)
+                }
+            }, "div[data-checkbox-id]"), this.element.on("input change", ".filter", function() {
+                e.onFilterInput($(this).parent().find(".container"))
+            }), $(document).functionalTooltip({
+                selector: ".item:not(.sortable-helper),[data-tooltip],.container[data-attribute='Reputation'],.container[data-attribute='Attack'],.container[data-attribute='Defense']",
+                trackMouse: !0,
+                position: {
+                    topOffset: 15,
+                    leftOffset: 20
+                },
+                onClose() {
+                    e.unSelectElements()
+                },
+                content() {
+                    return e.getTooltipHtml(this)
+                }
+            }), this.elementVersion = $("#version"), $(".ui-helper-hidden-accessible").remove(), $(document).contextmenu(this.setupContextMenu()), this.bindSortable($(".sortable, #game, .quick-slot"))
+        }
+        changeEquipmentOption(e) {
+            const t = "leftHand" === e,
+                a = t ? !saveDataGlobal.options.leftHand : !saveDataGlobal.options.rightHand;
+            game.updateOption(localPlayer, e, a), ui.setCheckboxValue(this.elementDialogEquipment, e, a), localPlayer.messages.source(M.Source.Meta).send(h.default.YouHaveEnabledDisabled, f.default.message(a ? h.default.Enabled : h.default.Disabled), f.default.message(t ? h.default.LeftHand : h.default.RightHand))
+        }
+        toggleCraftingTab(e, t = !0) {
+            if (this.elementDialogCrafting.isVisible()) {
+                if (t) {
+                    const t = this.elementDialogCraftingContainer.isVisible();
+                    if (t && "crafting" === e || !t && "dismantle" === e) return void this.toggleDialog(this.elementDialogCrafting)
+                }
+            } else this.toggleDialog(this.elementDialogCrafting);
+            this.toggleCraftingTabElements(e)
+        }
+        toggleCraftingTabElements(e) {
+            "crafting" === e ? (this.elementDialogDismantleButton.removeClass("active"), this.elementDialogCraftingButton.addClass("active"), this.elementDialogCraftingContainer.show(), this.elementDialogDismantleContainer.hide()) : (this.elementDialogDismantleButton.addClass("active"), this.elementDialogCraftingButton.removeClass("active"), this.elementDialogCraftingContainer.hide(), this.elementDialogDismantleContainer.show())
+        }
+        unbindElements() {}
+        bindSortable(e) {
+            const t = (e, t, a = !1) => {
+                this.highlightItemElementByItemId(e, t, a)
+            };
+            e.functionalSortable({
+                connectWith: ".sortable, #game, .quick-slot",
+                appendTo: $("#screen-in-game"),
+                zIndex: 999999,
+                distance: 10,
+                cursorAt: {
+                    top: 18,
+                    left: 18
+                },
+                onlyReceive: !0,
+                onStart: e => {
+                    window.getSelection().removeAllRanges(), this.tooltipDisable(), this.sortableElement = e.item ? e.item.get(0) : void 0, this.sortableElementPosition = void 0, this.sortableElementTargetContainer = void 0, this.sortingCancelled = !1, this.onSortableAction = void 0, ui.getBody().addClass("dragging"), $(".item[data-selected-count]").each(function() {
+                        t($(this).data("item-id"), !1, !0)
+                    }), this.blurInputs()
+                },
+                onOver: e => {
+                    e.targetContainer && (this.sortableElementTargetContainer = e.targetContainer)
+                },
+                onChange: e => {
+                    e.placeholder && (this.sortableElementPosition = e.placeholder.index() - 1)
+                },
+                onOut: e => {
+                    this.sortableElementTargetContainer = void 0
+                },
+                onReceive: e => {
+                    this.onSortableItemReceive(e)
+                },
+                onStop: e => {
+                    const t = e.initialContainer;
+                    this.sortingCancelled || (this.onSortableAction ? this.onSortableAction() : e.item && this.insertItemStringToContainer(e.item, t), this.saveItemOrder(t)), this.tooltipEnable(), this.sortableElement = void 0, this.sortableElementPosition = void 0, this.sortableElementTargetContainer = void 0, this.sortingCancelled = !1, this.onSortableAction = void 0, ui.getBody().removeClass("dragging")
+                }
+            })
+        }
+        pressHotKey(e) {
+            if (this.contextMenuOpen && this.contextMenu && this.contextMenuTarget) {
+                let t = !1;
+                for (let a = 0; a < this.contextMenu.actions.length; a++)
+                    if (void 0 !== this.contextMenu.actions[a].keybind && (t = !0, this.contextMenu.actions[a].keybind === e)) return this.onContextMenuAction(this.contextMenuTarget, this.contextMenu.actions[a]), $(document).contextmenu("close"), !0;
+                if (!t && this.contextMenu.actions.length > e) return this.onContextMenuAction(this.contextMenuTarget, this.contextMenu.actions[e]), $(document).contextmenu("close"), !0
+            }
+            return !1
+        }
+        useQuickSlot(e) {
+            const t = this.getQuickSlotItemElement(e);
+            if (t.hasClass("disabled")) return !1;
+            const a = t.children("li").first();
+            if (a && 1 === a.length) {
+                const t = a.getItemType();
+                if (t) {
+                    let n = game.items[a.data("item-id")];
+                    if (!n || !itemManager.isInInventory(n)) {
+                        const e = itemManager.getItemsInContainerByType(localPlayer.inventory, t, !0);
+                        if (!(e.length > 0)) return !1;
+                        n = e[0]
+                    }
+                    const o = c.itemDescriptions[t];
+                    if (!o) return !1;
+                    if (this.cancelSorting(), !localPlayer.hasDelay()) {
+                        const t = localPlayer.quickSlotInfo[e];
+                        if (t && t.action) return this.runContextMenuAction(n.id, t.action, !0); {
+                            const e = o.use ? o.use[0] : i.ActionType.Throw,
+                                t = {
+                                    action: o.use ? "Use" : "Throw",
+                                    text: new f.default(m.Dictionary.Action, e).getString(),
+                                    data: {
+                                        actionType: e
+                                    }
+                                };
+                            return this.runContextMenuAction(n.id, t, !0)
+                        }
+                    }
+                }
+            }
+            return !1
+        }
+        isSorting() {
+            return $(document).find(".sortable-helper").length > 0
+        }
+        runSortableAction(e, t, ...a) {
+            e.functionalSortable(t, ...a)
+        }
+        runGlobalSortableAction(e, ...t) {
+            $(".sortable").functionalSortable(e, ...t)
+        }
+        cancelSorting() {
+            this.isSorting() && (this.sortingCancelled = !0, this.runGlobalSortableAction("cancel"), this.sortingCancelled = !1)
+        }
+        setupContextMenu() {
+            const e = (e, t, a) => this.onContextMenuAction(e, t, a);
+            return {
+                delegate: ".item,.sort,#actions",
+                autoFocus: !0,
+                autoTrigger: !1,
+                preventContextMenuForPopup: !0,
+                preventSelect: !0,
+                taphold: !0,
+                show: !1,
+                hide: !1,
+                position: (e, t) => {
+                    let a;
+                    return this.actionsMenuOpen ? a = t.target : this.touchEvent ? ((a = this.touchEvent).pageX = a.originalEvent.touches[0].pageX, a.pageY = a.originalEvent.touches[0].pageY) : a = {
+                        pageX: this.mouseX,
+                        pageY: this.mouseY,
+                        preventDefault: !0
+                    }, this.lastContextMenuPosition = {
+                        my: "left-5 top-5",
+                        at: "center bottom",
+                        of: a,
+                        collision: "fit fit"
+                    }, this.lastContextMenuPosition
+                },
+                menu: [],
+                select: (t, a) => e(a.target, a.item.data(), $(t.toElement)),
+                beforeOpen: (e, t) => {
+                    this.contextMenuTarget = t.target, this.updateContextMenu(t.extraData), this.lastContextMenuPosition && (t.menu.position(this.lastContextMenuPosition), this.lastContextMenuPosition = void 0), this.contextMenuOpen = !0, this.contextMenuBlocking = !0, this.tooltipDisable()
+                },
+                close: () => {
+                    this.contextMenuOpen && (this.contextMenuOpen = !1, this.contextMenuBlocking = !0, this.tooltipEnable(), this.hideActionsMenu())
+                }
+            }
+        }
+        hasDelay() {
+            return localPlayer.hasDelay() ? (this.delayState = _.HasDelay, !0) : (this.delayState === _.HasDelay && (this.delayState = _.NoDelay), this.delayState === _.WaitingForDelay)
+        }
+        onShow() {
+            this.canUseQuickslot = !0, this.elementVisibleInGame.quickShow(), this.elementDialogInventory.dialog(this.setupDialog(u.DialogId.Inventory)), this.elementDialogCrafting.dialog(this.setupDialog(u.DialogId.Crafting)), this.elementDialogEquipment.dialog(this.setupDialog(u.DialogId.Equipment)), [this.elementDialogInventory, this.elementDialogCrafting, this.elementDialogEquipment].forEach(this.makeTopDialog);
+            const e = this.elementDialogCrafting.closest("[aria-describedby='crafting']");
+            e.find(".ui-dialog-title").remove(), $("#crafting-tab-buttons").prependTo(e.find(".ui-dialog-titlebar")), modManager.getHook(T.Hook.OnGameScreenVisible).call(), this.clampDialogs(), this.blurInputs(), this.tooltipEnable(), newui.on(I.UiApiEvent.Interrupt, this.onInterrupt), newui.on(I.UiApiEvent.InterruptClose, this.onInterruptClosed), steamworks.on(k.SteamworksEvent.OverlayShown, this.onInterrupt), steamworks.on(k.SteamworksEvent.OverlayHidden, this.onInterruptClosed), this.element[0].addEventListener("click", e => {
+                e.target !== this.elementCanvas[0] && e.target !== this.element[0] || this.element[0].focus()
+            })
+        }
+        makeTopDialog(e) {
+            const t = e[0].parentElement;
+            t && t.matches(".ui-dialog") && (w.default.makeTopDialog(t), t.addEventListener("click", () => {
+                w.default.makeTopDialog(t)
+            }))
+        }
+        onHide() {
+            newui.cancel(I.UiApiEvent.Interrupt, this.onInterrupt), newui.cancel(I.UiApiEvent.InterruptClose, this.onInterruptClosed), steamworks.cancel(k.SteamworksEvent.OverlayShown, this.onInterrupt), steamworks.cancel(k.SteamworksEvent.OverlayHidden, this.onInterruptClosed), this.initializeGameState(), $("#crafting-tab-buttons").prependTo("#crafting"), this.elementVisibleInGame.quickHide(), this.elementDialogInventory.dialog("destroy"), this.elementDialogCrafting.dialog("destroy"), this.elementDialogEquipment.dialog("destroy"), this.closeAllContainers();
+            for (let e = 0; e < this.elementOtherDialogs.length; e++) {
+                try {
+                    this.elementOtherDialogs[e].dialog("destroy")
+                } catch (e) {}
+                try {
+                    this.elementOtherDialogs[e].remove()
+                } catch (e) {}
+            }
+            this.elementOtherDialogs = [], this.onGameEnd()
+        }
+        initializeGameState() {
+            $(".item").remove(), $(".in-use").removeClass("in-use"), $(".disabled").removeClass("disabled"), $("#stats").find(".container").removeClass("flash"), $("input[type='search']").val(""), this.elementCanvas.removeClass("death respawn-on-death"), this.cancelSorting(), this.craftableItemTypes = void 0, this.nonCraftableItemTypes = void 0, this.lastStats = []
+        }
+        onGameEnd() {
+            this.tooltipHide(), this.hideContextMenu(), this.hideActionsMenu(), this.cancelSorting()
+        }
+        getDialogIndex(e, t) {
+            return e === u.DialogId.Custom && t ? `Custom_${t.id}` : e.toString()
+        }
+        setupDialog(e, t, n) {
+            let o = this.getDialogIndex(e, n),
+                r = localPlayer.getDialogInfo(o),
+                s = !1;
+            if (e === u.DialogId.Container && void 0 !== t) {
+                const e = game.items[t];
+                e && itemManager.isContainer(e) && (s = !0, o = t, r = localPlayer.dialogContainerInfo[o])
+            }
+            if (r) e === u.DialogId.Custom && n && (r.title = n.title, r.width = n.width, r.height = n.height, r.minWidth = n.minWidth, r.minHeight = n.minHeight, r.open = n.open, r.onOpen = n.onOpen, r.onClose = n.onClose, r.onResizeStop = n.onResizeStop, r.resizable = n.resizable);
+            else switch (r = s && void 0 !== t ? localPlayer.dialogContainerInfo[o] = {} : e === u.DialogId.Custom && n ? localPlayer.dialogInfo[o] = n : localPlayer.dialogInfo[o] = {}, e) {
+                case u.DialogId.Inventory:
+                    r.open = !0, r.width = 440, r.height = 210, r.x = ui.getWidth() - r.width - 20, r.y = 80;
+                    break;
+                case u.DialogId.Container:
+                    r.open = !0, r.width = 340, r.height = 310, r.x = ui.getWidth() - r.width - 20 - 440 - 10, r.y = 80;
+                    let a = !1;
+                    for (; this.isContainerDialogOver(r.x, r.y);)
+                        if (a ? (r.x += r.width + 10, r.x + r.width + 10 > ui.getWidth() && (a = !a, r.x = ui.getWidth() - r.width - 10, r.y += r.height + 10)) : (r.x -= r.width + 10, r.x < 10 && (a = !a, r.x = 10, r.y += r.height + 10)), r.y + r.height + 10 > ui.getHeight()) {
+                            r.y = ui.getHeight() - r.height - 10;
+                            break
+                        }
+                    break;
+                case u.DialogId.Crafting:
+                    r.width = 440, r.height = 205, r.x = ui.getWidth() - r.width - 20, r.y = 445;
+                    break;
+                case u.DialogId.Equipment:
+                    r.width = 440, r.height = 135, r.x = ui.getWidth() - r.width - 20, r.y = 300
+            }
+            const l = (e, t, a = !1) => {
+                    this.highlightItemElementByItemId(e, t, a)
+                },
+                d = {
+                    position: {
+                        my: `left+${r.x} top+${r.y}`,
+                        at: "left top"
+                    },
+                    width: r.width,
+                    height: r.height,
+                    minWidth: 210,
+                    appendTo: "#screen-in-game",
+                    autoOpen: !1,
+                    closeOnEscape: !1,
+                    open() {
+                        r.open = !0, r.onOpen && r.onOpen.apply(this), $(this).parent().find(".ui-dialog-titlebar-close").removeAttr("title"), localPlayer.updateDialogInfo(o)
+                    },
+                    close() {
+                        r.open = !1, r.onClose && r.onClose.apply(this), void 0 !== t && l(t, !1, !0), localPlayer.updateDialogInfo(o)
+                    },
+                    dragStart() {
+                        w.default.makeTopDialog(this.closest(".ui-dialog")), void 0 !== t && l(t, !0)
+                    },
+                    dragStop() {
+                        void 0 !== t && l(t, !1), r.x = $(this).parent().offset().left, r.y = $(this).parent().offset().top, localPlayer.updateDialogInfo(o)
+                    },
+                    resizeStart() {
+                        w.default.makeTopDialog(this.closest(".ui-dialog"))
+                    },
+                    resizeStop() {
+                        r.onResizeStop && r.onResizeStop.apply(this), r.x = $(this).parent().offset().left, r.y = $(this).parent().offset().top, r.width = $(this).parent().width(), r.height = $(this).parent().height(), localPlayer.updateDialogInfo(o), ui.getBody().removeAttr("style")
+                    }
+                };
+            r.title && (d.title = r.title), !1 === r.resizable ? d.resizable = !1 : d.resizable = !0, r.minWidth && (d.minWidth = r.minWidth), r.minHeight && (d.minHeight = r.minHeight);
+            const p = d.open,
+                c = d.close,
+                m = (e, t) => {
+                    this.showSortContextMenu(e, t === h.default.Inventory ? this.elementDialogInventoryContainer : t === h.default.Container ? e.parent().parent().parent().find(".sortable") : this.elementDialogCraftingContainer, t)
+                },
+                y = e => {
+                    this.closeContainerDialog(e)
+                };
+            switch (e) {
+                case u.DialogId.Container:
+                    d.autoOpen = !0, d.minWidth = 300, d.buttons = [{
+                        text: f.default.message(h.default.Sort).getString(),
+                        click() {
+                            m($(this).parent().find(".sort"), h.default.Container)
+                        },
+                        class: "sort clickable"
+                    }, {
+                        text: f.default.message(h.default.GrabAll).getString(),
+                        click() {
+                            a.default.get(i.ActionType.MoveItem).execute(localPlayer, void 0, $(this).data("container"), localPlayer.inventory)
+                        },
+                        class: "grab-all clickable"
+                    }], d.close = function(e, t) {
+                        c && c(e, ui), y($(this))
+                    };
+                    break;
+                case u.DialogId.Inventory:
+                    d.buttons = [{
+                        text: f.default.message(h.default.Sort).getString(),
+                        click() {
+                            m($(this).parent().find(".sort"), h.default.Inventory)
+                        },
+                        class: "sort clickable"
+                    }];
+                    break;
+                case u.DialogId.Crafting:
+                    d.buttons = [{
+                        text: f.default.message(h.default.Sort).getString(),
+                        click() {
+                            m($(this).parent().find(".sort"), h.default.Crafts)
+                        },
+                        class: "sort clickable"
+                    }];
+                    break;
+                case u.DialogId.Equipment:
+                    d.resizable = !1, d.width = d.minWidth = d.maxWidth = 440, d.height = d.minHeight = d.maxHeight = 135, d.buttons = [{
+                        text: f.default.message(h.default.UnEquipAll).getString(),
+                        click() {
+                            a.default.get(i.ActionType.Unequip).execute(localPlayer)
+                        },
+                        class: "unequip-all clickable"
+                    }], d.open = ((e, t) => {
+                        p && p(e, t), ui.setCheckboxValue(this.elementDialogEquipment, "leftHand", saveDataGlobal.options.leftHand), ui.setCheckboxValue(this.elementDialogEquipment, "rightHand", saveDataGlobal.options.rightHand)
+                    })
+            }
+            return d
+        }
+        onMouseMove(e) {
+            "touchmove" === e.type && e.preventDefault();
+            let t = e.pageX,
+                a = e.pageY;
+            "touchmove" === e.type && (t = e.originalEvent.touches[0].pageX, a = e.originalEvent.touches[0].pageY), this.mouseX = t, this.mouseY = a, game.playing
+        }
+        highlightItemElementByItemId(e, t, a = !1, i = !1) {
+            this.highlightItemElementBySelector(`.item[data-item-id="${e}"]`, t, a, i)
+        }
+        highlightItemElementByItemType(e, t, a = !1, i = !1) {
+            this.highlightItemElementBySelector(`.item[data-item-type="${e}"]`, t, a, i)
+        }
+        highlightItemElementByItemTypeWithNoItemId(e, t, a = !1, i = !1) {
+            this.highlightItemElementBySelector(`.item[data-item-type="${e}"]:not([data-item-id])`, t, a, i)
+        }
+        highlightItemElementBySelector(e, t, a = !1, i = !1) {
+            $(e).each(function() {
+                if (i) return void(t ? ($(this).addClass("selected"), $(this).hasClass("damaged") && $(this).addClass("highlighted")) : ($(this).removeClass("selected"), $(this).removeClass("highlighted")));
+                let e = parseInt($(this).attr("data-selected-count"), 10);
+                if ((void 0 === e || isNaN(e)) && (e = 0), t ? e++ : e--, t) e > 0 && ($(this).addClass("selected"), $(this).hasClass("damaged") && $(this).addClass("highlighted"));
+                else if (e <= 0 || a) return $(this).removeClass("selected"), $(this).removeClass("highlighted"), void $(this).removeAttr("data-selected-count");
+                $(this).attr("data-selected-count", e)
+            })
+        }
+        getMovementDirection(e, t) {
+            let a = u.Direction.None;
+            const i = renderer.screenToTile(e, t);
+            if (localPlayer.x === i.x && localPlayer.y === i.y) return a;
+            const n = (270 - 180 * Math.atan2(localPlayer.y - i.y, localPlayer.x - i.x) / Math.PI) % 360;
+            switch (n) {
+                case 315:
+                    localPlayer.facingDirection !== u.Direction.South && localPlayer.facingDirection !== u.Direction.West || (a = localPlayer.facingDirection);
+                    break;
+                case 225:
+                    localPlayer.facingDirection !== u.Direction.West && localPlayer.facingDirection !== u.Direction.North || (a = localPlayer.facingDirection);
+                    break;
+                case 135:
+                    localPlayer.facingDirection !== u.Direction.North && localPlayer.facingDirection !== u.Direction.East || (a = localPlayer.facingDirection);
+                    break;
+                case 45:
+                    localPlayer.facingDirection !== u.Direction.East && localPlayer.facingDirection !== u.Direction.South || (a = localPlayer.facingDirection)
+            }
+            return a === u.Direction.None && (a = 225 >= n && n >= 135 ? u.Direction.North : 135 >= n && n >= 45 ? u.Direction.East : 45 >= n || n >= 315 ? u.Direction.South : u.Direction.West), a
+        }
+        canUseHotkeys() {
+            if (this.contextMenuBlocking) {
+                this.contextMenuBlocking = !1;
+                for (let e = 0; e < F.length; e++) {
+                    const t = F[e];
+                    if (S.bindingManager.isPressed(t)) return this.contextMenuBlocking = !0, !1
+                }
+            }
+            return !localPlayer.isMovingClientside
+        }
+        refreshStats() {
+            const e = localPlayer.getStat(l.Stat.Stamina),
+                t = localPlayer.getStat(l.Stat.Health),
+                a = localPlayer.getStat(l.Stat.Hunger),
+                i = localPlayer.getStat(l.Stat.Thirst),
+                n = [{
+                    element: this.elementStatHealth,
+                    value: t.value,
+                    max: localPlayer.getMaxHealth()
+                }, {
+                    element: this.elementStatStamina,
+                    value: e.value,
+                    max: e.max
+                }, {
+                    element: this.elementStatThirst,
+                    value: i.value,
+                    max: i.max
+                }, {
+                    element: this.elementStatHunger,
+                    value: a.value,
+                    max: a.max
+                }];
+            for (let e = 0; e < n.length; e++) {
+                const t = n[e];
+                let a = B.default.roundNumber(t.value / t.max * 100, 0);
+                a <= 0 && (a = 0);
+                const i = `${t.value}/${t.max} (${a}%)`;
+                if (this.lastStats[e] === i) continue;
+                this.lastStats[e] = i, t.element.find(".stat").text(i), t.element.find(".fill").width(`${a}%`);
+                const o = t.element.parent();
+                a <= 10 ? o.addClass("flash") : o.removeClass("flash")
+            }
+            localPlayer.hasStatus(u.StatusType.Burned) ? this.elementStatBurn.quickShow() : this.elementStatBurn.quickHide(), localPlayer.hasStatus(u.StatusType.Bleeding) ? this.elementStatBleed.quickShow() : this.elementStatBleed.quickHide(), localPlayer.hasStatus(u.StatusType.Poisoned) ? this.elementStatPoison.quickShow() : this.elementStatPoison.quickHide()
+        }
+        blurInputs() {
+            $(".dialog-input, input[type='text'], input[type='number']").trigger("blur")
+        }
+        toggleDialog(e) {
+            return !!this.openDialog(e) || (this.closeDialog(e), !1)
+        }
+        openDialog(e) {
+            return !e.isVisible() && (e.dialog("open"), this.onOpenDialog(e), !0)
+        }
+        onOpenDialog(e) {
+            this.blurInputs(), $(".ui-dialog").attr("intercept", "all").click(e => {
+                e.target.matches("select") || (this.focus(), setTimeout(this.focus, 5))
+            });
+            const t = () => {
+                this.focus(), setTimeout(() => {
+                    this.focus()
+                }, 10)
+            };
+            $(".ui-dialog").removeAttr("tabindex"), $(".ui-dialog button").attr("tabindex", "-1").blur().click(t).focus(t), this.focus(), e.find("input[type='search'], input[type='text']").click(function() {
+                this.classList.add("can-focus"), setTimeout(() => {
+                    this.focus()
+                }, 10)
+            }).blur(function() {
+                this.classList.remove("can-focus")
+            }), this.makeTopDialog(e)
+        }
+        focus() {
+            document.activeElement !== this.element[0] && this.element[0].focus()
+        }
+        closeDialog(e) {
+            return !!e.isVisible() && (e.dialog("close"), this.blurInputs(), !0)
+        }
+        closeAllDialogs() {
+            let e = !1;
+            e = this.closeDialog(this.elementDialogInventory) || e, e = this.closeDialog(this.elementDialogCrafting) || e, e = this.closeDialog(this.elementDialogEquipment) || e, e = this.closeAllContainers() || e;
+            for (let t = 0; t < this.elementOtherDialogs.length; t++) e = this.closeDialog(this.elementOtherDialogs[t]) || e;
+            return e
+        }
+        autoOpenDialog(e, t) {
+            const a = localPlayer.getDialogInfo(e);
+            return !(!a || !a.open) && this.openDialog(t)
+        }
+        openDialogs() {
+            this.autoOpenDialog(u.DialogId.Inventory, this.elementDialogInventory), this.autoOpenDialog(u.DialogId.Crafting, this.elementDialogCrafting), this.autoOpenDialog(u.DialogId.Equipment, this.elementDialogEquipment);
+            for (const e of this.elementOtherDialogs) {
+                const t = e.data("dialog-index");
+                t && this.autoOpenDialog(t, e) && e.css("height", "")
+            }
+        }
+        clampDialogs() {
+            const e = ui.getBody(),
+                t = ui.getWidth(),
+                a = ui.getHeight();
+            $(".ui-dialog-content").each(function() {
+                const i = $(this).parent().position(),
+                    n = i.left,
+                    o = i.top,
+                    r = $(this).dialog("option", "width"),
+                    s = $(this).dialog("option", "height");
+                n + r > t && ($(this).dialog("option", "position", {
+                    my: "right top",
+                    at: `right top+${o}`,
+                    of: e,
+                    collision: "fit fit"
+                }), r > t && $(this).dialog("option", "width", t)), o + s > a && ($(this).dialog("option", "position", {
+                    my: "left bottom",
+                    at: `left+${n} bottom`,
+                    of: e,
+                    collision: "fit fit"
+                }), s > a && $(this).dialog("option", "height", a))
+            })
+        }
+        getItemClass(e, t) {
+            if (e && !t && (t = e.type), !t) return "";
+            let a = "";
+            e && e.quality && (a = ` ${u.ItemQuality[e.quality].toLowerCase()}`);
+            let i = "";
+            for (const e of itemManager.getGroups(t)) i += ` group-${u.ItemTypeGroup[e]}`;
+            return `item-${t}${a}${i}`
+        }
+        createItemString(e, t, a = "") {
+            return `<li class="tooltip item ${this.getItemClass(t,e)} ${a}" data-item-type="${e}"${t?`
+            data - item - id = "${t.id}"
+            `:""}></li>`
+        }
+        syncItemElements(e, t) {
+            const a = game.items[e];
+            if (!a) return;
+            const i = t || $(`.item[data-item-id="${e}"]`);
+            let n = !1;
+            i.each((e, t) => {
+                const i = $(t);
+                a.type !== i.getItemType() && (n = !0, a.quickSlot && this.removeItemFromQuickSlot(a.id, !0), i.attr("data-item-type", a.type), i.removeClass((e, t) => (t.match(/\bitem-\S+/g) || []).join(" ")), i.removeClass((e, t) => (t.match(/\bgroup-\S+/g) || []).join(" ")), i.get(0).className += ` ${this.getItemClass(a,a.type)}`), a.quickSlot ? i.getQuickSlot() && 0 !== i.children("span.number").length || (i.attr("data-quick-slot", a.quickSlot), i.append(`<span class="number">${a.quickSlot}</span>`)) : (i.getQuickSlot() || i.children("span.number").length > 0) && (i.removeAttr("data-quick-slot"), i.children("span.number").remove());
+                const o = a.getEquipSlot();
+                void 0 !== o ? i.getEquipSlot() && 0 !== i.children("span.equipped").length || (i.attr("data-equip-slot", u.EquipType[o].toString()), i.prepend('<span class="equipped">E</span>')) : (i.getEquipSlot() || i.children("span.equipped").length > 0) && (i.removeAttr("data-equip-slot"), i.children("span.equipped").remove()), a.legendary ? i.addClass("legendary") : i.removeClass("legendary"), this.syncDamagedDecayed(a, i)
+            }), n && this.refreshQuickSlots()
+        }
+        syncDamagedDecayed(e, t) {
+            const a = !!e && e.isDamaged(),
+                i = !!e && e.isDecayed();
+            a || i ? t.addClass("damaged") : t.removeClass("damaged")
+        }
+        addItemToContainer(e, t, a = !1, i = !1) {
+            let n, o;
+            const r = t === localPlayer.inventory;
+            r ? n = this.elementDialogInventoryContainer : (o = this.getDialogElementForContainer(t)) && (n = o.find(".container")), void 0 !== n && (void 0 !== e ? (this.insertItemStringToContainer(this.createItemString(e.type, e), n), this.syncItemElements(e.id), i || (this.saveItemOrder(n), this.onAddItemsToContainer(n, o, r))) : x.default.info(x.LogSource.Ui)("Attempted to add invalid item to container", t, t.itemOrders))
+        }
+        insertItemStringToContainer(e, t) {
+            if (void 0 !== this.sortableElementPosition) {
+                if (-1 === this.sortableElementPosition) t.prepend(e);
+                else {
+                    const a = t.children(),
+                        i = a.eq(this.sortableElementPosition);
+                    0 === i.length ? t.append(e) : i.after(e)
+                }
+                this.sortableElementPosition = void 0
+            } else t.append(e)
+        }
+        onAddItemsToContainer(e, t, a) {
+            !a && t && this.updateContainerName(t), this.onUpdateContainer(e, !0), localPlayer.updateTables(), this.isSorting() && this.runGlobalSortableAction("refreshItems"), this.refreshQuickSlots()
+        }
+        afterAddingMultipleItemsToContainer(e) {
+            let t, a;
+            const i = e === localPlayer.inventory;
+            i ? t = this.elementDialogInventoryContainer : (a = this.getDialogElementForContainer(e)) && (t = a.find(".container")), void 0 !== t && (this.saveItemOrder(t), this.onAddItemsToContainer(t, a, i))
+        }
+        removeItemFromContainer(e, t) {
+            const a = e.id;
+            let i, n;
+            const o = t === localPlayer.inventory;
+            o ? i = this.elementDialogInventoryContainer : (n = this.getDialogElementForContainer(t)) && (i = n.find(".container")), void 0 !== i && (i.children(`[data-item-id="${a}"]`).first().trigger("remove").remove(), n && this.updateContainerName(n))
+        }
+        refreshContainerName(e) {
+            const t = this.getDialogElementForContainer(e);
+            void 0 !== t && this.updateContainerName(t)
+        }
+        refreshQuickSlots() {
+            let e = !1;
+            for (let t = 1; t < 10; t++) this.updateQuickSlotItem(t) && (e = !0);
+            e && this.onUpdateQuickSlotsOrEquips()
+        }
+        getInventoryItemsInOrder() {
+            const e = [];
+            return this.elementDialogInventoryContainer.children().each(function() {
+                const t = $(this).data("item-id"),
+                    a = game.items[t];
+                e.push({
+                    type: a.type,
+                    id: t,
+                    quality: a.quality,
+                    minDur: a.minDur,
+                    maxDur: a.maxDur
+                })
+            }), e
+        }
+        loadQuickSlots() {
+            for (let e = 1; e < 10; e++) {
+                const t = localPlayer.quickSlotInfo[e];
+                if (t && t.itemType) {
+                    const a = this.getItemIdInQuickSlot(e);
+                    void 0 === a && this.setQuickSlotByItemType(e, t.itemType, !0)
+                }
+            }
+            this.refreshQuickSlots()
+        }
+        saveItemOrder(e) {
+            if (!game.playing) return;
+            let t = e.parent().data("container");
+            if (!t) {
+                if (!e.is("#container-inventory")) return;
+                t = localPlayer.inventory
+            }
+            const a = [];
+            e.children().each(function() {
+                const e = $(this).data("item-id");
+                void 0 !== e && a.push(e)
+            });
+            let i = !1;
+            for (let e = 0; e < a.length; e++)
+                if (t.containedItems[e] !== game.items[a[e]]) {
+                    i = !0;
+                    break
+                }
+            let n = !1,
+                o;
+            if (i)
+                if (void 0 === t.itemOrders) n = !0, o = a;
+                else {
+                    if (!(n = a.length !== t.itemOrders.length))
+                        for (let e = 0; e < a.length; e++)
+                            if (a[e] !== t.itemOrders[e]) {
+                                n = !0;
+                                break
+                            }
+                    o = a
+                } else n = !0;
+            n && (localPlayer.queueSoundEffect(u.SfxType.PickUp), multiplayer.isConnected() ? setTimeout(() => {
+                itemManager.updateItemOrder(t, o)
+            }, 1) : itemManager.updateItemOrder(t, o))
+        }
+        showItemContextMenu(e) {
+            if (this.isSorting()) return;
+            const t = e.data("item-id"),
+                a = e.getItemType(),
+                n = e.getQuickSlot(),
+                o = e.parent().parent().data("container"),
+                r = [],
+                s = game.items[t];
+            if (!s) return;
+            const l = s.isInTradeContainer(),
+                p = c.itemDescriptions[a];
+            let y;
+            const T = itemManager.getItemsInContainerByType(o || localPlayer.inventory, a),
+                S = T.length;
+            let I = 0,
+                v = !1;
+            for (y = 0; y < S; y++) {
+                const e = T[y];
+                e.quality === s.quality ? I++ : v = !0
+            }
+            if (!l && p && p.use)
+                for (y = 0; y < p.use.length; y++) {
+                    const e = p.use[y];
+                    p.use[y] === i.ActionType.OpenContainer && ui.isContainerOpen(s) || r.push({
+                        action: "Use",
+                        text: new f.default(m.Dictionary.Action, e).getString(),
+                        data: {
+                            actionType: e
+                        }
+                    })
+                }
+            if (ui.isContainerOpen(s) && r.push({
+                    action: "CloseContainer",
+                    text: f.default.message(h.default.CloseContainer).getString()
+                }), !l)
+                if (p && p.equip && (s.isEquipped() ? r.push({
+                        action: "EquipOrUnEquip",
+                        text: f.default.message(h.default.UnEquip).getString()
+                    }) : p.equip === u.EquipType.Held ? (r.push({
+                        action: "EquipLeftHand",
+                        text: f.default.message(h.default.EquipTo).getString() + f.default.message(g.equipTypeToMessage[u.EquipType.LeftHand]).getString()
+                    }), r.push({
+                        action: "EquipRightHand",
+                        text: f.default.message(h.default.EquipTo).getString() + f.default.message(g.equipTypeToMessage[u.EquipType.RightHand]).getString()
+                    })) : r.push({
+                        action: "EquipOrUnEquip",
+                        text: f.default.message(h.default.EquipTo).getString() + f.default.message(g.equipTypeToMessage[p.equip]).getString()
+                    })), n) r.push({
+                    action: "QuickSlotRemove",
+                    text: f.default.message(h.default.RemoveFromQuickslot).getString()
+                });
+                else {
+                    const e = this.getFreeQuickSlots();
+                    e.length > 0 && r.push({
+                        action: "QuickSlotAdd",
+                        text: f.default.message(h.default.AddToQuickslot).getString()
+                    })
+                }
+            if (o ? (o.containerType === d.ContainerType.Trade ? r.push({
+                    action: "MoveToInventory",
+                    text: f.default.message(h.default.TradeBarterCreditForItem).getString()
+                }) : r.push({
+                    action: "MoveToInventory",
+                    text: f.default.message(h.default.MoveToInventory).getString()
+                }), l || (S > 1 && r.push({
+                    action: "MoveAllToInventory",
+                    text: f.default.message(h.default.MoveAllToInventory).getString()
+                }), v && I > 1 && r.push({
+                    action: "MoveAllOfSameQualityToInventory",
+                    text: f.default.message(h.default.MoveAllOfSameQualityToInventory).getString()
+                }))) : void 0 !== this.activeContainer && (this.activeContainer.containerType === d.ContainerType.Trade ? r.push({
+                    action: "MoveToOpenedContainer",
+                    text: f.default.message(h.default.TradeItemForBarterCredit).getString()
+                }) : (r.push({
+                    action: "MoveToOpenedContainer",
+                    text: f.default.message(this.multipleContainersOpened ? h.default.MoveToLastOpenedContainer : h.default.MoveToOpenedContainer).getString()
+                }), S > 1 && r.push({
+                    action: "MoveAllToOpenedContainer",
+                    text: f.default.message(this.multipleContainersOpened ? h.default.MoveAllToLastOpenedContainer : h.default.MoveAllToOpenedContainer).getString()
+                }), v && I > 1 && r.push({
+                    action: "MoveAllOfSameQualityToOpenedContainer",
+                    text: f.default.message(this.multipleContainersOpened ? h.default.MoveAllOfSameQualityToLastOpenedContainer : h.default.MoveAllOfSameQualityToOpenedContainer).getString()
+                }))), !o) {
+                const e = localPlayer.getFacingTile().doodad;
+                if (e) {
+                    const t = e;
+                    itemManager.isContainer(e) && t !== this.activeContainer && (r.push({
+                        action: "MoveToFacingContainer",
+                        text: f.default.message(h.default.MoveToFacingContainer).getString(),
+                        data: {
+                            facingContainer: !0
+                        }
+                    }), S > 1 && r.push({
+                        action: "MoveAllToFacingContainer",
+                        text: f.default.message(h.default.MoveAllToFacingContainer).getString(),
+                        data: {
+                            facingContainer: !0
+                        }
+                    }), v && I > 1 && r.push({
+                        action: "MoveAllOfSameQualityToFacingContainer",
+                        text: f.default.message(h.default.MoveAllOfSameQualityToFacingContainer).getString(),
+                        data: {
+                            facingContainer: !0
+                        }
+                    }))
+                }
+            }
+            if (!l && (r.push({
+                    action: "Throw",
+                    text: f.default.message(h.default.Throw).getString()
+                }), r.push({
+                    action: "Rename",
+                    text: new f.default(m.Dictionary.Action, i.ActionType.Rename).getString()
+                }), r.push({
+                    action: "Offer",
+                    text: f.default.message(h.default.Offer).getString()
+                }), r.push({
+                    action: "Drop",
+                    text: f.default.message(h.default.Drop).getString()
+                }), S > 1 && r.push({
+                    action: "DropAll",
+                    text: f.default.message(h.default.DropAll).getString()
+                }), v && I > 1 && r.push({
+                    action: "DropAllOfSameQuality",
+                    text: f.default.message(h.default.DropAllOfSameQuality).getString()
+                }), p)) {
+                if (p.durability && void 0 !== s.minDur && void 0 !== s.maxDur && s.minDur < s.maxDur && !1 !== p.repairable) {
+                    const e = itemManager.getItemInInventoryByGroup(localPlayer, u.ItemTypeGroup.Repair, t);
+                    e && r.push({
+                        action: "Repair",
+                        text: `${f.default.nameOf(m.Dictionary.ItemGroup,u.ItemTypeGroup.Repair,!1).inContext(3).getString()} ${f.default.message(h.default.With).getString()} ${e.getName().inContext(3).getString()}`
+                    })
+                }
+                const e = itemManager.getItemInInventoryByGroup(localPlayer, u.ItemTypeGroup.Transmogrify);
+                if (e && r.push({
+                        action: "Transmogrify",
+                        text: `${f.default.nameOf(m.Dictionary.ItemGroup,u.ItemTypeGroup.Transmogrify,!1).inContext(3).getString()} ${f.default.message(h.default.With).getString()} ${e.getName().inContext(3).getString()}`
+                    }), p.durability) {
+                    const e = itemManager.getItemInInventoryByGroup(localPlayer, u.ItemTypeGroup.Reinforce);
+                    e && r.push({
+                        action: "Reinforce",
+                        text: `${f.default.nameOf(m.Dictionary.ItemGroup,u.ItemTypeGroup.Reinforce,!1).inContext(3).getString()} ${f.default.message(h.default.With).getString()} ${e.getName().inContext(3).getString()}`
+                    })
+                }
+                if (p.decayMax && p.use && p.use.indexOf(i.ActionType.Eat) > -1 && -1 === p.use.indexOf(i.ActionType.Preserve)) {
+                    const e = itemManager.getItemInInventoryByGroup(localPlayer, u.ItemTypeGroup.Preservative);
+                    e && r.push({
+                        action: "Preserve",
+                        text: `${f.default.message(h.default.Preserve).getString()} ${f.default.message(h.default.With).getString()} ${e.getName().inContext(3).getString()}`
+                    })
+                }
+                if (p.revert) {
+                    const e = itemManager.getItemInInventoryByGroup(localPlayer, u.ItemTypeGroup.Fuel);
+                    e && r.push({
+                        action: "Add-Fuel",
+                        text: `${f.default.message(h.default.AddFuel).getString()} ${f.default.message(h.default.With).getString()} ${e.getName().inContext(3).getString()}`
+                    })
+                }
+                if (p.lit) {
+                    const e = itemManager.getItemInInventoryByGroup(localPlayer, u.ItemTypeGroup.FireStarter);
+                    e && r.push({
+                        action: "Ignite",
+                        text: `${f.default.message(h.default.Ignite).getString()} ${f.default.message(h.default.With).getString()} ${e.getName().inContext(3).getString()}`
+                    })
+                }
+                p.disassemble && r.push({
+                    action: "Disassemble",
+                    text: f.default.message(h.default.DisassembleAction).getString()
+                }), p.dismantle && r.push({
+                    action: "Dismantle",
+                    text: f.default.message(h.default.DismantleAction).getString()
+                })
+            }
+            const w = {
+                actions: r,
+                quickSlot: n
+            };
+            ui.playClickSound(), $(document).contextmenu("open", e, w), $(".ui-contextmenu").removeAttr("tabindex")
+        }
+        onContextMenuAction(e, t, a) {
+            const i = e.data("item-id"),
+                n = e.getQuickSlot();
+            return a && a.is(".quick-slot-action-select") ? (a.parent().parent().parent().find(".selected").removeClass("selected"), a.addClass("selected"), localPlayer.updateQuickSlotInfo(n, void 0, t), ui.playClickSound(), !1) : this.runContextMenuAction(i, t)
+        }
+        runContextMenuAction(e, t, a) {
+            return this.runAction(e, t, a)
+        }
+        onCraftingItemClick(e) {
+            const t = c.itemDescriptions[e.data("item-type")];
+            if (!t || !t.recipe) return;
+            const n = new p.default(localPlayer, t.recipe, !0);
+            if (n.process(), n && n.requirementsMet()) {
+                if (saveDataGlobal.options.warnWhenBreakingItemsOnCraft) {
+                    let t = !1;
+                    for (const e of n.itemComponentsRequired)
+                        if (void 0 !== e.minDur && e.minDur <= 0) {
+                            t = !0;
+                            break
+                        }
+                    if (!t)
+                        for (const e of n.itemComponentsConsumed)
+                            if (void 0 !== e.minDur && e.minDur <= 0) {
+                                t = !0;
+                                break
+                            }
+                    if (t) return void newui.interruptWithConfirmation(y.default.GameInterruptItemMayBeDestroyedInCraft, y.default.GameInterruptItemMayBeDestroyedInCraftDescription).then(t => {
+                        t && (a.default.get(i.ActionType.Craft).execute(localPlayer, e.getItemType(), n.itemComponentsRequired, n.itemComponentsConsumed, n.itemBaseComponent, n.itemComponentsCanBurn), this.tooltipHide())
+                    })
+                }
+                a.default.get(i.ActionType.Craft).execute(localPlayer, e.getItemType(), n.itemComponentsRequired, n.itemComponentsConsumed, n.itemBaseComponent, n.itemComponentsCanBurn), this.tooltipHide()
+            }
+        }
+        onDismantleItemClick(e) {
+            if (e) {
+                if (saveDataGlobal.options.warnWhenBreakingItemsOnCraft) {
+                    let t;
+                    const n = c.itemDescriptions[e.type];
+                    if (n) {
+                        const e = n.dismantle;
+                        if (e) {
+                            const a = e.required;
+                            a && (t = itemManager.getItemForHuman(localPlayer, a))
+                        }
+                    }
+                    if (t && void 0 !== t.minDur && t.minDur <= 0) return void newui.interruptWithConfirmation(y.default.GameInterruptItemMayBeDestroyedInCraft, y.default.GameInterruptItemMayBeDestroyedInCraftDescription).then(t => {
+                        t && (a.default.get(i.ActionType.Dismantle).execute(localPlayer, e), this.tooltipHide())
+                    })
+                }
+                a.default.get(i.ActionType.Dismantle).execute(localPlayer, e)
+            }
+            this.tooltipHide()
+        }
+        getTooltipHtml(e) {
+            const t = e.attr("data-tooltip"),
+                a = e.data("attribute");
+            if (void 0 !== t) {
+                if (void 0 !== e.getEquipSlot()) {
+                    const t = e.children();
+                    if (t.length > 0) {
+                        const a = t.first();
+                        return this.getTooltipHtmlForItem(game.items[a.data("item-id")], a.getItemType(), a.hasClass("is-quick-slot"), e.hasClass("is-dismantle"), e.parent().hasClass("is-npc"))
+                    }
+                }
+                return t
+            }
+            if (e.hasClass("item")) {
+                const t = e.getItemType(),
+                    a = c.itemDescriptions[t],
+                    i = game.items[e.data("item-id")];
+                if (!i && a && a.recipe) {
+                    const a = !game.isChallenge && game.crafted[t];
+                    a && a.newUnlock && (a.newUnlock = !1, e.removeClass("highlighted"))
+                }
+                return this.getTooltipHtmlForItem(i, t, e.hasClass("is-quick-slot"), e.hasClass("is-dismantle"), e.parent().hasClass("is-npc"))
+            }
+            return f.default.message(h.default.NotAvailable).getString()
+        }
+        tooltipEnable() {
+            $(document).functionalTooltip("enable")
+        }
+        tooltipRefresh() {
+            $(document).functionalTooltip("refresh")
+        }
+        tooltipDisable() {
+            $(document).functionalTooltip("disable")
+        }
+        tooltipHide() {
+            $(document).functionalTooltip("hide")
+        }
+        unSelectElements() {
+            $(".selected").each(function() {
+                void 0 !== $(this).data("selected-count") || $(this).hasClass("quick-slot-action-select") || ($(this).removeClass("selected"), $(this).parent("#container-crafting").length || $(this).parent("#container-dismantle").length || $(this).removeClass("highlighted"))
+            })
+        }
+        getTooltipHtmlForItem(e, t, a, n, r) {
+            const s = c.itemDescriptions[t];
+            if (!s) return f.default.message(h.default.AnUnknownItem).inContext(3).getString();
+            const d = e ? e.getName() : f.default.nameOf(m.Dictionary.Item, t);
+            d.inContext(3);
+            let T = `<h3>${d.getString()}</h3>`;
+            if (e) {
+                if (r) {
+                    const t = e.getWorth();
+                    void 0 !== t && (T += `<p><strong>${f.default.ui(y.default.GameItemBarterCreditTrade).getString()}</strong>${Math.round(1.5*t)}`, e.legendary && e.legendary.type === u.LegendaryType.Worth && (T += ` <span class="legendary">+${e.legendary.value}</span>`), T += "</p>")
+                }
+                if (e.quality) {
+                    if (T += `<p><span class="${u.ItemQuality[e.quality].toLowerCase()}"> ${new f.default(m.Dictionary.ItemQuality,e.quality).inContext(3).getString()}`, e.legendary) {
+                        const {
+                            type: t,
+                            skill: a,
+                            stat: i
+                        } = e.legendary, n = void 0 !== a ? new f.default(m.Dictionary.Skill, a) : void 0 !== i ? new f.default(m.Dictionary.Stat, i) : void 0;
+                        T += ` (${new f.default(m.Dictionary.LegendaryType,t).inContext(3).getString(n)})`
+                    }
+                    T += "</span></p>"
+                }
+                saveDataGlobal.options.protectedCraftingItems && (e.isEquipped() || e.quickSlot) && (T += `<p><span class="protected">${f.default.message(h.default.LabelProtected).getString()}</span></p>`), T += `<p><strong>${f.default.message(h.default.LabelDurability).getString()}</strong><span`, void 0 !== e.minDur && e.minDur <= 2 && (T += ' class="damaged"'), T += `>${e.minDur}</span>/`, T += "<span", e.quality && (T += ` class="${u.ItemQuality[e.quality].toLowerCase()}"`), T += ">", T += `${e.maxDur}</span>`, s.decayMax && (T += ` <strong>${f.default.message(h.default.LabelDecay).getString()}</strong> ${e.decay}`), T += "</p>", T += "<p><strong>";
+                let t = e && itemManager.isContainer(e);
+                if (t) {
+                    const a = itemManager.computeContainerWeight(e);
+                    a > 0 ? (T += `${f.default.message(h.default.LabelWeight).getString()}</strong> ${e.weight} + `, itemManager.isInInventory(e) ? T += `<span class="strikethrough">${B.default.roundNumber(a,1)}</span> ${B.default.roundNumber(a*e.getContainerWeightReduction(),1)}` : T += `${B.default.roundNumber(a,1)}`) : t = !1
+                }
+                if (t || (T += `${f.default.message(h.default.LabelWeight).getString()}</strong> ${e.weight}`, e.legendary && e.legendary.type === u.LegendaryType.ItemWeight && (T += ` <span class="legendary">-${e.legendary.value}</span>`)), s.doodadContainer) {
+                    const e = o.doodadDescriptions[s.doodadContainer];
+                    e && (T += ` <strong>${f.default.message(h.default.LabelWeightCapacity).getString()}</strong> ${e.weightCapacity}`)
+                }
+                T += "</p>"
+            }
+            T += `<p><strong>${new f.default(m.Dictionary.Item,t,1).getString()}</strong></p>`;
+            let I = "";
+            if (s.use) {
+                I += "<strong>", s.use.length > 1 ? I += f.default.message(h.default.LabelUses).getString() : I += f.default.message(h.default.LabelUse).getString(), I += "</strong><span>";
+                for (const e of s.use) I += `${new f.default(m.Dictionary.Action,e).getString()}, `;
+                I = `${I.slice(0,-2)}</span>`
+            }
+            const v = [i.ActionType.Eat, i.ActionType.Heal, i.ActionType.HealOther, i.ActionType.DrinkItem, i.ActionType.DrinkCure];
+            if (s.onUse && localPlayer.revealedItems[t])
+                for (const t of v) {
+                    let a = s.onUse[t];
+                    Array.isArray(a) || void 0 === a || (a = [a]);
+                    const n = s.skillUse;
+                    let o = "";
+                    const r = localPlayer.getConsumeBonus(e, n);
+                    if (r >= 1 && (o = ` +(0-${r})`), a) {
+                        let n = h.default.None;
+                        switch (t) {
+                            case i.ActionType.Eat:
+                                n = h.default.LabelOnEat;
+                                break;
+                            case i.ActionType.Heal:
+                                n = h.default.LabelOnHeal;
+                                break;
+                            case i.ActionType.HealOther:
+                                n = h.default.LabelOnOtherHeal;
+                                break;
+                            case i.ActionType.DrinkItem:
+                                n = h.default.LabelOnDrink;
+                                break;
+                            case i.ActionType.DrinkCure:
+                                n = h.default.LabelOnCure
+                        }
+                        I += `<span class="consume"><strong>${f.default.message(n).getString()}</strong>`;
+                        const r = ["health"];
+                        t !== i.ActionType.HealOther && r.push("stamina", "hunger", "thirst");
+                        let s = 0;
+                        for (const t of r) 0 !== a[s] && (I += `<span class="stat ${t}">${a[s]>0?"+":""}${a[s]}${a[s]>=1?o:""}</span>`, a[s] >= 1 && e && e.legendary && e.legendary.type === u.LegendaryType.UseBenefits && (I += ` <span class="legendary">+${e.legendary.value}</span>`), I += ", "), s++;
+                        I = `${I.slice(0,-2)}</span>`
+                    }
+                }
+            const [w, M] = itemManager.getGroups(t).collect(R.default.hasAny);
+            if (w && (I += `<strong>${f.default.message(h.default.LabelGrouping).getString()}</strong>`, I += `<span>${M.map(e=>f.default.nameOf(m.Dictionary.ItemGroup,e,!1).inContext(3)).collect(f.default.formatList,!1).getString()}</span>`), s.onUse && s.onUse[i.ActionType.StokeFire]) {
+                let t = "";
+                if (e) {
+                    const a = e.getOnUseBonus();
+                    a && e.quality && (t = ` <span class="${u.ItemQuality[e.quality].toLowerCase()}">+${a}</span>`)
+                }
+                I += `<strong>${f.default.message(h.default.LabelStokeFireStrength).getString()}</strong><span>${s.onUse[i.ActionType.StokeFire]}${t}</span>`
+            }
+            if (s.lit) {
+                const t = c.itemDescriptions[s.lit];
+                if (t) {
+                    const a = t.onEquipEffect;
+                    a && (I += `<strong>${f.default.message(h.default.LabelLightSourceWhenLit).getString()}</strong><span>+${a[1]}`, e && e.legendary && e.legendary.type === u.LegendaryType.Illumination && (I += ` <span class="legendary">+${e.legendary.value}</span>`), I += "</span>")
+                }
+            }
+            if (s.onUse && !s.lit) {
+                const e = s.onUse[i.ActionType.Build],
+                    t = o.doodadDescriptions[e];
+                if (e && t) {
+                    const e = t.lit;
+                    if (e) {
+                        const t = o.doodadDescriptions[e];
+                        t && t.providesLight && (I += `<strong>${f.default.message(h.default.LabelLightSourceWhenLit).getString()}</strong><span>+${t.providesLight}</span>`)
+                    }
+                }
+            }
+            if (s.weightCapacity && (I += `<strong>${f.default.message(h.default.LabelWeightCapacity).getString()}</strong><span>${s.weightCapacity}`, e && e.legendary && e.legendary.type === u.LegendaryType.WeightCapacity && (I += ` <span class="legendary">+${e.legendary.value}</span>`), I += `</span><strong>${f.default.message(h.default.LabelWeightReduction).getString()}</strong><span>-50%`, e && e.legendary && e.legendary.type === u.LegendaryType.ContainerWeight && (I += ` <span class="legendary">-${e.legendary.value}%</span>`), I += "</span>"), s.recipe && s.recipe.reputation) {
+                if (I += `<strong>${f.default.message(h.default.LabelCraftingReputation).getString()}</strong><span>${s.recipe.reputation}`, s.recipe.skill) {
+                    const e = b.skillDescriptions[s.recipe.skill];
+                    e && e.reputation && (I += ` (${f.default.message(h.default.LabelCraftingSkillReputation).getString(e.reputation,new f.default(m.Dictionary.Skill,s.recipe.skill).inContext(3).getString())})`)
+                }
+                I += "</span>"
+            }
+            if (s.worth && void 0 !== e) {
+                const t = e.getWorth();
+                void 0 !== t && (I += `<strong>${f.default.message(h.default.LabelWorth).getString()}</strong><span>${t}`, e.legendary && e.legendary.type === u.LegendaryType.Worth && (I += ` <span class="legendary">+${e.legendary.value}</span>`), I += "</span>")
+            }
+            I && (T += `<p class="info-line">${I}</p>`);
+            let k = "";
+            if (s.equip) {
+                const e = g.equipTypeToMessage[s.equip];
+                k += `<strong>${f.default.message(h.default.LabelEquip).getString()}</strong> <span>${f.default.message(e).getString()}</span>`
+            }
+            if (s.attack ? (s.equip || (k += `<strong>${f.default.message(h.default.LabelRangedDamage).getString()}</strong> `), k += `<span>(+${s.attack} `, e && e.legendary && e.legendary.type === u.LegendaryType.Attack && (k += `<span class="legendary">+${e.legendary.value}</span> `), s.damageType && (k += g.fullDamageType([s.damageType]).getString()), k += ` ${f.default.message(h.default.Attack).getString()})</span>`) : k += `<strong>${f.default.message(h.default.LabelThrowDamageType).getString()}</strong><span>${g.fullDamageType([s.damageType?s.damageType:u.DamageType.Blunt]).getString()}</span>`, s.onUse) {
+                const t = s.onUse[i.ActionType.Build],
+                    a = o.doodadDescriptions[t];
+                t && a && a.trapDamage && (k += `<strong>${f.default.message(h.default.LabelTrapDamage).getString()}</strong> <span>${a.trapDamage}`, e && e.legendary && e.legendary.type === u.LegendaryType.TrapDamage && (k += ` <span class="legendary">+${e.legendary.value}</span>`), k += "</span>")
+            }
+            k && (T += `<p class="info-line">${k}</p>`);
+            let C = "",
+                D;
+            if (s.onEquipEffect && (C += `+${s.onEquipEffect[1]} `, e && e.legendary && e.legendary.type === u.LegendaryType.Illumination && (C += `<span class="legendary">+${e.legendary.value}</span> `), C += new f.default(m.Dictionary.OnEquip, s.onEquipEffect[0]).getString()), s.equip && e && e.legendary && e.legendary.type !== u.LegendaryType.Worth && e.legendary.type !== u.LegendaryType.ItemWeight && e.legendary.type !== u.LegendaryType.Illumination && e.legendary.type !== u.LegendaryType.WeightCapacity && e.legendary.type !== u.LegendaryType.Range && e.legendary.type !== u.LegendaryType.UseBenefits && e.legendary.type !== u.LegendaryType.ContainerWeight) {
+                if (C && (C += ", "), C += `<span class="legendary">+${e.legendary.value}`, void 0 !== e.legendary.skill) {
+                    const t = b.skillDescriptions[e.legendary.skill];
+                    t && (C += `% ${new f.default(m.Dictionary.Skill,e.legendary.skill).inContext(3).getString()}`)
+                } else if (void 0 !== e.legendary.stat) C += ` ${new f.default(m.Dictionary.Stat,e.legendary.stat).inContext(3).getString()}`;
+                else if (e.legendary.type === u.LegendaryType.MaxWeight) C += ` ${f.default.ui(y.default.GameTooltipLegendaryMaxWeightLabel).getString()}`;
+                else {
+                    let t;
+                    switch (e.legendary.type) {
+                        case u.LegendaryType.Benignity:
+                            t = l.Stat.Benignity;
+                            break;
+                        case u.LegendaryType.Malignity:
+                            t = l.Stat.Malignity;
+                            break;
+                        case u.LegendaryType.Attack:
+                            t = l.Stat.Attack;
+                            break;
+                        case u.LegendaryType.Defense:
+                            t = l.Stat.Defense
+                    }
+                    void 0 !== t && (C += ` ${new f.default(m.Dictionary.Stat,t).inContext(3).getString()}`)
+                }
+                C += "</span>"
+            }
+            if (C && (T += `<p><strong>${f.default.message(h.default.LabelOnEquip).getString()}</strong> ${C}</p>`), s.defense) {
+                let t = `<ul><li><strong>${f.default.message(h.default.LabelBase).getString()}</strong>${s.defense.base}`;
+                if (e && e.legendary && e.legendary.type === u.LegendaryType.Defense && (t += ` <span class="legendary">+${e.legendary.value}</span>`), t += "</li>", Object.keys(s.defense.resist).length > 0) {
+                    t += `<li><strong>${f.default.message(h.default.LabelResists).getString()}</strong>`;
+                    for (const e in s.defense.resist) t += `${new f.default(m.Dictionary.DamageType,e).inContext(3).getString()} (${s.defense.resist[e]}), `;
+                    t = t.substr(0, t.length - 2), t += "</li>"
+                }
+                if (Object.keys(s.defense.vulnerable).length > 0) {
+                    t += `<li><strong>${f.default.message(h.default.LabelVulnerabilities).getString()}</strong>`;
+                    for (const e in s.defense.vulnerable) t += `${new f.default(m.Dictionary.DamageType,e).inContext(3).getString()} (${s.defense.vulnerable[e]}), `;
+                    t = t.substr(0, t.length - 2), t += "</li>"
+                }
+                t += "</ul>", T += `<p class="no-space"><strong>${f.default.message(h.default.LabelDefense).getString()}</strong></p>${t}`
+            }
+            if (s.ranged) {
+                let t = "";
+                t = `+${s.ranged.attack}`, 0 === s.ranged.attack && (t = f.default.message(h.default.NotAvailable).getString()), T += `<p><strong>${f.default.message(h.default.LabelRanged).getString()}</strong> (${f.default.message(h.default.LabelRange).getString()} ${s.ranged.range}`, e && e.legendary && e.legendary.type === u.LegendaryType.Range && (T += ` <span class="legendary">+${e.legendary.value}</span>`), T += `, ${f.default.message(h.default.LabelRangedAttack).getString()} ${t}`, e && e.legendary && e.legendary.type === u.LegendaryType.Attack && (T += ` <span class="legendary">+${e.legendary.value}</span>`), T += ")</p>"
+            }
+            if (s.dismantle) {
+                let e = '<ul class="dismantle"><li>';
+                for (const t of s.dismantle.items) e += `<span class="item item-preview item-${t[0]}"></span>${f.default.nameOf(m.Dictionary.Item,t[0]).inContext(3).getString()} x${t[1]}, `;
+                if (e = e.substr(0, e.length - 2), e += "</li>", s.dismantle.required) {
+                    e += `<li><strong>${f.default.message(h.default.LabelRequires).getString()}</strong>`;
+                    const t = f.default.nameOf(m.Dictionary.ItemGroup, s.dismantle.required).inContext(3).getString(),
+                        a = itemManager.getItemForHuman(localPlayer, s.dismantle.required);
+                    e += a ? t : `<span class="recipe-missing-items">${t}</span>`, e += "</li>"
+                }
+                e += "</ul>", T += `<p class="no-space"><strong>${f.default.message(h.default.DismantleLabel).getString()}</strong></p>${e}`
+            }
+            if (e) {
+                if ((s.recipe || s.requiredForDisassembly) && (T += '<p class="info-line">'), s.requiredForDisassembly) {
+                    let e = "",
+                        a = 0;
+                    for (const t of s.requiredForDisassembly) {
+                        a++;
+                        const i = !!itemManager.getItemForHuman(localPlayer, t);
+                        let n = "";
+                        a >= s.requiredForDisassembly.length && (n = " last"), e += '<span class="disassembly', i || (e += " recipe-missing-items"), e += `${n}">${itemManager.getItemTypeGroupName(t).inContext(3).getString()}`, e += "</span>", a < s.requiredForDisassembly.length && (e += ", ")
+                    }
+                    T += `<strong>${f.default.message(h.default.RequiredForDisassembleLabel).getString()}</strong>${e}`, s.recipe && (s.recipe.requiredDoodad || s.recipe.requiresFire) && (T += `${this.additionalRequirements(t,s.recipe,!0)}`)
+                }(s.recipe || s.requiredForDisassembly) && (T += "</p>")
+            }
+            if (e && this.craftableItemTypes && this.nonCraftableItemTypes) {
+                const a = this.craftableItemTypes.concat(this.nonCraftableItemTypes);
+                for (const i of a) {
+                    const a = c.itemDescriptions[i];
+                    if (!a) continue;
+                    if (!(D = a.recipe)) continue;
+                    let n = !1;
+                    if (void 0 !== D.baseComponent && itemManager.isGroup(D.baseComponent) ? itemManager.isInGroup(t, D.baseComponent) && (n = !0) : D.baseComponent === e.type && (n = !0), !n)
+                        for (const t of D.components) {
+                            const a = t.type;
+                            if (itemManager.isGroup(a) && itemManager.isInGroup(e.type, a) || e.type === a) {
+                                n = !0;
+                                break
+                            }
+                        }
+                    n && this.highlightItemElementByItemTypeWithNoItemId(i, !0, !1, !0)
+                }
+            }
+            if (D = s.recipe, !e && D && !a && !n) {
+                let e = "<ul>";
+                const a = new p.default(localPlayer, D, !0);
+                a.process();
+                const i = a.itemBaseComponent,
+                    n = a.itemComponentsRequired,
+                    o = a.itemComponentsConsumed;
+                for (let e = 0; e < n.length; e++) this.highlightItemElementByItemId(n[e].id, !0, !1, !0);
+                for (let e = 0; e < o.length; e++) this.highlightItemElementByItemId(o[e].id, !0, !1, !0);
+                D.baseComponent && (i ? this.highlightItemElementByItemId(i.id, !0, !1, !0) : e += '<span class="recipe-missing-items">', e += `<li>x1 ${itemManager.getItemTypeGroupName(D.baseComponent).inContext(3).getString()}</li>`, i || (e += "</span>"));
+                const r = itemManager.getAdjacentContainers(localPlayer),
+                    s = [localPlayer.inventory, ...r],
+                    l = D.components;
+                for (let t = 0; t < l.length; t++) {
+                    const i = l[t],
+                        n = i.type,
+                        o = i.requiredAmount,
+                        r = i.consumedAmount,
+                        u = itemManager.isGroup(n) ? itemManager.countItemsInContainerByGroup(s, n) : itemManager.countItemsInContainer(s, n),
+                        d = a.amountNeededForComponent(t);
+                    d > 0 && (e += '<span class="recipe-missing-items">'), e += `<li>x${o} ${itemManager.getItemTypeGroupName(n,!1).inContext(3).getString()}`, r > 0 && (e += ` (x${r} ${f.default.message(h.default.Consumed).getString()})`);
+                    const p = d > 0 ? o - d : u;
+                    e += ` (${f.default.message(h.default.LabelHave).getString()} ${p}/${o})</li>`, d > 0 && (e += "</span>")
+                }(D.requiredDoodad || D.requiresFire) && (e += `<li>${this.additionalRequirements(t,D)}</li>`), e += "</ul>";
+                const u = g.recipeLevelToMessage[D.level];
+                let d = "";
+                d = localPlayer.getSkill(D.skill) <= b.skillChance(D.level) - 40 ? `<span class="skill-warning">${f.default.message(u).getString()}</span>` : f.default.message(u).getString();
+                const c = b.skillDescriptions[D.skill];
+                T += `<p><strong>${f.default.message(h.default.LabelSkill).getString()}</strong> ${c?new f.default(m.Dictionary.Skill,D.skill).inContext(3).getString():f.default.message(h.default.Unknown).getString()} <strong>${f.default.message(h.default.LabelLevel).getString()}</strong> ${d}</p>\n\t\t\t\t<p class="no-space"><strong>${f.default.message(h.default.LabelRequires).inContext(3).getString()}</strong> ${e}</p>`
+            }
+            if (n) {
+                const e = itemManager.getItemForHuman(localPlayer, t);
+                if (e && this.highlightItemElementByItemId(e.id, !0, !1, !0), s.dismantle && s.dismantle.required) {
+                    const e = itemManager.getItemForHuman(localPlayer, s.dismantle.required);
+                    e && this.highlightItemElementByItemId(e.id, !0, !1, !0)
+                }
+            }
+            if (S.bindingManager.isPressed(u.Bindable.GameMoreInformation) || saveDataGlobal.options.alwaysShowMoreInformation) {
+                if (s.use)
+                    for (const e of s.use) T += `<p><strong>${new f.default(m.Dictionary.Action,e).getString()}:</strong> ${new f.default(m.Dictionary.Action,e,1).getString()}</p>`
+            } else s.use && (T += `<p><em>${f.default.message(h.default.MoreInformation).getString(S.bindingManager.getBindingsTranslation(u.Bindable.GameMoreInformation))}</em></p>`);
+            return T
+        }
+        createDialog(e, t) {
+            const a = e.dialog(this.setupDialog(u.DialogId.Custom, void 0, t));
+            return a.data("dialog-index", this.getDialogIndex(u.DialogId.Custom, t)), this.elementOtherDialogs.push(a), a
+        }
+        getUsedQuickSlots() {
+            const e = [];
+            return this.elementQuickSlotsContainer.children(".in-use").each(function() {
+                e.push($(this).getQuickSlot())
+            }), e
+        }
+        getFreeQuickSlots() {
+            const e = [];
+            return this.elementQuickSlotsContainer.children().not(".in-use, #numbers").each(function() {
+                e.push($(this).getQuickSlot())
+            }), e
+        }
+        getQuickSlotItemElement(e) {
+            return this.elementQuickSlotsContainer.children(`[data-quick-slot="${e}"]`).first()
+        }
+        getItemIdInQuickSlot(e) {
+            const t = this.getQuickSlotItemElement(e);
+            if (t.hasClass("in-use") && !t.hasClass("disabled")) return t.children("li").data("item-id")
+        }
+        setQuickSlot(e, t, n = !1) {
+            if (void 0 === t) return !1;
+            const o = game.items[t];
+            if (!o || o.isInTradeContainer()) return !1;
+            if (!itemManager.isInInventory(o)) {
+                let t = !1;
+                for (let e = 0; e < this.elementContainerDialogs.length; e++) {
+                    const a = this.elementContainerDialogs[e].data("container");
+                    if (itemManager.isContainableInContainer(o, a)) {
+                        t = !0;
+                        break
+                    }
+                }
+                if (!t) return this.setQuickSlotByItemType(e, o.type, !0), !1;
+                a.default.get(i.ActionType.MoveItem).execute(localPlayer, o, void 0, localPlayer.inventory)
+            }
+            let r;
+            const s = localPlayer.quickSlotInfo[e];
+            return s && s.itemType === o.type && (r = s.action), o.quickSlot && (localPlayer.quickSlotInfo[o.quickSlot] && (r = localPlayer.quickSlotInfo[o.quickSlot].action), this.clearQuickSlot(o.quickSlot, !0)), this.setItemQuickslot(o, e), localPlayer.updateQuickSlotInfo(e, o.type, r), this.setQuickSlotByItemType(e, o.type, !1, o), this.syncItemElements(t), n || (localPlayer.queueSoundEffect(u.SfxType.PickUp), this.onUpdateQuickSlotsOrEquips()), !0
+        }
+        setQuickSlotByItemType(e, t, a, i) {
+            let n;
+            const o = localPlayer.quickSlotInfo[e];
+            o && o.itemType === t && (n = o.action), this.clearQuickSlot(e, !0), localPlayer.updateQuickSlotInfo(e, t, n);
+            const r = this.getQuickSlotItemElement(e);
+            r.attr("data-item-type", t), r.addClass("in-use"), a ? r.addClass("disabled") : r.removeClass("disabled"), r.prepend(this.createItemString(t, i, "is-quick-slot"))
+        }
+        addItemToFreeQuickSlot(e) {
+            const t = this.getFreeQuickSlots();
+            0 !== t.length && this.setQuickSlot(t[0], e)
+        }
+        clearQuickSlot(e, t = !1) {
+            const a = this.getQuickSlotItemElement(e);
+            if (!a.hasClass("in-use")) return;
+            const i = this.getItemIdInQuickSlot(e);
+            this.removeItemFromQuickSlot(i), localPlayer.updateQuickSlotInfo(e), a.removeClass("in-use"), a.removeClass("disabled"), a.removeAttr("data-item-type"), a.children("li").trigger("remove").remove(), t || localPlayer.queueSoundEffect(u.SfxType.PickUp)
+        }
+        removeItemFromQuickSlot(e, t) {
+            if (void 0 === e) return;
+            const a = game.items[e];
+            a && a.quickSlot && (this.getQuickSlotItemElement(a.quickSlot).children("li").removeAttr("data-item-id").removeData("item-id"), this.setItemQuickslot(a, void 0), t || this.syncItemElements(e), this.onUpdateQuickSlotsOrEquips())
+        }
+        setItemQuickslot(e, t) {
+            multiplayer.isConnected() ? setTimeout(() => {
+                e.isValid() && e.setQuickSlot(localPlayer, t)
+            }, 1) : e.setQuickSlot(localPlayer, t)
+        }
+        updateQuickSlotItem(e) {
+            const t = this.getQuickSlotItemElement(e);
+            if (!t.hasClass("in-use")) return !1;
+            const a = this.getItemIdInQuickSlot(e);
+            if (void 0 !== a) {
+                const i = game.items[a];
+                if (i && itemManager.isInInventory(i) && i.quickSlot === e) return t.removeClass("disabled"), !1
+            }
+            let i = !1;
+            const n = t.getItemType(),
+                o = itemManager.getItemsInContainerByType(localPlayer.inventory, n, !0);
+            if (o.length > 0)
+                for (let n = 0; n < o.length; n++) {
+                    const r = o[n];
+                    if (r && r.id !== a) {
+                        if (!r.quickSlot) return this.setQuickSlot(e, r.id, !0); {
+                            i = !0;
+                            const e = t.children("li").attr("data-item-id", r.id).addClass(this.getItemClass(r));
+                            this.syncItemElements(r.id, e)
+                        }
+                    }
+                }
+            return void 0 !== a ? this.setQuickSlotByItemType(e, n, !i) : i ? t.removeClass("disabled") : t.addClass("disabled"), !1
+        }
+        onUpdateQuickSlotsOrEquips() {
+            game.playing && saveDataGlobal.options.protectedCraftingItems && localPlayer.updateTables()
+        }
+        onSortableItemReceive(e) {
+            if (!e.item || !e.targetContainer) return;
+            const t = e.item,
+                n = t.data("item-id"),
+                o = t.getQuickSlot(),
+                r = parseInt(u.EquipType[t.getEquipSlot()], 10),
+                s = e.initialContainer.data("sortable"),
+                l = e.targetContainer,
+                d = l.getQuickSlot(),
+                p = parseInt(u.EquipType[l.getEquipSlot()], 10),
+                c = l.data("sortable"),
+                m = l.parent().data("container"),
+                h = game.items[n];
+            this.onSortableAction = (() => {
+                switch (c) {
+                    case "quick-slot":
+                        switch (s) {
+                            case "quick-slot":
+                                l.hasClass("in-use") && this.setQuickSlot(o, this.getItemIdInQuickSlot(d))
+                        }
+                        if (void 0 !== n) this.setQuickSlot(d, n);
+                        else {
+                            const e = t.getItemType();
+                            this.clearQuickSlot(t.parent().getQuickSlot()), this.setQuickSlotByItemType(d, e, !0), this.updateQuickSlotItem(d)
+                        }
+                        break;
+                    case "equip-slot":
+                        if (h.isInTradeContainer()) break;
+                        if ("equip-slot" === s && l.hasClass("in-use")) {
+                            const e = this.getItemIdInEquipSlot(p);
+                            if (void 0 !== e) {
+                                const t = !(p !== u.EquipType.Held && p !== u.EquipType.LeftHand && p !== u.EquipType.RightHand || r !== u.EquipType.Held && r !== u.EquipType.LeftHand && r !== u.EquipType.RightHand);
+                                a.default.get(i.ActionType.Equip).execute(localPlayer, game.items[e], r, !0, !!t || void 0)
+                            }
+                        }
+                        a.default.get(i.ActionType.Equip).execute(localPlayer, h, p);
+                        break;
+                    case "inventory":
+                        switch (s) {
+                            case "quick-slot":
+                                this.clearQuickSlot(o);
+                                break;
+                            case "equip-slot":
+                                a.default.get(i.ActionType.Unequip).execute(localPlayer, game.items[n]);
+                                break;
+                            case "container":
+                                h && (h.containedWithin && S.bindingManager.isPressed(u.Bindable.GameItemQuickMoveAll) ? a.default.get(i.ActionType.MoveItem).execute(localPlayer, void 0, h.containedWithin, localPlayer.inventory, h.type) : a.default.get(i.ActionType.MoveItem).execute(localPlayer, h, void 0, localPlayer.inventory));
+                                break;
+                            default:
+                                this.setQuickSlot(d, n)
+                        }
+                        break;
+                    case "container":
+                        switch (s) {
+                            case "inventory":
+                            case "container":
+                                h && m && (h.containedWithin && S.bindingManager.isPressed(u.Bindable.GameItemQuickMoveAll) ? a.default.get(i.ActionType.MoveItem).execute(localPlayer, void 0, h.containedWithin, m, h.type) : a.default.get(i.ActionType.MoveItem).execute(localPlayer, h, void 0, m))
+                        }
+                        break;
+                    case void 0:
+                        h && !h.isInTradeContainer() ? a.default.get(i.ActionType.Drop).execute(localPlayer, h, S.bindingManager.isPressed(u.Bindable.GameItemDropAll)) : "quick-slot" === s && this.clearQuickSlot(o)
+                }
+                this.blurInputs()
+            })
+        }
+        getEquipSlotItemElement(e) {
+            return this.elementDialogEquipmentContainer.children(`[data-equip-slot="${u.EquipType[e].toString()}"]`).first()
+        }
+        getItemIdInEquipSlot(e) {
+            const t = this.getEquipSlotItemElement(e);
+            if (t.hasClass("in-use")) return t.children("li").data("item-id")
+        }
+        setEquipSlot(e, t, a = !1) {
+            if (void 0 === t) return;
+            const i = game.items[t];
+            if (!i) return;
+            const n = this.getEquipSlotItemElement(e);
+            n.addClass("in-use"), n.prepend(this.createItemString(i.type, i)), this.syncItemElements(t), !a && this.isVisible() && this.openDialog(this.elementDialogEquipment), this.onUpdateQuickSlotsOrEquips()
+        }
+        removeItemFromEquipSlot(e) {
+            if (!e) return;
+            const t = this.getItemIdInEquipSlot(e);
+            if (void 0 === t) return;
+            const a = this.getEquipSlotItemElement(e);
+            a.hasClass("in-use") && (a.removeClass("in-use"), a.children("li").trigger("remove").remove(), this.syncItemElements(t), this.onUpdateQuickSlotsOrEquips())
+        }
+        sortSkills(e) {
+            return e.sort((e, t) => new f.default(m.Dictionary.Skill, e).getString().localeCompare(new f.default(m.Dictionary.Skill, t).getString()))
+        }
+        updateCraftingDialog(e, t) {
+            this.craftableItemTypes && this.nonCraftableItemTypes && A.default.equals(this.craftableItemTypes, e) && A.default.equals(this.nonCraftableItemTypes, t) || (this.craftableItemTypes = e, this.nonCraftableItemTypes = t, this.onUpdateContainer(this.elementDialogCraftingContainer, !1))
+        }
+        updateDismantleTab(e) {
+            let t = "";
+            for (const a in e) t += `<li class="tooltip is-dismantle item item-${a}" data-item-type="${a}"></li>`;
+            this.elementDialogDismantleContainer.html(t), this.onFilterInput(this.elementDialogDismantleContainer)
+        }
+        createCraftItemElements(e) {
+            let t = "";
+            const a = this.craftableItemTypes ? this.craftableItemTypes.slice() : void 0,
+                i = this.nonCraftableItemTypes ? this.nonCraftableItemTypes.slice() : void 0;
+            if (a && a.sort((t, a) => this.determineSort(e, void 0, t, void 0, a)), i && i.sort((t, a) => this.determineSort(e, void 0, t, void 0, a)), e.sortType === u.SortType.Category || e.sortType === u.SortType.Skill) {
+                const n = [];
+                switch (e.sortType) {
+                    case u.SortType.Category:
+                        const t = G.default.values(u.ItemTypeGroup).filter(e => e !== u.ItemTypeGroup.Invalid && e !== u.ItemTypeGroup.Last).collect(R.default.toArray);
+                        t.sort((e, t) => new f.default(m.Dictionary.ItemGroup, e).getString().localeCompare(new f.default(m.Dictionary.ItemGroup, t).getString())), e.reverse && t.reverse();
+                        for (const e of t) {
+                            const t = (t, a) => !!itemManager.isInGroup(t, e) || e === u.ItemTypeGroup.Other && !itemManager.getGroups(t).collect(R.default.first()),
+                                a = c.itemGroupDescriptions[e];
+                            a && n.push({
+                                name: f.default.nameOf(m.Dictionary.ItemGroup, e, !1).inContext(3).getString(),
+                                matcher: t
+                            })
+                        }
+                        break;
+                    case u.SortType.Skill:
+                        let a = G.default.values(u.SkillType).collect(R.default.toArray);
+                        a = this.sortSkills(a), e.reverse && a.reverse();
+                        for (const e of a) {
+                            const t = (t, a) => {
+                                const i = a.recipe;
+                                return i ? i.skill === e : -1 === e
+                            };
+                            n.push({
+                                name: (-1 === e ? f.default.message(h.default.NotAvailable) : new f.default(m.Dictionary.Skill, e).inContext(3)).getString(),
+                                matcher: t
+                            })
+                        }
+                }
+                for (const e of n) {
+                    let n = !1;
+                    const o = () => {
+                        n || (n = !0, t += `<div data-section="${e.name}">${e.name}</div>`)
+                    };
+                    if (a)
+                        for (let i = 0; i < a.length; i++) {
+                            const n = a[i],
+                                r = c.itemDescriptions[n];
+                            if (r && e.matcher(n, r)) {
+                                o();
+                                const e = !game.isChallenge && game.crafted[n];
+                                t += this.createItemString(n, void 0, e && e.newUnlock ? "highlighted" : "")
+                            }
+                        }
+                    if (i)
+                        for (let a = 0; a < i.length; a++) {
+                            const n = i[a],
+                                r = c.itemDescriptions[n];
+                            if (r && e.matcher(n, r)) {
+                                o();
+                                const e = !game.isChallenge && game.crafted[n];
+                                t += this.createItemString(n, void 0, e && e.newUnlock ? "highlighted non-craftable" : "non-craftable")
+                            }
+                        }
+                    n && (t += '<div class="clear-fix"></div>')
+                }
+            } else {
+                if (a)
+                    for (const e of a) {
+                        const a = !game.isChallenge && game.crafted[e];
+                        t += this.createItemString(e, void 0, a && a.newUnlock ? "highlighted" : "")
+                    }
+                if (t += '<div class="clear-fix clear-fix-bordered"></div>', i)
+                    for (const e of i) {
+                        const a = !game.isChallenge && game.crafted[e];
+                        t += this.createItemString(e, void 0, a && a.newUnlock ? "highlighted non-craftable" : "non-craftable")
+                    }
+            }
+            const n = this.elementDialogCraftingContainer.get(0);
+            n.innerHTML = t, this.onFilterInput(this.elementDialogCraftingContainer)
+        }
+        updateItem(e) {
+            this.syncItemElements(e.id);
+            const t = e.containedWithin;
+            void 0 !== t && void 0 !== t.weightCapacity && this.refreshContainerName(t)
+        }
+        onMove() {
+            this.hideActionsMenu(), this.closeStaticContainers()
+        }
+        refreshWorldTooltips() {}
+        getDialogElementForContainer(e) {
+            for (let t = 0; t < this.elementContainerDialogs.length; t++) {
+                const a = this.elementContainerDialogs[t];
+                if (a.data("container") === e) return a
+            }
+        }
+        isContainerOpen(e) {
+            return void 0 !== this.getDialogElementForContainer(e)
+        }
+        openContainer(e, t) {
+            let a = this.getDialogElementForContainer(e);
+            if (void 0 !== a) return void(void 0 !== t && (a.data("container-name", t), this.refreshContainerName(e)));
+            const i = $("#container").clone().removeAttr("id");
+            let n;
+            i.appendTo(this.elementDialogs);
+            const o = itemManager.getContainerReference(e);
+            o && o.type === d.ContainerReferenceType.Item && (n = o.id), (a = i.dialog(this.setupDialog(u.DialogId.Container, n)).data("container", e).data("container-name", t).data("cloned", i)).parent().hover(() => {
+                !this.isSorting() && n && this.highlightItemElementByItemId(n, !0)
+            }, () => {
+                n && this.highlightItemElementByItemId(n, !1, !0)
+            }), e.containerType === d.ContainerType.Trade && (a.parent().find(".grab-all").remove(), a.find(".container").addClass("is-npc")), this.elementContainerDialogs.push(a), a.find(".filter").val("");
+            const r = a.find(".container").addClass("is-container-container");
+            for (const t of itemManager.getOrderedContainerItems(e)) e.containerType === d.ContainerType.Trade && t.isEquipped() || this.addItemToContainer(t, e, !0, !0);
+            this.onAddItemsToContainer(r, a, !1), this.bindSortable(r), this.updateActiveContainer(), this.onOpenDialog(a), this.clampDialogs()
+        }
+        closeContainer(e) {
+            this.closeContainerDialog(this.getDialogElementForContainer(e))
+        }
+        closeContainerDialog(e) {
+            if (void 0 === e) return;
+            const t = e.data("container");
+            if (t) {
+                const t = e.find(".container");
+                this.sortableElementTargetContainer && this.sortableElementTargetContainer.get(0) === t.get(0) && this.cancelSorting();
+                const a = this.sortableElement,
+                    i = () => {
+                        this.cancelSorting()
+                    };
+                e.find(".item").each(function() {
+                    a && this === a && i(), $(this).trigger("remove").remove()
+                })
+            }
+            for (let t = 0; t < this.elementContainerDialogs.length; t++) {
+                const a = this.elementContainerDialogs[t];
+                a.get(0) === e.get(0) && (this.elementContainerDialogs.splice(t, 1), this.updateActiveContainer())
+            }
+            e.dialog("close").remove()
+        }
+        closeStaticContainers() {
+            for (let e = 0; e < this.elementContainerDialogs.length; e++) {
+                const t = this.elementContainerDialogs[e].data("container");
+                if (!itemManager.isInInventory(t)) return this.closeContainer(t), void this.closeStaticContainers()
+            }
+        }
+        closeAllContainers() {
+            return this.elementContainerDialogs.length > 0 && (this.closeContainerDialog(this.elementContainerDialogs[0]), this.closeAllContainers(), !0)
+        }
+        updateContainerName(e) {
+            const t = e.data("container");
+            if (t) {
+                let a = e.data("container-name");
+                if (a) {
+                    if (t.containerType === d.ContainerType.Trade) {
+                        const e = itemManager.getNPCFromInventoryContainer(t);
+                        if (void 0 !== e) {
+                            const t = e.getProperty(s.Property.Credit);
+                            if (void 0 !== t) {
+                                const e = t.get(localPlayer.identifier) || 0;
+                                a += ` [${f.default.ui(y.default.GameItemBarterCredit).getString()}${e}]`
+                            }
+                        }
+                    }
+                    if (void 0 !== t.weightCapacity) {
+                        a += ` (${B.default.roundNumber(itemManager.computeContainerWeight(t),1)}/${t.weightCapacity}`;
+                        const e = itemManager.getContainerReference(t, void 0, !1);
+                        if (e.type === d.ContainerReferenceType.Item) {
+                            const e = t;
+                            e.legendary && e.legendary.type === u.LegendaryType.WeightCapacity && (a += ` +${e.legendary.value}`)
+                        }
+                        a += ")"
+                    }
+                    e.dialog("option", "title", a)
+                }
+                t.containedWithin && t.containedWithin !== localPlayer.inventory && this.refreshContainerName(t.containedWithin)
+            }
+        }
+        updateActiveContainer() {
+            this.elementContainerDialogs.length > 0 ? (this.activeContainer = this.elementContainerDialogs[this.elementContainerDialogs.length - 1].data("container"), this.multipleContainersOpened = this.elementContainerDialogs.length > 1) : this.activeContainer = void 0
+        }
+        hideContextMenu() {
+            return !(!$(document).contextmenu("instance") || !$(document).contextmenu("isOpen")) && ($(document).contextmenu("close"), !0)
+        }
+        hideActionsMenu() {
+            this.actionsMenuOpen && (this.hideContextMenu(), this.elementActions.quickHide(), this.actionsMenuOpen = !1)
+        }
+        toggleActionsMenu(e = !1) {
+            this.actionsMenuOpen ? this.hideActionsMenu() : this.showActionsMenu(e), this.actionsMenuCentered = e
+        }
+        showActionsMenu(e = !1, t = !0, a) {
+            if (localPlayer.isResting()) return;
+            const n = [],
+                o = localPlayer.getFacingTile();
+            if (!o) return;
+            const r = localPlayer.getTile();
+            if (!o) return;
+            t && (e || this.actionsMenuCentered ? (this.elementActions.css("left", ui.getWidth() / 2), this.elementActions.css("top", ui.getHeight() / 2)) : (this.elementActions.css("left", this.mouseX), this.elementActions.css("top", this.mouseY))), this.elementActions.quickShow(), this.actionsMenuOpen = !0;
+            const s = C.default[L.default.getType(o)];
+            if (void 0 !== o.doodad && o.doodad.canPickup(localPlayer) && n.push({
+                    action: "CollectObjectWithHands",
+                    text: f.default.message(h.default.CollectObjectWithHands).getString(),
+                    keybind: 0
+                }), localPlayer.isFacingCarvableTile() && void 0 !== localPlayer.getDefaultCarveTool() && n.push({
+                    action: "CarveWithTool",
+                    text: f.default.message(h.default.CarveWithTool).getString(),
+                    keybind: 1
+                }), void 0 !== o.containedItems) {
+                const e = o.containedItems.length;
+                e > 0 && n.push({
+                    action: "PickUpItem",
+                    text: f.default.message(h.default.PickupItem).getString(),
+                    keybind: 2
+                }), e > 1 && n.push({
+                    action: "PickUpAllItems",
+                    text: f.default.message(h.default.PickupAllItems).getString(),
+                    keybind: 3
+                })
+            }
+            void 0 !== o.doodad && o.doodad.canHarvest() ? n.push({
+                action: "HarvestWithHands",
+                text: f.default.message(h.default.HarvestWithHands).getString(),
+                keybind: 4
+            }) : s && s.gather || void 0 !== o.doodad && o.doodad.isGatherable() || tileEventManager.canGather(o) ? n.push({
+                action: "GatherWithHands",
+                text: f.default.message(h.default.GatherWithHands).getString(),
+                keybind: 4
+            }) : !s || !s.passable || s.water || void 0 !== o.doodad || void 0 !== o.containedItems && 0 !== o.containedItems.length || void 0 !== o.corpses || void 0 !== o.events || n.push({
+                action: "DigWithHands",
+                text: f.default.message(h.default.DigWithHands).getString(),
+                keybind: 4
+            });
+            const l = o.doodad;
+            l && (l.type === u.DoodadType.WoodenDoor || l.type === u.DoodadType.WoodenGate ? n.push({
+                action: "OpenDoor",
+                text: f.default.message(h.default.OpenDoor).getString(),
+                keybind: 5
+            }) : l.type !== u.DoodadType.WoodenDoorOpen && l.type !== u.DoodadType.WoodenGateOpen || n.push({
+                action: "CloseDoor",
+                text: f.default.message(h.default.CloseDoor).getString(),
+                keybind: 5
+            }));
+            const d = localPlayer.getTile(),
+                p = C.default[L.default.getType(d)];
+            if (p && p.passable) {
+                const e = d.doodad && d.doodad.getActions(),
+                    t = e && e.some(e => e === i.ActionType.Rest || e === i.ActionType.Sleep);
+                t || n.push({
+                    action: "RestOnGround",
+                    text: f.default.message(h.default.RestOnGround).getString(),
+                    keybind: 6
+                })
+            }
+            localPlayer.canJump() && n.push({
+                action: "Jump",
+                text: f.default.message(h.default.Jump).getString(),
+                keybind: 7
+            });
+            const c = o.creature;
+            if (c && (c.isTamed() ? localPlayer.hasTamedCreature(c) && n.push({
+                    action: "Release",
+                    text: f.default.message(h.default.Release).getString(),
+                    keybind: 8
+                }) : n.push({
+                    action: "Tame",
+                    text: f.default.message(h.default.Tame).getString(),
+                    keybind: 8
+                })), c && void 0 !== c.hitchedTo) n.push({
+                action: "Unhitch",
+                text: f.default.message(h.default.Unhitch).getString(),
+                keybind: 9
+            });
+            else if (c) {
+                const e = [
+                    [c.x + 1, c.y],
+                    [c.x - 1, c.y],
+                    [c.x, c.y + 1],
+                    [c.x, c.y - 1]
+                ];
+                for (let t = 0; t < e.length; t++) {
+                    const a = game.getTile(e[t][0], e[t][1], c.z);
+                    if (a && a.doodad) {
+                        const e = a.doodad.description();
+                        if (e && e.group === u.DoodadTypeGroup.Hitch) {
+                            n.push({
+                                action: "Hitch",
+                                text: f.default.message(h.default.Hitch).getString(),
+                                keybind: 9
+                            });
+                            break
+                        }
+                    }
+                }
+            }
+            s && (s.water || s.shallowWater || L.default.getType(o) === u.TerrainType.Snow) && n.push({
+                action: "Drink",
+                text: f.default.message(h.default.Drink).getString(),
+                keybind: 10
+            }), void 0 !== o.creature && o.creature.isTamed() ? n.push({
+                action: "Rename",
+                text: new f.default(m.Dictionary.Action, i.ActionType.Rename).getString(),
+                data: o.creature,
+                keybind: 11
+            }) : void 0 !== o.doodad && n.push({
+                action: "Rename",
+                text: new f.default(m.Dictionary.Action, i.ActionType.Rename).getString(),
+                data: o.doodad,
+                keybind: 11
+            });
+            let y = 12;
+            if (void 0 !== o.npc) {
+                const e = o.npc.getActions();
+                if (void 0 !== e)
+                    for (const t of e) n.push({
+                        action: t.toString(),
+                        text: new f.default(m.Dictionary.Action, t).getString(),
+                        data: o.npc,
+                        keybind: y++
+                    });
+                o.npc.isHostile() || n.push({
+                    action: "Attack",
+                    text: f.default.message(h.default.Attack).getString(),
+                    keybind: y++
+                })
+            } else {
+                if (void 0 !== o.doodad) {
+                    const e = o.doodad.getActions();
+                    if (void 0 !== e)
+                        for (const t of e) n.push({
+                            action: t.toString(),
+                            text: new f.default(m.Dictionary.Action, t).getString(),
+                            data: o.doodad,
+                            keybind: y++
+                        })
+                }
+                if (void 0 !== r.doodad) {
+                    const e = r.doodad.getActions();
+                    if (void 0 !== e)
+                        for (const t of e) n.push({
+                            action: t.toString(),
+                            text: new f.default(m.Dictionary.Action, t).getString(),
+                            data: r.doodad,
+                            keybind: y++
+                        })
+                }
+            }
+            const g = {
+                actions: n
+            };
+            a || ui.playClickSound(), $(document).contextmenu("open", this.elementActions, g), $(".ui-contextmenu").removeAttr("tabindex")
+        }
+        onCopySelectedText() {
+            document.execCommand("copy"), window.getSelection().removeAllRanges()
+        }
+        onFilterInput(e) {
+            const t = 2 === e.length || e === this.elementDialogDismantleContainer || e === this.elementDialogCraftingContainer ? e.parent().parent().parent().find(".filter") : e.parent().parent().find(".filter"),
+                a = t.val(),
+                i = e.children();
+            if (a.length > 0) t.addClass("filtering"), t.parent().addClass("filtered");
+            else {
+                if (!t.hasClass("filtering")) return;
+                t.removeClass("filtering"), t.parent().removeClass("filtered")
+            }
+            let n = !1;
+            if ($.each(i, function() {
+                    const e = $(this).data("section");
+                    void 0 !== e && (n = !0);
+                    const t = $(this).getItemType();
+                    if (!t) return;
+                    const i = c.itemDescriptions[t];
+                    if (!i) return;
+                    const o = [f.default.nameOf(m.Dictionary.Item, t, !1).getString()];
+                    for (const e of itemManager.getGroups(t)) o.push(new f.default(m.Dictionary.ItemGroup, e).getString());
+                    if (i.recipe && void 0 !== i.recipe.skill && o.push(new f.default(m.Dictionary.Skill, i.recipe.skill).inContext(3).getString()), i.dismantle && i.dismantle.items)
+                        for (const [e] of i.dismantle.items) o.push(new f.default(m.Dictionary.Item, e).getString());
+                    const r = o.reduce((e, t) => e || t.toLocaleLowerCase().indexOf(a.toLocaleLowerCase()) > -1, !1);
+                    $(this).toggle(r)
+                }), n) $.each(i, function() {
+                const e = $(this).data("section");
+                if (void 0 === e) return;
+                let t = !1,
+                    a = $(this).next();
+                for (; a.is("li");) {
+                    if (a.isVisible()) {
+                        t = !0, a = a.nextAll(".clear-fix:first");
+                        break
+                    }
+                    a = a.next()
+                }
+                $(this).add(a).toggle(t)
+            });
+            else if (e.is("#container-crafting")) {
+                const t = e.find(".clear-fix-bordered"),
+                    a = t.prevAll(":not([style*='display: none'])"),
+                    i = t.nextAll(":not([style*='display: none'])");
+                t.toggle(a.length > 0 && i.length > 0)
+            }
+        }
+        showSortContextMenu(e, t, a) {
+            const i = [];
+            i.push({
+                action: "SortName",
+                text: f.default.message(h.default.Name).getString(),
+                data: {
+                    sortType: u.SortType.Name,
+                    container: t,
+                    messageType: a
+                }
+            }), a === h.default.Crafts ? (i.push({
+                action: "SortSkill",
+                text: f.default.message(h.default.Skill).getString(),
+                data: {
+                    sortType: u.SortType.Skill,
+                    container: t,
+                    messageType: a
+                }
+            }), i.push({
+                action: "SortCategory",
+                text: f.default.message(h.default.Category).getString(),
+                data: {
+                    sortType: u.SortType.Category,
+                    container: t,
+                    messageType: a
+                }
+            }), i.push({
+                action: "SortUnlockedTime",
+                text: f.default.message(h.default.UnlockedTime).getString(),
+                data: {
+                    sortType: u.SortType.DiscoveredTime,
+                    container: t,
+                    messageType: a
+                }
+            })) : (i.push({
+                action: "SortDecay",
+                text: f.default.message(h.default.Decay).getString(),
+                data: {
+                    sortType: u.SortType.Decay,
+                    container: t,
+                    messageType: a
+                }
+            }), i.push({
+                action: "SortDurability",
+                text: f.default.message(h.default.Durability).getString(),
+                data: {
+                    sortType: u.SortType.Durability,
+                    container: t,
+                    messageType: a
+                }
+            }), i.push({
+                action: "SortGroup",
+                text: f.default.message(h.default.Group).getString(),
+                data: {
+                    sortType: u.SortType.Group,
+                    container: t,
+                    messageType: a
+                }
+            }), i.push({
+                action: "SortRecent",
+                text: f.default.message(h.default.Recent).getString(),
+                data: {
+                    sortType: u.SortType.Recent,
+                    container: t,
+                    messageType: a
+                }
+            }), i.push({
+                action: "SortQuality",
+                text: f.default.message(h.default.Quality).getString(),
+                data: {
+                    sortType: u.SortType.Quality,
+                    container: t,
+                    messageType: a
+                }
+            }), i.push({
+                action: "SortWeight",
+                text: f.default.message(h.default.Weight).getString(),
+                data: {
+                    sortType: u.SortType.Weight,
+                    container: t,
+                    messageType: a
+                }
+            }), i.push({
+                action: "SortBest",
+                text: f.default.message(h.default.Best).getString(),
+                data: {
+                    sortType: u.SortType.Best,
+                    container: t,
+                    messageType: a
+                }
+            }));
+            const n = {
+                actions: i
+            };
+            $(document).contextmenu("open", e, n), $(".ui-contextmenu").removeAttr("tabindex")
+        }
+        getContainerId(e) {
+            const t = e.parent(),
+                a = t.data("container");
+            return a ? JSON.stringify(itemManager.getContainerReference(a)) : t.attr("id")
+        }
+        sortItems(e, t, a, i = !0) {
+            const n = this.getContainerId(e);
+            let o = localPlayer.containerSortInfo[n];
+            if (o && o.sortType === t ? i && void 0 !== a && (o.reverse = !o.reverse) : (o = localPlayer.containerSortInfo[n] = {
+                    sortType: t
+                }, t !== u.SortType.Quality && t !== u.SortType.Decay || (o.reverse = !0)), e === this.elementDialogCraftingContainer) this.createCraftItemElements(o);
+            else {
+                let t;
+                const a = e.children(".clear-fix");
+                if (0 === a.length) t = [e.children()];
+                else {
+                    if (1 !== a.length) return;
+                    t = [a.prevAll(), a.nextAll()]
+                }
+                for (let i = 0; i < t.length; i++) {
+                    let n = t[i];
+                    this.sortItemElements(n, o), n = n.detach(), 2 === t.length ? 0 === i ? n.insertBefore(a) : n.insertAfter(a) : n.appendTo(e)
+                }
+                0 === a.length && this.saveItemOrder(e)
+            }
+            if (void 0 === a) return;
+            let r = h.default.None;
+            switch (t) {
+                case u.SortType.Name:
+                    r = h.default.SortedByName;
+                    break;
+                case u.SortType.Group:
+                    r = h.default.SortedByGroup;
+                    break;
+                case u.SortType.Weight:
+                    r = h.default.SortedByWeight;
+                    break;
+                case u.SortType.Recent:
+                    r = h.default.SortedByRecent;
+                    break;
+                case u.SortType.Skill:
+                    r = h.default.SortedBySkill;
+                    break;
+                case u.SortType.Decay:
+                    r = h.default.SortedByDecay;
+                    break;
+                case u.SortType.Quality:
+                    r = h.default.SortedByQuality;
+                    break;
+                case u.SortType.Durability:
+                    r = h.default.SortedByDurability;
+                    break;
+                case u.SortType.Category:
+                    r = h.default.SortedByCategory;
+                    break;
+                case u.SortType.DiscoveredTime:
+                    r = h.default.SortedByUnlockedTime;
+                    break;
+                case u.SortType.Best:
+                    r = h.default.SortedByBest
+            }
+            localPlayer.messages.send(r, f.default.message(a))
+        }
+        sortItemElements(e, t) {
+            e.sort((e, a) => {
+                const i = $(e).getItemType(),
+                    n = $(a).getItemType();
+                return this.determineSort(t, $(e).data("item-id"), i, $(a).data("item-id"), n)
+            })
+        }
+        updateInventorySort() {
+            this.onUpdateContainer(this.elementDialogInventoryContainer, !0)
+        }
+        onUpdateContainer(e, t) {
+            this.updateSort(e, t), this.onFilterInput(e)
+        }
+        updateSort(e, t) {
+            if (t && !saveDataGlobal.options.keepSortActive) return;
+            const a = this.getContainerId(e);
+            let i;
+            const n = localPlayer.containerSortInfo[a];
+            i = n && void 0 !== n.sortType ? n.sortType : e === this.elementDialogCraftingContainer ? u.SortType.Name : u.SortType.Recent, this.sortItems(e, i, void 0, !1)
+        }
+        isContainerDialogOver(e, t) {
+            for (let a = 0; a < this.elementContainerDialogs.length; a++) {
+                const i = this.elementContainerDialogs[a],
+                    n = i.parent().offset().left,
+                    o = i.parent().offset().top,
+                    r = i.parent().width(),
+                    s = i.parent().height();
+                if (!(e < n || t < o) && !(e > n + r || t > o + s)) return !0
+            }
+            return !1
+        }
+        onUpdateDirection() {
+            this.actionsMenuOpen ? (this.hideActionsMenu(), this.showActionsMenu(!1, !0, !0)) : this.contextMenuOpen && this.contextMenuTarget && this.showItemContextMenu(this.contextMenuTarget)
+        }
+        onBindLoop(e, t) {
+            function n() {
+                return !1 !== t
+            }
+            let o;
+            document.activeElement && "INPUT" === document.activeElement.tagName && document.activeElement.matches(".ui-dialog input") && !document.activeElement.classList.contains("can-focus") && this.element[0].focus(), this.mouseX = e.mouseX, this.mouseY = e.mouseY, t = t || void 0 !== this.isCurrentlySorting || this.isOverlayVisible();
+            const r = () => (void 0 === o && (o = this.getHoveredItem(e)), o);
+            if (e.wasPressed(u.Bindable.GameItemMenu) && !n() && r() && (this.showItemContextMenu($(r())), t = u.Bindable.GameItemMenu, P.sleep(50).then(() => {
+                    e.removePressState(u.Bindable.GameItemMenu)
+                })), !e.wasPressed(u.Bindable.GameItemQuickMove) && !e.wasPressed(u.Bindable.GameItemQuickMoveAll) || n())(e.wasReleased(u.Bindable.GameItemQuickMove) || e.wasReleased(u.Bindable.GameItemQuickMoveAll)) && (this.isQuickmoving = !1);
+            else if (r()) {
+                const n = game.items[$(r()).data("item-id")];
+                if (n) {
+                    const o = e.wasPressed(u.Bindable.GameItemQuickMoveAll);
+                    let r;
+                    if (t = o ? u.Bindable.GameItemQuickMoveAll : u.Bindable.GameItemQuickMove, n.containedWithin === localPlayer.inventory)
+                        if (this.activeContainer) r = this.activeContainer;
+                        else {
+                            const e = localPlayer.getFacingTile().doodad;
+                            e && itemManager.isContainer(e) && (r = e)
+                        } else r = localPlayer.inventory;
+                    r && (o ? a.default.get(i.ActionType.MoveItem).execute(localPlayer, void 0, n.containedWithin, r, n.type) : a.default.get(i.ActionType.MoveItem).execute(localPlayer, n, void 0, r))
+                }
+                this.isQuickmoving = !0
+            }
+            if (e.wasPressed(u.Bindable.GameItemMove) && !n() && r() && (this.isCurrentlySorting = r(), this.runSortableAction($([r().parentElement]), "mouseDown", {
+                    type: "mousedown",
+                    which: 1,
+                    target: r(),
+                    pageX: e.mouseX,
+                    pageY: e.mouseY,
+                    stopPropagation() {},
+                    preventDefault() {}
+                }), t = u.Bindable.GameItemMove), this.shouldCancelSorting && (this.shouldCancelSorting = !1, e.removePressState(u.Bindable.GameItemMove)), e.wasReleased(u.Bindable.GameItemMove) && this.isCurrentlySorting && (this.runSortableAction($([this.isCurrentlySorting.parentElement]), "mouseUp", {
+                    type: "mouseup",
+                    which: 1,
+                    target: this.isCurrentlySorting,
+                    pageX: e.mouseX,
+                    pageY: e.mouseY,
+                    stopPropagation() {},
+                    preventDefault() {}
+                }), this.isCurrentlySorting = void 0), e.wasPressed(u.Bindable.GameItemEquipToggle) && !n() && r()) {
+                const e = game.items[$(r()).data("item-id")];
+                if (e) {
+                    if (e.isEquipped()) a.default.get(i.ActionType.Unequip).execute(localPlayer, e);
+                    else if (!e.isInTradeContainer()) {
+                        const t = c.itemDescriptions[e.type];
+                        t && t.equip && a.default.get(i.ActionType.Equip).execute(localPlayer, e, t.equip)
+                    }
+                    t = u.Bindable.GameItemEquipToggle
+                }
+            }
+            if (this.contextMenuOpen)
+                for (let a = 1; a < 25; a++) {
+                    const i = u.Bindable[`GameContextMenu${a}`];
+                    e.wasPressed(i) && !n() && (this.pressHotKey(a - 1) && (t = i), this.canUseQuickslot = !1)
+                }
+            for (let a = 1; a < 10; a++) {
+                const i = u.Bindable[`GameQuickSlotToggle${a}`],
+                    o = e.wasPressed(i);
+                this.contextMenuOpen || !o && !e.isDown(i) || n() || !r() || this.quickSlotToggleBindPressed(e, r(), a, i, o) && (t = i), e.wasReleased(i) && (this.canUseQuickslot = !0)
+            }
+            for (let a = 1; a < 10; a++) {
+                const i = u.Bindable[`GameQuickSlot${a}`],
+                    o = e.wasPressed(i);
+                this.contextMenuOpen || !(o || !this.hasDelay() && e.isDown(i)) || n() || this.quickSlotBindPressed(e, a, i) && (t = i), e.wasReleased(i) && (this.canUseQuickslot = !0), (this.contextMenuOpen || this.isOverlayVisible() || !this.canUseQuickslot) && e.removePressState(i)
+            }
+            if (e.wasPressed(u.Bindable.GameQuickSlotClear) && !n()) {
+                let a = !1;
+                if ($("#quick-slots > .quick-slot").each((t, i) => {
+                        const n = i;
+                        return !e.isMouseWithin(n) || (this.clearQuickSlot(+n.dataset.quickSlot), a = !0, !1)
+                    }), !a && r()) {
+                    const e = game.items[$(r()).data("item-id")];
+                    e && e.quickSlot && (this.clearQuickSlot(e.quickSlot, !0), a = !0)
+                }
+                a && (t = u.Bindable.GameQuickSlotClear)
+            }
+            if ((e.wasPressed(u.Bindable.GameItemDrop) || e.wasPressed(u.Bindable.GameItemDropAll)) && !n()) {
+                const n = r() ? game.items[$(r()).data("item-id")] : void 0;
+                if (n && !n.isInTradeContainer()) {
+                    const o = e.wasPressed(u.Bindable.GameItemDropAll);
+                    a.default.get(i.ActionType.Drop).execute(localPlayer, n, o), t = o ? u.Bindable.GameItemDropAll : u.Bindable.GameItemDrop
+                }
+            }
+            return e.wasPressed(u.Bindable.MenuCancel) && !n() && this.contextMenuOpen && (t = u.Bindable.MenuCancel), e.wasPressed(u.Bindable.DialogCloseAll) && !n() && this.closeAllDialogs() && (t = u.Bindable.DialogCloseAll), !e.wasPressed(u.Bindable.GameMoreInformation) && !e.wasReleased(u.Bindable.GameMoreInformation) || n() || ui.tooltipRefresh(), e.wasPressed(u.Bindable.DialogDismantle) && !n() && (this.toggleCraftingTab("dismantle"), t = u.Bindable.DialogDismantle), e.wasPressed(u.Bindable.GameHandToggleLeft) && !n() && (this.changeEquipmentOption("leftHand"), t = u.Bindable.GameHandToggleLeft), e.wasPressed(u.Bindable.GameHandToggleRight) && !n() && (this.changeEquipmentOption("rightHand"), t = u.Bindable.GameHandToggleRight), !this.contextMenuOpen || !t && !e.isDown("Mouse0") || e.isDown(u.Bindable.GameActions) || e.isDown(u.Bindable.GameItemMenu) || e.isMouseWithin(document.getElementsByClassName("ui-contextmenu")[0], !1) || (this.hideActionsMenu(), this.hideContextMenu()), t
+        }
+        additionalRequirements(e, t, a) {
+            const i = c.itemDescriptions[e];
+            let n = `<strong>${f.default.message(h.default.LabelAdditionalRequirements).getString()}</strong> `;
+            const o = itemManager.hasAdditionalRequirements(localPlayer, e, void 0, void 0, a);
+            if ((t.requiresFire || a && i && i.repairAndDisassemblyRequiresFire) && (o.fireRequirementMet || (n += '<span class="recipe-missing-items">'), n += f.default.message(h.default.FireSource).getString(), o.fireRequirementMet || (n += "</span>")), t.requiredDoodad) {
+                (t.requiresFire || a && i && i.repairAndDisassemblyRequiresFire) && (n += ", "), o.doodadRequirementMet || (n += '<span class="recipe-missing-items">');
+                const e = doodadManager.isDoodadTypeGroup(t.requiredDoodad);
+                n += f.default.nameOf(e ? m.Dictionary.DoodadGroup : m.Dictionary.ItemGroup, t.requiredDoodad).inContext(3).getString(), o.doodadRequirementMet || (n += "</span>")
+            }
+            return n
+        }
+        runAction(e, t, o) {
+            let s, l, d, p, m;
+            if (void 0 !== e && (d = game.items[e]) && (s = d.type, l = d.quickSlot), t.data && t.data.facingContainer) {
+                const e = localPlayer.getFacingTile().doodad;
+                e && (m = e)
+            }
+            switch (t.action) {
+                case "Attack":
+                    a.default.get(i.ActionType.Attack).execute(localPlayer);
+                    break;
+                case "CollectObjectWithHands":
+                    a.default.get(i.ActionType.Pickup).execute(localPlayer, void 0);
+                    break;
+                case "CarveWithTool":
+                    const o = localPlayer.getDefaultCarveTool();
+                    o && a.default.get(i.ActionType.Carve).execute(localPlayer, o);
+                    break;
+                case "PickUpItem":
+                    a.default.get(i.ActionType.PickupItem).execute(localPlayer);
+                    break;
+                case "PickUpAllItems":
+                    a.default.get(i.ActionType.PickupAllItems).execute(localPlayer);
+                    break;
+                case "OpenDoor":
+                    a.default.get(i.ActionType.OpenDoor).execute(localPlayer);
+                    break;
+                case "CloseDoor":
+                    a.default.get(i.ActionType.CloseDoor).execute(localPlayer);
+                    break;
+                case "Drink":
+                    a.default.get(i.ActionType.DrinkInFront).execute(localPlayer);
+                    break;
+                case "GatherWithHands":
+                    this.confirmAction(i.ActionType.Gather, [void 0, !0], !1);
+                    break;
+                case "HarvestWithHands":
+                    this.confirmAction(i.ActionType.Harvest, [void 0, !0], !1);
+                    break;
+                case "DigWithHands":
+                    a.default.get(i.ActionType.Dig).execute(localPlayer);
+                    break;
+                case "RestOnGround":
+                    a.default.get(i.ActionType.Rest).execute(localPlayer);
+                    break;
+                case "Jump":
+                    a.default.get(i.ActionType.Jump).execute(localPlayer);
+                    break;
+                case "Tame":
+                    a.default.get(i.ActionType.Tame).execute(localPlayer);
+                    break;
+                case "Release":
+                    const h = localPlayer.getFacingTile();
+                    if (h && (p = h.creature)) {
+                        const e = p.getName();
+                        newui.interrupt(() => f.default.ui(y.default.GameInterruptReleaseCreature).get(e)).withDescription(() => f.default.ui(y.default.GameInterruptReleaseCreatureDescription).get(e)).withConfirmation().then(e => {
+                            e && a.default.get(i.ActionType.Release).execute(localPlayer)
+                        })
+                    }
+                    break;
+                case "Use":
+                    if (d) {
+                        const e = t.data.actionType;
+                        this.confirmAction(e, [d, e])
+                    }
+                    break;
+                case "EquipLeftHand":
+                    if (d && s) {
+                        const e = c.itemDescriptions[s];
+                        e && e.equip && a.default.get(i.ActionType.Equip).execute(localPlayer, d, u.EquipType.LeftHand)
+                    }
+                    break;
+                case "EquipRightHand":
+                    if (d && s) {
+                        const e = c.itemDescriptions[s];
+                        e && e.equip && a.default.get(i.ActionType.Equip).execute(localPlayer, d, u.EquipType.RightHand)
+                    }
+                    break;
+                case "EquipOrUnEquip":
+                    if (d)
+                        if (d.isEquipped()) a.default.get(i.ActionType.Unequip).execute(localPlayer, d);
+                        else if (s) {
+                        const e = c.itemDescriptions[s];
+                        e && e.equip && a.default.get(i.ActionType.Equip).execute(localPlayer, d, e.equip)
+                    }
+                    break;
+                case "QuickSlotAdd":
+                    this.addItemToFreeQuickSlot(e);
+                    break;
+                case "QuickSlotRemove":
+                    void 0 !== l && this.clearQuickSlot(l);
+                    break;
+                case "Throw":
+                    d && a.default.get(i.ActionType.Throw).execute(localPlayer, d);
+                    break;
+                case "Offer":
+                    d && a.default.get(i.ActionType.Offer).execute(localPlayer, d);
+                    break;
+                case "Drop":
+                    d && a.default.get(i.ActionType.Drop).execute(localPlayer, d);
+                    break;
+                case "DropAll":
+                    d && a.default.get(i.ActionType.Drop).execute(localPlayer, d, !0);
+                    break;
+                case "DropAllOfSameQuality":
+                    d && a.default.get(i.ActionType.Drop).execute(localPlayer, d, !0, !0);
+                    break;
+                case "MoveToOpenedContainer":
+                    d && this.activeContainer && a.default.get(i.ActionType.MoveItem).execute(localPlayer, d, void 0, this.activeContainer);
+                    break;
+                case "MoveAllToOpenedContainer":
+                    d && this.activeContainer && a.default.get(i.ActionType.MoveItem).execute(localPlayer, void 0, localPlayer.inventory, this.activeContainer, d.type);
+                    break;
+                case "MoveAllOfSameQualityToOpenedContainer":
+                    d && this.activeContainer && a.default.get(i.ActionType.MoveItem).execute(localPlayer, void 0, localPlayer.inventory, this.activeContainer, d.type, d.quality);
+                    break;
+                case "MoveToFacingContainer":
+                    d && m && a.default.get(i.ActionType.MoveItem).execute(localPlayer, d, void 0, m);
+                    break;
+                case "MoveAllToFacingContainer":
+                    d && m && a.default.get(i.ActionType.MoveItem).execute(localPlayer, void 0, localPlayer.inventory, m, d.type);
+                    break;
+                case "MoveAllOfSameQualityToFacingContainer":
+                    d && m && a.default.get(i.ActionType.MoveItem).execute(localPlayer, void 0, localPlayer.inventory, m, d.type, d.quality);
+                    break;
+                case "MoveToInventory":
+                    d && a.default.get(i.ActionType.MoveItem).execute(localPlayer, d, void 0, localPlayer.inventory);
+                    break;
+                case "MoveAllToInventory":
+                    d && d.containedWithin && a.default.get(i.ActionType.MoveItem).execute(localPlayer, void 0, d.containedWithin, localPlayer.inventory, d.type);
+                    break;
+                case "MoveAllOfSameQualityToInventory":
+                    d && d.containedWithin && a.default.get(i.ActionType.MoveItem).execute(localPlayer, void 0, d.containedWithin, localPlayer.inventory, d.type, d.quality);
+                    break;
+                case "Repair":
+                    const g = itemManager.getItemInInventoryByGroup(localPlayer, u.ItemTypeGroup.Repair, e);
+                    g && a.default.get(i.ActionType.Repair).execute(localPlayer, g, d);
+                    break;
+                case "Transmogrify":
+                    const T = itemManager.getItemInInventoryByGroup(localPlayer, u.ItemTypeGroup.Transmogrify);
+                    T && a.default.get(i.ActionType.Transmogrify).execute(localPlayer, T, d);
+                    break;
+                case "Reinforce":
+                    const S = itemManager.getItemInInventoryByGroup(localPlayer, u.ItemTypeGroup.Reinforce);
+                    S && a.default.get(i.ActionType.Reinforce).execute(localPlayer, S, d);
+                    break;
+                case "Preserve":
+                    const I = itemManager.getItemInInventoryByGroup(localPlayer, u.ItemTypeGroup.Preservative);
+                    I && a.default.get(i.ActionType.Preserve).execute(localPlayer, I, d);
+                    break;
+                case "Add-Fuel":
+                    const v = itemManager.getItemInInventoryByGroup(localPlayer, u.ItemTypeGroup.Fuel);
+                    v && d && a.default.get(i.ActionType.AddFuel).execute(localPlayer, v, d);
+                    break;
+                case "Ignite":
+                    const w = itemManager.getItemInInventoryByGroup(localPlayer, u.ItemTypeGroup.FireStarter);
+                    w && d && a.default.get(i.ActionType.StartFire).execute(localPlayer, w, d);
+                    break;
+                case "Rename":
+                    let M, b, k, C, D, A;
+                    if (ui.hideActionsMenu(), d) {
+                        M = d.renamed || "";
+                        const e = d.renamed;
+                        delete d.renamed, b = d.getName().inContext(3), k = d.getName(!1).inContext(3), d.renamed = e, D = y.default.GameInterruptRenameItem, A = y.default.GameInterruptRenameItemDescription
+                    } else {
+                        const e = t.data;
+                        if (e instanceof r.default) {
+                            M = (C = e).renamed || "";
+                            const t = C.renamed;
+                            delete C.renamed, b = C.getName().inContext(3), k = C.getName(!1).inContext(3), C.renamed = t, D = y.default.GameInterruptRenameDoodad, A = y.default.GameInterruptRenameDoodadDescription
+                        } else if (e instanceof n.default) {
+                            M = (p = e).renamed || "";
+                            const t = p.renamed;
+                            delete p.renamed, b = p.getName().inContext(3), k = p.getName(!1).inContext(3), p.renamed = t, D = y.default.GameInterruptRenameCreature, A = y.default.GameInterruptRenameCreatureDescription
+                        }
+                    }
+                    const P = d || C || p;
+                    if (void 0 === M || void 0 === b || void 0 === A || void 0 === P) break;
+                    newui.interrupt(() => f.default.ui(D).get(k)).withDescription(A).setCanCancel().withInput(e => e.setMaxLength(64).setClearTo(() => b && b.getString() || "").setPlaceholder(f.default.generator(b && b.getString() || "")).setDefault(() => (f.default.isSerializedTranslation(M) ? f.default.deserialize(M).getString() : M) || "")).then(e => {
+                        void 0 !== e && (e === (b && b.getString() || "") && (e = ""), a.default.get(i.ActionType.Rename).execute(localPlayer, P, e))
+                    });
+                    break;
+                case "Disassemble":
+                    a.default.get(i.ActionType.Disassemble).execute(localPlayer, d);
+                    break;
+                case "Dismantle":
+                    this.onDismantleItemClick(d);
+                    break;
+                case "CloseContainer":
+                    a.default.get(i.ActionType.CloseContainer).execute(localPlayer, d);
+                    break;
+                case "Hitch":
+                    a.default.get(i.ActionType.Hitch).execute(localPlayer);
+                    break;
+                case "Unhitch":
+                    a.default.get(i.ActionType.Unhitch).execute(localPlayer);
+                    break;
+                case "SortName":
+                    this.sortItems(t.data.container, u.SortType.Name, t.data.messageType);
+                    break;
+                case "SortGroup":
+                    this.sortItems(t.data.container, u.SortType.Group, t.data.messageType);
+                    break;
+                case "SortWeight":
+                    this.sortItems(t.data.container, u.SortType.Weight, t.data.messageType);
+                    break;
+                case "SortRecent":
+                    this.sortItems(t.data.container, u.SortType.Recent, t.data.messageType);
+                    break;
+                case "SortSkill":
+                    this.sortItems(t.data.container, u.SortType.Skill, t.data.messageType);
+                    break;
+                case "SortDecay":
+                    this.sortItems(t.data.container, u.SortType.Decay, t.data.messageType);
+                    break;
+                case "SortQuality":
+                    this.sortItems(t.data.container, u.SortType.Quality, t.data.messageType);
+                    break;
+                case "SortDurability":
+                    this.sortItems(t.data.container, u.SortType.Durability, t.data.messageType);
+                    break;
+                case "SortCategory":
+                    this.sortItems(t.data.container, u.SortType.Category, t.data.messageType);
+                    break;
+                case "SortUnlockedTime":
+                    this.sortItems(t.data.container, u.SortType.DiscoveredTime, t.data.messageType);
+                    break;
+                case "SortBest":
+                    this.sortItems(t.data.container, u.SortType.Best, t.data.messageType);
+                    break;
+                default:
+                    const G = parseInt(t.action, 10);
+                    if (isNaN(G)) return x.default.warn(x.LogSource.Ui)(`Missing case for action ${t.action}`), !1; {
+                        const e = a.default.get(G);
+                        if (e) {
+                            const a = [localPlayer];
+                            for (const n of e.action.argumentTypes) switch (Array.isArray(n) ? n[0] : n) {
+                                case i.ActionArgument.Doodad:
+                                case i.ActionArgument.NPC:
+                                    a.push(t.data);
+                                    break;
+                                default:
+                                    a.push(void 0)
+                            }
+                            e.execute.call(e, ...a)
+                        } else x.default.warn(x.LogSource.Ui)(`Missing action executor for ${G}`)
+                    }
+            }
+            return o || ui.playClickSound(), !0
+        }
+        updateContextMenu(e) {
+            const t = [];
+            for (let a = 0; a < e.actions.length; a++) {
+                const i = e.actions[a];
+                let n = "";
+                F[a] && (n = void 0 !== i.keybind ? S.bindingManager.getBindingsTranslation(F[i.keybind]) : S.bindingManager.getBindingsTranslation(F[a]));
+                let o = `<span class="context-menu-title">${n} ${i.text}</span>`;
+                if (void 0 !== e.quickSlot && !isNaN(e.quickSlot)) {
+                    const t = localPlayer.quickSlotInfo[e.quickSlot];
+                    if (t) {
+                        let e = "";
+                        const n = c.itemDescriptions[t.itemType];
+                        n && (!t.action && !n.use && "Throw" === i.action || !t.action && n.use && 0 === a || t.action && t.action.action === i.action && (!t.action.data || t.action.data.actionType === i.data.actionType)) && (e = " selected"), o = `<span class="quick-slot-action-select${e}"></span> ${o}`
+                    }
+                }
+                t.push({
+                    title: o,
+                    cmd: i.action,
+                    data: i
+                })
+            }
+            this.contextMenu = e, this.contextMenuOpen = !1, $(document).contextmenu("replaceMenu", t), this.contextMenuOpen = !0
+        }
+        async confirmAction(e, t, n = !0) {
+            let o, r;
+            switch (e) {
+                case i.ActionType.Gather:
+                case i.ActionType.Harvest:
+                    {
+                        const t = localPlayer.options.warnOnDangerousActions ? localPlayer.checkForGatherFire() : void 0,
+                            a = localPlayer.checkForGather();
+                        void 0 !== t ? (o = f.default.ui(y.default.GameInterruptConfirmationActionOnFire).addArgs(t, f.default.message(e === i.ActionType.Harvest ? h.default.Harvest : h.default.Gather)), r = f.default.ui(y.default.GameInterruptConfirmationActionOnFireDescription).addArgs(t, f.default.message(e === i.ActionType.Harvest ? h.default.Harvest : h.default.Gather))) : void 0 !== a && (o = f.default.ui(y.default.GameInterruptConfirmationDestroyOnGather).inContext(4).addArgs(f.default.message(h.default.The).addArgs(a.getName(!1))), r = f.default.ui(y.default.GameInterruptConfirmationDestroyOnGatherDescription).inContext(4).addArgs(f.default.message(h.default.The).addArgs(a.getName(!1))));
+                        break
+                    }
+                case i.ActionType.Pour:
+                    {
+                        const e = t[0];
+                        !itemManager.isInGroup(e.type, u.ItemTypeGroup.ContainerOfSeawater) && localPlayer.checkForStill() && (o = y.default.GameInterruptDesalinationNoNeed, r = y.default.GameInterruptDesalinationNoNeedDescription), itemManager.isInGroup(e.type, u.ItemTypeGroup.ContainerOfSeawater) && localPlayer.checkForWell() && (o = y.default.GameInterruptWellConvert, r = y.default.GameInterruptWellConvertDescription);
+                        break
+                    }
+                case i.ActionType.Heal:
+                case i.ActionType.HealOther:
+                    {
+                        let t, a;
+                        if (e === i.ActionType.Heal) t = localPlayer.getStat(l.Stat.Health), a = localPlayer;
+                        else {
+                            const e = localPlayer.getFacingTile();
+                            if (!e) break;
+                            const i = e.creature,
+                                n = e.npc,
+                                o = game.getPlayersAtTile(e);
+                            if (!(a = o && o.length > 0 ? o[0] : i || n)) break;
+                            t = a.getStat(l.Stat.Health)
+                        }
+                        if (t.value < t.max || a.hasStatus(u.StatusType.Bleeding)) break;
+                        o = y.default.GameInterruptNoHealingRequired, r = y.default.GameInterruptNoHealingRequiredDescription;
+                        break
+                    }
+            }
+            if (o) {
+                const e = await newui.interrupt(o).withDescription(r).withConfirmation();
+                if (!e) return
+            }
+            n && e !== i.ActionType.Sling && e !== i.ActionType.Shoot && e !== i.ActionType.Fire && (n = !1, t.pop()), a.default.get(n ? i.ActionType.UseItem : e).execute(localPlayer, ...t)
+        }
+        isOverlayVisible() {
+            return newui.isScreenVisible(v.ScreenId.Interrupt)
+        }
+        getHoveredItem(e) {
+            const t = document.elementFromPoint(e.mouseX, e.mouseY);
+            return t && t.matches("\n\t\t\t\t.ui-dialog:not([style*='display: none']):not([aria-describedby='crafting']) li.item,\n\t\t\t\t.quick-slot li.item\n\t\t\t") ? t : null
+        }
+        quickSlotBindPressed(e, t, a) {
+            return this.delayState = _.WaitingForDelay, this.useQuickSlot(t)
+        }
+        quickSlotToggleBindPressed(e, t, a, i, n) {
+            if (t && n) {
+                const e = game.items[$(t).data("item-id")];
+                return e && e.quickSlot !== a ? (this.setQuickSlot(a, e.id), this.canUseQuickslot = !1) : this.clearQuickSlot(a, !0), !0
+            }
+            return !1
+        }
+        determineSort(e, t, a, i, n) {
+            if (void 0 === a || void 0 === n) return 0;
+            let o = 0,
+                r = 0;
+            const s = void 0 !== t ? game.items[t] : void 0,
+                l = void 0 !== i ? game.items[i] : void 0;
+            switch (e.sortType) {
+                case u.SortType.Name:
+                    o = s && s.renamed ? s.renamed : (u.ItemType[a] || f.default.message(h.default.Unknown).getString()).toString(), r = l && l.renamed ? l.renamed : (u.ItemType[n] || f.default.message(h.default.Unknown).getString()).toString();
+                    break;
+                case u.SortType.Group:
+                    const t = itemManager.getGroups(a).collect(R.default.first());
+                    o = t ? new f.default(m.Dictionary.ItemGroup, t).getString() : "z";
+                    const i = itemManager.getGroups(n).collect(R.default.first());
+                    r = i ? new f.default(m.Dictionary.ItemGroup, i).getString() : "z";
+                    break;
+                case u.SortType.Weight:
+                    s && (o = s.legendary && s.legendary.type === u.LegendaryType.ItemWeight ? s.weight - s.legendary.value : s.weight), l && (r = l.legendary && l.legendary.type === u.LegendaryType.ItemWeight ? l.weight - l.legendary.value : l.weight);
+                    break;
+                case u.SortType.Recent:
+                    s && s.containedWithin && (o = s.containedWithin.containedItems.indexOf(s)), l && l.containedWithin && (r = l.containedWithin.containedItems.indexOf(l));
+                    break;
+                case u.SortType.Decay:
+                    if (o = 0, r = 0, s && void 0 !== s.decay) {
+                        const e = c.itemDescriptions[s.type];
+                        e && e.decayMax && (o = s.decay)
+                    }
+                    if (l && void 0 !== l.decay) {
+                        const e = c.itemDescriptions[l.type];
+                        e && e.decayMax && (r = l.decay)
+                    }
+                    break;
+                case u.SortType.Quality:
+                    s && (o = u.itemQualitySortOrder[s.quality || u.ItemQuality.None]), l && (r = u.itemQualitySortOrder[l.quality || u.ItemQuality.None]);
+                    break;
+                case u.SortType.Durability:
+                    s && (o = s.minDur), l && (r = l.minDur);
+                    break;
+                case u.SortType.DiscoveredTime:
+                    const d = game.crafted[a];
+                    d && (o = d.unlockTime);
+                    const p = game.crafted[n];
+                    p && (r = p.unlockTime);
+                    break;
+                case u.SortType.Best:
+                    s && (o = 4 * u.itemQualitySortOrder[s.quality || u.ItemQuality.None] + (s.minDur ? s.minDur / 4 : 0) - 10 * (s.legendary && s.legendary.type === u.LegendaryType.ItemWeight ? s.weight - s.legendary.value : s.weight)), l && (r = 4 * u.itemQualitySortOrder[l.quality || u.ItemQuality.None] + (l.minDur ? l.minDur / 4 : 0) - 10 * (l.legendary && l.legendary.type === u.LegendaryType.ItemWeight ? l.weight - l.legendary.value : l.weight))
+            }
+            o === r && e.sortType !== u.SortType.Name && (o = s && s.renamed ? s.renamed : (u.ItemType[a] || f.default.message(h.default.Unknown).getString()).toString(), r = l && l.renamed ? l.renamed : (u.ItemType[n] || f.default.message(h.default.Unknown).getString()).toString()), o === r && (o = t, r = i);
+            let d = e.reverse;
+            return e.sortType !== u.SortType.Skill && e.sortType !== u.SortType.Category || (d = !1), (d ? r > o : o > r) ? 1 : -1
+        }
+    }
+    __decorate([Override], H.prototype, "selector", null), __decorate([Override], H.prototype, "bindElements", null), __decorate([Override], H.prototype, "unbindElements", null), __decorate([Override], H.prototype, "onShow", null), __decorate([E.Bound], H.prototype, "makeTopDialog", null), __decorate([Override], H.prototype, "onHide", null), __decorate([Override], H.prototype, "onMouseMove", null), __decorate([E.Bound], H.prototype, "focus", null), t.default = H
+}),
 
 define("newui/BindingManager",["require","exports","Enums","language/Dictionaries","language/dictionary/UiTranslation","language/Translation","mod/IHookManager","utilities/Async","utilities/Emitter","utilities/enum/Enums","utilities/Log","utilities/math/Vector2"],function(e,t,a,i,n,o,r,s,l,u,d,p){var c;function m(e){return e.preventDefault(),e.stopPropagation(),!1}function h(e,t){const a=e.modifiers||[],i=t.modifiers||[];return e.key===t.key&&e.mouseButton===t.mouseButton&&e.gamepadButton===t.gamepadButton&&typeof a==typeof i&&(!a||a.length===i.length&&void 0===a.find(e=>!i.includes(e)))}function y(e){if(e instanceof KeyboardEvent)return isEdge&&void 0===e.code&&e.key&&1===e.key.length?`Key${e.key.toLocaleUpperCase()}`:e.code||e.key;if(e instanceof WheelEvent)return`Mouse${e.deltaY<0?"Up":"Down"}`;if(e instanceof MouseEvent)return`Mouse${e.button}`;if(e instanceof TouchEvent)return"Mouse0";if(e instanceof Event)return"Unknown";if("number"!=typeof e)return e.key||void 0!==e.mouseButton&&`Mouse${e.mouseButton}`||"Unknown";switch(e){case c.Alt:return"Alt";case c.Shift:return"Shift";case c.Control:return"Control";default:return"Unknown"}}function g(e,t){for(let a=t;a;a=a.parentElement)if(e===a)return!0;return!1}Object.defineProperty(t,"__esModule",{value:!0}),function(e){e[e.Shift=0]="Shift",e[e.Alt=1]="Alt",e[e.Control=2]="Control"}(c=t.KeyModifier||(t.KeyModifier={}));class f extends l.default{constructor(){super(),this.bindCatchers={},document.body.addEventListener("contextmenu",e=>{if(!saveDataGlobal.options.developerMode||!saveDataGlobal.options.developerModeContextMenu)return m(e)}),document.body.addEventListener("onselectstart",m)}registerBindable(e,t){f.defaultBinds[e]=t}deregisterBindable(e){delete f.defaultBinds[e]}getBindableType(e){const t=a.Bindable[e];for(const e of u.default.keys(a.BindableType))if(t.startsWith(e))return a.BindableType[e]}getBinding(e){return a.Bindable[e]in saveDataGlobal.options.bindings?saveDataGlobal.options.bindings[a.Bindable[e]]:f.defaultBinds[e]}getBindings(e){const t=this.getBinding(e);return Array.isArray(t)?t:[t]}addBinding(e,t){if(!(a.Bindable[e]in saveDataGlobal.options.bindings)){const t=f.defaultBinds[e];saveDataGlobal.options.bindings[a.Bindable[e]]=Array.isArray(t)?[...t]:t}Array.isArray(saveDataGlobal.options.bindings[a.Bindable[e]])||(saveDataGlobal.options.bindings[a.Bindable[e]]=[saveDataGlobal.options.bindings[a.Bindable[e]]]);const i=saveDataGlobal.options.bindings[a.Bindable[e]];void 0===i.find(e=>h(t,e))&&i.push(t)}setBinding(e,t){saveDataGlobal.options.bindings[a.Bindable[e]]=t}deleteBinding(e){saveDataGlobal.options.bindings[a.Bindable[e]]=[]}resetBinding(e){delete saveDataGlobal.options.bindings[a.Bindable[e]]}doBindsIntersect(e,t){const a=this.getBindings(e),i=this.getBindings(t);return a.some(e=>i.some(t=>h(e,t)))}getBindingsTranslation(e,t=!1){"number"==typeof e&&(e=this.getBinding(e)),Array.isArray(e)||(e=[e]);const a=[];for(const t of e){let e="";for(const a of t.modifiers||[])e+=o.default.ui(n.default.MenuOptionsBindLabelModifier).getString(this.getBindPressTranslation(`Modifier${c[a]}`));if("key"in t){const a=this.getBindPressTranslation(t.key);e+=a.isValid?a.getString():t.key}else"mouseButton"in t?e+=this.getBindPressTranslation(`Mouse${t.mouseButton}`).getString():d.default.warn(d.LogSource.NewUi)("Unknown button");a.push(e)}return t?a:a?a.length<=1?a.length?a[0]:o.default.ui(n.default.MiscBindableNoBindings).getString():a.reduce((e,t)=>`${o.default.ui(n.default.MiscBindableOr).getString(e)}${t}`):""}registerBindCatcher(e,t=!1){const a={},i=p.default.ZERO;let n=0;const o={enabled:!0,element:e,states:a,mouse:i,mouseStart:void 0,mouseStartElement:void 0,async handler(o){if("visibilitychange"===o.type||"blur"===o.type){if("hidden"===document.visibilityState||"blur"===o.type)for(const e of Object.keys(a))delete a[e];return}const r=o.target;if("mousemove"!==o.type&&"mouseup"!==o.type&&"keyup"!==o.type&&"touchmove"!==o.type&&"touchend"!==o.type&&r.matches("[intercept='all'], [intercept='all'] *")&&!r.matches("[intercept='none'], [intercept='none'] *, [intercept-children='none'] *"))return!0;const l=y(o);switch(o.type){case"keydown":case"mousedown":case"touchstart":if(t&&e.focus(),a[l]=Date.now(),"F12"===l&&saveDataGlobal.options.developerMode&&!steamworks.isElectron())return;if("F11"===l&&!steamworks.isElectron())return;if("mousedown"===o.type){const e=o;this.mouseStart=new p.default(e.clientX,e.clientY),this.mouseStartElement=o.target}else if("touchstart"===o.type){const e=o;this.mouseStart=new p.default(e.touches[0].clientX,e.touches[0].clientY),this.mouseStartElement=o.target}break;case"keyup":delete a[l];break;case"mouseup":case"touchend":return delete a[l],this.mouseStart=void 0,void(this.mouseStartElement=void 0);case"mouseleave":return delete a.Mouse0,delete a.Mouse1,void delete a.Mouse2;case"wheel":let r=o.deltaY;if(0===o.deltaMode&&(r/=-120),n+=r,Math.abs(n)>.8){n=0;const e=a[l]=Date.now();s.sleep(50).then(()=>{a[l]===e&&delete a[l]})}return;case"mousemove":{const e=o;return i.x=e.clientX,void(i.y=e.clientY)}case"touchmove":{const e=o;return i.x=e.touches[0].clientX,void(i.y=e.touches[0].clientY)}default:d.default.warn(d.LogSource.NewUi)("Unknown event",o.type)}return o.preventDefault(),o.stopPropagation(),!1}};let r;o.handler=o.handler.bind(o),e.addEventListener("mousemove",o.handler),e.addEventListener("mouseleave",o.handler),e.addEventListener("mousedown",o.handler),e.addEventListener("mouseup",o.handler),e.addEventListener("keydown",o.handler),e.addEventListener("keyup",o.handler),e.addEventListener("wheel",o.handler),e.addEventListener("touchstart",o.handler),e.addEventListener("touchend",o.handler),e.addEventListener("touchmove",o.handler),document.addEventListener("visibilitychange",o.handler),window.addEventListener("blur",o.handler);do{r=Math.random()}while(r in this.bindCatchers);return this.bindCatchers[r]=o,this.setDefaultBindCatcher(r),this.startLoop(),r}deregisterBindCatcher(e){const t=this.bindCatchers[e];t&&(t.element.removeEventListener("mousemove",t.handler),t.element.removeEventListener("mouseleave",t.handler),t.element.removeEventListener("mousedown",t.handler),t.element.removeEventListener("mouseup",t.handler),t.element.removeEventListener("keydown",t.handler),t.element.removeEventListener("keyup",t.handler),t.element.removeEventListener("wheel",t.handler),t.element.removeEventListener("touchstart",t.handler),t.element.removeEventListener("touchend",t.handler),t.element.removeEventListener("touchmove",t.handler),document.removeEventListener("visibilitychange",t.handler),window.removeEventListener("blur",t.handler),delete this.bindCatchers[e])}disableBindsUntil(e,t=this.defaultBindCatcher){this.bindCatchers[t].enabled=!1,"number"==typeof e&&(e=s.sleep(e)),e.then(()=>{this.bindCatchers[t].enabled=!0,this.emit("BindsEnabled")})}areBindsDisabled(e=this.defaultBindCatcher){return!this.bindCatchers[e].enabled}setDefaultBindCatcher(e){this.defaultBindCatcher=e}getPressTime(e,t=this.defaultBindCatcher){if(void 0===t||!this.bindCatchers[t].enabled)return-1;const a=this.bindCatchers[t].states,i="string"==typeof e?void 0:this.getBindings(e);for(const n in a)if(i)for(const e of i)try{if(n===y(e)&&this.checkModifiers(e.modifiers||[],n,t))return a[n]}catch(t){throw d.default.error(d.LogSource.BindingManager)(n,e,i),t}else if(n===e)return a[n];return-1}removePressState(e,t=this.defaultBindCatcher){if(void 0!==t){const a=this.bindCatchers[t].states,i="string"==typeof e?void 0:this.getBindings(e);for(const n in a)if(i)for(const e of i)n===y(e)&&this.checkModifiers(e.modifiers||[],n,t)&&delete a[n];else n===e&&delete a[n]}}removeAllPressStates(e=this.defaultBindCatcher){if(void 0!==e){const t=this.bindCatchers[e].states;for(const e in t)delete t[e]}}checkModifiers(e,t,a=this.defaultBindCatcher){if(void 0!==a){const i=this.bindCatchers[a].states;for(const a of u.default.values(c)){const n=e.includes(a),o=y(a);let r=!1;for(const e of[`${o}Left`,`${o}Right`])t!==e&&!r&&i[e]&&(r=!0);if(n!==r)return!1}}return!0}isPressed(e,t=this.defaultBindCatcher){return-1!==this.getPressTime(e,t)}isAnythingPressed(e=this.defaultBindCatcher){const t=this.bindCatchers[e];if(!t)return!1;if(!t.enabled)return!1;for(const e in t.states)if(t.states[e])return!0;return!1}getMouse(e=this.defaultBindCatcher){return this.bindCatchers[e].mouse}isMouseWithin(e,t=!1,a=this.defaultBindCatcher){const i=this.bindCatchers[a];if(!i)return!1;const n=document.elementFromPoint(i.mouse.x,i.mouse.y);return"element"in e&&(e=e.element),e===n||!t&&g(e,n)}mouseStartWasWithin(e,t=!1,a=this.defaultBindCatcher){const i=this.bindCatchers[a];if(!i)return!1;const n=i.mouseStartElement;return"element"in e&&(e=e.element),e===n||!t&&g(e,n)}manualLoop(e){const t={},i={},n=this.bindCatchers,o={time:0,wasPressed:a=>{if(t[a]===o.time)return!0;const n=this.getPressTime(a,e);if(-1===n)t[a]&&(i[a]=o.time,delete t[a]);else if(!t[a])return t[a]=o.time,delete i[a],!0;return!1},wasReleased:e=>i[e]===o.time,removePressState:(a,n=!0)=>{i[a]=o.time,delete t[a],n&&this.removePressState(a,e)},removeAllPressStates:(e=!0)=>{for(const a in t)o.removePressState(a,e)},isDown:t=>this.isPressed(t,e),isAnythingDown:()=>this.isAnythingPressed(e),timeDown:t=>this.getPressTime(t,e),get mouseX(){return n[e].mouse.x},get mouseY(){return n[e].mouse.y},get mousePosition(){return new p.default(n[e].mouse)},isMouseWithin:(t,a)=>this.isMouseWithin(t,a,e),mouseStartWasWithin:(t,a)=>this.mouseStartWasWithin(t,a,e)};return()=>((!document.activeElement||document.activeElement.classList.contains("hidden")||null===document.activeElement.offsetParent&&!document.activeElement.classList.contains("no-offset-parent"))&&n[e].element.focus(),o.time=Date.now(),o.wasPressed(a.Bindable.GameFullscreen)&&steamworks.isElectron()?newui.toggleFullscreen():o.wasPressed(a.Bindable.DeveloperToggleDeveloperMode)?saveDataGlobal.options.developerMode=!saveDataGlobal.options.developerMode:saveDataGlobal.options.developerMode&&(o.wasPressed(a.Bindable.DeveloperReloadGame)||o.wasPressed(a.Bindable.DeveloperReloadAndContinueGame)?(o.wasPressed(a.Bindable.DeveloperReloadAndContinueGame)&&(saveDataGlobal.options.shouldLoadLastSave=!0),steamworks.reload()):o.wasPressed(a.Bindable.DeveloperToggleDeveloperTools)&&steamworks.isElectron()&&steamworks.toggleDeveloperTools()),o)}startLoop(){const e=this.defaultBindCatcher;this.bindCatchers[e].loop=this.manualLoop(e);const t=this.bindCatchers[e];if(t){const i=()=>{if(t.loop){const n=t.loop();try{const t=modManager.getHook(r.Hook.OnBindLoop).call(a.Bindable.None,n);ui.isInGameScreenShown()&&ui.screenInGame.onBindLoop(n,t)}catch(t){d.default.error(d.LogSource.BindingManager)(`An error occured in bind loop '${e}'`,t)}requestAnimationFrame(i)}};i()}}getBindPressTranslation(e){return new o.default(i.Dictionary.BindPress,e).setFailWith(e)}}f.defaultBinds={[a.Bindable.GameMoveDirection]:{mouseButton:0},[a.Bindable.GameMoveToTile]:[{mouseButton:0,modifiers:[c.Control]},{mouseButton:1}],[a.Bindable.GameMoveToTilePreview]:{key:"ControlLeft"},[a.Bindable.GameMoveUp]:{key:"KeyW"},[a.Bindable.GameMoveLeft]:{key:"KeyA"},[a.Bindable.GameMoveDown]:{key:"KeyS"},[a.Bindable.GameMoveRight]:{key:"KeyD"},[a.Bindable.GameFaceDirection]:{mouseButton:0,modifiers:[c.Shift]},[a.Bindable.GameFaceUp]:{key:"KeyW",modifiers:[c.Shift]},[a.Bindable.GameFaceLeft]:{key:"KeyA",modifiers:[c.Shift]},[a.Bindable.GameFaceDown]:{key:"KeyS",modifiers:[c.Shift]},[a.Bindable.GameFaceRight]:{key:"KeyD",modifiers:[c.Shift]},[a.Bindable.GameIdle]:{key:"Space"},[a.Bindable.GameHandToggleLeft]:{key:"BracketLeft"},[a.Bindable.GameHandToggleRight]:{key:"BracketRight"},[a.Bindable.GameQuickSlot1]:{key:"Digit1"},[a.Bindable.GameQuickSlot2]:{key:"Digit2"},[a.Bindable.GameQuickSlot3]:{key:"Digit3"},[a.Bindable.GameQuickSlot4]:{key:"Digit4"},[a.Bindable.GameQuickSlot5]:{key:"Digit5"},[a.Bindable.GameQuickSlot6]:{key:"Digit6"},[a.Bindable.GameQuickSlot7]:{key:"Digit7"},[a.Bindable.GameQuickSlot8]:{key:"Digit8"},[a.Bindable.GameQuickSlot9]:{key:"Digit9"},[a.Bindable.GameQuickSlotToggle1]:{key:"Digit1",modifiers:[c.Shift]},[a.Bindable.GameQuickSlotToggle2]:{key:"Digit2",modifiers:[c.Shift]},[a.Bindable.GameQuickSlotToggle3]:{key:"Digit3",modifiers:[c.Shift]},[a.Bindable.GameQuickSlotToggle4]:{key:"Digit4",modifiers:[c.Shift]},[a.Bindable.GameQuickSlotToggle5]:{key:"Digit5",modifiers:[c.Shift]},[a.Bindable.GameQuickSlotToggle6]:{key:"Digit6",modifiers:[c.Shift]},[a.Bindable.GameQuickSlotToggle7]:{key:"Digit7",modifiers:[c.Shift]},[a.Bindable.GameQuickSlotToggle8]:{key:"Digit8",modifiers:[c.Shift]},[a.Bindable.GameQuickSlotToggle9]:{key:"Digit9",modifiers:[c.Shift]},[a.Bindable.GameQuickSlot9]:{key:"Digit9"},[a.Bindable.GameQuickSlotClear]:{key:"KeyX"},[a.Bindable.GameContextMenu1]:{key:"Digit1"},[a.Bindable.GameContextMenu2]:{key:"Digit2"},[a.Bindable.GameContextMenu3]:{key:"Digit3"},[a.Bindable.GameContextMenu4]:{key:"Digit4"},[a.Bindable.GameContextMenu5]:{key:"Digit5"},[a.Bindable.GameContextMenu6]:{key:"Digit6"},[a.Bindable.GameContextMenu7]:{key:"Digit7"},[a.Bindable.GameContextMenu8]:{key:"Digit8"},[a.Bindable.GameContextMenu9]:{key:"Digit9"},[a.Bindable.GameContextMenu10]:{key:"Digit0"},[a.Bindable.GameContextMenu11]:{key:"Minus"},[a.Bindable.GameContextMenu12]:{key:"Equal"},[a.Bindable.GameContextMenu13]:{key:"Digit1",modifiers:[c.Shift]},[a.Bindable.GameContextMenu14]:{key:"Digit2",modifiers:[c.Shift]},[a.Bindable.GameContextMenu15]:{key:"Digit3",modifiers:[c.Shift]},[a.Bindable.GameContextMenu16]:{key:"Digit4",modifiers:[c.Shift]},[a.Bindable.GameContextMenu17]:{key:"Digit5",modifiers:[c.Shift]},[a.Bindable.GameContextMenu18]:{key:"Digit6",modifiers:[c.Shift]},[a.Bindable.GameContextMenu19]:{key:"Digit7",modifiers:[c.Shift]},[a.Bindable.GameContextMenu20]:{key:"Digit8",modifiers:[c.Shift]},[a.Bindable.GameContextMenu21]:{key:"Digit9",modifiers:[c.Shift]},[a.Bindable.GameContextMenu22]:{key:"Digit0",modifiers:[c.Shift]},[a.Bindable.GameContextMenu23]:{key:"Minus",modifiers:[c.Shift]},[a.Bindable.GameContextMenu24]:{key:"Equal",modifiers:[c.Shift]},[a.Bindable.GameActions]:[{key:"KeyQ"},{mouseButton:2}],[a.Bindable.GameZoomIn]:{mouseButton:"Up"},[a.Bindable.GameZoomOut]:{mouseButton:"Down"},[a.Bindable.GameItemMove]:{mouseButton:0},[a.Bindable.GameItemQuickMove]:{mouseButton:0,modifiers:[c.Shift]},[a.Bindable.GameItemQuickMoveAll]:{mouseButton:0,modifiers:[c.Shift,c.Control]},[a.Bindable.GameItemMenu]:{mouseButton:2},[a.Bindable.GameItemDrop]:[{mouseButton:2,modifiers:[c.Shift]},{key:"KeyQ"}],[a.Bindable.GameItemDropAll]:{key:"KeyQ",modifiers:[c.Shift]},[a.Bindable.GameItemEquipToggle]:{key:"KeyE"},[a.Bindable.GameInspect]:{mouseButton:2,modifiers:[c.Shift]},[a.Bindable.GameMoreInformation]:[{key:"ShiftLeft"},{key:"ShiftRight"}],[a.Bindable.GameScreenshotMode]:{key:"F2"},[a.Bindable.GamePause]:{key:"Escape"},[a.Bindable.GameSave]:{key:"KeyS",modifiers:[c.Control]},[a.Bindable.GameFullscreen]:{key:"F11"},[a.Bindable.DialogCloseAll]:{key:"Backquote"},[a.Bindable.DialogInventory]:{key:"KeyI"},[a.Bindable.DialogNotes]:{key:"KeyN"},[a.Bindable.DialogHelp]:[{key:"Slash"},{key:"F1"}],[a.Bindable.DialogSkills]:{key:"KeyV"},[a.Bindable.DialogMessages]:{key:"KeyM"},[a.Bindable.DialogOptions]:{key:"KeyO"},[a.Bindable.DialogEquipment]:{key:"KeyE"},[a.Bindable.DialogCrafting]:{key:"KeyC"},[a.Bindable.DialogDismantle]:{key:"KeyX"},[a.Bindable.DialogMilestones]:{key:"KeyZ"},[a.Bindable.DialogQuests]:{key:"KeyU"},[a.Bindable.DialogMessagesChatFocus]:{key:"Enter"},[a.Bindable.MenuEnter]:[{key:"Enter"},{key:"Space"}],[a.Bindable.MenuCancel]:[{key:"Escape"},{key:"Backspace"}],[a.Bindable.MenuNext]:{key:"Tab"},[a.Bindable.MenuPrevious]:{key:"Tab",modifiers:[c.Shift]},[a.Bindable.MenuLeft]:{key:"ArrowLeft"},[a.Bindable.MenuRight]:{key:"ArrowRight"},[a.Bindable.MenuUp]:{key:"ArrowUp"},[a.Bindable.MenuDown]:{key:"ArrowDown"},[a.Bindable.MenuContextMenu]:{mouseButton:2},[a.Bindable.DeveloperToggleDeveloperMode]:{key:"F9"},[a.Bindable.DeveloperReloadGame]:{key:"F5"},[a.Bindable.DeveloperReloadAndContinueGame]:{key:"F5",modifiers:[c.Control]},[a.Bindable.DeveloperToggleDeveloperTools]:{key:"F10"}},t.BindingManager=f,t.bindingManager=new f,window.bindingManager=t.bindingManager}),
 
@@ -7752,7 +10198,1638 @@ define("ui/Ui",["require","exports","Enums","language/dictionary/Message","langu
 
 define("utilities/WebAssemblyHelpers",["require","exports","utilities/Log"],function(e,t,a){var i;Object.defineProperty(t,"__esModule",{value:!0}),function(e){let t;!function(e){e[e.FlowField=0]="FlowField",e[e.FieldOfView=1]="FieldOfView"}(t=e.Module||(e.Module={}));const i={};function n(){return"object"==typeof WebAssembly}function o(){n()}function r(e,n,o){const r=i[e];if(!r)return;const s=new WebAssembly.Memory({initial:256,maximum:512}),l=r.instances[n]={imports:{env:Object.assign({memoryBase:0,tableBase:0,memory:s,table:new WebAssembly.Table({initial:256,maximum:512,element:"anyfunc"}),_consoleLog:e=>{a.default.info(a.LogSource.WebAssembly)(e)}},o)},exports:void 0,instance:void 0,memoryBuffer:s.buffer};return l.instance=new WebAssembly.Instance(r.module,l.imports),l.exports=l.instance.exports,a.default.info(a.LogSource.Utilities)(`Initialized web assembly module ${t[e]}`,l.exports),l}e.isAvailable=n,e.loadAndCompileModules=o,e.initializeInstance=r}(i||(i={})),t.default=i}),
 
-define("game/Game",["require","exports","audio/Audio","command/CommandManager","creature/corpse/CorpseManager","creature/corpse/Corpses","creature/Creature","creature/CreatureManager","creature/Creatures","creature/ICreature","DedicatedServer","doodad/DoodadManager","doodad/Doodads","doodad/doodads/Doodad","entity/IEntity","entity/IStats","entity/StatFactory","Enums","flowfield/FlowFieldManager","game/Difficulty","game/IGame","game/TimeManager","item/Item","item/ItemManager","item/Items","language/Dictionaries","language/dictionary/InterruptChoice","language/dictionary/Message","language/dictionary/Note","language/dictionary/UiTranslation","language/LanguageManager","language/Messages","language/Translation","mapgen/MapGen","mod/IHookManager","mod/IModInfo","mod/ModManager","multiplayer/IMultiplayer","multiplayer/Multiplayer","multiplayer/packets/client/PausePacket","multiplayer/packets/client/SetPlayerZPacket","multiplayer/packets/client/TickPacket","multiplayer/packets/shared/UpdateOptionPacket","newui/NewUi","newui/screen/IScreen","newui/screen/screens/menu/component/IMenu","npc/NPCManager","OldEnums","player/Customizations","player/IMessageManager","player/IMilestone","player/IPlayer","player/MessageManager","player/Player","player/quest/quest/Challenge","renderer/fieldofview/FieldOfView","renderer/Notifier","renderer/particle/IParticle","renderer/particle/Particle","renderer/particle/Particles","renderer/RendererConstants","renderer/Shaders","renderer/SpriteAtlas","renderer/SpriteBatch","renderer/TileAtlas","renderer/TileLayer","renderer/World","renderer/WorldRenderer","resources/ResourceLoader","save/clientStore/IClientStore","save/data/SaveData","save/data/SaveDataGlobal","save/ISaveManager","save/ISerializer","save/SaveManager","steamworks/Steamworks","tile/ITileEvent","tile/TerrainResources","tile/Terrains","tile/TileEventManager","tile/TileEvents","ui/Ui","utilities/Async","utilities/Emitter","utilities/enum/EnumManager","utilities/enum/Enums","utilities/Log","utilities/math/Vector2","utilities/math/Vector3","utilities/Objects","utilities/Random","utilities/TileHelpers","utilities/UUID","utilities/Version","utilities/WebAssemblyHelpers"],function(e,t,a,i,n,o,r,s,l,u,d,p,c,m,h,y,g,f,T,S,I,v,w,M,b,k,C,D,A,P,G,R,x,B,E,L,O,F,_,H,W,N,q,U,z,V,j,$,Q,Y,J,K,X,Z,ee,te,ae,ie,ne,oe,re,se,le,ue,de,pe,ce,me,he,ye,ge,fe,Te,Se,Ie,ve,we,Me,be,ke,Ce,De,Ae,Pe,Ge,Re,xe,Be,Ee,Le,Oe,Fe,_e,He,We){Object.defineProperty(t,"__esModule",{value:!0});const Ne=new xe.default(xe.LogSource.Game);class qe extends Pe.default{constructor(){super(...arguments),this.interval=I.interval,this.mapSize=512,this.mapSizeSq=this.mapSize*this.mapSize,this.mapGenVersion=gameVersion,this.seeds={base:0,saved:0},this.version=gameVersion,this.glContext=null,this.visible=!0,this._updateRender=!1,this.renderingEnabled=!0,this.ambientLightLevelCache={},this.gameLoop=(e=>{if(requestAnimationFrame(this.gameLoop),audio.processEffects(),!this.playing)return;this.notifier&&this.notifier.update();let t=!1;if(this.paused&&!(t=!!(void 0!==this.fadeInAmount||this.thumbnailResolve||this.updateFieldOfView||this._updateRender)))return;const a=this.getAndUpdateAmbientLightLevel(localPlayer.z);let i=!1;if(!t){this.absoluteTime=e;const t=this.isRealTimeMode();if(t&&(void 0===this.nextTickTime&&players.some(e=>e.isResting())&&(this.nextTickTime=this.absoluteTime+this.getTickSpeed()*this.interval),void 0!==this.nextTickTime&&this.nextTickTime<=this.absoluteTime&&(this.lastTickTime=this.absoluteTime,this.getTurnMode()===f.TurnMode.Simulated?this.nextTickTime=void 0:this.nextTickTime=this.absoluteTime+this.getTickSpeed()*this.interval,t&&(this.visible&&!multiplayer.isConnected()||multiplayer.isServer())))){if(multiplayer.isServer()){if(!steamworks.isDedicatedServer()||players.length>1){const e=new N.default;e.isMoving=players.map(e=>e.isMoving),e.noInputReceived=players.map(e=>e.noInputReceived),e.movementComplete=players.map(e=>e.movementComplete),e.processAndSend()}}else this.tickRealtime();if(!this.playing)return}for(const e of players){1!==e.movementProgress&&this.updateRenderInternal(I.RenderSource.MovementPlayerPre);const t=f.Delay.Movement+e.getWeightMovementPenalty();if(e.movementProgress=1-Math.min(1,Math.max(0,(e.movementFinishTime-this.absoluteTime)/(t*this.interval))),1!==e.movementProgress)this.updateRenderInternal(I.RenderSource.MovementPlayerPost);else if(e.isMovingClientside){e.isMovingClientside=!1,e.fromX=e.x,e.fromY=e.y,e.isLocalPlayer()&&fieldOfView.resetTransitionProgress(),multiplayer.isConnected()&&multiplayer.isServer()&&(e.isMoving=!1);const t=e.movementCompleteZ;if(void 0!==t){if(multiplayer.isConnected()){if(multiplayer.isServer()){const a=new W.default;a.pid=e.id,a.z=t,a.processAndSend()}}else e.setZ(t);e.isLocalPlayer()&&(i=!0),e.movementCompleteZ=void 0}multiplayer.isConnected()?e.movementComplete=!0:modManager.getHook(E.Hook.OnMoveComplete).call(e)}}if(!this.playing)return;if(t&&!this._updateRender){for(const e of this.creatures)if(e){const t=e.getMovementFinishTime();if(void 0!==t&&1!==t&&(localPlayer.canSeePosition(e.x,e.y,e.z,!0)||localPlayer.canSeePosition(e.fromX,e.fromY,e.z,!0))){this.updateRenderInternal(I.RenderSource.MovementCreature);break}}if(!this._updateRender){for(const e of this.tileEvents)if(e){const t=e.movementFinishTime;if(void 0!==t&&1!==t&&(localPlayer.canSeePosition(e.x,e.y,e.z,!0)||localPlayer.canSeePosition(e.fromX,e.fromY,e.z,!0))){this.updateRenderInternal(I.RenderSource.MovementTileEvent);break}}if(!this._updateRender)for(const e of this.npcs)if(e){const t=e.getMovementFinishTime();if(void 0!==t&&1!==t&&(localPlayer.canSeePosition(e.x,e.y,e.z,!0)||localPlayer.canSeePosition(e.fromX,e.y,e.z,!0))){this.updateRenderInternal(I.RenderSource.MovementNPC);break}}}}}if(steamworks.isDedicatedServer())this.updateFieldOfView&&(this.updateFieldOfView=!1,fieldOfView.compute(void 0,a));else if(this.renderingEnabled&&(fieldOfView.updateTransitionProgress()&&this.updateRenderInternal(I.RenderSource.FovTransition),modManager.getHook(E.Hook.PreRender).call(),this.render(a),modManager.getHook(E.Hook.PostRender).call(),i&&this.updateView(I.RenderSource.MovementPlayerZPost,!0),this.thumbnailResolve&&this.glContext&&this.gameCanvas)){const e=document.createElement("canvas");e.width=512,e.height=512;const t=e.getContext("2d");if(!t)return;t.drawImage(this.gameCanvas,this.glContext.canvas.width/2-256,this.glContext.canvas.height/2-256,512,512,0,0,512,512),saveData.gameThumbnail=e.toDataURL(),this.thumbnailResolve(),this.thumbnailResolve=void 0}if(!t)for(const e of players){const t=e.hasDelay();e.processInput(),e.noInputReceived=!t&&!e.isMovingClientside&&!e.hasDelay(),!multiplayer.isConnected()&&e.noInputReceived&&modManager.getHook(E.Hook.OnNoInputReceived).call(e)}})}get isChallenge(){return this.difficulty===S.Difficulty.Challenge}get updateRender(){return this.updateRenderInternal}set updateRender(e){!0===e&&this.updateRenderInternal(I.RenderSource.Mod,!1)}initialize(){if(steamworks.isDedicatedServer())return this.notifier=d.notifier,void(this.particle=d.particle);this.gameCanvas=document.getElementById("game"),this.gameCanvas.addEventListener("webglcontextlost",e=>{e.preventDefault(),this.renderingEnabled=!1,multiplayer.isConnected()||this.setPaused(!0),Ne.error("Lost gl context",e.statusMessage||"Unknown error"),newui.showLoadingInterrupt(P.default.GameInterruptLoadingLostGLContext,P.default.GameInterruptLoadingLostGLContextDescription)},!1),this.gameCanvas.addEventListener("webglcontextrestored",()=>{Ne.warn("Restored gl context"),this.setupGl(!0),!multiplayer.isConnected()&&this.paused&&this.setPaused(!1)},!1)}async initGl(){if(!this.gameCanvas)return void Ne.info("No game canvas, not initializing webgl");let e,t;switch("low-power"!==saveDataGlobal.options.powerPreference&&"high-performance"!==saveDataGlobal.options.powerPreference||(t={powerPreference:saveDataGlobal.options.powerPreference}),Ne.info(`Initializing webgl version ${webGlVersion}`,t),webGlVersion){case 2:try{if(t||(t={}),t.antialias=!0,e=this.gameCanvas.getContext("webgl2",t))break;Ne.warn("Failed to get webgl 2 context. Falling back to webgl 1")}catch(e){Ne.warn("Failed to get webgl 2 context. Falling back to webgl 1",e)}finally{t&&delete t.antialias}default:e=this.gameCanvas.getContext("webgl",t)||this.gameCanvas.getContext("experimental-webgl",t)}if(!e)throw new Error("Invalid WebGl game canvas context");return this.glContext=e,ui.onWindowResize(),this.setupGl(!1)}async setupGl(e){this.glContext?(ue.default.resetGl(),resourceLoader.initialize(this.glContext),me.default.compileShaders(this.glContext),pe.default.compileShaders(this.glContext),te.default.compileShaders(this.glContext),this.notifier=new ae.default(this.glContext,16),this.particle=new ne.default(this.glContext),fieldOfView&&fieldOfView.resetGl(this.glContext),this.playing?(await this.loadResources(),this.createWorldRenderer(),world.load(),renderer.updateAll(),this.updateFieldOfView=!0,this.updateRenderInternal(I.RenderSource.SetupGl),this.renderingEnabled=!0,e&&newui.hideLoadingInterrupt()):e&&newui.hideLoadingInterrupt()):e&&newui.hideLoadingInterrupt()}resetWebGL(){if(this.glContext){const e=this.glContext.getExtension("WEBGL_lose_context");e&&(e.loseContext(),setTimeout(()=>{e.restoreContext()},1e3))}}setGlContextSize(e,t){const a=window.devicePixelRatio||1;this.glContext&&(this.glContext.canvas.width=Math.round(e*a),this.glContext.canvas.height=Math.round(t*a))}resizeRenderer(){renderer&&this.glContext&&(renderer.setViewport(new Be.default(this.glContext.canvas.width,this.glContext.canvas.height)),this.updateZoomLevel(),this.playing&&localPlayer&&this.updateView(I.RenderSource.Resize,!1))}checkWaterFill(e,t,a,i){if(this.fillCount>=i)return;const n=this.getTile(e,t,a);if(!n)return;const o=Fe.default.getType(this.getTile(e,t,a)),r=be.default[o];if(r&&(r.shallowWater||r.water)){if(this.fillTile[e]&&this.fillTile[e][t])return;r.deepWater?this.fillCount+=3:r.water?this.fillCount+=2:this.fillCount++,this.fillTile[e]=this.fillTile[e]||[],this.fillTile[e][t]=!0,this.checkWaterFill(e-1,t,a,i),this.checkWaterFill(e,t-1,a,i),this.checkWaterFill(e+1,t,a,i),this.checkWaterFill(e,t+1,a,i)}}consumeWaterTile(e,t,a){const i=this.getTile(e,t,a),n=Fe.default.getType(i);let o;const r=50;if(this.fillCount=0,this.fillTile=[],this.checkWaterFill(e,t,a,50),game.fillCount<50){const i=be.default[n];n===f.TerrainType.DeepFreshWater||n===f.TerrainType.DeepSeawater?o=i&&i.freshWater?f.TerrainType.FreshWater:f.TerrainType.Seawater:n===f.TerrainType.FreshWater||n===f.TerrainType.Seawater?(o=i&&i.freshWater?f.TerrainType.ShallowFreshWater:f.TerrainType.ShallowSeawater,50*Oe.default.float()+game.fillCount<=25&&(o=i&&i.tileOnConsume?i.tileOnConsume:f.TerrainType.Dirt)):o=i&&i.tileOnConsume?i.tileOnConsume:f.TerrainType.Dirt,this.changeTile(o,e,t,a,!1)}}checkForHiddenMob(e,t,a,i){const n=this.getTile(t,a,i).creature;n&&n.isHidden()&&(n.ai|=h.AiType.Hostile,n.ai&=~h.AiType.Hidden,X.default.get(e).source(Y.Source.Combat,Y.Source.Creature).send(D.default.CreatureAppears,n.getName()),this.updateView(I.RenderSource.HiddenMob,!1))}animateSkeletalRemains(e,t,a,i){const n=this.getTile(t,a,i);if(!n)return;const o=n.doodad;o&&o.type===f.DoodadType.SkeletalRemains&&creatureManager.spawn(f.CreatureType.Skeleton,t,a,i,!0)&&(doodadManager.remove(o),e.messages.source(Y.Source.Creature).send(D.default.ReturnsToLife,x.default.nameOf(k.Dictionary.Creature,f.CreatureType.Skeleton)))}getWrappedCoord(e){return e-this.mapSize*Math.floor(e/this.mapSize)}getTileFromPoint(e){return this.getTile(e.x,e.y,e.z)}getTile(e,t,a){return this.tile[a*this.mapSizeSq+this.getWrappedCoord(t)*this.mapSize+this.getWrappedCoord(e)]}getTileUnsafe(e,t,a){return this.tile[a*this.mapSizeSq+t*this.mapSize+e]}setTile(e,t,a,i){return this.tile[a*this.mapSizeSq+t*this.mapSize+e]=i,i}getOrCreateTile(e,t,a){const i=a*this.mapSizeSq+t*this.mapSize+e;let n=this.tile[i];return n||(n={},this.tile[i]=n,n)}setPaused(e,t=!1){if(this.paused===e)return;if(Ne.info(e?"Paused game":"Unpaused game"),this.paused=e,multiplayer.isConnected()&&multiplayer.isServer()){const a=new H.default;a.paused=e,a.showChatMessage=t,a.send()}const a=this.paused?D.default.MultiplayerGamePaused:D.default.MultiplayerGameResumed;xe.default.info(xe.LogSource.Chat)(x.default.message(a).getString()),this.emit(this.paused?I.GameEvent.Pause:I.GameEvent.Resume)}async saveGame(e){if(this.saveClear)return;Ne.info("Saving game",f.SaveType[e]);const t=e===f.SaveType.Quit;let a=!1;if((!multiplayer.isConnected()||multiplayer.isServer())&&(this.seeds.saved=Oe.default.generator.getSeed(),(!this.isChallenge||e===f.SaveType.Challenge||e===f.SaveType.Multiplayer)&&(multiplayer.isServer()&&t&&multiplayer.disconnect(void 0,void 0,!0),e===f.SaveType.InGame||e===f.SaveType.Death||e===f.SaveType.Multiplayer||e===f.SaveType.Challenge?modManager.saveAll():await modManager.unloadAll(),this.playing))){a=!0;const i=e===f.SaveType.Multiplayer?Te.SLOT_MULTIPLAYER:this.slot;if(t)return saveManager.save(i,!0),{slot:i};e!==f.SaveType.Multiplayer&&await this.updateThumbnail();const n=performance.now();modManager.getHook(E.Hook.PreSaveGame).call();const o=await saveManager.save(i);modManager.getHook(E.Hook.PostSaveGame).call();const r=performance.now()-n;if(Ne.info(`Saving took ${(r/1e3).toPrecision(2)} seconds`),void 0!==o.bytes&&e!==f.SaveType.Multiplayer&&e!==f.SaveType.Death){const e=(o.bytes/1024/1024).toFixed(3);localPlayer.messages.source(Y.Source.Meta).send(D.default.GameHasBeenSavedIsTakingUpMB,e)}return o}a||saveManager.save(Te.SLOT_GLOBAL,t)}async updateThumbnail(){if(steamworks.isDedicatedServer())return;const e=await Promise.race([new Promise((e,t)=>{this.thumbnailResolve=(()=>{e(!0)})}),Ae.sleep(5e3)]);e||(this.thumbnailResolve=void 0)}addZoomLevel(e){const t=Math.max(Math.min(saveDataGlobal.options.zoomLevel+e,8),1);t!==saveDataGlobal.options.zoomLevel&&(saveDataGlobal.options.zoomLevel=Math.round(t),this.updateZoomLevel())}updateZoomLevel(){renderer&&(renderer.setZoom(modManager.getHook(E.Hook.GetZoomLevel,saveDataGlobal.options.zoomLevel).call()),this.playing&&this.updateView(I.RenderSource.OptionZoomLevel,!1))}async requestPlay(e){const t=e.slot,a=await saveManager.loadPartial(t),i={};saveManager.loadPartialData(a,i,"modsUnloadable");const n=i.modsUnloadable;if(void 0!==n){const e=Object.keys(n);if(e.length>0){let t="CanLoad";const a=[],i=[];for(const o of e){if(n[o].unloadable)continue;let e="Error";const r=modManager.canLoadFromIdentifier(o);if(r.loadable){e="NotEnabled";for(const t of modManager.getIndexFromIdentifier(o))if(modManager.isEnabled(t)){e="Enabled";break}}"Error"===e?(t="MissingMod",a.push(r.name)):"NotEnabled"===e&&("MissingMod"!==t&&(t="CanEnable"),i.push(r.name))}if("MissingMod"===t||"CanEnable"===t){const e=await newui.interrupt(P.default.MenuLoadGameInterruptMissingMod).withDescription(()=>x.default.ui(P.default.MenuLoadGameInterruptMissingModDescription).get(0===a.length?"":x.default.ui(P.default.MenuLoadGameInterruptMissingModDescriptionLabelModsMissing).get(x.default.formatList(a)),0===i.length?"":x.default.ui(P.default.MenuLoadGameInterruptMissingModDescriptionLabelModsDisabled).get(x.default.formatList(i)))).withConfirmation();if(!e)return!1}}}return this.play(Object.assign({},e,{slot:t}))}async play(e){if(void 0!==e.multiplayerServerToJoin)return multiplayer.joinServer(e.multiplayerServerToJoin,e.character),!0;if(void 0===e.slot&&e.difficulty!==S.Difficulty.Challenge){const t=await saveManager.getFirstFreeSlot();if(void 0===t)return Ne.error("No free game slots available. Try deleting some saves"),!1;e.slot=t}const t=e.multiplayerWorld||e.difficulty!==S.Difficulty.Challenge?e.slot:Te.SLOT_CHALLENGE;if(Ne.info("play",t),"number"!=typeof t)return!1;if(newui.showLoadingInterrupt(P.default.GameInterruptLoadingGame,P.default.GameInterruptLoadingGameDescription),this.initializeGameState(),this.slot=t,this.createWorld(),this.difficulty=void 0!==e.difficulty?e.difficulty:S.Difficulty.Hardcore,this.difficultyOptions=void 0!==e.difficultyOptions?e.difficultyOptions:S.getDefaultDifficultyOptions(this.difficulty),this.tickSpeed=void 0!==e.realTimeTickSpeed?e.realTimeTickSpeed:f.TickSpeed.Default,this.turnMode=void 0!==e.turnMode?e.turnMode:f.TurnMode.Manual,!e.multiplayerWorld&&this.isChallenge&&(!localPlayer||localPlayer.state!==f.PlayerState.Traveling))return await saveManager.deleteSlot(Te.SLOT_CHALLENGE),this.prePlay(!1,{seed:`${e.seed||Date.now()}`,name:e.name,character:e.character,turnMode:e.turnMode,multiplayer:e.multiplayer});const a=await saveManager.isSlotUsed(this.slot);if(a){if(e.multiplayerWorld){Ne.info(`Adding players. Local id: ${e.multiplayerWorld.pid}. Multiplayer player count: ${e.multiplayerWorld.playerCount}`);for(let t=0;t<e.multiplayerWorld.playerCount;t++){const t=this.addPlayer({options:{}});t.id===e.multiplayerWorld.pid&&this.setLocalPlayer(t)}}else this.setLocalPlayer(this.addPlayer({options:{},identifier:multiplayer.getPlayerIdentifier()}));await saveManager.load(this.slot),localPlayer.state===f.PlayerState.Traveling&&this.initializeGameState(!0),e.seed=localPlayer.state===f.PlayerState.Traveling?void 0:`${this.seeds.base}`}return this.prePlay(a,e)}setLocalPlayer(e){localPlayer=e,e.canSendMessage=!0}addPlayer(e){let t;Ne.info(`Adding player with pid ${e?e.id:void 0}, identifier: ${e?e.identifier:void 0}`);let a=!1;if(e&&e.identifier){for(let e=0;e<players.length;e++)Ne.info(`players id ${e}, identifier ${players[e].identifier}`);for(let i=0;i<absentPlayers.length;i++){const n=absentPlayers[i];if(Ne.info(`absentPlayer id ${i}, identifier ${n.identifier}`),n.identifier===e.identifier){Fe.default.isOpenTile(n,n.getTile())||(a=!0),(t=n).wasAbsentPlayer=!0;const e=t.getStat(y.Stat.Health);e.value<=0&&(Ne.info("Fixing invalid health value"),t.setStat(e,20)),this.removeAndFixPids(absentPlayers,i),Ne.info("Restored absent player",i),t.state===f.PlayerState.Ghost&&this.getDifficultyOptions().respawn&&(t.state=f.PlayerState.None,Ne.info("Updated player state from ghost to none"));break}}}if(void 0===t&&(t=new Z.default(e&&e.identifier?e.identifier:_e.default.create())),e&&(e.options&&t.setOptions(e.options),t.wasAbsentPlayer&&!a||!e.position||(t.x=e.position.x,t.y=e.position.y,t.z=e.position.z,t.fromX=e.position.x,t.fromY=e.position.y),!t.wasAbsentPlayer&&e.character&&(t.customization=e.character.customization,t.name=e.character.name),void 0!==e.id))return t.setId(e.id),players[t.id]=t,this.playing&&modManager.getHook(E.Hook.OnTileUpdate).call(t.getTile(),t.x,t.y,t.z),t;const i=players.push(t);return t.setId(i-1),this.playing&&(modManager.getHook(E.Hook.OnTileUpdate).call(t.getTile(),t.x,t.y,t.z),this.updateView(I.RenderSource.TileUpdate,!1)),t}removePlayer(e){const t=players[e];if(t){if(Ne.info("Removing player",e),t.absentLastUsedTime=Date.now(),absentPlayers.push(t),t.resetMovementStates(),this.removeAndFixPids(players,e),this.playing&&this.updateView(I.RenderSource.PlayerRemove,!1),multiplayer.isServer()){const e=steamworks.getDedicatedServerInfo();e&&e.console&&game.saveGame(f.SaveType.InGame)}}else Ne.warn("Unable to remove player",e)}deletePlayer(e,t){for(let a=0;a<e.length;a++){const i=e[a];if(i.identifier===t){e.splice(a,1);const n=itemManager.getItemsInContainer(i.inventory,!0);Ne.info(`Deleting player '${i.name}' [${t}] - ${n.length} items`);for(const e of n)itemManager.remove(e);const o=e.find(e=>e.identifier===t);for(const e of game.items)e&&e.containedWithin===i.inventory&&(Ne.info("Fixing duplicate identifier issue",e),void 0!==o?(Ne.info(`Moving item into '${i.name}'s inventory`),itemManager.moveToContainer(o,e,o.inventory)):itemManager.remove(e));if(void 0!==o)for(const e of o.inventory.containedItems)e.containedWithin!==o.inventory&&(e.containedWithin=o.inventory,Ne.info("Fixing invalid contained within for another player"));break}}}isRealTimeMode(){return this.getTurnMode()!==f.TurnMode.Manual}getTurnMode(){return this.turnMode}setTurnMode(e){this.turnMode=e,this.getTurnMode()===f.TurnMode.RealTime&&(this.nextTickTime=0),multiplayer.isServer()&&multiplayer.updateOptions({turnMode:e})}getTickSpeed(){return this.tickSpeed}setTickSpeed(e){this.tickSpeed=e,multiplayer.isServer()&&multiplayer.updateOptions({tickSpeed:e})}synchronizeFlowFields(e){Ne.info(this.time.ticks,this.flowFieldSyncCount,"synchronizeFlowFields",e.length,e.map(e=>e.id).join(",")),flowFieldManager.setPlayers(e),this.updateEntityFov(),flowFieldManager.reset(),this.flowFieldSyncCount++}enableFlowFieldDebug(){this.glContext}async resetGameState(e=!1){Ne.info("resetGameState",saveData.gameSlotName,f.PlayerState[localPlayer.state]),modManager.getHook(E.Hook.OnGameEnd).call(localPlayer.state),steamworks.stopPlaytimeTracking(),multiplayer.isConnected()&&(e=multiplayer.isClient(),multiplayer.disconnect(),e||(saveData.multiplayerState.enable=!0)),this.isChallenge?localPlayer.state===f.PlayerState.Traveling&&await this.saveGame(f.SaveType.Challenge):e||await this.saveGame(f.SaveType.BackToMainMenu),this.playing=!1,this.notifier.clear(),fieldOfView=void 0,renderer&&renderer.dispose(),audio.updateMusicSpeed(1),await modManager.unloadAll(!0),Ge.default.reset(),localPlayer.state===f.PlayerState.Traveling?this.play({slot:this.slot}):ui.switchToScreen(z.ScreenId.MainMenu)}shouldRender(){const e=modManager.getHook(E.Hook.ShouldRender).call();return void 0===e?65535:e}makeLavaPassage(e){const{x:t,y:a,z:i}=e.getFacingPoint(),n=game.getTile(t,a,i),o=Fe.default.getType(n);if(i===f.WorldZ.Overworld&&o!==f.TerrainType.Lava){const n=game.getTile(t,a,f.WorldZ.Cave),o=Fe.default.getType(n);if(o===f.TerrainType.Lava){this.changeTile(f.TerrainType.Lava,t,a,i,!1),Oe.default.bool()&&this.changeTile(f.TerrainType.CoolingLava,t,a,f.WorldZ.Cave,!1),e.messages.source(Y.Source.Action).send(D.default.DiscoveredLavaPassage),e.queueSoundEffectInFront(f.SfxType.Water);const n=be.default[o];return n&&game.particle.create(t,a,i,n.particles),f.TerrainType.Lava}}}makeCaveEntrance(e){if(e.z===f.WorldZ.Cave)return;const t=e.getFacingPoint(),a={x:0,y:0};for(a.x=t.x-1;a.x<t.x+2;a.x++)for(a.y=t.y-1;a.y<t.y+2;a.y++)if(Fe.default.getType(this.getTile(a.x,a.y,f.WorldZ.Overworld))===f.TerrainType.CaveEntrance)return;if(0===Oe.default.int(50)){e.addDelay(f.Delay.Collision),e.messages.source(Y.Source.Action).send(D.default.DiscoveredCaveEntrance),this.changeTile(f.TerrainType.CaveEntrance,t.x,t.y,e.z,!1),this.changeTile(f.TerrainType.CaveEntrance,t.x,t.y,f.WorldZ.Cave,!1,!0);const a=this.getTile(t.x,t.y,f.WorldZ.Cave).doodad;return a&&a.damage(!0),f.TerrainType.CaveEntrance}}getTileData(e,t,a){const i=this.tileData[e];if(i){const e=i[t];if(e)return e[a]}}getOrCreateTileData(e,t,a){let i=this.tileData[e];i||(i=this.tileData[e]={});let n=i[t];n||(n=i[t]={});let o=n[a];return o||(o=n[a]=[]),o}updateTablesAndWeightNextTick(){this.shouldUpdateTablesAndWeight=!0}makeMiniMap(e){const t=document.createElement("canvas");t.width=456,t.height=456;const a=t.getContext("2d");if(!a)throw new Error("Invalid map canvas context");const i=38,n=456,o=12,r=this.glContext;if(!this.cartographyTexture){const e=r.createTexture();if(!e)throw new Error("Unable to create map texture");this.cartographyTexture=e,r.bindTexture(r.TEXTURE_2D,this.cartographyTexture),r.texParameteri(r.TEXTURE_2D,r.TEXTURE_MAG_FILTER,r.NEAREST),r.texParameteri(r.TEXTURE_2D,r.TEXTURE_MIN_FILTER,r.NEAREST),r.texParameteri(r.TEXTURE_2D,r.TEXTURE_WRAP_S,r.CLAMP_TO_EDGE),r.texParameteri(r.TEXTURE_2D,r.TEXTURE_WRAP_T,r.CLAMP_TO_EDGE),r.texImage2D(r.TEXTURE_2D,0,r.RGBA,456,456,0,r.RGBA,r.UNSIGNED_BYTE,re.emptyUint8Array)}const s=r.createFramebuffer();r.bindFramebuffer(r.FRAMEBUFFER,s),r.framebufferTexture2D(r.FRAMEBUFFER,r.COLOR_ATTACHMENT0,r.TEXTURE_2D,this.cartographyTexture,0);const l=456/(38*re.subTileSize*2);r.viewport(0,0,456,456),r.clearColor(98/255,67/255,30/255,1),r.clear(r.COLOR_BUFFER_BIT),r.enable(r.BLEND),r.blendFunc(r.SRC_ALPHA,r.ONE_MINUS_SRC_ALPHA),renderer.layers[e.tilePosition.z].renderFullbright(e.tilePosition.x-.5,e.tilePosition.y-.5,l,456,456,!1),renderer.layers[e.tilePosition.z].renderFullbright(e.tilePosition.x-.5,e.tilePosition.y-.5,l,456,456,!0);const u=new Uint8Array(831744);r.readPixels(0,0,456,456,r.RGBA,r.UNSIGNED_BYTE,u),r.deleteFramebuffer(s),r.bindFramebuffer(r.FRAMEBUFFER,null);const d=a.createImageData(456,456);let p,c;for(p=0;p<456;p++)for(c=0;c<456;c++){const e=4*(456*p+c),t=4*(456*(456-p)+c);d.data[e]=u[t],d.data[e+1]=u[t+1],d.data[e+2]=u[t+2],d.data[e+3]=u[t+3]}if(a.putImageData(d,0,0),e.skillCheck){const e=this.getSkillPercent(f.SkillType.Cartography);if(void 0!==e)for(a.fillStyle="rgba(0,0,0,0)",c=0;c<38;c++)for(p=0;p<38;p++){const t=e/100,i=Oe.generalRandom.weightedChoice([[Math.pow(4*(1-Math.abs(t-0)),2),[[20,1],[8,.8],[4,.6],[.25,.4],[.1,.2]]],[Math.pow(4*(1-Math.abs(t-.2)),2),[[12,1],[6,.8],[4,.6],[.25,.25],[.1,.1]]],[Math.pow(4*(1-Math.abs(t-.4)),2),[[4,.8],[4,.6],[1,.25],[.1,.1]]],[Math.pow(4*(1-Math.abs(t-.6)),2),[[1,.8],[4,.6],[2,.25],[1,.1]]],[Math.pow(4*(1-Math.abs(t-.8)),2),[[1,.8],[3,.25],[3,.1]]],[Math.pow(4*(1-Math.abs(t-1)),2),[[1,.8],[3,.25],[5,.1]]]]),n=Oe.generalRandom.weightedChoice(i),o=6;for(let e=0;e<o;e++)for(let t=0;t<o;t++)Oe.generalRandom.chance(n)&&a.clearRect(12*c+12*e/o,12*p+12*t/o,12/o,12/o)}a.fillStyle="#00ff00",a.fillRect(228,228,12,12)}return t}getBlackness(){return void 0!==this.fadeInAmount?1-this.fadeInAmount:1}getAmbientLightLevel(e){return this.ambientLightLevelCache[e]}getAndUpdateAmbientLightLevel(e){const t=this.getAmbientLightLevel(e),a=e!==f.WorldZ.Cave?1-this.time.getBrightness():.05,i=modManager.getHook(E.Hook.GetAmbientLightLevel).setDefault(a).call(a,e);return t!==i&&(this.updateFieldOfView=!0,this.ambientLightLevelCache[e]=i),i}updateReputation(e){if(1===players.length)return void(localPlayer.isGhost()||localPlayer.updateReputation(e));const t=this.getPlayers();if(0===t.length)return;const a=Math.floor(e/t.length);for(const e of t)e.updateReputation(a)}getDifficulty(){return this.difficulty}getDifficultyOptions(){return this.difficultyOptions}getReputation(){return this.getPlayerAverage(e=>e.getReputation(),!0)}getMalignity(){return this.getPlayerAverage(e=>e.getStat(y.Stat.Malignity).value,!0)}getBenignity(){return this.getPlayerAverage(e=>e.getStat(y.Stat.Benignity).value,!0)}getMaxHealth(){return this.getPlayerAverage(e=>e.getMaxHealth())}getMaxWeight(){return this.getPlayerAverage(e=>e.getMaxWeight())}getTactics(){return this.getPlayerAverage(e=>e.skills[f.SkillType.Tactics].core)}getSkillPercent(e){return this.getPlayerAverage(t=>t.getSkill(e))}getPlayerAverage(e,t){if(1===players.length){if(localPlayer.isGhost())return 0;const t=e(localPlayer);return void 0!==t?t:0}const a=this.getPlayers();if(0===a.length)return 0;let i=0;for(const t of a){const a=e(t);void 0!==a&&(i+=a)}if(0===i)return 0;const n=i/a.length;return t?Math.round(n):n}changeTile(e,t,a,i,n,o,r){t=this.getWrappedCoord(t),a=this.getWrappedCoord(a);const s="number"==typeof e?{type:e}:e;if(void 0===s.type)return;let l=Oe.default.int(3);const u=this.getTile(t,a,i);if(!u)return;const d=be.default[Fe.default.getType(u)];d&&d.noGfxSwitch&&(l=Fe.default.getGfx(u));let p=this.getOrCreateTileData(t,a,i);if(o){const e=p.length-1;for(let n=e;n>=0;n--){const o=p[n];if((!r||!(n===e||n===e-1&&p[e]&&p[e].type===f.TerrainType.CaveEntrance))&&o.type!==f.TerrainType.CaveEntrance){const e=Me.default[o.type];if(e&&e.defaultItem){let n,r;o.minDur&&o.maxDur&&(n=o.minDur-1,r=o.maxDur);let s=f.ItemQuality.Random;void 0!==o.quality&&(s=o.quality);const l=itemManager.create(e.defaultItem,itemManager.getTileContainer(t,a,i),s);void 0!==n&&(l.minDur=n),void 0!==r&&(l.maxDur=r),void 0===n&&void 0===r||ui.updateItem(l)}}}this.tileData[t][a][i]=[],p=this.getOrCreateTileData(t,a,i)}if(n)Fe.default.getType(u)===f.TerrainType.Grass?p.length>0?p[0].type=f.TerrainType.Dirt:p.push({type:f.TerrainType.Dirt}):p.length<=0&&p.push({type:Fe.default.getType(u)}),p.unshift(s);else{p.length<=0&&p.push(s),p[0].type=s.type,p[0].gfx=l;const e=be.default[s.type];if(e){const t=e.durability;void 0===p[0].minDur&&void 0!==t&&(p[0].minDur=t),void 0===p[0].maxDur&&void 0!==t&&(p[0].maxDur=t)}}Fe.default.setGfx(u,l),Fe.default.setType(u,s.type),world.updateTile(t,a,i,u)}isPositionFull(e,t,a){const i=this.getTile(e,t,a);return!i||this.isTileFull(i)}isTileFull(e){const t=e;return!(!t.containedItems||!t.containedItems.length)&&itemManager.getItemsWeight(t.containedItems)>=36}isOnFire(e){const t=e.doodad;if(t){const e=t.description();if(e&&e.providesFire)return f.FireType.Doodad}if(tileEventManager.get(e,we.TileEventType.Fire))return f.FireType.Fire;const a=Fe.default.getType(e);return a===f.TerrainType.Lava?f.FireType.Lava:a===f.TerrainType.CoolingLava?f.FireType.CoolingLava:f.FireType.None}isTileEmpty(e){const t=e,a=be.default[Fe.default.getType(e)],i=!(a&&!a.passable||void 0!==e.doodad||void 0!==t.containedItems&&t.containedItems.length>0||e.creature||e.npc||e.corpses||e.events||this.isPlayerAtTile(e));return multiplayer.addSyncCheck(F.MultiplayerSyncCheck.IsTileEmpty,{doodad:void 0!==e.doodad,creature:void 0!==e.creature,corpses:void 0!==e.corpses,events:void 0!==e.events,items:void 0!==t.containedItems&&t.containedItems.length>0,hasPlayer:this.isPlayerAtTile(e),ret:i}),i}isPositionEmpty(e,t,a){const i=this.getTile(e,t,a);return i?this.isTileEmpty(i):(multiplayer.addSyncCheck(F.MultiplayerSyncCheck.IsTileEmpty,{x:e,y:t,z:a}),!1)}processWaterContamination(){if(0===this.contaminatedWater.length)return;const e=[];for(;this.contaminatedWater.length>0;){const t=this.contaminatedWater.pop();if(!t)return;const a=world.layers[t.z],i=a.getTileType(t.x,t.y);if(i>f.TerrainType.ShallowFreshWater)continue;i>f.TerrainType.ShallowSeawater&&this.changeTile(i-3,t.x,t.y,t.z,!1);let n=a.getTileType(t.x+1,t.y);n>f.TerrainType.ShallowSeawater&&n<=f.TerrainType.ShallowFreshWater&&e.push({x:t.x+1,y:t.y,z:t.z}),(n=a.getTileType(t.x-1,t.y))>f.TerrainType.ShallowSeawater&&n<=f.TerrainType.ShallowFreshWater&&e.push({x:t.x-1,y:t.y,z:t.z}),(n=a.getTileType(t.x,t.y+1))>f.TerrainType.ShallowSeawater&&n<=f.TerrainType.ShallowFreshWater&&e.push({x:t.x,y:t.y+1,z:t.z}),(n=a.getTileType(t.x,t.y-1))>f.TerrainType.ShallowSeawater&&n<=f.TerrainType.ShallowFreshWater&&e.push({x:t.x,y:t.y-1,z:t.z})}this.contaminatedWater=e}getMovementFinishTime(){return this.absoluteTime+f.Delay.Movement*this.interval}passTurn(e,t){e.passTurn(t);const a=this.isRealTimeMode();a&&e.isResting()?e.tick(!0):a||(e.tick(!0),this.tick()),this.getTurnMode()===f.TurnMode.Simulated&&!e.isGhost()&&(void 0===this.lastTickTime||this.lastTickTime+this.getTickSpeed()*this.interval<this.absoluteTime)&&(this.nextTickTime=0),e.updateStatsAndAttributes(),this.updateView(I.RenderSource.GamePassTurn,!e.isResting()&&(e.isLocalPlayer()||0!==e.lightBonus))}tickRealtime(){this.tick();for(const e of players)e.isServer()||e.tick();for(const e of this.getPlayers())e.updateStatsAndAttributes();this.updateView(I.RenderSource.GameTick,!localPlayer.isResting()&&(localPlayer.isLocalPlayer()||0!==localPlayer.lightBonus))}updateView(e,t){"boolean"==typeof e&&(t=e,e=I.RenderSource.Mod),t&&(this.updateFieldOfView=!0),!renderer||localPlayer.isResting()&&!multiplayer.isConnected()||(this.updateRenderInternal(e,!0),renderer.computeSpritesInViewport())}updateRenderInternal(e,t=!1){this._updateRender=!0}updateTablesAndWeight(){this.shouldUpdateTablesAndWeight=!1;for(const e of this.getPlayers())e.updateTablesAndWeight()}rangeFinder(e,t){0===e&&(e=1),0===t&&(t=1);const a=Math.ceil(t/100*6)-1;let i=a;a>e&&(i=e);const n=Oe.default.intInRange(i,e);let o=n+a;return 1===e&&(o=Math.floor(o/2)),o<1&&o++,o}damage(e,t,a=!0){let i=x.default.message(D.default.YourFist),n=x.default.message(D.default.TheirFist);t.weaponName instanceof x.default?i=n=t.weaponName:"number"==typeof t.weaponName&&t.weaponName!==D.default.YourFist&&(i=n=x.default.message(t.weaponName));const o=e.getName();let s=!1,u,d=x.default.message(D.default.None),p;switch(e.entityType){case h.EntityType.Player:p=modManager.getHook(E.Hook.OnPlayerDamage).call(e,t);break;case h.EntityType.NPC:p=modManager.getHook(E.Hook.OnNPCDamage).call(e,t);break;case h.EntityType.Creature:p=modManager.getHook(E.Hook.OnCreatureDamage).call(e,t)}if(void 0!==p){if(p<=0)return;void 0!==p&&(u=p)}if(t.legacy&&(u=t.amount)<0&&(u*=-1),void 0===u){let a;if(e instanceof r.default){const t=e.description();t&&(a=t.defense)}else a=e.defense;if(!a)return;let l=a.base;e instanceof r.default&&e.aberrant&&(l=Math.ceil(l*Math.max(this.getTactics()/30,2)))>15&&(l=15);const p=a.resist;let c=0;const m=[],h=a.vulnerable;let g=0;const T=[];for(const a of Re.default.values(f.DamageType)){if(t.type&a&&p[a]){const n=p[a];switch(n){case 99:t.weaponName&&X.default.get(t.human).source(Y.Source.Combat,Y.Source.Action,Y.Source.Item).type(X.MessageType.Bad).send(D.default.DidNotSeemToBeHurting,i,o),s=!0;break;case 100:t.weaponName&&X.default.get(t.human).source(Y.Source.Combat,Y.Source.Action,Y.Source.Item).type(X.MessageType.Bad).send(D.default.SeemsToHaveDrawnEnergy,o,i),e instanceof r.default&&e.increaseStat(y.Stat.Health,t.amount)&&(this.notifier.addStat(e.x,e.y,e.z,f.StatType.EnemyHealth,t.amount),e.queueSoundEffect(f.SfxType.Miss)),s=!0;break;default:m.push(a),c+=n}}t.type&a&&h[a]&&(T.push(a),g+=h[a])}const S=t.amount+g;if(u=S-(l+c),g&&c){const e=m.concat(T.filter(function(e){return-1===m.indexOf(e)}));d=x.default.message(D.default.DamageAppeared).addArgs(R.fullDamageType(e),x.default.message(D.default.BothEffectiveIneffective))}else g?d=x.default.message(D.default.DamageAppeared).addArgs(R.fullDamageType(T),x.default.message(D.default.Effective)):c&&(d=x.default.message(D.default.DamageAppeared).addArgs(R.fullDamageType(m),x.default.message(D.default.Ineffective)));if(u<=0&&!s){u=0;const a=Oe.default.percent();a<=10?u=1:(this.notifier.addStat(e.x,e.y,e.z,f.StatType.Zero,0),t.weaponName&&(X.default.get(t.human).source(Y.Source.Combat,Y.Source.Action).type(X.MessageType.Miss).send(D.default.FailedToCauseDamage,o,i,d),e instanceof Z.default&&X.default.get(e).source(Y.Source.Combat).type(X.MessageType.Good).send(D.default.FailedToCauseYouDamage,t.human.getName(),n,d)))}}if(e instanceof r.default||(u=Math.ceil(u*e.getDamageModifier())),e instanceof Z.default&&(e.lastAttackedBy=void 0),u>=1&&!s){if(e.reduceStat(y.Stat.Health,u),!(e instanceof r.default)){const a=e;if(a.cancelResting(f.RestCancelReason.CreatureDamaged),t.damageMessage&&(a.deathBy=("number"==typeof t.damageMessage?x.default.message(t.damageMessage):t.damageMessage).serialize()),e instanceof Z.default)if(e.healthSyncCheck(),t.human)t.human.updateReputation(e.getReputation()>0?-25:25),e.lastAttackedBy=t.human;else if(t.creature){const a=t.creature.getOwner();a&&(a.updateReputation(e.getReputation()>0?-25:25),e.lastAttackedBy=t.creature)}e.queueSoundEffect(f.SfxType.Hurt,void 0===t.soundDelay?0:t.soundDelay)}if(t.weaponName&&(X.default.get(t.human).source(Y.Source.Combat,Y.Source.Action).type(X.MessageType.Attack).send(D.default.HitForDamage,o,u,i,d),e instanceof Z.default&&X.default.get(e).source(Y.Source.Combat,Y.Source.Wellbeing).type(X.MessageType.Bad).send(D.default.HitYouForDamage,t.human.getName(),u,n,d)),e instanceof r.default){if(!t.human&&void 0!==e.enemy){const t=game.creatures[e.enemy];if(t){const a=t.getOwner();if(a){const t=e.description();t&&a.updateReputation(t.reputation<0?-25:25)}}}if(e.type===f.CreatureType.Slime&&0===Oe.default.int(7)){const t=Math.floor(Oe.default.float()+e.x-Oe.default.float()),a=Math.floor(Oe.default.float()+e.y-Oe.default.float()),i=creatureManager.spawn(f.CreatureType.Slime,t,a,e.z,!1,!!e.aberrant||void 0);if(void 0!==i){X.default.toAll(i=>i.ifVisible(new Ee.default(t,a,e.z)).source(Y.Source.Creature).send(D.default.HasSplit,o));const i=l.default[f.CreatureType.Slime];i&&i.blood&&this.particle.create(t,a,e.z,i.blood),audio.queueEffect(f.SfxType.Water,t,a,e.z)}}if(a){let t;const a=e.description();e.aberrant&&a&&a.aberrantBlood?t=a.aberrantBlood:a&&a.blood?t=a.blood:(t=oe.default[ie.ParticleType.Blood],0===Oe.default.int(10)&&corpseManager.createBlood(e.x,e.y,e.z)),this.particle.create(e.x,e.y,e.z,t)}}else if(a){const t=oe.default[ie.ParticleType.Blood];0===Oe.default.int(10)&&corpseManager.createBlood(e.x,e.y,e.z),this.particle.create(e.x,e.y,e.z,t)}this.notifier.addStat(e.x,e.y,e.z,e instanceof Z.default?f.StatType.Health:f.StatType.EnemyHealth,-1*u),e.queueSoundEffect(e instanceof r.default?f.SfxType.CreatureHit:f.SfxType.Hurt)}const c=t.human||t.creature;return c&&e.getStatValue(y.Stat.Health)<=0&&modManager.getHook(E.Hook.OnEntityKill).call(c,e),u}getPlayers(e,t){const a=[];for(const i of players)i.isServer()||i.isGhost()&&!e||i.isConnecting&&!t||a.push(i);return a}isPlayerAtTile(e,t,a){return 0!==this.getPlayersAtTile(e,t,a).length}isPlayerAtPosition(e,t,a,i,n){return 0!==this.getPlayersAtPosition(e,t,a,i,n).length}getPlayersAtTile(e,t,a){const i=[];for(const n of players)n.isServer()||n.isGhost()&&!t||n.isConnecting&&!a||n.getTile()!==e||i.push(n);return i}getPlayersAtPosition(e,t,a,i,n){"object"==typeof e&&(n=a,i=t,a=e.z,t=e.y,e=e.x);const o=[];for(const r of players)r.isServer()||r.isGhost()&&!i||r.isConnecting&&!n||r.x!==e||r.y!==t||r.z!==a||o.push(r);return o}getPlayersThatSeePosition(e,t,a){const i=[];for(const n of this.getPlayers())n.canSeePosition(e,t,a)&&i.push(n);return i}canASeeB(e,t,a,i,n,o,r){if(multiplayer.isConnected()&&!r){const r=this.getLightSourceAt(e,t,a),s=fieldOfView&&fieldOfView.canASeeB(e,t,a,i,n,o,r);return multiplayer.addSyncCheck(F.MultiplayerSyncCheck.CanASeeB,`${e},${t},${a}:${s},${r}`),s}return!fieldOfView||fieldOfView.disabled?a===o:fieldOfView.canASeeB(e,t,a,i,n,o)}getNearestPlayer(e,t,a){if(1===players.length){if(localPlayer.isGhost())return;if(void 0!==a&&localPlayer.z!==a)return;return localPlayer}let i,n;for(const o of this.getPlayers()){if(void 0!==a&&o.z!==a)continue;const r=Math.sqrt(Math.pow(e-o.x,2)+Math.pow(t-o.y,2));(void 0===n||void 0===i||i>r)&&(i=r,n=o)}return n}getPlayerByPid(e){for(const t of players)if(t.id===e)return t}getPlayerByIdentifier(e,t=!0){for(const t of players)if(t.identifier===e)return t;if(t)for(const t of absentPlayers)if(t.identifier===e)return t}getPlayerByName(e){for(const t of players)if(t.name&&t.name.toLowerCase()===e.toLowerCase())return t}getValidPlayerName(e){let t=e?e.trim():"";0===t.length?t=x.default.ui(P.default.MiscPlayerNameDefault).getString():t.length>32&&(t=t.substring(0,32));let a=2,i=t;for(;void 0!==this.getPlayerByName(i);)i=`${t} (${a})`,a++;return i}getHeight(e,t,a){const i=a*Oe.default.float()-.5*a;return.5*(e+t)+i}getLightSourceAt(e,t,a){const i=this.getTile(e,t,a);if(!i)return 0;let n=modManager.getHook(E.Hook.GetTileLightLevel).call(i,e,t,a);if(void 0!==n)return n;n=0;const r=i.doodad;if(r){const e=r.description();if(e&&e.providesFire){let t=e.providesLight;t&&r.isEmbers()&&(t/=2),void 0!==t&&(n=25+12*Oe.default.float()+17*t),r.legendary&&r.legendary.type===f.LegendaryType.Illumination&&(n+=r.legendary.value),void 0!==r.decay&&(n+=Math.min(Math.floor(r.decay/10),50))}}const s=tileEventManager.get(i,we.TileEventType.Fire);s&&void 0!==s.decay&&(n=75+12*Oe.default.float()+Math.min(Math.floor(s.decay/10),50));const l=i.creature;if(l){const e=l.description();e&&e.lightSource&&(n=Math.max(85+Oe.default.int(12),n))}const u=i.corpses;if(u)for(const e of u){const t=o.default[e.type];t&&t.lightSource&&(n=Math.max(85+Oe.default.int(12),n))}const d=Fe.default.getType(i);d===f.TerrainType.Lava?n=Math.max(85+Oe.default.int(12),n):d===f.TerrainType.CoolingLava&&(n=Math.max(40+Oe.default.int(12),n)),a===f.WorldZ.Cave&&d===f.TerrainType.CaveEntrance&&(n=Math.max(6*(1-this.time.getBrightness())*17,n));const p=this.getPlayersAtPosition(e,t,a);if(p.length>0){let e=0;for(const t of p)t.lightBonus>0&&(e+=25+12*Oe.default.float()+t.lightBonus);n=Math.max(Math.floor(e),n)}return n}setupSave(e){itemManager.saveTileReferences(),saveData.saveManagerSaveTime=Date.now(),saveData.saveManagerTicks=game.time&&game.time.ticks||0,saveData.saveManagerOriginalVersion=game.version,saveData.saveManagerDifficulty=game.getDifficulty(),saveData.saveManagerScore=localPlayer.score,saveData.saveManagerDeathBy=localPlayer.deathBy}async onGlobalSlotLoaded(e,t){Ne.info("onGlobalSlotLoaded",t),t&&(this.upgradeGlobalSave(He.default.getVersionInfo(saveDataGlobal.gameLastPlayedVersion?saveDataGlobal.gameLastPlayedVersion:"beta2.0.5")),ui.setFontStyle(),steamworks.isElectron()&&newui.toggleFullscreen(saveDataGlobal.options.fullscreen),audio.updateVolume()),languageManager.initialize();try{await this.initGl()}catch(e){return Ne.error("Failed to initialize gl",e),void newui.interrupt(x.default.generator("Wayward cannot be run on this system or browser.")).withDescription(x.default.generator(e.message)).withChoice(C.default.Quit).then(()=>{window.close(),document.body.innerHTML=""})}this.emit(I.GameEvent.GlobalSlotLoaded),await modManager.setupMods(),Ne.info("Finished setting up mods"),this.loadResources(),saveDataGlobal.options.muteMusic||audio.playMusic(),requestAnimationFrame(this.gameLoop),void 0!==this.simulateInterval&&clearInterval(this.simulateInterval);const a=steamworks.getDedicatedServerInfo();if(void 0!==a?(document.getElementById("initial-load").remove(),void 0!==a.load?(Ne.info(`Going to load "${a.load}"`),saveManager.getUsedSlots().then(async e=>{for(const t of e){const e=await saveManager.loadPartial(t),i={};if(saveManager.loadPartialData(e,i,"gameSlotName"),i.gameSlotName&&i.gameSlotName.toLocaleLowerCase()===a.load.toLocaleLowerCase())return void game.play({slot:t})}Ne.warn(`Unable to load "${a.load}" - save not found`);let t=a.console;a.newGameOptions&&(Ne.info(`Generating a new world "${a.load}" with the following options`,a.newGameOptions),a.newGameOptions.character||(a.newGameOptions.character=Q.generateRandomCharacter()),a.console||ui.switchToScreen(z.ScreenId.MainMenu),await game.play(a.newGameOptions)?t=!1:Ne.error("Unable to start a new game")),t&&(Ne.error("Exiting because no save was loaded"),setTimeout(()=>{window.close()},0),xe.default.setCallback(void 0)),a.console||ui.switchToScreen(z.ScreenId.MainMenu)})):ui.switchToScreen(z.ScreenId.MainMenu)):(this.simulateInterval=setInterval(()=>{this.simulate()},this.interval),newui.showScreen(z.ScreenId.Splash)),steamworks.onReady(),t){const e=He.default.getVersionInfo(gameVersion),t=saveDataGlobal.gameLastPlayedVersion?He.default.getVersionInfo(saveDataGlobal.gameLastPlayedVersion):void 0;if(Ne.info(`Current version: ${gameVersion}. Last played version: ${saveDataGlobal.gameLastPlayedVersion}`),!t||t.minor<e.minor){const e=modManager.getMods();for(let t=0;t<e.length;t++)modManager.isValid(t)&&modManager.getType(t)!==L.ModType.Internal&&modManager.isEnabled(t)&&modManager.setState(t,L.ModState.Disabled);hookManager.cacheHooks()}}}onSaveLoaded(e){e!==Te.SLOT_MULTIPLAYER&&(this.saveVersion||(this.saveVersion="beta2.0.5"),this.upgradeSave(He.default.getVersionInfo(this.saveVersion)))}directionToMovement(e){return{x:e===f.Direction.West?-1:e===f.Direction.East?1:0,y:e===f.Direction.North?-1:e===f.Direction.South?1:0}}fireBreath(e,t,a,i,n,o){for(let r=0;r<3;r++){let s=e,l=t;i===f.Direction.West?s-=1+r:i===f.Direction.East?s+=1+r:i===f.Direction.North?l-=1+r:i===f.Direction.South&&(l+=1+r);const u=this.getTile(s,l,a),d=be.default[Fe.default.getType(u)];if(!d||!d.passable||d.water||d.shallowWater)break;const p=u.doodad;if(p){const e=p.description();if(e&&!e.isFlammable)break}if(void 0!==u.creature){const e=Oe.default.intInRange(4,6);n&&u.creature.damage({amount:e,type:f.DamageType.Fire,weaponName:n})}o&&u.npc&&u.npc.makeHostile(),tileEventManager.create(we.TileEventType.Fire,s,l,a),this.particle.create(s,l,a,oe.default[ie.ParticleType.Fire])}}updateOption(e,t,a){if(e){const i=new q.default;i.pid=e.id,i.id=t,i.value=a,multiplayer.syncPacket(i,()=>{this.updateOptionInternal(t,a,e),e&&e.isLocalPlayer()&&(saveDataGlobal.options=e.options)})}else this.updateOptionInternal(t,a)}updateFlowFieldTile(e,t,a,i){flowFieldManager&&(flowFieldManager.updateTile(t,a,i),modManager.getHook(E.Hook.OnTileUpdate).call(e,t,a,i))}getCompletedMilestoneCount(){let e=0;if(saveDataGlobal.playerMilestoneData){const t=Object.keys(saveDataGlobal.playerMilestoneData);for(let a=0;a<t.length;a++){const i=t[a],n=saveDataGlobal.playerMilestoneData[i];n&&-1===n.amount&&e++}}return e}packGround(e,t,a){const i=this.getTile(e,t,a);if(Fe.default.isTilled(i)){const n=this.getTileData(e,t,a);n&&(n[0].tilled=!1,Fe.default.setTilled(i,!1),world.updateTile(e,t,a,i))}}getRandomQuality(e,t=0){const a=Oe.default.int(600-t);return a<=1?f.ItemQuality.Legendary:a<=8?f.ItemQuality.Exceptional:a<=40?f.ItemQuality.Remarkable:f.ItemQuality.None}getMaxDurability(e,t){return e===f.ItemQuality.Remarkable?Math.floor(1.3*t)+Oe.default.int(3)+6:e===f.ItemQuality.Exceptional?Math.floor(1.5*t)+Oe.default.int(6)+12:e===f.ItemQuality.Legendary?Math.floor(1.8*t)+Oe.default.int(9)+24:t}doLavaEvents(e,t,a){const i=this.getTile(e,t,a);if(!i)return;const n=Fe.default.getType(i),o=Oe.default.percent();o<=10?n===f.TerrainType.Lava?this.changeTile(f.TerrainType.CoolingLava,e,t,a,!1):n===f.TerrainType.CoolingLava&&this.changeTile(f.TerrainType.Obsidian,e,t,a,!1):o<=65&&tileEventManager.fireOverflow(e,t,a)}wrapCoordinate(e,t){return t-e>255?e+this.mapSize:e-t>255?e-this.mapSize:e}isFlammable(e,t,a){const i=this.getTile(e,t,a);if(!i)return!1;if(tileEventManager.get(i,we.TileEventType.Fire))return!1;const n=be.default[Fe.default.getType(i)];if(n&&n.flammable&&void 0===i.doodad)return!0;if(i.doodad){const e=i.doodad.description();if(e&&(e.isFlammable||e.providesFire))return!0}if(n&&!n.water&&!n.shallowWater){const e=i;if(e.containedItems)for(let t=0;t<e.containedItems.length;t++){const a=e.containedItems[t],i=a.description();if(i&&i.flammable)return!0}}if(n&&!n.water&&!n.shallowWater){const e=i.events;if(e)for(const t of e){const e=Ce.default[t.type];if(e&&e.isFlammable)return!0}}return!1}getCameraPosition(){let e=new Be.default(localPlayer.fromX,localPlayer.fromY).lerp(localPlayer,localPlayer.movementProgress);e=modManager.getHook(E.Hook.GetCameraPosition,e).call(e);const t=16*renderer.getZoom();return t>=16?e:new Be.default(e).multiply(t).floor().divide(t)}updateOptionInternal(e,t,a){const i=a?a.options:saveDataGlobal.options;if(i[e]=t,this.playing&&a){switch(e){case"protectedCraftingItems":case"protectedCraftingItemContainers":case"useAdjacentContainers":a.updateTables();break;case"hideEquippedHeadgear":this.updateRenderInternal(I.RenderSource.OptionHeadgear);break;case"leftHand":case"rightHand":a.updateHandToUse()}a.emit("UpdateOption",e,t)}}tick(){modManager.getHook(E.Hook.OnGameTickStart).call(),audio.updatePosition();const e=this.getPlayers();multiplayer.addSyncCheck(F.MultiplayerSyncCheck.Tick,e.length),this.processTimers(e),multiplayer.isConnected()&&!multiplayer.isServer()||this.processAutoSave(),this.processWaterContamination(),this.tickDayNightCycle(e),fieldOfView.tickSeed();for(const t of e)this.runRandomEvents(t);itemManager.decayItems()&&(this.shouldUpdateTablesAndWeight=!0),this.updateEntityFov(),flowFieldManager.setPlayers(e),flowFieldManager.update(),creatureManager.updateAll(),npcManager.updateAll();for(const t of e){const{x:e,y:a,z:i}=t.getFacingPoint();this.animateSkeletalRemains(t,e,a,i)}this.shouldUpdateTablesAndWeight&&this.updateTablesAndWeight(),ui.tooltipRefresh(),modManager.getHook(E.Hook.OnGameTickEnd).call()}updateEntityFov(){const e=[];for(const t of game.getPlayers())if(flowFieldManager.isPlayerInFlowField(t)){const a=fieldOfView.getBounds(t,multiplayer.isConnected()?I.lineOfSightMaxRadius:void 0);a.min.x-=t.x,a.min.y-=t.y,a.max.x-=t.x,a.max.y-=t.y,a.min.scale(1.75),a.max.scale(1.75),a.min.x+=t.x,a.min.y+=t.y,a.max.x+=t.x,a.max.y+=t.y,e.push(a)}creatureManager.updateFov(e),npcManager.updateFov(e)}processTimers(e){this.creatureSpawnTimer++;let t=Math.min(200,350/this.getMalignity()*1e4)+this.getBenignity()/320;if(multiplayer.isConnected()&&e.length>1&&(t-=t*((e.length-1)/50)),this.isChallenge&&(t-=t*(e.length*ee.default.getCreaturesOfRequirements().length()/50)),t<=0&&(Ne.warn(`Spawn rate is below expected worst case scenario. Malignity: ${this.getMalignity()}, Benignity: ${this.getBenignity()}, Players: ${e.length}, Quests: ${ee.default.getCreaturesOfRequirements().length()}.`),t=1),this.creatureSpawnTimer>=t){const t=this.creatures.filter(e=>e).length;if(t>=(this.isChallenge?350:300))this.creatureSpawnTimer=0;else for(const t of e){let e,a;const i=Oe.default.int(4);switch(i){case 0:e=t.x+10+Oe.default.int(30),a=t.y+10+Oe.default.int(30);break;case 1:e=t.x-10-Oe.default.int(30),a=t.y-10-Oe.default.int(30);break;case 2:e=t.x+10+Oe.default.int(30),a=t.y-10-Oe.default.int(-30);break;default:e=t.x-10-Oe.default.int(30),a=t.y+10+Oe.default.int(30)}if(e=this.getWrappedCoord(e),a=this.getWrappedCoord(a),multiplayer.addSyncCheck(F.MultiplayerSyncCheck.Random,`CS:${t.id},${e},${a}`),!t.canSeePosition(e,a,t.z)){const i=this.getTile(e,a,t.z);if(i){const n=be.default[Fe.default.getType(i)];if(n&&n.water&&0===Oe.default.int(2)){if(creatureManager.spawnFromGroup(u.SpawnGroup.Water,e,a,t.z)){this.creatureSpawnTimer=0;break}}else if(creatureManager.spawnFromGroup(u.SpawnGroup.Any,e,a,t.z)){this.creatureSpawnTimer=0;break}}}}}}async processAutoSave(){this.isChallenge||!this.getDifficultyOptions().respawn&&localPlayer.state===f.PlayerState.Ghost||steamworks.processBackups()||saveDataGlobal.options.enableAutoSave&&(this.autoSaveTimer++,this.autoSaveTimer>=5e3&&!localPlayer.isResting()&&(this.autoSaveTimer=0,await newui.showLoadingInterrupt(P.default.GameInterruptLoadingAutoSaving,P.default.GameInterruptLoadingAutoSavingDescription),await this.saveGame(f.SaveType.InGame),"undefined"!=typeof gc&&gc(),newui.hideLoadingInterrupt()))}tickDayNightCycle(e){this.time.nextTick(),tileEventManager.updateAll(),doodadManager.updateAll(),corpseManager.updateAll();const t=this.time.ticks%20==0;let a=!1;t&&(multiplayer.isConnected()&&multiplayer.isServer()&&multiplayer.updateGlobalServerDirectory(),this.shouldUpdateTablesAndWeight=!0,a=this.time.isPast("6:30pm"));for(const t of e)t.z===f.WorldZ.Overworld&&a&&t.notes.write(A.default.Nightfall),t.updateStatuses()}runRandomEvents(e){let t;const a=Oe.default.int(this.mapSize),i=Oe.default.int(this.mapSize),n=this.getTile(a,i,e.z),o=Fe.default.getType(n);if(multiplayer.addSyncCheck(F.MultiplayerSyncCheck.Random,`RE:${e.id},${a},${i},${o}`),o===f.TerrainType.Lava&&0===Oe.default.int(10))this.changeTile(f.TerrainType.CoolingLava,a,i,e.z,!1),X.default.toAll(t=>t.ifVisible(new Ee.default(a,i,e.z)).send(D.default.YouNoticeLavaCooling));else if(o===f.TerrainType.CoolingLava&&0===Oe.default.int(10))this.changeTile(f.TerrainType.Obsidian,a,i,e.z,!1),X.default.toAll(t=>t.ifVisible(new Ee.default(a,i,e.z)).send(D.default.YouNoticeLavaHardening));else if(void 0!==n.creature){t=Oe.default.int(4);const o=n.creature,r=o.description(),s=o.getStat(y.Stat.Health);0===t&&r&&s.value<s.max?(X.default.toAll(t=>t.ifVisible(new Ee.default(a,i,e.z)).source(Y.Source.Creature).send(D.default.YouNoticeWoundsClosing,o.getName())),o.increaseStat(s,1)):1===t&&r&&!r.noStumble?(X.default.toAll(t=>t.ifVisible(new Ee.default(a,i,e.z)).source(Y.Source.Creature).send(D.default.YouNoticeStumbleInjureItself,o.getName())),o.damage({amount:1,type:f.DamageType.True,skipMilestones:!0})):2!==t||o.isTamed()||void 0!==o.renamed?3!==t||o.aberrant||(X.default.toAll(t=>t.ifVisible(new Ee.default(a,i,e.z)).source(Y.Source.Creature).send(D.default.YouNoticeBecomeEnraged,o.getName())),o.aberrant=!0,o.setStat(s,Math.ceil(s.value*Math.max(this.getMaxWeight()/15,2))),o.isTamed()||(o.ai|=h.AiType.Hostile,o.ai&=~h.AiType.Scared)):(X.default.toAll(t=>t.ifVisible(new Ee.default(a,i,e.z)).source(Y.Source.Creature).send(D.default.YouNoticePerish,o.getName())),o.damage({amount:999,type:f.DamageType.True,skipMilestones:!0}))}else if(void 0!==n.doodad){const o=n.doodad,r=o.description();r&&r.spreadMax&&void 0!==o.spread&&(0===(t=Oe.default.int(3))?(X.default.toAll(t=>t.ifVisible(new Ee.default(a,i,e.z)).source(Y.Source.Creature).send(D.default.YouNoticeDying,o.getName())),doodadManager.remove(o)):1===t?(o.spread++,X.default.toAll(t=>t.ifVisible(new Ee.default(a,i,e.z)).send(D.default.YouNoticeFertilityIncreasing,o.getName()))):2===t&&o.spread>=1&&(o.spread--,X.default.toAll(t=>t.ifVisible(new Ee.default(a,i,e.z)).send(D.default.YouNoticeFertilityDecreasing,o.getName()))))}else if(this.isPositionEmpty(a,i,e.z)&&0===Oe.default.int(750)){const t=[];for(const n of Re.default.values(f.DoodadType)){const r=c.default[n];if(r&&r.canGrow&&(e.z===f.WorldZ.Overworld||e.z===f.WorldZ.Cave&&r.canGrowInCaves)){const e=r.allowedTiles;if(e)for(const a of e)if(o===a){t.push(n);break}}if(t.length){const n=Oe.default.getElement(t),o=doodadManager.create(n,a,i,e.z);if(o){X.default.toAll(t=>t.ifVisible(new Ee.default(a,i,e.z)).send(D.default.YouNoticeGrowing,x.default.nameOf(k.Dictionary.Doodad,n)));break}}}}else if(this.getReputation()<=-6e3&&this.isPositionEmpty(a,i,e.z)&&0===Oe.default.int(750)&&!e.canSeePosition(a,i,e.z)){creatureManager.spawn(f.CreatureType.Zombie,a,i,e.z);let t=!1;for(let n=-1;n<=1;n++)for(let o=-1;o<=1;o++)creatureManager.spawn(f.CreatureType.Zombie,a+n,i+o,e.z)&&(t||(t=X.default.toAll(t=>t.ifVisible(new Ee.default(a,i,e.z)).send(D.default.YouNoticeZombieHorde))))}}upgradeToClasses(e,t,a){let i=!1;if(e)for(let n=0;n<e.length;n++){const o=e[n];if(o&&!(o instanceof t)){const r=new t,s=Object.keys(o);for(const e of s)r[e]=o[e];a&&a(r),e[n]=r,i=!0}}return i}async prePlay(e,t){Ne.info("prePlay",t.seed,e),this.playOptions=t,this.isLoadingSave=e,this.isLoadingSave&&localPlayer.state!==f.PlayerState.Traveling||(this.saveVersion=this.version),Ge.default.restore(),newui.showLoadingInterrupt(P.default.GameInterruptLoadingMods,P.default.GameInterruptLoadingModsDescription);const a=await modManager.loadAll(t);return a?(Ne.error("modManager.loadAll",a),await multiplayer.disconnect(F.DisconnectReason.UnableToLoadMods,()=>x.default.ui(P.default.GameMultiplayerInterruptFailedToLoadMods).get(a)),this.resetGameState(!0),!1):(steamworks.startPlaytimeTracking(),itemManager.generateLookups(),Ne.info("Creating world renderer..."),this.createWorldRenderer(),Ne.info("Created world renderer"),this.playPostSeed(t))}async playPostSeed(e){Ne.info("playPostSeed 1",e.seed),void 0!==e.seed?(this.seeds.base=e.seed,Oe.default.generator.setSeed(Oe.convertStringToSeed(e.seed))):this.seeds.base=Oe.default.generator.getSeed(),saveData.gameBaseSeed=this.seeds.base,Ne.info("playPostSeed 2",this.seeds.base,Oe.default.generator.getSeed()),Oe.default.generator.pushSeed(),this.isLoadingSave?e.multiplayerWorld||localPlayer.setOptions(saveDataGlobal.options):(this.setLocalPlayer(this.addPlayer({options:saveDataGlobal.options,character:e.character,identifier:multiplayer.getPlayerIdentifier()})),saveData.gameSlotName=e.name,saveData.gameCreationTime=Date.now()),e.multiplayerWorld?this.crafted=e.multiplayerWorld.crafted:this.crafted=saveDataGlobal.gameCrafted;const t=this.loadResources();return Oe.default.generator.popSeed(),await B.generateWorld(!this.isLoadingSave||localPlayer.state===f.PlayerState.Traveling),t.isResolved||newui.showLoadingInterrupt(P.default.GameInterruptLoadingSprites,P.default.GameInterruptLoadingSpritesDescription),await t,this.startGame(this.playOptions)}render(e){const t=this.getCameraPosition();this.updateFieldOfView&&(this.updateFieldOfView=!1,fieldOfView.compute(void 0,e),this.updateRenderInternal(I.RenderSource.FovUpdate)),this._updateRender&&(this._updateRender=!1,renderer.batchCreatures(),renderer.renderWorld(t.x,t.y,localPlayer.z),void 0!==this.fadeInAmount&&(this.fadeInAmount=Math.max(this.fadeInAmount-.005,0),0===this.fadeInAmount&&(delete this.fadeInAmount,this.updateThumbnail(),multiplayer.isConnected()&&multiplayer.isClient()&&(this.updateFieldOfView=!0)),this._updateRender=!0));const a=this.glContext;a.viewport(0,0,2*Math.round(a.canvas.width/2),2*Math.round(a.canvas.height/2)),a.clear(a.COLOR_BUFFER_BIT),renderer.render(),this.particle.render(t.x,t.y),void 0!==this.debugRenderer&&this.debugRenderer.renderDebug(),this.notifier.render(t.x,t.y,2*re.subTileSize,renderer.getTileScale(),renderer.getViewport().x,renderer.getViewport().y)}simulate(){this.playing&&!this.paused&&this.particle&&this.particle.simulate()}getPotentialRecipesInContainer(e,t,a){for(let i=0;i<e.containedItems.length;i++){const n=e.containedItems[i];if(!t[n.type]){t[n.type]=!0;const e=b.itemDescriptions[n.type],i=e?e.recipes:void 0;if(i)for(let e=0;e<i.length;e++)i[e]in this.crafted&&(a[i[e]]=!0)}const o=n;o.containedItems&&o.containedItems.length>0&&this.getPotentialRecipesInContainer(o,t,a)}}removeAndFixPids(e,t){Ne.info(`Remove and fix pids in ${e===players?"players":"absentPlayers"}. Current count: ${e.length}. Removing ${t} [${e[t].identifier}]`);for(let t=0;t<e.length;t++){const a=e[t];Ne.info(`${t}: ${a.id} [${a.identifier}]`)}e.splice(t,1);for(let t=0;t<e.length;t++){const a=e[t],i=a.id;i!==t&&(a.setId(t),e===players&&multiplayer.updatePlayerId(i,t))}}createWorld(){world&&world.delete(),world=new ce.default(this.mapSize,this.mapSize),world.addLayer(f.WorldZ.Cave),world.addLayer(f.WorldZ.Overworld)}createWorldRenderer(){modManager.getHook(E.Hook.OnCreateWorld).call(world);for(const e of players)e.clientStore.get(ye.ClientDataType.ExploredMap).restoreExploredMap();for(const e of absentPlayers)e.clientStore.get(ye.ClientDataType.ExploredMap).restoreExploredMap();this.glContext&&(this.playOptions.multiplayerWorld&&!multiplayer.isServer()&&(Ne.info("Setting up world map"),world.setupExploredMap(),Ne.info("Finished resetting world map")),renderer=new me.default(this.glContext),renderer.setSpriteTexture(this.spriteTexture,this.spriteTextureSizeInversed),pe.default.setTileTexture(this.tileTexture,this.tileTextureSizeInversed),this.notifier.setTexture(this.spriteTexture,this.spriteTextureSizeInversed),this.resizeRenderer())}loadResources(){return resourceLoader.loadResources(this)}initializeGameState(e=!1){Ne.info("initializeGameState",e),this.version=gameVersion,delete this.saveVersion,delete this.mapGenVersion,delete this.previousSaveVersion,this.isLoadingSave=!1,this.absoluteTime=0,this.autoSaveTimer=0,this.contaminatedWater=[],this.corpses=[],this.creatures=[],this.creatureSpawnTimer=0,this.doodads=[],this.fadeInAmount=0,this.fillCount=0,this.fillTile=[],this.flowFieldSyncCount=0,this.lastCreationIds={},this.npcs=[],this.paused=!1,this.playing=!1,this.nextTickTime=void 0,this.lastTickTime=void 0,this.saveClear=!1,this.shouldUpdateTablesAndWeight=!1,this.spawnCoords={x:0,y:0,z:f.WorldZ.Overworld},this.tile=[],this.tileContainers=[],this.tileData={},this.wellData={},this.tileEvents=[],this.time=new v.default(0),this._updateRender=!1,this.ambientLightLevelCache={},this.particle&&this.particle.clear(),e?world.resetExploredMap():(delete this.slot,this.items=[],delete this.difficulty,this.turnMode=f.TurnMode.Manual,this.tickSpeed=f.TickSpeed.Default,this.worldId=_e.default.create(),players=[],absentPlayers=[],saveData=new ge.default,ui.initializeGameState()),Ge.default.initializeGameState(),"undefined"!=typeof gc&&gc()}async startGame(e){Ne.info("startGame",Oe.default.generator.getSeed()),ui.setupItemBackgrounds(),await newui.showLoadingInterrupt(P.default.GameInterruptLoadingFinalizingWorld,P.default.GameInterruptLoadingFinalizingWorldDescription);const t=steamworks.isDedicatedServer();if(this.isLoadingSave){Oe.default.generator.setSeed(this.seeds.saved),Ne.info("startGame - set seed from saved",this.seeds.saved),localPlayer.spawnPoint&&void 0!==localPlayer.spawnPoint.x||(localPlayer.spawnPoint=this.spawnCoords,localPlayer.spawnPoint.z=f.WorldZ.Overworld),localPlayer.state===f.PlayerState.Traveling?(Oe.default.bool(),localPlayer.x=this.spawnCoords.x,localPlayer.y=this.spawnCoords.y,localPlayer.raft=void 0,localPlayer.swimming=!1,saveManager.deleteSlot(this.slot),itemManager.resetMapsInContainer(localPlayer.inventory),localPlayer.messages.type(X.MessageType.Stat).send(D.default.TravelToFarOffLands)):(localPlayer.restData=void 0,this.getDifficultyOptions().respawn&&(localPlayer.state=f.PlayerState.None)),Oe.default.generator.pushSeed(),itemManager.loadTileReferences(),itemManager.loadReferences(),this.slot!==Te.SLOT_MULTIPLAYER&&doodadManager.verifyAndFixItemWeights(),Oe.default.generator.popSeed();const e=itemManager.getItemsInContainer(localPlayer.inventory,!0);for(const t of e){t.containedWithin===localPlayer.inventory&&ui.addItemToContainer(t,localPlayer.inventory,!0,!0),t.quickSlot&&ui.setQuickSlot(t.quickSlot,t.id,!0);const e=t.getEquipSlot();void 0!==e&&ui.setEquipSlot(e,t.id,!0)}ui.afterAddingMultipleItemsToContainer(localPlayer.inventory),ui.loadQuickSlots()}else{t&&(localPlayer.state=f.PlayerState.Server),localPlayer.setup(this.getCompletedMilestoneCount());for(let e=0;e<3;e++)doodadManager.updateAll();const e=this.getDifficultyOptions().time;e.frozen&&(this.time.frozenTime=e.initial),e.initial&&this.time.setTime(e.initial),e.dayLength&&(this.time.dayLength=e.dayLength),e.dayPercent&&(this.time.dayPercent=e.dayPercent)}localPlayer.fromX=localPlayer.x,localPlayer.fromY=localPlayer.y,modManager.getHook(E.Hook.OnGameStart).call(this.isLoadingSave,saveDataGlobal.gamePlayedCount),world.layers[localPlayer.z]||(localPlayer.z=f.WorldZ.Overworld),Ne.info("Loading world...",Oe.default.generator.getSeed()),world.load(),Ne.info("Loaded world",Oe.default.generator.getSeed()),renderer&&(Ne.info("Updating renderer...",Oe.default.generator.getSeed()),renderer.updateAll(),Ne.info("Renderer updated",Oe.default.generator.getSeed())),fieldOfView=new te.default(this.glContext,I.lineOfSightRadius,I.lineOfSightMaxRadius,I.lineOfSightDetail),(localPlayer.isGhost()||t)&&(fieldOfView.disabled=!0),modManager.getHook(E.Hook.PostFieldOfView).call(),localPlayer.isGhost()&&(ui.onGameEnd(),saveData.gameState=f.PlayerState.Ghost),localPlayer.calculateEquipmentStats(),this.updateTablesAndWeight(),flowFieldManager=new T.default(2*I.lineOfSightMaxRadius),e.multiplayerWorld?(this.synchronizeFlowFields(e.multiplayerWorld.initialFlowFieldPids.map(e=>players[e])),this.flowFieldSyncCount-=1):this.synchronizeFlowFields(players),this.fadeInAmount=1;for(const e of localPlayer.inventory.containedItems){if(e.isEquipped()){const t=b.itemDescriptions[e.type];t&&t.onEquip&&t.onEquip(e)}itemManager.checkMilestones(localPlayer,e)}localPlayer.checkReputationMilestones(),localPlayer.updateStatsAndAttributes(),await newui.hideLoadingInterrupt(),newui.hideScreen(z.ScreenId.MainMenu),newui.hideScreen(z.ScreenId.Interrupt),ui.isInGameScreenShown()||t||ui.switchToScreen(z.ScreenId.Game),localPlayer.travelData||!this.isLoadingSave||t||localPlayer.messages.type(X.MessageType.Stat).send(D.default.LastPlaceYouLeftOff),t||ui.openDialogs(),localPlayer.updateTables(),localPlayer.addDelay(f.Delay.Movement,!0);const a=this.getTurnMode();if(a===f.TurnMode.RealTime&&(this.nextTickTime=0),this.playing=!0,saveDataGlobal.gamePlayedCount++,this.updateZoomLevel(),audio.updatePosition(),this.isLoadingSave&&localPlayer.travelData){if(localPlayer.travelData.dehydration&&localPlayer.messages.source(Y.Source.Wellbeing).type(X.MessageType.Bad).send(D.default.DyingOfDehydration),localPlayer.travelData.starvation&&localPlayer.messages.source(Y.Source.Wellbeing).type(X.MessageType.Bad).send(D.default.StarvingToDeath),localPlayer.travelData.dehydration||localPlayer.travelData.starvation){let e=localPlayer.travelData.dehydration+localPlayer.travelData.starvation;e>localPlayer.travelData.originalHealth&&(e=localPlayer.travelData.originalHealth-1),this.notifier.addStat(localPlayer.x,localPlayer.y,localPlayer.z,f.StatType.Health,-1*e),localPlayer.queueSoundEffect(f.SfxType.Hurt)}if(localPlayer.travelData.itemId){const e=this.items[localPlayer.travelData.itemId];e.placeOnTile(localPlayer.x,localPlayer.y,localPlayer.z,!0,!0)}localPlayer.travelData.state===f.PlayerState.Traveling?localPlayer.addMilestone(J.MilestoneType.Navigator):localPlayer.travelData.state===f.PlayerState.Won&&localPlayer.addMilestone(J.MilestoneType.Seafarer),localPlayer.updateMilestones(),localPlayer.state=f.PlayerState.None,delete localPlayer.travelData}if(e.multiplayerWorld&&multiplayer.isConnected()&&multiplayer.onPlaying(),Ne.info("Playing",Oe.default.generator.getSeed(),players.length),t?(localPlayer.state=f.PlayerState.Server,localPlayer.identifier=_e.default.create(),localPlayer.name=localPlayer.identifier,Ne.info(`Randomizing local player name and identifier to ${localPlayer.identifier}`),newui.interrupt().withMenu(V.MenuId.Pause)):(await newui.hideLoadingInterrupt(),newui.hideScreen(z.ScreenId.Interrupt)),!e.multiplayerWorld){let i=e.multiplayer||t,n=e.multiplayer;!0===n||!i&&saveData.multiplayerState.enable&&await newui.interrupt(P.default.GameMultiplayerInterruptRestartServerAfterLoadingSave).withDescription(P.default.GameMultiplayerInterruptRestartServerAfterLoadingSaveDescription).withConfirmation()?(i=!0,n=saveData.multiplayerState.options):saveData.multiplayerState.enable=!1,i&&((n||t)&&multiplayer.createServer(_e.default.create(),n),t||Ae.sleep(200).then(()=>{game.setPaused(!0),newui.interrupt().withMenu(V.MenuId.Pause,e=>e.schedule(600,e.showWorldMenu))})),multiplayer.isConnected()||a!==f.TurnMode.Simulated||i&&n||this.setTurnMode(f.TurnMode.Manual)}return steamworks.updateDiscordPresence(),this.updateView(I.RenderSource.StartGame,!0),!0}upgradeSave(e){let t=!1;const a=game;t=this.upgradePlayer(localPlayer,e)||t;for(const a of absentPlayers)t=this.upgradePlayer(a,e)||t;if(t=this.upgradeSaveMoveProperty(game,game,"monsters","creatures")||t,2===e.major&&e.minor<2)for(const e of this.doodads)e&&e.type>=51&&e.type<=61&&(e.type-=1,t=!0);if(2===e.major&&e.minor<4){const a=[];for(const i of this.doodads){if(!i)continue;const n=i,o=i.type;let r,s=!1;switch(o){case $.Pre240DoodadType.GrowingMushroom:case $.Pre240DoodadType.GrowingPlant:if(t=!0,n.growInto){let t=$.Pre240DoodadType[n.growInto];2===e.major&&e.minor<2&&n.growInto>=51&&n.growInto<=61&&(t=$.Pre240DoodadType[n.growInto-1]);const a=f.DoodadType[t];void 0===(r=a)&&(r=f.DoodadType.MapleTree);const o=c.default[n.growInto];o&&o.decayMax&&(i.decay=o.decayMax),i.gfx=3*f.GrowingStage.Seedling+Oe.default.int(3)}else s=!0;break;case $.Pre240DoodadType.Sapling:t=!0,r=f.DoodadType.MapleTree,i.gfx=3*f.GrowingStage.Seedling+Oe.default.int(3);break;case $.Pre240DoodadType.GrowingGrass:t=!0,r=f.DoodadType.Grass,i.gfx=f.GrowingStage.Vegetative+Oe.default.int(3)}if(s){t=!0,a.push(i);continue}let l=$.Pre240DoodadType[o];void 0===r&&("DeadBush"===l&&(l="Tumbleweed"),r=f.DoodadType[l]),void 0===r?Ne.warn(`Unable to convert doodad type ${l}`):r!==i.type&&(i.type=r,t=!0);const u=c.default[i.type];if(u){const e=u.canGrow;e&&void 0===i.gfx&&(i.gfx=3*f.GrowingStage.Ripening+Oe.default.int(3),t=!0)}}for(const e of a)doodadManager.remove(e)}if(2===e.major&&e.minor<6)for(const e of this.doodads)if(e){if(e.type===f.DoodadType.Tumbleweed){const a=c.default[e.type];a&&(e.gfx=3*f.GrowingStage.Ripening+Oe.default.int(3),e.decay=a.decayMax,t=!0)}e.legendary&&(e.legendary.type=f.LegendaryType.Skill,t=!0)}void 0!==a.dayNight&&(a.time=new v.default(0),a.time.restoreFromDayNight(a.dayNight,a.dayNightSwitch),delete a.dayNight,t=!0);const i=[];for(let a=0;a<this.items.length;a++){const n=this.items[a];if(null===n){this.items[a]=void 0,t=!0;continue}if(!n)continue;null===n.containedWithin&&(delete n.containedWithin,t=!0);const o=n;if(o.equipped&&(n.equippedId=localPlayer.id,localPlayer.equipped[o.equipped]=n.id,n.equippedType=h.EntityType.Player,delete o.equipped,t=!0),void 0!==o.equippedPid&&(n.equippedId=o.equippedPid,n.equippedType=h.EntityType.Player,delete o.equippedPid,t=!0),2===e.major&&e.minor<4&&(55===n.type||283===n.type||286===n.type)&&(i.push(n),t=!0),2===e.major&&e.minor<6&&n.legendary&&(n.legendary.type=f.LegendaryType.Skill,t=!0),2===e.major&&e.minor<7&&n.legendary&&n.legendary.type===f.LegendaryType.Stat){switch(n.legendary.stat){case f.StatType.Health:n.legendary.stat=y.Stat.Health;break;case f.StatType.Stamina:n.legendary.stat=y.Stat.Stamina;break;case f.StatType.Metabolism:n.legendary.stat=y.Stat.Metabolism}t=!0}}for(const e of i)itemManager.remove(e);for(const e of this.doodads)e&&null===e.containedWithin&&(delete e.containedWithin,t=!0);for(let e=0;e<this.creatures.length;e++){const a=this.creatures[e];void 0!==a&&("number"==typeof a.direction&&(a.facingDirection=a.direction,a.direction=game.directionToMovement(a.facingDirection),t=!0))}if(2===e.major&&5===e.minor&&3===e.patch)for(const e of this.doodads)if(e){const a=c.default[e.type];a&&a.lit&&!a.isUnlitTorch&&void 0!==e.decay&&e.decay>=0&&(e.decay=-1,t=!0),a&&a.revert&&!a.isLitTorch&&-1===e.decay&&(e.decay=a.decayMax,t=!0)}if(2===e.major&&e.minor<4){t=!0;for(const e of this.doodads)if(e&&void 0!==e.decay&&e.decay>0){const t=c.default[e.type];t&&(!t.isWaterSource&&!t.lit||t.isWaterSource&&!t.lit)&&(e.decay*=20)}for(const e of this.corpses)e&&void 0!==e.decay&&e.decay>0&&(e.decay*=20);for(const e of this.tileEvents)e&&void 0!==e.decay&&e.decay>0&&(e.decay*=20)}t=this.upgradeSaveMoveProperty(game,localPlayer,"tamedCreatures")||t,t=this.upgradeSaveMoveProperty(ui,localPlayer,"dialogInfo")||t,t=this.upgradeSaveMoveProperty(ui,localPlayer,"dialogContainerInfo")||t,t=this.upgradeSaveMoveProperty(ui,localPlayer,"quickSlotInfo")||t,t=this.upgradeSaveMoveProperty(ui,localPlayer,"containerSortInfo")||t,localPlayer.dialogInfo[f.DialogId.Crafting]&&405===localPlayer.dialogInfo[f.DialogId.Crafting].y&&(localPlayer.dialogInfo[f.DialogId.Crafting].y=445,t=!0),t=this.upgradeToClasses(this.items,w.default,e=>e.description())||t,t=this.upgradeToClasses(this.creatures,r.default)||t,t=this.upgradeToClasses(this.doodads,m.default)||t;for(let e=0;e<this.creatures.length;e++){const a=this.creatures[e];void 0!==a&&(a.stats&&a.getStat(y.Stat.Health)||(a.initializeStats(a.maxhp,a.hp),t=!0),void 0!==a.happiness&&(new g.default(y.Stat.Happiness,a.happiness).setChangeTimer(1,-1).initializeOn(a),delete a.happiness,t=!0),void 0!==a.chickenEggCounter&&(a.setStat(y.Stat.Produce,a.chickenEggCounter),delete a.chickenEggCounter,t=!0),void 0!==a.goatMilkCounter&&(a.setStat(y.Stat.Produce,a.goatMilkCounter),delete a.goatMilkCounter,t=!0))}for(let e=0;e<this.npcs.length;e++){const a=this.npcs[e];void 0!==a&&("weightCapacity"in a.inventory&&(delete a.inventory.weightCapacity,t=!0))}void 0!==a.isRealTime&&(this.turnMode=a.isRealTime?f.TurnMode.RealTime:f.TurnMode.Manual,delete a.isRealTime,t=!0),void 0!==a.realTimeTickSpeed&&(this.tickSpeed=a.realTimeTickSpeed,delete a.realTimeTickSpeed,t=!0),void 0===this.difficultyOptions&&(this.difficultyOptions=S.getDefaultDifficultyOptions(this.difficulty),t=!0),t&&Ne.info(`Upgrading save from ${e.str} to ${gameVersion}`),this.previousSaveVersion=e,this.saveVersion=gameVersion}upgradePlayer(e,t){const a=e;let i=!1;if("containedWithin"in e.inventory&&(delete e.inventory.containedWithin,i=!0),"weightCapacity"in e.inventory&&(delete e.inventory.weightCapacity,i=!0),void 0!==a.talent&&(a.score=a.talent,a.malignity=a.talent,a.malignity>64e3&&(a.malignity=64e3),delete a.talent,i=!0),void 0!==a.malignityPlus&&(a.malignity=a.malignityPlus,delete a.malignityPlus,i=!0),void 0!==a.malignityNegative&&(a.benignity=-1*a.malignityNegative,delete a.malignityNegative,i=!0),void 0!==a.gender&&(e.customization={hairColor:f.HairColor[0===a.gender?f.HairColor["#7e4b1c"]:f.HairColor["#b84627"]],skinColor:f.SkinColor[f.SkinColor["#f0ceab"]],hairStyle:f.HairStyle[0===a.gender?f.HairStyle.Spike:f.HairStyle.Bun]},delete a.gender,i=!0),void 0!==a.health){const t=e.getStat(y.Stat.Health);e.setStat(t,a.health,h.StatChangeReason.Upgrade),t.changeTimer=a.healthTimer,delete a.health,delete a.healthTimer,i=!0}if(void 0!==a.stamina){const t=e.getStat(y.Stat.Stamina);e.setStat(t,a.stamina,h.StatChangeReason.Upgrade),t.changeTimer=a.staminaTimer,delete a.health,delete a.staminaTimer,i=!0}if(void 0!==a.hunger){const t=e.getStat(y.Stat.Hunger);e.setStat(t,a.hunger,h.StatChangeReason.Upgrade),t.changeTimer=a.hungerTimer,delete a.hunger,delete a.hungerTimer,i=!0}if(void 0!==a.thirst){const t=e.getStat(y.Stat.Thirst);e.setStat(t,a.thirst,h.StatChangeReason.Upgrade),t.changeTimer=a.thirstTimer,delete a.thirst,delete a.thirstTimer,i=!0}if(void 0!==a.stats.health){const t=e.getStat(y.Stat.Health);e.setStat(t,a.stats.health.value,h.StatChangeReason.Upgrade),t.changeTimer=a.stats.health.timer,delete a.stats.health,i=!0}if(void 0!==a.stats.stamina){const t=e.getStat(y.Stat.Stamina);e.setStat(t,a.stats.stamina.value,h.StatChangeReason.Upgrade),t.changeTimer=a.stats.stamina.timer,delete a.stats.stamina,i=!0}if(void 0!==a.stats.hunger){const t=e.getStat(y.Stat.Hunger);e.setStat(t,a.stats.hunger.value,h.StatChangeReason.Upgrade),t.changeTimer=a.stats.hunger.timer,delete a.stats.hunger,i=!0}if(void 0!==a.stats.thirst){const t=e.getStat(y.Stat.Thirst);e.setStat(t,a.stats.thirst.value,h.StatChangeReason.Upgrade),t.changeTimer=a.stats.thirst.timer,delete a.stats.thirst,i=!0}void 0!==a.strength&&(e.setStatMax(y.Stat.Health,a.strength),delete a.strength,i=!0),void 0!==a.dexterity&&(e.setStatMax(y.Stat.Stamina,a.dexterity),delete a.dexterity,i=!0),void 0!==a.starvation&&(e.setStatMax(y.Stat.Hunger,a.starvation),delete a.starvation,i=!0),void 0!==a.dehydration&&(e.setStatMax(y.Stat.Thirst,a.dehydration),delete a.dehydration,i=!0),void 0!==a.weight&&(e.setStat(y.Stat.Weight,a.weight),delete a.weight,i=!0),void 0!==a.attack&&(e.setStat(y.Stat.Attack,a.attack),delete a.attack,i=!0),void 0!==a.malignity&&(e.setStat(y.Stat.Malignity,a.malignity),delete a.malignity,i=!0),void 0!==a.benignity&&(e.setStat(y.Stat.Benignity,a.benignity),delete a.benignity,i=!0),"number"==typeof a.customization.hairStyle&&(e.customization={hairColor:f.HairColor[a.customization.hairColor],skinColor:f.SkinColor[a.customization.skinColor],hairStyle:f.HairStyle[a.customization.hairStyle]},i=!0),(e.getMaxHealth()!==e.getStatMax(y.Stat.Health)||t.major<=2&&t.minor<7)&&(e.setStat(y.Stat.Strength,e.getStatMax(y.Stat.Health),h.StatChangeReason.Upgrade),e.setStatBonus(y.Stat.Strength,K.STRENGTH_BONUS,h.StatChangeReason.Upgrade),i=!0);try{const t=e.getStat(y.Stat.Health),a=e.getStat(y.Stat.Stamina),n=e.getStat(y.Stat.Hunger),o=e.getStat(y.Stat.Thirst);if(t&&a&&n&&o&&0===t.value&&0===a.value&&0===n.value&&0===o.value){const t=5;e.setStatMax(a,Oe.default.int(10+t)+70),e.setStat(y.Stat.Strength,Oe.default.int(5+t)+45,h.StatChangeReason.Upgrade),e.setStatMax(n,Oe.default.int(5+t)+15),e.setStatMax(o,Oe.default.int(5+t)+15),e.setStat(y.Stat.Stamina,a.max-Oe.default.int(10),h.StatChangeReason.Upgrade),e.setStat(y.Stat.Health,e.getMaxHealth()-Oe.default.int(5),h.StatChangeReason.Upgrade),e.setStat(y.Stat.Hunger,n.max-Oe.default.int(2),h.StatChangeReason.Upgrade),e.setStat(y.Stat.Thirst,o.max-Oe.default.int(2),h.StatChangeReason.Upgrade),i=!0}}catch(e){}return i=e.messages.pruneMessageHistory()||i,e.identifier||(e.identifier=_e.default.create(),i=!0),a.exploredMapEncodedData&&(e.clientStore.get(ye.ClientDataType.ExploredMap).exploredMapEncodedData=a.exploredMapEncodedData,delete a.exploredMapEncodedData,i=!0),i}upgradeSaveMoveProperty(e,t,a,i=a){const n=e[a];return void 0!==n&&(t[i]=n,delete e[a],!0)}upgradeGlobalSave(e){let t=!1;const a=game,i=saveDataGlobal.options;if(a.crafted&&(saveDataGlobal.gameCrafted=a.crafted,delete a.crafted,t=!0),saveDataGlobal.gameCrafted&&"object"==typeof saveDataGlobal.gameCrafted){const e=Object.keys(saveDataGlobal.gameCrafted);for(const a of e){const e=parseInt(a,10),i=saveDataGlobal.gameCrafted[e];"object"!=typeof i&&(saveDataGlobal.gameCrafted[e]={newUnlock:!1,unlockTime:Date.now()},t=!0)}}if(a.options&&(saveDataGlobal.options=a.options,delete a.options,t=!0),a.highscores)for(const e of a.highscores)void 0!==e.talent&&(e.score=e.talent,delete e.talent,t=!0);saveDataGlobal.playerMilestoneData||(saveDataGlobal.playerMilestoneData={},t=!0),2===e.major&&e.minor<=3&&e.patch<=3&&(t=!0,saveDataGlobal.options.alternateContextMenu=!0,saveDataGlobal.options.rightClickInspect=!0),"boolean"==typeof saveDataGlobal.options.directionTurnDelay&&(saveDataGlobal.options.directionTurnDelay=!0===saveDataGlobal.options.directionTurnDelay?13:0),a.highscores&&(saveDataGlobal.gameHighscores=a.highscores,delete a.highscores,t=!0),void 0!==a.lastPlayedVersion&&(saveDataGlobal.gameLastPlayedVersion=a.lastPlayedVersion,delete a.lastPlayedVersion,t=!0),void 0!==a.playedCount&&(saveDataGlobal.gamePlayedCount=a.playedCount,delete a.playedCount,t=!0);const n=saveDataGlobal.gameHighscores;for(const e of n)e&&"boolean"==typeof e.dailyChallenge&&(e.difficulty=e.dailyChallenge?S.Difficulty.Challenge:S.Difficulty.Hardcore,delete e.dailyChallenge,t=!0);"boolean"==typeof i.developerLogging&&(saveDataGlobal.options.developerMode=i.developerLogging,delete i.developerLogging,t=!0),"boolean"==typeof i.skipIntro&&(saveDataGlobal.options.skipSplash=i.skipIntro,delete i.skipIntro,t=!0),"boolean"==typeof i.hints&&(delete i.hints,t=!0),"boolean"==typeof i.openNotesAutomatically&&(delete i.openNotesAutomatically,t=!0),"boolean"==typeof i.worldTooltips&&(delete i.worldTooltips,t=!0);for(const e of["Doodads","Items","NPCs","Terrain","Creatures"])"boolean"==typeof i[`tooltips${e}`]&&(delete i[`tooltips${e}`],t=!0);if("boolean"==typeof i.dropUnderYourself&&(saveDataGlobal.options.dropLocation=i.dropUnderYourself?f.DropLocation.Feet:f.DropLocation.Facing,delete i.dropUnderYourself,t=!0),2===e.major&&5===e.minor&&e.patch<6){const e={};for(const t in i.bindings){const a=f.Bindable[t];a&&(e[a]=i.bindings[t])}saveDataGlobal.options.bindings=e}const o=saveDataGlobal.gameHighscores.filter(e=>"object"==typeof e&&"number"==typeof e.score);saveDataGlobal.gameHighscores.length!==o.length&&(saveDataGlobal.gameHighscores=o,t=!0),t&&Ne.info(`Upgrading global save from ${e.str} to ${gameVersion}`)}}__decorate([Se.SaveProperty()],qe.prototype,"contaminatedWater",void 0),__decorate([Se.SaveProperty()],qe.prototype,"corpses",void 0),__decorate([Se.SaveProperty()],qe.prototype,"creatures",void 0),__decorate([Se.SaveProperty()],qe.prototype,"creatureSpawnTimer",void 0),__decorate([Se.SaveProperty()],qe.prototype,"difficulty",void 0),__decorate([Se.SaveProperty()],qe.prototype,"difficultyOptions",void 0),__decorate([Se.SaveProperty()],qe.prototype,"doodads",void 0),__decorate([Se.SaveProperty()],qe.prototype,"flowFieldSyncCount",void 0),__decorate([Se.SaveProperty()],qe.prototype,"items",void 0),__decorate([Se.SaveProperty()],qe.prototype,"lastCreationIds",void 0),__decorate([Se.SaveProperty()],qe.prototype,"mapGenVersion",void 0),__decorate([Se.SaveProperty()],qe.prototype,"npcs",void 0),__decorate([Se.SaveProperty()],qe.prototype,"turnMode",void 0),__decorate([Se.SaveProperty()],qe.prototype,"tickSpeed",void 0),__decorate([Se.SaveProperty()],qe.prototype,"saveVersion",void 0),__decorate([Se.SaveProperty()],qe.prototype,"seeds",void 0),__decorate([Se.SaveProperty()],qe.prototype,"shouldUpdateTablesAndWeight",void 0),__decorate([Se.SaveProperty()],qe.prototype,"tileContainers",void 0),__decorate([Se.SaveProperty()],qe.prototype,"tileData",void 0),__decorate([Se.SaveProperty()],qe.prototype,"wellData",void 0),__decorate([Se.SaveProperty()],qe.prototype,"tileEvents",void 0),__decorate([Se.SaveProperty()],qe.prototype,"time",void 0),__decorate([Se.SaveProperty()],qe.prototype,"version",void 0),__decorate([Se.SaveProperty()],qe.prototype,"worldId",void 0),__decorate([Le.Bound],qe.prototype,"updateRenderInternal",null),t.default=qe;const Ue=async()=>{try{try{steamworks=new ve.default,steamworks.initialize()}catch(e){Ne.info("Failed to initialize steamworks",e)}finally{void 0!==e&&(window.require=void 0),"undefined"!=typeof requirejs&&(window.requirejs=void 0)}steamworks.isDedicatedServer()?(audio=d.audio,renderer=d.worldRenderer,resourceLoader=d.resourceLoader):(await se.loadShaders(),audio=new a.default,resourceLoader=new he.default),commandManager=new i.default,corpseManager=new n.default,creatureManager=new s.default,doodadManager=new p.default,itemManager=new M.default,languageManager=new G.default,modManager=new O.default,multiplayer=new _.default,multiplayerNetworkingOptions=F.networkingOptions,npcManager=new j.default,saveData=new ge.default,saveDataGlobal=new fe.default,saveManager=new Ie.default,spriteAtlas=new le.default,tileAtlas=new de.default,tileEventManager=new ke.default,Ge.default.initialize(),We.default.loadAndCompileModules(),game=new qe,game.initialize(),ui=new De.default,ui.initialize(),newui=new U.default,ui.onWindowResize(),saveManager.initialize()}catch(e){Ne.error("Failed to load game",e)}};"complete"===document.readyState?Ue():window.onload=Ue,document.addEventListener("visibilitychange",()=>{game&&(game.visible="visible"===document.visibilityState)})}),
+define("game/Game", ["require", "exports", "audio/Audio", "command/CommandManager", "creature/corpse/CorpseManager", "creature/corpse/Corpses", "creature/Creature", "creature/CreatureManager", "creature/Creatures", "creature/ICreature", "DedicatedServer", "doodad/DoodadManager", "doodad/Doodads", "doodad/doodads/Doodad", "entity/IEntity", "entity/IStats", "entity/StatFactory", "Enums", "flowfield/FlowFieldManager", "game/Difficulty", "game/IGame", "game/TimeManager", "item/Item", "item/ItemManager", "item/Items", "language/Dictionaries", "language/dictionary/InterruptChoice", "language/dictionary/Message", "language/dictionary/Note", "language/dictionary/UiTranslation", "language/LanguageManager", "language/Messages", "language/Translation", "mapgen/MapGen", "mod/IHookManager", "mod/IModInfo", "mod/ModManager", "multiplayer/IMultiplayer", "multiplayer/Multiplayer", "multiplayer/packets/client/PausePacket", "multiplayer/packets/client/SetPlayerZPacket", "multiplayer/packets/client/TickPacket", "multiplayer/packets/shared/UpdateOptionPacket", "newui/NewUi", "newui/screen/IScreen", "newui/screen/screens/menu/component/IMenu", "npc/NPCManager", "OldEnums", "player/Customizations", "player/IMessageManager", "player/IMilestone", "player/IPlayer", "player/MessageManager", "player/Player", "player/quest/quest/Challenge", "renderer/fieldofview/FieldOfView", "renderer/Notifier", "renderer/particle/IParticle", "renderer/particle/Particle", "renderer/particle/Particles", "renderer/RendererConstants", "renderer/Shaders", "renderer/SpriteAtlas", "renderer/SpriteBatch", "renderer/TileAtlas", "renderer/TileLayer", "renderer/World", "renderer/WorldRenderer", "resources/ResourceLoader", "save/clientStore/IClientStore", "save/data/SaveData", "save/data/SaveDataGlobal", "save/ISaveManager", "save/ISerializer", "save/SaveManager", "steamworks/Steamworks", "tile/ITileEvent", "tile/TerrainResources", "tile/Terrains", "tile/TileEventManager", "tile/TileEvents", "ui/Ui", "utilities/Async", "utilities/Emitter", "utilities/enum/EnumManager", "utilities/enum/Enums", "utilities/Log", "utilities/math/Vector2", "utilities/math/Vector3", "utilities/Objects", "utilities/Random", "utilities/TileHelpers", "utilities/UUID", "utilities/Version", "utilities/WebAssemblyHelpers"], function(e, t, a, i, n, o, r, s, l, u, d, p, c, m, h, y, g, f, T, S, I, v, w, M, b, k, C, D, A, P, G, R, x, B, E, L, O, F, _, H, W, N, q, U, z, V, j, $, Q, Y, J, K, X, Z, ee, te, ae, ie, ne, oe, re, se, le, ue, de, pe, ce, me, he, ye, ge, fe, Te, Se, Ie, ve, we, Me, be, ke, Ce, De, Ae, Pe, Ge, Re, xe, Be, Ee, Le, Oe, Fe, _e, He, We) {
+    Object.defineProperty(t, "__esModule", {
+        value: !0
+    });
+    const Ne = new xe.default(xe.LogSource.Game);
+    class qe extends Pe.default {
+        constructor() {
+            super(...arguments), this.interval = I.interval, this.mapSize = 512, this.mapSizeSq = this.mapSize * this.mapSize, this.mapGenVersion = gameVersion, this.seeds = {
+                base: 0,
+                saved: 0
+            }, this.version = gameVersion, this.glContext = null, this.visible = !0, this._updateRender = !1, this.renderingEnabled = !0, this.ambientLightLevelCache = {}, this.gameLoop = (e => {
+                if (requestAnimationFrame(this.gameLoop), audio.processEffects(), !this.playing) return;
+                this.notifier && this.notifier.update();
+                let t = !1;
+                if (this.paused && !(t = !!(void 0 !== this.fadeInAmount || this.thumbnailResolve || this.updateFieldOfView || this._updateRender))) return;
+                const a = this.getAndUpdateAmbientLightLevel(localPlayer.z);
+                let i = !1;
+                if (!t) {
+                    this.absoluteTime = e;
+                    const t = this.isRealTimeMode();
+                    if (t && (void 0 === this.nextTickTime && players.some(e => e.isResting()) && (this.nextTickTime = this.absoluteTime + this.getTickSpeed() * this.interval), void 0 !== this.nextTickTime && this.nextTickTime <= this.absoluteTime && (this.lastTickTime = this.absoluteTime, this.getTurnMode() === f.TurnMode.Simulated ? this.nextTickTime = void 0 : this.nextTickTime = this.absoluteTime + this.getTickSpeed() * this.interval, t && (this.visible && !multiplayer.isConnected() || multiplayer.isServer())))) {
+                        if (multiplayer.isServer()) {
+                            if (!steamworks.isDedicatedServer() || players.length > 1) {
+                                const e = new N.default;
+                                e.isMoving = players.map(e => e.isMoving), e.noInputReceived = players.map(e => e.noInputReceived), e.movementComplete = players.map(e => e.movementComplete), e.processAndSend()
+                            }
+                        } else this.tickRealtime();
+                        if (!this.playing) return
+                    }
+                    for (const e of players) {
+                        1 !== e.movementProgress && this.updateRenderInternal(I.RenderSource.MovementPlayerPre);
+                        const t = f.Delay.Movement + e.getWeightMovementPenalty();
+                        if (e.movementProgress = 1 - Math.min(1, Math.max(0, (e.movementFinishTime - this.absoluteTime) / (t * this.interval))), 1 !== e.movementProgress) this.updateRenderInternal(I.RenderSource.MovementPlayerPost);
+                        else if (e.isMovingClientside) {
+                            e.isMovingClientside = !1, e.fromX = e.x, e.fromY = e.y, e.isLocalPlayer() && fieldOfView.resetTransitionProgress(), multiplayer.isConnected() && multiplayer.isServer() && (e.isMoving = !1);
+                            const t = e.movementCompleteZ;
+                            if (void 0 !== t) {
+                                if (multiplayer.isConnected()) {
+                                    if (multiplayer.isServer()) {
+                                        const a = new W.default;
+                                        a.pid = e.id, a.z = t, a.processAndSend()
+                                    }
+                                } else e.setZ(t);
+                                e.isLocalPlayer() && (i = !0), e.movementCompleteZ = void 0
+                            }
+                            multiplayer.isConnected() ? e.movementComplete = !0 : modManager.getHook(E.Hook.OnMoveComplete).call(e)
+                        }
+                    }
+                    if (!this.playing) return;
+                    if (t && !this._updateRender) {
+                        for (const e of this.creatures)
+                            if (e) {
+                                const t = e.getMovementFinishTime();
+                                if (void 0 !== t && 1 !== t && (localPlayer.canSeePosition(e.x, e.y, e.z, !0) || localPlayer.canSeePosition(e.fromX, e.fromY, e.z, !0))) {
+                                    this.updateRenderInternal(I.RenderSource.MovementCreature);
+                                    break
+                                }
+                            }
+                        if (!this._updateRender) {
+                            for (const e of this.tileEvents)
+                                if (e) {
+                                    const t = e.movementFinishTime;
+                                    if (void 0 !== t && 1 !== t && (localPlayer.canSeePosition(e.x, e.y, e.z, !0) || localPlayer.canSeePosition(e.fromX, e.fromY, e.z, !0))) {
+                                        this.updateRenderInternal(I.RenderSource.MovementTileEvent);
+                                        break
+                                    }
+                                }
+                            if (!this._updateRender)
+                                for (const e of this.npcs)
+                                    if (e) {
+                                        const t = e.getMovementFinishTime();
+                                        if (void 0 !== t && 1 !== t && (localPlayer.canSeePosition(e.x, e.y, e.z, !0) || localPlayer.canSeePosition(e.fromX, e.y, e.z, !0))) {
+                                            this.updateRenderInternal(I.RenderSource.MovementNPC);
+                                            break
+                                        }
+                                    }
+                        }
+                    }
+                }
+                if (steamworks.isDedicatedServer()) this.updateFieldOfView && (this.updateFieldOfView = !1, fieldOfView.compute(void 0, a));
+                else if (this.renderingEnabled && (fieldOfView.updateTransitionProgress() && this.updateRenderInternal(I.RenderSource.FovTransition), modManager.getHook(E.Hook.PreRender).call(), this.render(a), modManager.getHook(E.Hook.PostRender).call(), i && this.updateView(I.RenderSource.MovementPlayerZPost, !0), this.thumbnailResolve && this.glContext && this.gameCanvas)) {
+                    const e = document.createElement("canvas");
+                    e.width = 512, e.height = 512;
+                    const t = e.getContext("2d");
+                    if (!t) return;
+                    t.drawImage(this.gameCanvas, this.glContext.canvas.width / 2 - 256, this.glContext.canvas.height / 2 - 256, 512, 512, 0, 0, 512, 512), saveData.gameThumbnail = e.toDataURL(), this.thumbnailResolve(), this.thumbnailResolve = void 0
+                }
+                if (!t)
+                    for (const e of players) {
+                        const t = e.hasDelay();
+                        e.processInput(), e.noInputReceived = !t && !e.isMovingClientside && !e.hasDelay(), !multiplayer.isConnected() && e.noInputReceived && modManager.getHook(E.Hook.OnNoInputReceived).call(e)
+                    }
+            })
+        }
+        get isChallenge() {
+            return this.difficulty === S.Difficulty.Challenge
+        }
+        get updateRender() {
+            return this.updateRenderInternal
+        }
+        set updateRender(e) {
+            !0 === e && this.updateRenderInternal(I.RenderSource.Mod, !1)
+        }
+        initialize() {
+            if (steamworks.isDedicatedServer()) return this.notifier = d.notifier, void(this.particle = d.particle);
+            this.gameCanvas = document.getElementById("game"), this.gameCanvas.addEventListener("webglcontextlost", e => {
+                e.preventDefault(), this.renderingEnabled = !1, multiplayer.isConnected() || this.setPaused(!0), Ne.error("Lost gl context", e.statusMessage || "Unknown error"), newui.showLoadingInterrupt(P.default.GameInterruptLoadingLostGLContext, P.default.GameInterruptLoadingLostGLContextDescription)
+            }, !1), this.gameCanvas.addEventListener("webglcontextrestored", () => {
+                Ne.warn("Restored gl context"), this.setupGl(!0), !multiplayer.isConnected() && this.paused && this.setPaused(!1)
+            }, !1)
+        }
+        async initGl() {
+            if (!this.gameCanvas) return void Ne.info("No game canvas, not initializing webgl");
+            let e, t;
+            switch ("low-power" !== saveDataGlobal.options.powerPreference && "high-performance" !== saveDataGlobal.options.powerPreference || (t = {
+                powerPreference: saveDataGlobal.options.powerPreference
+            }), Ne.info(`Initializing webgl version ${webGlVersion}`, t), webGlVersion) {
+                case 2:
+                    try {
+                        if (t || (t = {}), t.antialias = !0, e = this.gameCanvas.getContext("webgl2", t)) break;
+                        Ne.warn("Failed to get webgl 2 context. Falling back to webgl 1")
+                    } catch (e) {
+                        Ne.warn("Failed to get webgl 2 context. Falling back to webgl 1", e)
+                    } finally {
+                        t && delete t.antialias
+                    }
+                default:
+                    e = this.gameCanvas.getContext("webgl", t) || this.gameCanvas.getContext("experimental-webgl", t)
+            }
+            if (!e) throw new Error("Invalid WebGl game canvas context");
+            return this.glContext = e, ui.onWindowResize(), this.setupGl(!1)
+        }
+        async setupGl(e) {
+            this.glContext ? (ue.default.resetGl(), resourceLoader.initialize(this.glContext), me.default.compileShaders(this.glContext), pe.default.compileShaders(this.glContext), te.default.compileShaders(this.glContext), this.notifier = new ae.default(this.glContext, 16), this.particle = new ne.default(this.glContext), fieldOfView && fieldOfView.resetGl(this.glContext), this.playing ? (await this.loadResources(), this.createWorldRenderer(), world.load(), renderer.updateAll(), this.updateFieldOfView = !0, this.updateRenderInternal(I.RenderSource.SetupGl), this.renderingEnabled = !0, e && newui.hideLoadingInterrupt()) : e && newui.hideLoadingInterrupt()) : e && newui.hideLoadingInterrupt()
+        }
+        resetWebGL() {
+            if (this.glContext) {
+                const e = this.glContext.getExtension("WEBGL_lose_context");
+                e && (e.loseContext(), setTimeout(() => {
+                    e.restoreContext()
+                }, 1e3))
+            }
+        }
+        setGlContextSize(e, t) {
+            const a = window.devicePixelRatio || 1;
+            this.glContext && (this.glContext.canvas.width = Math.round(e * a), this.glContext.canvas.height = Math.round(t * a))
+        }
+        resizeRenderer() {
+            renderer && this.glContext && (renderer.setViewport(new Be.default(this.glContext.canvas.width, this.glContext.canvas.height)), this.updateZoomLevel(), this.playing && localPlayer && this.updateView(I.RenderSource.Resize, !1))
+        }
+        checkWaterFill(e, t, a, i) {
+            if (this.fillCount >= i) return;
+            const n = this.getTile(e, t, a);
+            if (!n) return;
+            const o = Fe.default.getType(this.getTile(e, t, a)),
+                r = be.default[o];
+            if (r && (r.shallowWater || r.water)) {
+                if (this.fillTile[e] && this.fillTile[e][t]) return;
+                r.deepWater ? this.fillCount += 3 : r.water ? this.fillCount += 2 : this.fillCount++, this.fillTile[e] = this.fillTile[e] || [], this.fillTile[e][t] = !0, this.checkWaterFill(e - 1, t, a, i), this.checkWaterFill(e, t - 1, a, i), this.checkWaterFill(e + 1, t, a, i), this.checkWaterFill(e, t + 1, a, i)
+            }
+        }
+        consumeWaterTile(e, t, a) {
+            const i = this.getTile(e, t, a),
+                n = Fe.default.getType(i);
+            let o;
+            const r = 50;
+            if (this.fillCount = 0, this.fillTile = [], this.checkWaterFill(e, t, a, 50), game.fillCount < 50) {
+                const i = be.default[n];
+                n === f.TerrainType.DeepFreshWater || n === f.TerrainType.DeepSeawater ? o = i && i.freshWater ? f.TerrainType.FreshWater : f.TerrainType.Seawater : n === f.TerrainType.FreshWater || n === f.TerrainType.Seawater ? (o = i && i.freshWater ? f.TerrainType.ShallowFreshWater : f.TerrainType.ShallowSeawater, 50 * Oe.default.float() + game.fillCount <= 25 && (o = i && i.tileOnConsume ? i.tileOnConsume : f.TerrainType.Dirt)) : o = i && i.tileOnConsume ? i.tileOnConsume : f.TerrainType.Dirt, this.changeTile(o, e, t, a, !1)
+            }
+        }
+        checkForHiddenMob(e, t, a, i) {
+            const n = this.getTile(t, a, i).creature;
+            n && n.isHidden() && (n.ai |= h.AiType.Hostile, n.ai &= ~h.AiType.Hidden, X.default.get(e).source(Y.Source.Combat, Y.Source.Creature).send(D.default.CreatureAppears, n.getName()), this.updateView(I.RenderSource.HiddenMob, !1))
+        }
+        animateSkeletalRemains(e, t, a, i) {
+            const n = this.getTile(t, a, i);
+            if (!n) return;
+            const o = n.doodad;
+            o && o.type === f.DoodadType.SkeletalRemains && creatureManager.spawn(f.CreatureType.Skeleton, t, a, i, !0) && (doodadManager.remove(o), e.messages.source(Y.Source.Creature).send(D.default.ReturnsToLife, x.default.nameOf(k.Dictionary.Creature, f.CreatureType.Skeleton)))
+        }
+        getWrappedCoord(e) {
+            return e - this.mapSize * Math.floor(e / this.mapSize)
+        }
+        getTileFromPoint(e) {
+            return this.getTile(e.x, e.y, e.z)
+        }
+        getTile(e, t, a) {
+            return this.tile[a * this.mapSizeSq + this.getWrappedCoord(t) * this.mapSize + this.getWrappedCoord(e)]
+        }
+        getTileUnsafe(e, t, a) {
+            return this.tile[a * this.mapSizeSq + t * this.mapSize + e]
+        }
+        setTile(e, t, a, i) {
+            return this.tile[a * this.mapSizeSq + t * this.mapSize + e] = i, i
+        }
+        getOrCreateTile(e, t, a) {
+            const i = a * this.mapSizeSq + t * this.mapSize + e;
+            let n = this.tile[i];
+            return n || (n = {}, this.tile[i] = n, n)
+        }
+        setPaused(e, t = !1) {
+            if (this.paused === e) return;
+            if (Ne.info(e ? "Paused game" : "Unpaused game"), this.paused = e, multiplayer.isConnected() && multiplayer.isServer()) {
+                const a = new H.default;
+                a.paused = e, a.showChatMessage = t, a.send()
+            }
+            const a = this.paused ? D.default.MultiplayerGamePaused : D.default.MultiplayerGameResumed;
+            xe.default.info(xe.LogSource.Chat)(x.default.message(a).getString()), this.emit(this.paused ? I.GameEvent.Pause : I.GameEvent.Resume)
+        }
+        async saveGame(e) {
+            if (this.saveClear) return;
+            Ne.info("Saving game", f.SaveType[e]);
+            const t = e === f.SaveType.Quit;
+            let a = !1;
+            if ((!multiplayer.isConnected() || multiplayer.isServer()) && (this.seeds.saved = Oe.default.generator.getSeed(), (!this.isChallenge || e === f.SaveType.Challenge || e === f.SaveType.Multiplayer) && (multiplayer.isServer() && t && multiplayer.disconnect(void 0, void 0, !0), e === f.SaveType.InGame || e === f.SaveType.Death || e === f.SaveType.Multiplayer || e === f.SaveType.Challenge ? modManager.saveAll() : await modManager.unloadAll(), this.playing))) {
+                a = !0;
+                const i = e === f.SaveType.Multiplayer ? Te.SLOT_MULTIPLAYER : this.slot;
+                if (t) return saveManager.save(i, !0), {
+                    slot: i
+                };
+                e !== f.SaveType.Multiplayer && await this.updateThumbnail();
+                const n = performance.now();
+                modManager.getHook(E.Hook.PreSaveGame).call();
+                const o = await saveManager.save(i);
+                modManager.getHook(E.Hook.PostSaveGame).call();
+                const r = performance.now() - n;
+                if (Ne.info(`Saving took ${(r/1e3).toPrecision(2)} seconds`), void 0 !== o.bytes && e !== f.SaveType.Multiplayer && e !== f.SaveType.Death) {
+                    const e = (o.bytes / 1024 / 1024).toFixed(3);
+                    localPlayer.messages.source(Y.Source.Meta).send(D.default.GameHasBeenSavedIsTakingUpMB, e)
+                }
+                return o
+            }
+            a || saveManager.save(Te.SLOT_GLOBAL, t)
+        }
+        async updateThumbnail() {
+            if (steamworks.isDedicatedServer()) return;
+            const e = await Promise.race([new Promise((e, t) => {
+                this.thumbnailResolve = (() => {
+                    e(!0)
+                })
+            }), Ae.sleep(5e3)]);
+            e || (this.thumbnailResolve = void 0)
+        }
+        addZoomLevel(e) {
+            const t = Math.max(Math.min(saveDataGlobal.options.zoomLevel + e, 8), 1);
+            t !== saveDataGlobal.options.zoomLevel && (saveDataGlobal.options.zoomLevel = Math.round(t), this.updateZoomLevel())
+        }
+        updateZoomLevel() {
+            renderer && (renderer.setZoom(modManager.getHook(E.Hook.GetZoomLevel, saveDataGlobal.options.zoomLevel).call()), this.playing && this.updateView(I.RenderSource.OptionZoomLevel, !1))
+        }
+        async requestPlay(e) {
+            const t = e.slot,
+                a = await saveManager.loadPartial(t),
+                i = {};
+            saveManager.loadPartialData(a, i, "modsUnloadable");
+            const n = i.modsUnloadable;
+            if (void 0 !== n) {
+                const e = Object.keys(n);
+                if (e.length > 0) {
+                    let t = "CanLoad";
+                    const a = [],
+                        i = [];
+                    for (const o of e) {
+                        if (n[o].unloadable) continue;
+                        let e = "Error";
+                        const r = modManager.canLoadFromIdentifier(o);
+                        if (r.loadable) {
+                            e = "NotEnabled";
+                            for (const t of modManager.getIndexFromIdentifier(o))
+                                if (modManager.isEnabled(t)) {
+                                    e = "Enabled";
+                                    break
+                                }
+                        }
+                        "Error" === e ? (t = "MissingMod", a.push(r.name)) : "NotEnabled" === e && ("MissingMod" !== t && (t = "CanEnable"), i.push(r.name))
+                    }
+                    if ("MissingMod" === t || "CanEnable" === t) {
+                        const e = await newui.interrupt(P.default.MenuLoadGameInterruptMissingMod).withDescription(() => x.default.ui(P.default.MenuLoadGameInterruptMissingModDescription).get(0 === a.length ? "" : x.default.ui(P.default.MenuLoadGameInterruptMissingModDescriptionLabelModsMissing).get(x.default.formatList(a)), 0 === i.length ? "" : x.default.ui(P.default.MenuLoadGameInterruptMissingModDescriptionLabelModsDisabled).get(x.default.formatList(i)))).withConfirmation();
+                        if (!e) return !1
+                    }
+                }
+            }
+            return this.play(Object.assign({}, e, {
+                slot: t
+            }))
+        }
+        async play(e) {
+            if (void 0 !== e.multiplayerServerToJoin) return multiplayer.joinServer(e.multiplayerServerToJoin, e.character), !0;
+            if (void 0 === e.slot && e.difficulty !== S.Difficulty.Challenge) {
+                const t = await saveManager.getFirstFreeSlot();
+                if (void 0 === t) return Ne.error("No free game slots available. Try deleting some saves"), !1;
+                e.slot = t
+            }
+            const t = e.multiplayerWorld || e.difficulty !== S.Difficulty.Challenge ? e.slot : Te.SLOT_CHALLENGE;
+            if (Ne.info("play", t), "number" != typeof t) return !1;
+            if (newui.showLoadingInterrupt(P.default.GameInterruptLoadingGame, P.default.GameInterruptLoadingGameDescription), this.initializeGameState(), this.slot = t, this.createWorld(), this.difficulty = void 0 !== e.difficulty ? e.difficulty : S.Difficulty.Hardcore, this.difficultyOptions = void 0 !== e.difficultyOptions ? e.difficultyOptions : S.getDefaultDifficultyOptions(this.difficulty), this.tickSpeed = void 0 !== e.realTimeTickSpeed ? e.realTimeTickSpeed : f.TickSpeed.Default, this.turnMode = void 0 !== e.turnMode ? e.turnMode : f.TurnMode.Manual, !e.multiplayerWorld && this.isChallenge && (!localPlayer || localPlayer.state !== f.PlayerState.Traveling)) return await saveManager.deleteSlot(Te.SLOT_CHALLENGE), this.prePlay(!1, {
+                seed: `${e.seed||Date.now()}`,
+                name: e.name,
+                character: e.character,
+                turnMode: e.turnMode,
+                multiplayer: e.multiplayer
+            });
+            const a = await saveManager.isSlotUsed(this.slot);
+            if (a) {
+                if (e.multiplayerWorld) {
+                    Ne.info(`Adding players. Local id: ${e.multiplayerWorld.pid}. Multiplayer player count: ${e.multiplayerWorld.playerCount}`);
+                    for (let t = 0; t < e.multiplayerWorld.playerCount; t++) {
+                        const t = this.addPlayer({
+                            options: {}
+                        });
+                        t.id === e.multiplayerWorld.pid && this.setLocalPlayer(t)
+                    }
+                } else this.setLocalPlayer(this.addPlayer({
+                    options: {},
+                    identifier: multiplayer.getPlayerIdentifier()
+                }));
+                await saveManager.load(this.slot), localPlayer.state === f.PlayerState.Traveling && this.initializeGameState(!0), e.seed = localPlayer.state === f.PlayerState.Traveling ? void 0 : `${this.seeds.base}`
+            }
+            return this.prePlay(a, e)
+        }
+        setLocalPlayer(e) {
+            localPlayer = e, e.canSendMessage = !0
+        }
+        addPlayer(e) {
+            let t;
+            Ne.info(`Adding player with pid ${e?e.id:void 0}, identifier: ${e?e.identifier:void 0}`);
+            let a = !1;
+            if (e && e.identifier) {
+                for (let e = 0; e < players.length; e++) Ne.info(`players id ${e}, identifier ${players[e].identifier}`);
+                for (let i = 0; i < absentPlayers.length; i++) {
+                    const n = absentPlayers[i];
+                    if (Ne.info(`absentPlayer id ${i}, identifier ${n.identifier}`), n.identifier === e.identifier) {
+                        Fe.default.isOpenTile(n, n.getTile()) || (a = !0), (t = n).wasAbsentPlayer = !0;
+                        const e = t.getStat(y.Stat.Health);
+                        e.value <= 0 && (Ne.info("Fixing invalid health value"), t.setStat(e, 20)), this.removeAndFixPids(absentPlayers, i), Ne.info("Restored absent player", i), t.state === f.PlayerState.Ghost && this.getDifficultyOptions().respawn && (t.state = f.PlayerState.None, Ne.info("Updated player state from ghost to none"));
+                        break
+                    }
+                }
+            }
+            if (void 0 === t && (t = new Z.default(e && e.identifier ? e.identifier : _e.default.create())), e && (e.options && t.setOptions(e.options), t.wasAbsentPlayer && !a || !e.position || (t.x = e.position.x, t.y = e.position.y, t.z = e.position.z, t.fromX = e.position.x, t.fromY = e.position.y), !t.wasAbsentPlayer && e.character && (t.customization = e.character.customization, t.name = e.character.name), void 0 !== e.id)) return t.setId(e.id), players[t.id] = t, this.playing && modManager.getHook(E.Hook.OnTileUpdate).call(t.getTile(), t.x, t.y, t.z), t;
+            const i = players.push(t);
+            return t.setId(i - 1), this.playing && (modManager.getHook(E.Hook.OnTileUpdate).call(t.getTile(), t.x, t.y, t.z), this.updateView(I.RenderSource.TileUpdate, !1)), t
+        }
+        removePlayer(e) {
+            const t = players[e];
+            if (t) {
+                if (Ne.info("Removing player", e), t.absentLastUsedTime = Date.now(), absentPlayers.push(t), t.resetMovementStates(), this.removeAndFixPids(players, e), this.playing && this.updateView(I.RenderSource.PlayerRemove, !1), multiplayer.isServer()) {
+                    const e = steamworks.getDedicatedServerInfo();
+                    e && e.console && game.saveGame(f.SaveType.InGame)
+                }
+            } else Ne.warn("Unable to remove player", e)
+        }
+        deletePlayer(e, t) {
+            for (let a = 0; a < e.length; a++) {
+                const i = e[a];
+                if (i.identifier === t) {
+                    e.splice(a, 1);
+                    const n = itemManager.getItemsInContainer(i.inventory, !0);
+                    Ne.info(`Deleting player '${i.name}' [${t}] - ${n.length} items`);
+                    for (const e of n) itemManager.remove(e);
+                    const o = e.find(e => e.identifier === t);
+                    for (const e of game.items) e && e.containedWithin === i.inventory && (Ne.info("Fixing duplicate identifier issue", e), void 0 !== o ? (Ne.info(`Moving item into '${i.name}'s inventory`), itemManager.moveToContainer(o, e, o.inventory)) : itemManager.remove(e));
+                    if (void 0 !== o)
+                        for (const e of o.inventory.containedItems) e.containedWithin !== o.inventory && (e.containedWithin = o.inventory, Ne.info("Fixing invalid contained within for another player"));
+                    break
+                }
+            }
+        }
+        isRealTimeMode() {
+            return this.getTurnMode() !== f.TurnMode.Manual
+        }
+        getTurnMode() {
+            return this.turnMode
+        }
+        setTurnMode(e) {
+            this.turnMode = e, this.getTurnMode() === f.TurnMode.RealTime && (this.nextTickTime = 0), multiplayer.isServer() && multiplayer.updateOptions({
+                turnMode: e
+            })
+        }
+        getTickSpeed() {
+            return this.tickSpeed
+        }
+        setTickSpeed(e) {
+            this.tickSpeed = e, multiplayer.isServer() && multiplayer.updateOptions({
+                tickSpeed: e
+            })
+        }
+        synchronizeFlowFields(e) {
+            Ne.info(this.time.ticks, this.flowFieldSyncCount, "synchronizeFlowFields", e.length, e.map(e => e.id).join(",")), flowFieldManager.setPlayers(e), this.updateEntityFov(), flowFieldManager.reset(), this.flowFieldSyncCount++
+        }
+        enableFlowFieldDebug() {
+            this.glContext
+        }
+        async resetGameState(e = !1) {
+            Ne.info("resetGameState", saveData.gameSlotName, f.PlayerState[localPlayer.state]), modManager.getHook(E.Hook.OnGameEnd).call(localPlayer.state), steamworks.stopPlaytimeTracking(), multiplayer.isConnected() && (e = multiplayer.isClient(), multiplayer.disconnect(), e || (saveData.multiplayerState.enable = !0)), this.isChallenge ? localPlayer.state === f.PlayerState.Traveling && await this.saveGame(f.SaveType.Challenge) : e || await this.saveGame(f.SaveType.BackToMainMenu), this.playing = !1, this.notifier.clear(), fieldOfView = void 0, renderer && renderer.dispose(), audio.updateMusicSpeed(1), await modManager.unloadAll(!0), Ge.default.reset(), localPlayer.state === f.PlayerState.Traveling ? this.play({
+                slot: this.slot
+            }) : ui.switchToScreen(z.ScreenId.MainMenu)
+        }
+        shouldRender() {
+            const e = modManager.getHook(E.Hook.ShouldRender).call();
+            return void 0 === e ? 65535 : e
+        }
+        makeLavaPassage(e) {
+            const {
+                x: t,
+                y: a,
+                z: i
+            } = e.getFacingPoint(), n = game.getTile(t, a, i), o = Fe.default.getType(n);
+            if (i === f.WorldZ.Overworld && o !== f.TerrainType.Lava) {
+                const n = game.getTile(t, a, f.WorldZ.Cave),
+                    o = Fe.default.getType(n);
+                if (o === f.TerrainType.Lava) {
+                    this.changeTile(f.TerrainType.Lava, t, a, i, !1), Oe.default.bool() && this.changeTile(f.TerrainType.CoolingLava, t, a, f.WorldZ.Cave, !1), e.messages.source(Y.Source.Action).send(D.default.DiscoveredLavaPassage), e.queueSoundEffectInFront(f.SfxType.Water);
+                    const n = be.default[o];
+                    return n && game.particle.create(t, a, i, n.particles), f.TerrainType.Lava
+                }
+            }
+        }
+        makeCaveEntrance(e) {
+            if (e.z === f.WorldZ.Cave) return;
+            const t = e.getFacingPoint(),
+                a = {
+                    x: 0,
+                    y: 0
+                };
+            for (a.x = t.x - 1; a.x < t.x + 2; a.x++)
+                for (a.y = t.y - 1; a.y < t.y + 2; a.y++)
+                    if (Fe.default.getType(this.getTile(a.x, a.y, f.WorldZ.Overworld)) === f.TerrainType.CaveEntrance) return;
+            if (0 === Oe.default.int(50)) {
+                e.addDelay(f.Delay.Collision), e.messages.source(Y.Source.Action).send(D.default.DiscoveredCaveEntrance), this.changeTile(f.TerrainType.CaveEntrance, t.x, t.y, e.z, !1), this.changeTile(f.TerrainType.CaveEntrance, t.x, t.y, f.WorldZ.Cave, !1, !0);
+                const a = this.getTile(t.x, t.y, f.WorldZ.Cave).doodad;
+                return a && a.damage(!0), f.TerrainType.CaveEntrance
+            }
+        }
+        getTileData(e, t, a) {
+            const i = this.tileData[e];
+            if (i) {
+                const e = i[t];
+                if (e) return e[a]
+            }
+        }
+        getOrCreateTileData(e, t, a) {
+            let i = this.tileData[e];
+            i || (i = this.tileData[e] = {});
+            let n = i[t];
+            n || (n = i[t] = {});
+            let o = n[a];
+            return o || (o = n[a] = []), o
+        }
+        updateTablesAndWeightNextTick() {
+            this.shouldUpdateTablesAndWeight = !0
+        }
+        makeMiniMap(e) {
+            const t = document.createElement("canvas");
+            t.width = 456, t.height = 456;
+            const a = t.getContext("2d");
+            if (!a) throw new Error("Invalid map canvas context");
+            const i = 38,
+                n = 456,
+                o = 12,
+                r = this.glContext;
+            if (!this.cartographyTexture) {
+                const e = r.createTexture();
+                if (!e) throw new Error("Unable to create map texture");
+                this.cartographyTexture = e, r.bindTexture(r.TEXTURE_2D, this.cartographyTexture), r.texParameteri(r.TEXTURE_2D, r.TEXTURE_MAG_FILTER, r.NEAREST), r.texParameteri(r.TEXTURE_2D, r.TEXTURE_MIN_FILTER, r.NEAREST), r.texParameteri(r.TEXTURE_2D, r.TEXTURE_WRAP_S, r.CLAMP_TO_EDGE), r.texParameteri(r.TEXTURE_2D, r.TEXTURE_WRAP_T, r.CLAMP_TO_EDGE), r.texImage2D(r.TEXTURE_2D, 0, r.RGBA, 456, 456, 0, r.RGBA, r.UNSIGNED_BYTE, re.emptyUint8Array)
+            }
+            const s = r.createFramebuffer();
+            r.bindFramebuffer(r.FRAMEBUFFER, s), r.framebufferTexture2D(r.FRAMEBUFFER, r.COLOR_ATTACHMENT0, r.TEXTURE_2D, this.cartographyTexture, 0);
+            const l = 456 / (38 * re.subTileSize * 2);
+            r.viewport(0, 0, 456, 456), r.clearColor(98 / 255, 67 / 255, 30 / 255, 1), r.clear(r.COLOR_BUFFER_BIT), r.enable(r.BLEND), r.blendFunc(r.SRC_ALPHA, r.ONE_MINUS_SRC_ALPHA), renderer.layers[e.tilePosition.z].renderFullbright(e.tilePosition.x - .5, e.tilePosition.y - .5, l, 456, 456, !1), renderer.layers[e.tilePosition.z].renderFullbright(e.tilePosition.x - .5, e.tilePosition.y - .5, l, 456, 456, !0);
+            const u = new Uint8Array(831744);
+            r.readPixels(0, 0, 456, 456, r.RGBA, r.UNSIGNED_BYTE, u), r.deleteFramebuffer(s), r.bindFramebuffer(r.FRAMEBUFFER, null);
+            const d = a.createImageData(456, 456);
+            let p, c;
+            for (p = 0; p < 456; p++)
+                for (c = 0; c < 456; c++) {
+                    const e = 4 * (456 * p + c),
+                        t = 4 * (456 * (456 - p) + c);
+                    d.data[e] = u[t], d.data[e + 1] = u[t + 1], d.data[e + 2] = u[t + 2], d.data[e + 3] = u[t + 3]
+                }
+            if (a.putImageData(d, 0, 0), e.skillCheck) {
+                const e = this.getSkillPercent(f.SkillType.Cartography);
+                if (void 0 !== e)
+                    for (a.fillStyle = "rgba(0,0,0,0)", c = 0; c < 38; c++)
+                        for (p = 0; p < 38; p++) {
+                            const t = e / 100,
+                                i = Oe.generalRandom.weightedChoice([
+                                    [Math.pow(4 * (1 - Math.abs(t - 0)), 2), [
+                                        [20, 1],
+                                        [8, .8],
+                                        [4, .6],
+                                        [.25, .4],
+                                        [.1, .2]
+                                    ]],
+                                    [Math.pow(4 * (1 - Math.abs(t - .2)), 2), [
+                                        [12, 1],
+                                        [6, .8],
+                                        [4, .6],
+                                        [.25, .25],
+                                        [.1, .1]
+                                    ]],
+                                    [Math.pow(4 * (1 - Math.abs(t - .4)), 2), [
+                                        [4, .8],
+                                        [4, .6],
+                                        [1, .25],
+                                        [.1, .1]
+                                    ]],
+                                    [Math.pow(4 * (1 - Math.abs(t - .6)), 2), [
+                                        [1, .8],
+                                        [4, .6],
+                                        [2, .25],
+                                        [1, .1]
+                                    ]],
+                                    [Math.pow(4 * (1 - Math.abs(t - .8)), 2), [
+                                        [1, .8],
+                                        [3, .25],
+                                        [3, .1]
+                                    ]],
+                                    [Math.pow(4 * (1 - Math.abs(t - 1)), 2), [
+                                        [1, .8],
+                                        [3, .25],
+                                        [5, .1]
+                                    ]]
+                                ]),
+                                n = Oe.generalRandom.weightedChoice(i),
+                                o = 6;
+                            for (let e = 0; e < o; e++)
+                                for (let t = 0; t < o; t++) Oe.generalRandom.chance(n) && a.clearRect(12 * c + 12 * e / o, 12 * p + 12 * t / o, 12 / o, 12 / o)
+                        }
+                a.fillStyle = "#00ff00", a.fillRect(228, 228, 12, 12)
+            }
+            return t
+        }
+        getBlackness() {
+            return void 0 !== this.fadeInAmount ? 1 - this.fadeInAmount : 1
+        }
+        getAmbientLightLevel(e) {
+            return this.ambientLightLevelCache[e]
+        }
+        getAndUpdateAmbientLightLevel(e) {
+            const t = this.getAmbientLightLevel(e),
+                a = e !== f.WorldZ.Cave ? 1 - this.time.getBrightness() : .05,
+                i = modManager.getHook(E.Hook.GetAmbientLightLevel).setDefault(a).call(a, e);
+            return t !== i && (this.updateFieldOfView = !0, this.ambientLightLevelCache[e] = i), i
+        }
+        updateReputation(e) {
+            if (1 === players.length) return void(localPlayer.isGhost() || localPlayer.updateReputation(e));
+            const t = this.getPlayers();
+            if (0 === t.length) return;
+            const a = Math.floor(e / t.length);
+            for (const e of t) e.updateReputation(a)
+        }
+        getDifficulty() {
+            return this.difficulty
+        }
+        getDifficultyOptions() {
+            return this.difficultyOptions
+        }
+        getReputation() {
+            return this.getPlayerAverage(e => e.getReputation(), !0)
+        }
+        getMalignity() {
+            return this.getPlayerAverage(e => e.getStat(y.Stat.Malignity).value, !0)
+        }
+        getBenignity() {
+            return this.getPlayerAverage(e => e.getStat(y.Stat.Benignity).value, !0)
+        }
+        getMaxHealth() {
+            return this.getPlayerAverage(e => e.getMaxHealth())
+        }
+        getMaxWeight() {
+            return this.getPlayerAverage(e => e.getMaxWeight())
+        }
+        getTactics() {
+            return this.getPlayerAverage(e => e.skills[f.SkillType.Tactics].core)
+        }
+        getSkillPercent(e) {
+            return this.getPlayerAverage(t => t.getSkill(e))
+        }
+        getPlayerAverage(e, t) {
+            if (1 === players.length) {
+                if (localPlayer.isGhost()) return 0;
+                const t = e(localPlayer);
+                return void 0 !== t ? t : 0
+            }
+            const a = this.getPlayers();
+            if (0 === a.length) return 0;
+            let i = 0;
+            for (const t of a) {
+                const a = e(t);
+                void 0 !== a && (i += a)
+            }
+            if (0 === i) return 0;
+            const n = i / a.length;
+            return t ? Math.round(n) : n
+        }
+        changeTile(e, t, a, i, n, o, r) {
+            t = this.getWrappedCoord(t), a = this.getWrappedCoord(a);
+            const s = "number" == typeof e ? {
+                type: e
+            } : e;
+            if (void 0 === s.type) return;
+            let l = Oe.default.int(3);
+            const u = this.getTile(t, a, i);
+            if (!u) return;
+            const d = be.default[Fe.default.getType(u)];
+            d && d.noGfxSwitch && (l = Fe.default.getGfx(u));
+            let p = this.getOrCreateTileData(t, a, i);
+            if (o) {
+                const e = p.length - 1;
+                for (let n = e; n >= 0; n--) {
+                    const o = p[n];
+                    if ((!r || !(n === e || n === e - 1 && p[e] && p[e].type === f.TerrainType.CaveEntrance)) && o.type !== f.TerrainType.CaveEntrance) {
+                        const e = Me.default[o.type];
+                        if (e && e.defaultItem) {
+                            let n, r;
+                            o.minDur && o.maxDur && (n = o.minDur - 1, r = o.maxDur);
+                            let s = f.ItemQuality.Random;
+                            void 0 !== o.quality && (s = o.quality);
+                            const l = itemManager.create(e.defaultItem, itemManager.getTileContainer(t, a, i), s);
+                            void 0 !== n && (l.minDur = n), void 0 !== r && (l.maxDur = r), void 0 === n && void 0 === r || ui.updateItem(l)
+                        }
+                    }
+                }
+                this.tileData[t][a][i] = [], p = this.getOrCreateTileData(t, a, i)
+            }
+            if (n) Fe.default.getType(u) === f.TerrainType.Grass ? p.length > 0 ? p[0].type = f.TerrainType.Dirt : p.push({
+                type: f.TerrainType.Dirt
+            }) : p.length <= 0 && p.push({
+                type: Fe.default.getType(u)
+            }), p.unshift(s);
+            else {
+                p.length <= 0 && p.push(s), p[0].type = s.type, p[0].gfx = l;
+                const e = be.default[s.type];
+                if (e) {
+                    const t = e.durability;
+                    void 0 === p[0].minDur && void 0 !== t && (p[0].minDur = t), void 0 === p[0].maxDur && void 0 !== t && (p[0].maxDur = t)
+                }
+            }
+            Fe.default.setGfx(u, l), Fe.default.setType(u, s.type), world.updateTile(t, a, i, u)
+        }
+        isPositionFull(e, t, a) {
+            const i = this.getTile(e, t, a);
+            return !i || this.isTileFull(i)
+        }
+        isTileFull(e) {
+            const t = e;
+            return !(!t.containedItems || !t.containedItems.length) && itemManager.getItemsWeight(t.containedItems) >= 36
+        }
+        isOnFire(e) {
+            const t = e.doodad;
+            if (t) {
+                const e = t.description();
+                if (e && e.providesFire) return f.FireType.Doodad
+            }
+            if (tileEventManager.get(e, we.TileEventType.Fire)) return f.FireType.Fire;
+            const a = Fe.default.getType(e);
+            return a === f.TerrainType.Lava ? f.FireType.Lava : a === f.TerrainType.CoolingLava ? f.FireType.CoolingLava : f.FireType.None
+        }
+        isTileEmpty(e) {
+            const t = e,
+                a = be.default[Fe.default.getType(e)],
+                i = !(a && !a.passable || void 0 !== e.doodad || void 0 !== t.containedItems && t.containedItems.length > 0 || e.creature || e.npc || e.corpses || e.events || this.isPlayerAtTile(e));
+            return multiplayer.addSyncCheck(F.MultiplayerSyncCheck.IsTileEmpty, {
+                doodad: void 0 !== e.doodad,
+                creature: void 0 !== e.creature,
+                corpses: void 0 !== e.corpses,
+                events: void 0 !== e.events,
+                items: void 0 !== t.containedItems && t.containedItems.length > 0,
+                hasPlayer: this.isPlayerAtTile(e),
+                ret: i
+            }), i
+        }
+        isPositionEmpty(e, t, a) {
+            const i = this.getTile(e, t, a);
+            return i ? this.isTileEmpty(i) : (multiplayer.addSyncCheck(F.MultiplayerSyncCheck.IsTileEmpty, {
+                x: e,
+                y: t,
+                z: a
+            }), !1)
+        }
+        processWaterContamination() {
+            if (0 === this.contaminatedWater.length) return;
+            const e = [];
+            for (; this.contaminatedWater.length > 0;) {
+                const t = this.contaminatedWater.pop();
+                if (!t) return;
+                const a = world.layers[t.z],
+                    i = a.getTileType(t.x, t.y);
+                if (i > f.TerrainType.ShallowFreshWater) continue;
+                i > f.TerrainType.ShallowSeawater && this.changeTile(i - 3, t.x, t.y, t.z, !1);
+                let n = a.getTileType(t.x + 1, t.y);
+                n > f.TerrainType.ShallowSeawater && n <= f.TerrainType.ShallowFreshWater && e.push({
+                    x: t.x + 1,
+                    y: t.y,
+                    z: t.z
+                }), (n = a.getTileType(t.x - 1, t.y)) > f.TerrainType.ShallowSeawater && n <= f.TerrainType.ShallowFreshWater && e.push({
+                    x: t.x - 1,
+                    y: t.y,
+                    z: t.z
+                }), (n = a.getTileType(t.x, t.y + 1)) > f.TerrainType.ShallowSeawater && n <= f.TerrainType.ShallowFreshWater && e.push({
+                    x: t.x,
+                    y: t.y + 1,
+                    z: t.z
+                }), (n = a.getTileType(t.x, t.y - 1)) > f.TerrainType.ShallowSeawater && n <= f.TerrainType.ShallowFreshWater && e.push({
+                    x: t.x,
+                    y: t.y - 1,
+                    z: t.z
+                })
+            }
+            this.contaminatedWater = e
+        }
+        getMovementFinishTime() {
+            return this.absoluteTime + f.Delay.Movement * this.interval
+        }
+        passTurn(e, t) {
+            e.passTurn(t);
+            const a = this.isRealTimeMode();
+            a && e.isResting() ? e.tick(!0) : a || (e.tick(!0), this.tick()), this.getTurnMode() === f.TurnMode.Simulated && !e.isGhost() && (void 0 === this.lastTickTime || this.lastTickTime + this.getTickSpeed() * this.interval < this.absoluteTime) && (this.nextTickTime = 0), e.updateStatsAndAttributes(), this.updateView(I.RenderSource.GamePassTurn, !e.isResting() && (e.isLocalPlayer() || 0 !== e.lightBonus))
+        }
+        tickRealtime() {
+            this.tick();
+            for (const e of players) e.isServer() || e.tick();
+            for (const e of this.getPlayers()) e.updateStatsAndAttributes();
+            this.updateView(I.RenderSource.GameTick, !localPlayer.isResting() && (localPlayer.isLocalPlayer() || 0 !== localPlayer.lightBonus))
+        }
+        updateView(e, t) {
+            "boolean" == typeof e && (t = e, e = I.RenderSource.Mod), t && (this.updateFieldOfView = !0), !renderer || localPlayer.isResting() && !multiplayer.isConnected() || (this.updateRenderInternal(e, !0), renderer.computeSpritesInViewport())
+        }
+        updateRenderInternal(e, t = !1) {
+            this._updateRender = !0
+        }
+        updateTablesAndWeight() {
+            this.shouldUpdateTablesAndWeight = !1;
+            for (const e of this.getPlayers()) e.updateTablesAndWeight()
+        }
+        rangeFinder(e, t) {
+            0 === e && (e = 1), 0 === t && (t = 1);
+            const a = Math.ceil(t / 100 * 6) - 1;
+            let i = a;
+            a > e && (i = e);
+            const n = Oe.default.intInRange(i, e);
+            let o = n + a;
+            return 1 === e && (o = Math.floor(o / 2)), o < 1 && o++, o
+        }
+        damage(e, t, a = !0) {
+            let i = x.default.message(D.default.YourFist),
+                n = x.default.message(D.default.TheirFist);
+            t.weaponName instanceof x.default ? i = n = t.weaponName : "number" == typeof t.weaponName && t.weaponName !== D.default.YourFist && (i = n = x.default.message(t.weaponName));
+            const o = e.getName();
+            let s = !1,
+                u, d = x.default.message(D.default.None),
+                p;
+            switch (e.entityType) {
+                case h.EntityType.Player:
+                    p = modManager.getHook(E.Hook.OnPlayerDamage).call(e, t);
+                    break;
+                case h.EntityType.NPC:
+                    p = modManager.getHook(E.Hook.OnNPCDamage).call(e, t);
+                    break;
+                case h.EntityType.Creature:
+                    p = modManager.getHook(E.Hook.OnCreatureDamage).call(e, t)
+            }
+            if (void 0 !== p) {
+                if (p <= 0) return;
+                void 0 !== p && (u = p)
+            }
+            if (t.legacy && (u = t.amount) < 0 && (u *= -1), void 0 === u) {
+                let a;
+                if (e instanceof r.default) {
+                    const t = e.description();
+                    t && (a = t.defense)
+                } else a = e.defense;
+                if (!a) return;
+                let l = a.base;
+                e instanceof r.default && e.aberrant && (l = Math.ceil(l * Math.max(this.getTactics() / 30, 2))) > 15 && (l = 15);
+                const p = a.resist;
+                let c = 0;
+                const m = [],
+                    h = a.vulnerable;
+                let g = 0;
+                const T = [];
+                for (const a of Re.default.values(f.DamageType)) {
+                    if (t.type & a && p[a]) {
+                        const n = p[a];
+                        switch (n) {
+                            case 99:
+                                t.weaponName && X.default.get(t.human).source(Y.Source.Combat, Y.Source.Action, Y.Source.Item).type(X.MessageType.Bad).send(D.default.DidNotSeemToBeHurting, i, o), s = !0;
+                                break;
+                            case 100:
+                                t.weaponName && X.default.get(t.human).source(Y.Source.Combat, Y.Source.Action, Y.Source.Item).type(X.MessageType.Bad).send(D.default.SeemsToHaveDrawnEnergy, o, i), e instanceof r.default && e.increaseStat(y.Stat.Health, t.amount) && (this.notifier.addStat(e.x, e.y, e.z, f.StatType.EnemyHealth, t.amount), e.queueSoundEffect(f.SfxType.Miss)), s = !0;
+                                break;
+                            default:
+                                m.push(a), c += n
+                        }
+                    }
+                    t.type & a && h[a] && (T.push(a), g += h[a])
+                }
+                const S = t.amount + g;
+                if (u = S - (l + c), g && c) {
+                    const e = m.concat(T.filter(function(e) {
+                        return -1 === m.indexOf(e)
+                    }));
+                    d = x.default.message(D.default.DamageAppeared).addArgs(R.fullDamageType(e), x.default.message(D.default.BothEffectiveIneffective))
+                } else g ? d = x.default.message(D.default.DamageAppeared).addArgs(R.fullDamageType(T), x.default.message(D.default.Effective)) : c && (d = x.default.message(D.default.DamageAppeared).addArgs(R.fullDamageType(m), x.default.message(D.default.Ineffective)));
+                if (u <= 0 && !s) {
+                    u = 0;
+                    const a = Oe.default.percent();
+                    a <= 10 ? u = 1 : (this.notifier.addStat(e.x, e.y, e.z, f.StatType.Zero, 0), t.weaponName && (X.default.get(t.human).source(Y.Source.Combat, Y.Source.Action).type(X.MessageType.Miss).send(D.default.FailedToCauseDamage, o, i, d), e instanceof Z.default && X.default.get(e).source(Y.Source.Combat).type(X.MessageType.Good).send(D.default.FailedToCauseYouDamage, t.human.getName(), n, d)))
+                }
+            }
+            if (e instanceof r.default || (u = Math.ceil(u * e.getDamageModifier())), e instanceof Z.default && (e.lastAttackedBy = void 0), u >= 1 && !s) {
+                if (e.reduceStat(y.Stat.Health, u), !(e instanceof r.default)) {
+                    const a = e;
+                    if (a.cancelResting(f.RestCancelReason.CreatureDamaged), t.damageMessage && (a.deathBy = ("number" == typeof t.damageMessage ? x.default.message(t.damageMessage) : t.damageMessage).serialize()), e instanceof Z.default)
+                        if (e.healthSyncCheck(), t.human) t.human.updateReputation(e.getReputation() > 0 ? -25 : 25), e.lastAttackedBy = t.human;
+                        else if (t.creature) {
+                        const a = t.creature.getOwner();
+                        a && (a.updateReputation(e.getReputation() > 0 ? -25 : 25), e.lastAttackedBy = t.creature)
+                    }
+                    e.queueSoundEffect(f.SfxType.Hurt, void 0 === t.soundDelay ? 0 : t.soundDelay)
+                }
+                if (t.weaponName && (X.default.get(t.human).source(Y.Source.Combat, Y.Source.Action).type(X.MessageType.Attack).send(D.default.HitForDamage, o, u, i, d), e instanceof Z.default && X.default.get(e).source(Y.Source.Combat, Y.Source.Wellbeing).type(X.MessageType.Bad).send(D.default.HitYouForDamage, t.human.getName(), u, n, d)), e instanceof r.default) {
+                    if (!t.human && void 0 !== e.enemy) {
+                        const t = game.creatures[e.enemy];
+                        if (t) {
+                            const a = t.getOwner();
+                            if (a) {
+                                const t = e.description();
+                                t && a.updateReputation(t.reputation < 0 ? -25 : 25)
+                            }
+                        }
+                    }
+                    if (e.type === f.CreatureType.Slime && 0 === Oe.default.int(7)) {
+                        const t = Math.floor(Oe.default.float() + e.x - Oe.default.float()),
+                            a = Math.floor(Oe.default.float() + e.y - Oe.default.float()),
+                            i = creatureManager.spawn(f.CreatureType.Slime, t, a, e.z, !1, !!e.aberrant || void 0);
+                        if (void 0 !== i) {
+                            X.default.toAll(i => i.ifVisible(new Ee.default(t, a, e.z)).source(Y.Source.Creature).send(D.default.HasSplit, o));
+                            const i = l.default[f.CreatureType.Slime];
+                            i && i.blood && this.particle.create(t, a, e.z, i.blood), audio.queueEffect(f.SfxType.Water, t, a, e.z)
+                        }
+                    }
+                    if (a) {
+                        let t;
+                        const a = e.description();
+                        e.aberrant && a && a.aberrantBlood ? t = a.aberrantBlood : a && a.blood ? t = a.blood : (t = oe.default[ie.ParticleType.Blood], 0 === Oe.default.int(10) && corpseManager.createBlood(e.x, e.y, e.z)), this.particle.create(e.x, e.y, e.z, t)
+                    }
+                } else if (a) {
+                    const t = oe.default[ie.ParticleType.Blood];
+                    0 === Oe.default.int(10) && corpseManager.createBlood(e.x, e.y, e.z), this.particle.create(e.x, e.y, e.z, t)
+                }
+                this.notifier.addStat(e.x, e.y, e.z, e instanceof Z.default ? f.StatType.Health : f.StatType.EnemyHealth, -1 * u), e.queueSoundEffect(e instanceof r.default ? f.SfxType.CreatureHit : f.SfxType.Hurt)
+            }
+            const c = t.human || t.creature;
+            return c && e.getStatValue(y.Stat.Health) <= 0 && modManager.getHook(E.Hook.OnEntityKill).call(c, e), u
+        }
+        getPlayers(e, t) {
+            const a = [];
+            for (const i of players) i.isServer() || i.isGhost() && !e || i.isConnecting && !t || a.push(i);
+            return a
+        }
+        isPlayerAtTile(e, t, a) {
+            return 0 !== this.getPlayersAtTile(e, t, a).length
+        }
+        isPlayerAtPosition(e, t, a, i, n) {
+            return 0 !== this.getPlayersAtPosition(e, t, a, i, n).length
+        }
+        getPlayersAtTile(e, t, a) {
+            const i = [];
+            for (const n of players) n.isServer() || n.isGhost() && !t || n.isConnecting && !a || n.getTile() !== e || i.push(n);
+            return i
+        }
+        getPlayersAtPosition(e, t, a, i, n) {
+            "object" == typeof e && (n = a, i = t, a = e.z, t = e.y, e = e.x);
+            const o = [];
+            for (const r of players) r.isServer() || r.isGhost() && !i || r.isConnecting && !n || r.x !== e || r.y !== t || r.z !== a || o.push(r);
+            return o
+        }
+        getPlayersThatSeePosition(e, t, a) {
+            const i = [];
+            for (const n of this.getPlayers()) n.canSeePosition(e, t, a) && i.push(n);
+            return i
+        }
+        canASeeB(e, t, a, i, n, o, r) {
+            if (multiplayer.isConnected() && !r) {
+                const r = this.getLightSourceAt(e, t, a),
+                    s = fieldOfView && fieldOfView.canASeeB(e, t, a, i, n, o, r);
+                return multiplayer.addSyncCheck(F.MultiplayerSyncCheck.CanASeeB, `${e},${t},${a}:${s},${r}`), s
+            }
+            return !fieldOfView || fieldOfView.disabled ? a === o : fieldOfView.canASeeB(e, t, a, i, n, o)
+        }
+        getNearestPlayer(e, t, a) {
+            if (1 === players.length) {
+                if (localPlayer.isGhost()) return;
+                if (void 0 !== a && localPlayer.z !== a) return;
+                return localPlayer
+            }
+            let i, n;
+            for (const o of this.getPlayers()) {
+                if (void 0 !== a && o.z !== a) continue;
+                const r = Math.sqrt(Math.pow(e - o.x, 2) + Math.pow(t - o.y, 2));
+                (void 0 === n || void 0 === i || i > r) && (i = r, n = o)
+            }
+            return n
+        }
+        getPlayerByPid(e) {
+            for (const t of players)
+                if (t.id === e) return t
+        }
+        getPlayerByIdentifier(e, t = !0) {
+            for (const t of players)
+                if (t.identifier === e) return t;
+            if (t)
+                for (const t of absentPlayers)
+                    if (t.identifier === e) return t
+        }
+        getPlayerByName(e) {
+            for (const t of players)
+                if (t.name && t.name.toLowerCase() === e.toLowerCase()) return t
+        }
+        getValidPlayerName(e) {
+            let t = e ? e.trim() : "";
+            0 === t.length ? t = x.default.ui(P.default.MiscPlayerNameDefault).getString() : t.length > 32 && (t = t.substring(0, 32));
+            let a = 2,
+                i = t;
+            for (; void 0 !== this.getPlayerByName(i);) i = `${t} (${a})`, a++;
+            return i
+        }
+        getHeight(e, t, a) {
+            const i = a * Oe.default.float() - .5 * a;
+            return .5 * (e + t) + i
+        }
+        getLightSourceAt(e, t, a) {
+            const i = this.getTile(e, t, a);
+            if (!i) return 0;
+            let n = modManager.getHook(E.Hook.GetTileLightLevel).call(i, e, t, a);
+            if (void 0 !== n) return n;
+            n = 0;
+            const r = i.doodad;
+            if (r) {
+                const e = r.description();
+                if (e && e.providesFire) {
+                    let t = e.providesLight;
+                    t && r.isEmbers() && (t /= 2), void 0 !== t && (n = 25 + 12 * Oe.default.float() + 17 * t), r.legendary && r.legendary.type === f.LegendaryType.Illumination && (n += r.legendary.value), void 0 !== r.decay && (n += Math.min(Math.floor(r.decay / 10), 50))
+                }
+            }
+            const s = tileEventManager.get(i, we.TileEventType.Fire);
+            s && void 0 !== s.decay && (n = 75 + 12 * Oe.default.float() + Math.min(Math.floor(s.decay / 10), 50));
+            const l = i.creature;
+            if (l) {
+                const e = l.description();
+                e && e.lightSource && (n = Math.max(85 + Oe.default.int(12), n))
+            }
+            const u = i.corpses;
+            if (u)
+                for (const e of u) {
+                    const t = o.default[e.type];
+                    t && t.lightSource && (n = Math.max(85 + Oe.default.int(12), n))
+                }
+            const d = Fe.default.getType(i);
+            d === f.TerrainType.Lava ? n = Math.max(85 + Oe.default.int(12), n) : d === f.TerrainType.CoolingLava && (n = Math.max(40 + Oe.default.int(12), n)), a === f.WorldZ.Cave && d === f.TerrainType.CaveEntrance && (n = Math.max(6 * (1 - this.time.getBrightness()) * 17, n));
+            const p = this.getPlayersAtPosition(e, t, a);
+            if (p.length > 0) {
+                let e = 0;
+                for (const t of p) t.lightBonus > 0 && (e += 25 + 12 * Oe.default.float() + t.lightBonus);
+                n = Math.max(Math.floor(e), n)
+            }
+            return n
+        }
+        setupSave(e) {
+            itemManager.saveTileReferences(), saveData.saveManagerSaveTime = Date.now(), saveData.saveManagerTicks = game.time && game.time.ticks || 0, saveData.saveManagerOriginalVersion = game.version, saveData.saveManagerDifficulty = game.getDifficulty(), saveData.saveManagerScore = localPlayer.score, saveData.saveManagerDeathBy = localPlayer.deathBy
+        }
+        async onGlobalSlotLoaded(e, t) {
+            Ne.info("onGlobalSlotLoaded", t), t && (this.upgradeGlobalSave(He.default.getVersionInfo(saveDataGlobal.gameLastPlayedVersion ? saveDataGlobal.gameLastPlayedVersion : "beta2.0.5")), ui.setFontStyle(), steamworks.isElectron() && newui.toggleFullscreen(saveDataGlobal.options.fullscreen), audio.updateVolume()), languageManager.initialize();
+            try {
+                await this.initGl()
+            } catch (e) {
+                return Ne.error("Failed to initialize gl", e), void newui.interrupt(x.default.generator("Wayward cannot be run on this system or browser.")).withDescription(x.default.generator(e.message)).withChoice(C.default.Quit).then(() => {
+                    window.close(), document.body.innerHTML = ""
+                })
+            }
+            this.emit(I.GameEvent.GlobalSlotLoaded), await modManager.setupMods(), Ne.info("Finished setting up mods"), this.loadResources(), saveDataGlobal.options.muteMusic || audio.playMusic(), requestAnimationFrame(this.gameLoop), void 0 !== this.simulateInterval && clearInterval(this.simulateInterval);
+            const a = steamworks.getDedicatedServerInfo();
+            if (void 0 !== a ? (document.getElementById("initial-load").remove(), void 0 !== a.load ? (Ne.info(`Going to load "${a.load}"`), saveManager.getUsedSlots().then(async e => {
+                    for (const t of e) {
+                        const e = await saveManager.loadPartial(t),
+                            i = {};
+                        if (saveManager.loadPartialData(e, i, "gameSlotName"), i.gameSlotName && i.gameSlotName.toLocaleLowerCase() === a.load.toLocaleLowerCase()) return void game.play({
+                            slot: t
+                        })
+                    }
+                    Ne.warn(`Unable to load "${a.load}" - save not found`);
+                    let t = a.console;
+                    a.newGameOptions && (Ne.info(`Generating a new world "${a.load}" with the following options`, a.newGameOptions), a.newGameOptions.character || (a.newGameOptions.character = Q.generateRandomCharacter()), a.console || ui.switchToScreen(z.ScreenId.MainMenu), await game.play(a.newGameOptions) ? t = !1 : Ne.error("Unable to start a new game")), t && (Ne.error("Exiting because no save was loaded"), setTimeout(() => {
+                        window.close()
+                    }, 0), xe.default.setCallback(void 0)), a.console || ui.switchToScreen(z.ScreenId.MainMenu)
+                })) : ui.switchToScreen(z.ScreenId.MainMenu)) : (this.simulateInterval = setInterval(() => {
+                    this.simulate()
+                }, this.interval), newui.showScreen(z.ScreenId.Splash)), steamworks.onReady(), t) {
+                const e = He.default.getVersionInfo(gameVersion),
+                    t = saveDataGlobal.gameLastPlayedVersion ? He.default.getVersionInfo(saveDataGlobal.gameLastPlayedVersion) : void 0;
+                if (Ne.info(`Current version: ${gameVersion}. Last played version: ${saveDataGlobal.gameLastPlayedVersion}`), !t || t.minor < e.minor) {
+                    const e = modManager.getMods();
+                    for (let t = 0; t < e.length; t++) modManager.isValid(t) && modManager.getType(t) !== L.ModType.Internal && modManager.isEnabled(t) && modManager.setState(t, L.ModState.Disabled);
+                    hookManager.cacheHooks()
+                }
+            }
+        }
+        onSaveLoaded(e) {
+            e !== Te.SLOT_MULTIPLAYER && (this.saveVersion || (this.saveVersion = "beta2.0.5"), this.upgradeSave(He.default.getVersionInfo(this.saveVersion)))
+        }
+        directionToMovement(e) {
+            return {
+                x: e === f.Direction.West ? -1 : e === f.Direction.East ? 1 : 0,
+                y: e === f.Direction.North ? -1 : e === f.Direction.South ? 1 : 0
+            }
+        }
+        fireBreath(e, t, a, i, n, o) {
+            for (let r = 0; r < 3; r++) {
+                let s = e,
+                    l = t;
+                i === f.Direction.West ? s -= 1 + r : i === f.Direction.East ? s += 1 + r : i === f.Direction.North ? l -= 1 + r : i === f.Direction.South && (l += 1 + r);
+                const u = this.getTile(s, l, a),
+                    d = be.default[Fe.default.getType(u)];
+                if (!d || !d.passable || d.water || d.shallowWater) break;
+                const p = u.doodad;
+                if (p) {
+                    const e = p.description();
+                    if (e && !e.isFlammable) break
+                }
+                if (void 0 !== u.creature) {
+                    const e = Oe.default.intInRange(4, 6);
+                    n && u.creature.damage({
+                        amount: e,
+                        type: f.DamageType.Fire,
+                        weaponName: n
+                    })
+                }
+                o && u.npc && u.npc.makeHostile(), tileEventManager.create(we.TileEventType.Fire, s, l, a), this.particle.create(s, l, a, oe.default[ie.ParticleType.Fire])
+            }
+        }
+        updateOption(e, t, a) {
+            if (e) {
+                const i = new q.default;
+                i.pid = e.id, i.id = t, i.value = a, multiplayer.syncPacket(i, () => {
+                    this.updateOptionInternal(t, a, e), e && e.isLocalPlayer() && (saveDataGlobal.options = e.options)
+                })
+            } else this.updateOptionInternal(t, a)
+        }
+        updateFlowFieldTile(e, t, a, i) {
+            flowFieldManager && (flowFieldManager.updateTile(t, a, i), modManager.getHook(E.Hook.OnTileUpdate).call(e, t, a, i))
+        }
+        getCompletedMilestoneCount() {
+            let e = 0;
+            if (saveDataGlobal.playerMilestoneData) {
+                const t = Object.keys(saveDataGlobal.playerMilestoneData);
+                for (let a = 0; a < t.length; a++) {
+                    const i = t[a],
+                        n = saveDataGlobal.playerMilestoneData[i];
+                    n && -1 === n.amount && e++
+                }
+            }
+            return e
+        }
+        packGround(e, t, a) {
+            const i = this.getTile(e, t, a);
+            if (Fe.default.isTilled(i)) {
+                const n = this.getTileData(e, t, a);
+                n && (n[0].tilled = !1, Fe.default.setTilled(i, !1), world.updateTile(e, t, a, i))
+            }
+        }
+        getRandomQuality(e, t = 0) {
+            const a = Oe.default.int(600 - t);
+            return a <= 1 ? f.ItemQuality.Legendary : a <= 8 ? f.ItemQuality.Exceptional : a <= 40 ? f.ItemQuality.Remarkable : f.ItemQuality.None
+        }
+        getMaxDurability(e, t) {
+            return e === f.ItemQuality.Remarkable ? Math.floor(1.3 * t) + Oe.default.int(3) + 6 : e === f.ItemQuality.Exceptional ? Math.floor(1.5 * t) + Oe.default.int(6) + 12 : e === f.ItemQuality.Legendary ? Math.floor(1.8 * t) + Oe.default.int(9) + 24 : t
+        }
+        doLavaEvents(e, t, a) {
+            const i = this.getTile(e, t, a);
+            if (!i) return;
+            const n = Fe.default.getType(i),
+                o = Oe.default.percent();
+            o <= 10 ? n === f.TerrainType.Lava ? this.changeTile(f.TerrainType.CoolingLava, e, t, a, !1) : n === f.TerrainType.CoolingLava && this.changeTile(f.TerrainType.Obsidian, e, t, a, !1) : o <= 65 && tileEventManager.fireOverflow(e, t, a)
+        }
+        wrapCoordinate(e, t) {
+            return t - e > 255 ? e + this.mapSize : e - t > 255 ? e - this.mapSize : e
+        }
+        isFlammable(e, t, a) {
+            const i = this.getTile(e, t, a);
+            if (!i) return !1;
+            if (tileEventManager.get(i, we.TileEventType.Fire)) return !1;
+            const n = be.default[Fe.default.getType(i)];
+            if (n && n.flammable && void 0 === i.doodad) return !0;
+            if (i.doodad) {
+                const e = i.doodad.description();
+                if (e && (e.isFlammable || e.providesFire)) return !0
+            }
+            if (n && !n.water && !n.shallowWater) {
+                const e = i;
+                if (e.containedItems)
+                    for (let t = 0; t < e.containedItems.length; t++) {
+                        const a = e.containedItems[t],
+                            i = a.description();
+                        if (i && i.flammable) return !0
+                    }
+            }
+            if (n && !n.water && !n.shallowWater) {
+                const e = i.events;
+                if (e)
+                    for (const t of e) {
+                        const e = Ce.default[t.type];
+                        if (e && e.isFlammable) return !0
+                    }
+            }
+            return !1
+        }
+        getCameraPosition() {
+            let e = new Be.default(localPlayer.fromX, localPlayer.fromY).lerp(localPlayer, localPlayer.movementProgress);
+            e = modManager.getHook(E.Hook.GetCameraPosition, e).call(e);
+            const t = 16 * renderer.getZoom();
+            return t >= 16 ? e : new Be.default(e).multiply(t).floor().divide(t)
+        }
+        updateOptionInternal(e, t, a) {
+            const i = a ? a.options : saveDataGlobal.options;
+            if (i[e] = t, this.playing && a) {
+                switch (e) {
+                    case "protectedCraftingItems":
+                    case "protectedCraftingItemContainers":
+                    case "useAdjacentContainers":
+                        a.updateTables();
+                        break;
+                    case "hideEquippedHeadgear":
+                        this.updateRenderInternal(I.RenderSource.OptionHeadgear);
+                        break;
+                    case "leftHand":
+                    case "rightHand":
+                        a.updateHandToUse()
+                }
+                a.emit("UpdateOption", e, t)
+            }
+        }
+        tick() {
+            modManager.getHook(E.Hook.OnGameTickStart).call(), audio.updatePosition();
+            const e = this.getPlayers();
+            multiplayer.addSyncCheck(F.MultiplayerSyncCheck.Tick, e.length), this.processTimers(e), multiplayer.isConnected() && !multiplayer.isServer() || this.processAutoSave(), this.processWaterContamination(), this.tickDayNightCycle(e), fieldOfView.tickSeed();
+            for (const t of e) this.runRandomEvents(t);
+            itemManager.decayItems() && (this.shouldUpdateTablesAndWeight = !0), this.updateEntityFov(), flowFieldManager.setPlayers(e), flowFieldManager.update(), creatureManager.updateAll(), npcManager.updateAll();
+            for (const t of e) {
+                const {
+                    x: e,
+                    y: a,
+                    z: i
+                } = t.getFacingPoint();
+                this.animateSkeletalRemains(t, e, a, i)
+            }
+            this.shouldUpdateTablesAndWeight && this.updateTablesAndWeight(), ui.tooltipRefresh(), modManager.getHook(E.Hook.OnGameTickEnd).call()
+        }
+        updateEntityFov() {
+            const e = [];
+            for (const t of game.getPlayers())
+                if (flowFieldManager.isPlayerInFlowField(t)) {
+                    const a = fieldOfView.getBounds(t, multiplayer.isConnected() ? I.lineOfSightMaxRadius : void 0);
+                    a.min.x -= t.x, a.min.y -= t.y, a.max.x -= t.x, a.max.y -= t.y, a.min.scale(1.75), a.max.scale(1.75), a.min.x += t.x, a.min.y += t.y, a.max.x += t.x, a.max.y += t.y, e.push(a)
+                }
+            creatureManager.updateFov(e), npcManager.updateFov(e)
+        }
+        processTimers(e) {
+            this.creatureSpawnTimer++;
+            let t = Math.min(200, 350 / this.getMalignity() * 1e4) + this.getBenignity() / 320;
+            if (multiplayer.isConnected() && e.length > 1 && (t -= t * ((e.length - 1) / 50)), this.isChallenge && (t -= t * (e.length * ee.default.getCreaturesOfRequirements().length() / 50)), t <= 0 && (Ne.warn(`Spawn rate is below expected worst case scenario. Malignity: ${this.getMalignity()}, Benignity: ${this.getBenignity()}, Players: ${e.length}, Quests: ${ee.default.getCreaturesOfRequirements().length()}.`), t = 1), this.creatureSpawnTimer >= t) {
+                const t = this.creatures.filter(e => e).length;
+                if (t >= (this.isChallenge ? 350 : 300)) this.creatureSpawnTimer = 0;
+                else
+                    for (const t of e) {
+                        let e, a;
+                        const i = Oe.default.int(4);
+                        switch (i) {
+                            case 0:
+                                e = t.x + 10 + Oe.default.int(30), a = t.y + 10 + Oe.default.int(30);
+                                break;
+                            case 1:
+                                e = t.x - 10 - Oe.default.int(30), a = t.y - 10 - Oe.default.int(30);
+                                break;
+                            case 2:
+                                e = t.x + 10 + Oe.default.int(30), a = t.y - 10 - Oe.default.int(-30);
+                                break;
+                            default:
+                                e = t.x - 10 - Oe.default.int(30), a = t.y + 10 + Oe.default.int(30)
+                        }
+                        if (e = this.getWrappedCoord(e), a = this.getWrappedCoord(a), multiplayer.addSyncCheck(F.MultiplayerSyncCheck.Random, `CS:${t.id},${e},${a}`), !t.canSeePosition(e, a, t.z)) {
+                            const i = this.getTile(e, a, t.z);
+                            if (i) {
+                                const n = be.default[Fe.default.getType(i)];
+                                if (n && n.water && 0 === Oe.default.int(2)) {
+                                    if (creatureManager.spawnFromGroup(u.SpawnGroup.Water, e, a, t.z)) {
+                                        this.creatureSpawnTimer = 0;
+                                        break
+                                    }
+                                } else if (creatureManager.spawnFromGroup(u.SpawnGroup.Any, e, a, t.z)) {
+                                    this.creatureSpawnTimer = 0;
+                                    break
+                                }
+                            }
+                        }
+                    }
+            }
+        }
+        async processAutoSave() {
+            this.isChallenge || !this.getDifficultyOptions().respawn && localPlayer.state === f.PlayerState.Ghost || steamworks.processBackups() || saveDataGlobal.options.enableAutoSave && (this.autoSaveTimer++, this.autoSaveTimer >= 5e3 && !localPlayer.isResting() && (this.autoSaveTimer = 0, await newui.showLoadingInterrupt(P.default.GameInterruptLoadingAutoSaving, P.default.GameInterruptLoadingAutoSavingDescription), await this.saveGame(f.SaveType.InGame), "undefined" != typeof gc && gc(), newui.hideLoadingInterrupt()))
+        }
+        tickDayNightCycle(e) {
+            this.time.nextTick(), tileEventManager.updateAll(), doodadManager.updateAll(), corpseManager.updateAll();
+            const t = this.time.ticks % 20 == 0;
+            let a = !1;
+            t && (multiplayer.isConnected() && multiplayer.isServer() && multiplayer.updateGlobalServerDirectory(), this.shouldUpdateTablesAndWeight = !0, a = this.time.isPast("6:30pm"));
+            for (const t of e) t.z === f.WorldZ.Overworld && a && t.notes.write(A.default.Nightfall), t.updateStatuses()
+        }
+        runRandomEvents(e) {
+            let t;
+            const a = Oe.default.int(this.mapSize),
+                i = Oe.default.int(this.mapSize),
+                n = this.getTile(a, i, e.z),
+                o = Fe.default.getType(n);
+            if (multiplayer.addSyncCheck(F.MultiplayerSyncCheck.Random, `RE:${e.id},${a},${i},${o}`), o === f.TerrainType.Lava && 0 === Oe.default.int(10)) this.changeTile(f.TerrainType.CoolingLava, a, i, e.z, !1), X.default.toAll(t => t.ifVisible(new Ee.default(a, i, e.z)).send(D.default.YouNoticeLavaCooling));
+            else if (o === f.TerrainType.CoolingLava && 0 === Oe.default.int(10)) this.changeTile(f.TerrainType.Obsidian, a, i, e.z, !1), X.default.toAll(t => t.ifVisible(new Ee.default(a, i, e.z)).send(D.default.YouNoticeLavaHardening));
+            else if (void 0 !== n.creature) {
+                t = Oe.default.int(4);
+                const o = n.creature,
+                    r = o.description(),
+                    s = o.getStat(y.Stat.Health);
+                0 === t && r && s.value < s.max ? (X.default.toAll(t => t.ifVisible(new Ee.default(a, i, e.z)).source(Y.Source.Creature).send(D.default.YouNoticeWoundsClosing, o.getName())), o.increaseStat(s, 1)) : 1 === t && r && !r.noStumble ? (X.default.toAll(t => t.ifVisible(new Ee.default(a, i, e.z)).source(Y.Source.Creature).send(D.default.YouNoticeStumbleInjureItself, o.getName())), o.damage({
+                    amount: 1,
+                    type: f.DamageType.True,
+                    skipMilestones: !0
+                })) : 2 !== t || o.isTamed() || void 0 !== o.renamed ? 3 !== t || o.aberrant || (X.default.toAll(t => t.ifVisible(new Ee.default(a, i, e.z)).source(Y.Source.Creature).send(D.default.YouNoticeBecomeEnraged, o.getName())), o.aberrant = !0, o.setStat(s, Math.ceil(s.value * Math.max(this.getMaxWeight() / 15, 2))), o.isTamed() || (o.ai |= h.AiType.Hostile, o.ai &= ~h.AiType.Scared)) : (X.default.toAll(t => t.ifVisible(new Ee.default(a, i, e.z)).source(Y.Source.Creature).send(D.default.YouNoticePerish, o.getName())), o.damage({
+                    amount: 999,
+                    type: f.DamageType.True,
+                    skipMilestones: !0
+                }))
+            } else if (void 0 !== n.doodad) {
+                const o = n.doodad,
+                    r = o.description();
+                r && r.spreadMax && void 0 !== o.spread && (0 === (t = Oe.default.int(3)) ? (X.default.toAll(t => t.ifVisible(new Ee.default(a, i, e.z)).source(Y.Source.Creature).send(D.default.YouNoticeDying, o.getName())), doodadManager.remove(o)) : 1 === t ? (o.spread++, X.default.toAll(t => t.ifVisible(new Ee.default(a, i, e.z)).send(D.default.YouNoticeFertilityIncreasing, o.getName()))) : 2 === t && o.spread >= 1 && (o.spread--, X.default.toAll(t => t.ifVisible(new Ee.default(a, i, e.z)).send(D.default.YouNoticeFertilityDecreasing, o.getName()))))
+            } else if (this.isPositionEmpty(a, i, e.z) && 0 === Oe.default.int(750)) {
+                const t = [];
+                for (const n of Re.default.values(f.DoodadType)) {
+                    const r = c.default[n];
+                    if (r && r.canGrow && (e.z === f.WorldZ.Overworld || e.z === f.WorldZ.Cave && r.canGrowInCaves)) {
+                        const e = r.allowedTiles;
+                        if (e)
+                            for (const a of e)
+                                if (o === a) {
+                                    t.push(n);
+                                    break
+                                }
+                    }
+                    if (t.length) {
+                        const n = Oe.default.getElement(t),
+                            o = doodadManager.create(n, a, i, e.z);
+                        if (o) {
+                            X.default.toAll(t => t.ifVisible(new Ee.default(a, i, e.z)).send(D.default.YouNoticeGrowing, x.default.nameOf(k.Dictionary.Doodad, n)));
+                            break
+                        }
+                    }
+                }
+            } else if (this.getReputation() <= -6e3 && this.isPositionEmpty(a, i, e.z) && 0 === Oe.default.int(750) && !e.canSeePosition(a, i, e.z)) {
+                creatureManager.spawn(f.CreatureType.Zombie, a, i, e.z);
+                let t = !1;
+                for (let n = -1; n <= 1; n++)
+                    for (let o = -1; o <= 1; o++) creatureManager.spawn(f.CreatureType.Zombie, a + n, i + o, e.z) && (t || (t = X.default.toAll(t => t.ifVisible(new Ee.default(a, i, e.z)).send(D.default.YouNoticeZombieHorde))))
+            }
+        }
+        upgradeToClasses(e, t, a) {
+            let i = !1;
+            if (e)
+                for (let n = 0; n < e.length; n++) {
+                    const o = e[n];
+                    if (o && !(o instanceof t)) {
+                        const r = new t,
+                            s = Object.keys(o);
+                        for (const e of s) r[e] = o[e];
+                        a && a(r), e[n] = r, i = !0
+                    }
+                }
+            return i
+        }
+        async prePlay(e, t) {
+            Ne.info("prePlay", t.seed, e), this.playOptions = t, this.isLoadingSave = e, this.isLoadingSave && localPlayer.state !== f.PlayerState.Traveling || (this.saveVersion = this.version), Ge.default.restore(), newui.showLoadingInterrupt(P.default.GameInterruptLoadingMods, P.default.GameInterruptLoadingModsDescription);
+            const a = await modManager.loadAll(t);
+            return a ? (Ne.error("modManager.loadAll", a), await multiplayer.disconnect(F.DisconnectReason.UnableToLoadMods, () => x.default.ui(P.default.GameMultiplayerInterruptFailedToLoadMods).get(a)), this.resetGameState(!0), !1) : (steamworks.startPlaytimeTracking(), itemManager.generateLookups(), Ne.info("Creating world renderer..."), this.createWorldRenderer(), Ne.info("Created world renderer"), this.playPostSeed(t))
+        }
+        async playPostSeed(e) {
+            Ne.info("playPostSeed 1", e.seed), void 0 !== e.seed ? (this.seeds.base = e.seed, Oe.default.generator.setSeed(Oe.convertStringToSeed(e.seed))) : this.seeds.base = Oe.default.generator.getSeed(), saveData.gameBaseSeed = this.seeds.base, Ne.info("playPostSeed 2", this.seeds.base, Oe.default.generator.getSeed()), Oe.default.generator.pushSeed(), this.isLoadingSave ? e.multiplayerWorld || localPlayer.setOptions(saveDataGlobal.options) : (this.setLocalPlayer(this.addPlayer({
+                options: saveDataGlobal.options,
+                character: e.character,
+                identifier: multiplayer.getPlayerIdentifier()
+            })), saveData.gameSlotName = e.name, saveData.gameCreationTime = Date.now()), e.multiplayerWorld ? this.crafted = e.multiplayerWorld.crafted : this.crafted = saveDataGlobal.gameCrafted;
+            const t = this.loadResources();
+            return Oe.default.generator.popSeed(), await B.generateWorld(!this.isLoadingSave || localPlayer.state === f.PlayerState.Traveling), t.isResolved || newui.showLoadingInterrupt(P.default.GameInterruptLoadingSprites, P.default.GameInterruptLoadingSpritesDescription), await t, this.startGame(this.playOptions)
+        }
+        render(e) {
+            const t = this.getCameraPosition();
+            this.updateFieldOfView && (this.updateFieldOfView = !1, fieldOfView.compute(void 0, e), this.updateRenderInternal(I.RenderSource.FovUpdate)), this._updateRender && (this._updateRender = !1, renderer.batchCreatures(), renderer.renderWorld(t.x, t.y, localPlayer.z), void 0 !== this.fadeInAmount && (this.fadeInAmount = Math.max(this.fadeInAmount - .005, 0), 0 === this.fadeInAmount && (delete this.fadeInAmount, this.updateThumbnail(), multiplayer.isConnected() && multiplayer.isClient() && (this.updateFieldOfView = !0)), this._updateRender = !0));
+            const a = this.glContext;
+            a.viewport(0, 0, 2 * Math.round(a.canvas.width / 2), 2 * Math.round(a.canvas.height / 2)), a.clear(a.COLOR_BUFFER_BIT), renderer.render(), this.particle.render(t.x, t.y), void 0 !== this.debugRenderer && this.debugRenderer.renderDebug(), this.notifier.render(t.x, t.y, 2 * re.subTileSize, renderer.getTileScale(), renderer.getViewport().x, renderer.getViewport().y)
+        }
+        simulate() {
+            this.playing && !this.paused && this.particle && this.particle.simulate()
+        }
+        getPotentialRecipesInContainer(e, t, a) {
+            for (let i = 0; i < e.containedItems.length; i++) {
+                const n = e.containedItems[i];
+                if (!t[n.type]) {
+                    t[n.type] = !0;
+                    const e = b.itemDescriptions[n.type],
+                        i = e ? e.recipes : void 0;
+                    if (i)
+                        for (let e = 0; e < i.length; e++) i[e] in this.crafted && (a[i[e]] = !0)
+                }
+                const o = n;
+                o.containedItems && o.containedItems.length > 0 && this.getPotentialRecipesInContainer(o, t, a)
+            }
+        }
+        removeAndFixPids(e, t) {
+            Ne.info(`Remove and fix pids in ${e===players?"players":"absentPlayers"}. Current count: ${e.length}. Removing ${t} [${e[t].identifier}]`);
+            for (let t = 0; t < e.length; t++) {
+                const a = e[t];
+                Ne.info(`${t}: ${a.id} [${a.identifier}]`)
+            }
+            e.splice(t, 1);
+            for (let t = 0; t < e.length; t++) {
+                const a = e[t],
+                    i = a.id;
+                i !== t && (a.setId(t), e === players && multiplayer.updatePlayerId(i, t))
+            }
+        }
+        createWorld() {
+            world && world.delete(), world = new ce.default(this.mapSize, this.mapSize), world.addLayer(f.WorldZ.Cave), world.addLayer(f.WorldZ.Overworld)
+        }
+        createWorldRenderer() {
+            modManager.getHook(E.Hook.OnCreateWorld).call(world);
+            for (const e of players) e.clientStore.get(ye.ClientDataType.ExploredMap).restoreExploredMap();
+            for (const e of absentPlayers) e.clientStore.get(ye.ClientDataType.ExploredMap).restoreExploredMap();
+            this.glContext && (this.playOptions.multiplayerWorld && !multiplayer.isServer() && (Ne.info("Setting up world map"), world.setupExploredMap(), Ne.info("Finished resetting world map")), renderer = new me.default(this.glContext), renderer.setSpriteTexture(this.spriteTexture, this.spriteTextureSizeInversed), pe.default.setTileTexture(this.tileTexture, this.tileTextureSizeInversed), this.notifier.setTexture(this.spriteTexture, this.spriteTextureSizeInversed), this.resizeRenderer())
+        }
+        loadResources() {
+            return resourceLoader.loadResources(this)
+        }
+        initializeGameState(e = !1) {
+            Ne.info("initializeGameState", e), this.version = gameVersion, delete this.saveVersion, delete this.mapGenVersion, delete this.previousSaveVersion, this.isLoadingSave = !1, this.absoluteTime = 0, this.autoSaveTimer = 0, this.contaminatedWater = [], this.corpses = [], this.creatures = [], this.creatureSpawnTimer = 0, this.doodads = [], this.fadeInAmount = 0, this.fillCount = 0, this.fillTile = [], this.flowFieldSyncCount = 0, this.lastCreationIds = {}, this.npcs = [], this.paused = !1, this.playing = !1, this.nextTickTime = void 0, this.lastTickTime = void 0, this.saveClear = !1, this.shouldUpdateTablesAndWeight = !1, this.spawnCoords = {
+                x: 0,
+                y: 0,
+                z: f.WorldZ.Overworld
+            }, this.tile = [], this.tileContainers = [], this.tileData = {}, this.wellData = {}, this.tileEvents = [], this.time = new v.default(0), this._updateRender = !1, this.ambientLightLevelCache = {}, this.particle && this.particle.clear(), e ? world.resetExploredMap() : (delete this.slot, this.items = [], delete this.difficulty, this.turnMode = f.TurnMode.Manual, this.tickSpeed = f.TickSpeed.Default, this.worldId = _e.default.create(), players = [], absentPlayers = [], saveData = new ge.default, ui.initializeGameState()), Ge.default.initializeGameState(), "undefined" != typeof gc && gc()
+        }
+        async startGame(e) {
+            Ne.info("startGame", Oe.default.generator.getSeed()), ui.setupItemBackgrounds(), await newui.showLoadingInterrupt(P.default.GameInterruptLoadingFinalizingWorld, P.default.GameInterruptLoadingFinalizingWorldDescription);
+            const t = steamworks.isDedicatedServer();
+            if (this.isLoadingSave) {
+                Oe.default.generator.setSeed(this.seeds.saved), Ne.info("startGame - set seed from saved", this.seeds.saved), localPlayer.spawnPoint && void 0 !== localPlayer.spawnPoint.x || (localPlayer.spawnPoint = this.spawnCoords, localPlayer.spawnPoint.z = f.WorldZ.Overworld), localPlayer.state === f.PlayerState.Traveling ? (Oe.default.bool(), localPlayer.x = this.spawnCoords.x, localPlayer.y = this.spawnCoords.y, localPlayer.raft = void 0, localPlayer.swimming = !1, saveManager.deleteSlot(this.slot), itemManager.resetMapsInContainer(localPlayer.inventory), localPlayer.messages.type(X.MessageType.Stat).send(D.default.TravelToFarOffLands)) : (localPlayer.restData = void 0, this.getDifficultyOptions().respawn && (localPlayer.state = f.PlayerState.None)), Oe.default.generator.pushSeed(), itemManager.loadTileReferences(), itemManager.loadReferences(), this.slot !== Te.SLOT_MULTIPLAYER && doodadManager.verifyAndFixItemWeights(), Oe.default.generator.popSeed();
+                const e = itemManager.getItemsInContainer(localPlayer.inventory, !0);
+                for (const t of e) {
+                    t.containedWithin === localPlayer.inventory && ui.addItemToContainer(t, localPlayer.inventory, !0, !0), t.quickSlot && ui.setQuickSlot(t.quickSlot, t.id, !0);
+                    const e = t.getEquipSlot();
+                    void 0 !== e && ui.setEquipSlot(e, t.id, !0)
+                }
+                ui.afterAddingMultipleItemsToContainer(localPlayer.inventory), ui.loadQuickSlots()
+            } else {
+                t && (localPlayer.state = f.PlayerState.Server), localPlayer.setup(this.getCompletedMilestoneCount());
+                for (let e = 0; e < 3; e++) doodadManager.updateAll();
+                const e = this.getDifficultyOptions().time;
+                e.frozen && (this.time.frozenTime = e.initial), e.initial && this.time.setTime(e.initial), e.dayLength && (this.time.dayLength = e.dayLength), e.dayPercent && (this.time.dayPercent = e.dayPercent)
+            }
+            localPlayer.fromX = localPlayer.x, localPlayer.fromY = localPlayer.y, modManager.getHook(E.Hook.OnGameStart).call(this.isLoadingSave, saveDataGlobal.gamePlayedCount), world.layers[localPlayer.z] || (localPlayer.z = f.WorldZ.Overworld), Ne.info("Loading world...", Oe.default.generator.getSeed()), world.load(), Ne.info("Loaded world", Oe.default.generator.getSeed()), renderer && (Ne.info("Updating renderer...", Oe.default.generator.getSeed()), renderer.updateAll(), Ne.info("Renderer updated", Oe.default.generator.getSeed())), fieldOfView = new te.default(this.glContext, I.lineOfSightRadius, I.lineOfSightMaxRadius, I.lineOfSightDetail), (localPlayer.isGhost() || t) && (fieldOfView.disabled = !0), modManager.getHook(E.Hook.PostFieldOfView).call(), localPlayer.isGhost() && (ui.onGameEnd(), saveData.gameState = f.PlayerState.Ghost), localPlayer.calculateEquipmentStats(), this.updateTablesAndWeight(), flowFieldManager = new T.default(2 * I.lineOfSightMaxRadius), e.multiplayerWorld ? (this.synchronizeFlowFields(e.multiplayerWorld.initialFlowFieldPids.map(e => players[e])), this.flowFieldSyncCount -= 1) : this.synchronizeFlowFields(players), this.fadeInAmount = 1;
+            for (const e of localPlayer.inventory.containedItems) {
+                if (e.isEquipped()) {
+                    const t = b.itemDescriptions[e.type];
+                    t && t.onEquip && t.onEquip(e)
+                }
+                itemManager.checkMilestones(localPlayer, e)
+            }
+            localPlayer.checkReputationMilestones(), localPlayer.updateStatsAndAttributes(), await newui.hideLoadingInterrupt(), newui.hideScreen(z.ScreenId.MainMenu), newui.hideScreen(z.ScreenId.Interrupt), ui.isInGameScreenShown() || t || ui.switchToScreen(z.ScreenId.Game), localPlayer.travelData || !this.isLoadingSave || t || localPlayer.messages.type(X.MessageType.Stat).send(D.default.LastPlaceYouLeftOff), t || ui.openDialogs(), localPlayer.updateTables(), localPlayer.addDelay(f.Delay.Movement, !0);
+            const a = this.getTurnMode();
+            if (a === f.TurnMode.RealTime && (this.nextTickTime = 0), this.playing = !0, saveDataGlobal.gamePlayedCount++, this.updateZoomLevel(), audio.updatePosition(), this.isLoadingSave && localPlayer.travelData) {
+                if (localPlayer.travelData.dehydration && localPlayer.messages.source(Y.Source.Wellbeing).type(X.MessageType.Bad).send(D.default.DyingOfDehydration), localPlayer.travelData.starvation && localPlayer.messages.source(Y.Source.Wellbeing).type(X.MessageType.Bad).send(D.default.StarvingToDeath), localPlayer.travelData.dehydration || localPlayer.travelData.starvation) {
+                    let e = localPlayer.travelData.dehydration + localPlayer.travelData.starvation;
+                    e > localPlayer.travelData.originalHealth && (e = localPlayer.travelData.originalHealth - 1), this.notifier.addStat(localPlayer.x, localPlayer.y, localPlayer.z, f.StatType.Health, -1 * e), localPlayer.queueSoundEffect(f.SfxType.Hurt)
+                }
+                if (localPlayer.travelData.itemId) {
+                    const e = this.items[localPlayer.travelData.itemId];
+                    e.placeOnTile(localPlayer.x, localPlayer.y, localPlayer.z, !0, !0)
+                }
+                localPlayer.travelData.state === f.PlayerState.Traveling ? localPlayer.addMilestone(J.MilestoneType.Navigator) : localPlayer.travelData.state === f.PlayerState.Won && localPlayer.addMilestone(J.MilestoneType.Seafarer), localPlayer.updateMilestones(), localPlayer.state = f.PlayerState.None, delete localPlayer.travelData
+            }
+            if (e.multiplayerWorld && multiplayer.isConnected() && multiplayer.onPlaying(), Ne.info("Playing", Oe.default.generator.getSeed(), players.length), t ? (localPlayer.state = f.PlayerState.Server, localPlayer.identifier = _e.default.create(), localPlayer.name = localPlayer.identifier, Ne.info(`Randomizing local player name and identifier to ${localPlayer.identifier}`), newui.interrupt().withMenu(V.MenuId.Pause)) : (await newui.hideLoadingInterrupt(), newui.hideScreen(z.ScreenId.Interrupt)), !e.multiplayerWorld) {
+                let i = e.multiplayer || t,
+                    n = e.multiplayer;
+                !0 === n || !i && saveData.multiplayerState.enable && await newui.interrupt(P.default.GameMultiplayerInterruptRestartServerAfterLoadingSave).withDescription(P.default.GameMultiplayerInterruptRestartServerAfterLoadingSaveDescription).withConfirmation() ? (i = !0, n = saveData.multiplayerState.options) : saveData.multiplayerState.enable = !1, i && ((n || t) && multiplayer.createServer(_e.default.create(), n), t || Ae.sleep(200).then(() => {
+                    game.setPaused(!0), newui.interrupt().withMenu(V.MenuId.Pause, e => e.schedule(600, e.showWorldMenu))
+                })), multiplayer.isConnected() || a !== f.TurnMode.Simulated || i && n || this.setTurnMode(f.TurnMode.Manual)
+            }
+            return steamworks.updateDiscordPresence(), this.updateView(I.RenderSource.StartGame, !0), !0
+        }
+        upgradeSave(e) {
+            let t = !1;
+            const a = game;
+            t = this.upgradePlayer(localPlayer, e) || t;
+            for (const a of absentPlayers) t = this.upgradePlayer(a, e) || t;
+            if (t = this.upgradeSaveMoveProperty(game, game, "monsters", "creatures") || t, 2 === e.major && e.minor < 2)
+                for (const e of this.doodads) e && e.type >= 51 && e.type <= 61 && (e.type -= 1, t = !0);
+            if (2 === e.major && e.minor < 4) {
+                const a = [];
+                for (const i of this.doodads) {
+                    if (!i) continue;
+                    const n = i,
+                        o = i.type;
+                    let r, s = !1;
+                    switch (o) {
+                        case $.Pre240DoodadType.GrowingMushroom:
+                        case $.Pre240DoodadType.GrowingPlant:
+                            if (t = !0, n.growInto) {
+                                let t = $.Pre240DoodadType[n.growInto];
+                                2 === e.major && e.minor < 2 && n.growInto >= 51 && n.growInto <= 61 && (t = $.Pre240DoodadType[n.growInto - 1]);
+                                const a = f.DoodadType[t];
+                                void 0 === (r = a) && (r = f.DoodadType.MapleTree);
+                                const o = c.default[n.growInto];
+                                o && o.decayMax && (i.decay = o.decayMax), i.gfx = 3 * f.GrowingStage.Seedling + Oe.default.int(3)
+                            } else s = !0;
+                            break;
+                        case $.Pre240DoodadType.Sapling:
+                            t = !0, r = f.DoodadType.MapleTree, i.gfx = 3 * f.GrowingStage.Seedling + Oe.default.int(3);
+                            break;
+                        case $.Pre240DoodadType.GrowingGrass:
+                            t = !0, r = f.DoodadType.Grass, i.gfx = f.GrowingStage.Vegetative + Oe.default.int(3)
+                    }
+                    if (s) {
+                        t = !0, a.push(i);
+                        continue
+                    }
+                    let l = $.Pre240DoodadType[o];
+                    void 0 === r && ("DeadBush" === l && (l = "Tumbleweed"), r = f.DoodadType[l]), void 0 === r ? Ne.warn(`Unable to convert doodad type ${l}`) : r !== i.type && (i.type = r, t = !0);
+                    const u = c.default[i.type];
+                    if (u) {
+                        const e = u.canGrow;
+                        e && void 0 === i.gfx && (i.gfx = 3 * f.GrowingStage.Ripening + Oe.default.int(3), t = !0)
+                    }
+                }
+                for (const e of a) doodadManager.remove(e)
+            }
+            if (2 === e.major && e.minor < 6)
+                for (const e of this.doodads)
+                    if (e) {
+                        if (e.type === f.DoodadType.Tumbleweed) {
+                            const a = c.default[e.type];
+                            a && (e.gfx = 3 * f.GrowingStage.Ripening + Oe.default.int(3), e.decay = a.decayMax, t = !0)
+                        }
+                        e.legendary && (e.legendary.type = f.LegendaryType.Skill, t = !0)
+                    }
+            void 0 !== a.dayNight && (a.time = new v.default(0), a.time.restoreFromDayNight(a.dayNight, a.dayNightSwitch), delete a.dayNight, t = !0);
+            const i = [];
+            for (let a = 0; a < this.items.length; a++) {
+                const n = this.items[a];
+                if (null === n) {
+                    this.items[a] = void 0, t = !0;
+                    continue
+                }
+                if (!n) continue;
+                null === n.containedWithin && (delete n.containedWithin, t = !0);
+                const o = n;
+                if (o.equipped && (n.equippedId = localPlayer.id, localPlayer.equipped[o.equipped] = n.id, n.equippedType = h.EntityType.Player, delete o.equipped, t = !0), void 0 !== o.equippedPid && (n.equippedId = o.equippedPid, n.equippedType = h.EntityType.Player, delete o.equippedPid, t = !0), 2 === e.major && e.minor < 4 && (55 === n.type || 283 === n.type || 286 === n.type) && (i.push(n), t = !0), 2 === e.major && e.minor < 6 && n.legendary && (n.legendary.type = f.LegendaryType.Skill, t = !0), 2 === e.major && e.minor < 7 && n.legendary && n.legendary.type === f.LegendaryType.Stat) {
+                    switch (n.legendary.stat) {
+                        case f.StatType.Health:
+                            n.legendary.stat = y.Stat.Health;
+                            break;
+                        case f.StatType.Stamina:
+                            n.legendary.stat = y.Stat.Stamina;
+                            break;
+                        case f.StatType.Metabolism:
+                            n.legendary.stat = y.Stat.Metabolism
+                    }
+                    t = !0
+                }
+            }
+            for (const e of i) itemManager.remove(e);
+            for (const e of this.doodads) e && null === e.containedWithin && (delete e.containedWithin, t = !0);
+            for (let e = 0; e < this.creatures.length; e++) {
+                const a = this.creatures[e];
+                void 0 !== a && ("number" == typeof a.direction && (a.facingDirection = a.direction, a.direction = game.directionToMovement(a.facingDirection), t = !0))
+            }
+            if (2 === e.major && 5 === e.minor && 3 === e.patch)
+                for (const e of this.doodads)
+                    if (e) {
+                        const a = c.default[e.type];
+                        a && a.lit && !a.isUnlitTorch && void 0 !== e.decay && e.decay >= 0 && (e.decay = -1, t = !0), a && a.revert && !a.isLitTorch && -1 === e.decay && (e.decay = a.decayMax, t = !0)
+                    }
+            if (2 === e.major && e.minor < 4) {
+                t = !0;
+                for (const e of this.doodads)
+                    if (e && void 0 !== e.decay && e.decay > 0) {
+                        const t = c.default[e.type];
+                        t && (!t.isWaterSource && !t.lit || t.isWaterSource && !t.lit) && (e.decay *= 20)
+                    }
+                for (const e of this.corpses) e && void 0 !== e.decay && e.decay > 0 && (e.decay *= 20);
+                for (const e of this.tileEvents) e && void 0 !== e.decay && e.decay > 0 && (e.decay *= 20)
+            }
+            t = this.upgradeSaveMoveProperty(game, localPlayer, "tamedCreatures") || t, t = this.upgradeSaveMoveProperty(ui, localPlayer, "dialogInfo") || t, t = this.upgradeSaveMoveProperty(ui, localPlayer, "dialogContainerInfo") || t, t = this.upgradeSaveMoveProperty(ui, localPlayer, "quickSlotInfo") || t, t = this.upgradeSaveMoveProperty(ui, localPlayer, "containerSortInfo") || t, localPlayer.dialogInfo[f.DialogId.Crafting] && 405 === localPlayer.dialogInfo[f.DialogId.Crafting].y && (localPlayer.dialogInfo[f.DialogId.Crafting].y = 445, t = !0), t = this.upgradeToClasses(this.items, w.default, e => e.description()) || t, t = this.upgradeToClasses(this.creatures, r.default) || t, t = this.upgradeToClasses(this.doodads, m.default) || t;
+            for (let e = 0; e < this.creatures.length; e++) {
+                const a = this.creatures[e];
+                void 0 !== a && (a.stats && a.getStat(y.Stat.Health) || (a.initializeStats(a.maxhp, a.hp), t = !0), void 0 !== a.happiness && (new g.default(y.Stat.Happiness, a.happiness).setChangeTimer(1, -1).initializeOn(a), delete a.happiness, t = !0), void 0 !== a.chickenEggCounter && (a.setStat(y.Stat.Produce, a.chickenEggCounter), delete a.chickenEggCounter, t = !0), void 0 !== a.goatMilkCounter && (a.setStat(y.Stat.Produce, a.goatMilkCounter), delete a.goatMilkCounter, t = !0))
+            }
+            for (let e = 0; e < this.npcs.length; e++) {
+                const a = this.npcs[e];
+                void 0 !== a && ("weightCapacity" in a.inventory && (delete a.inventory.weightCapacity, t = !0))
+            }
+            void 0 !== a.isRealTime && (this.turnMode = a.isRealTime ? f.TurnMode.RealTime : f.TurnMode.Manual, delete a.isRealTime, t = !0), void 0 !== a.realTimeTickSpeed && (this.tickSpeed = a.realTimeTickSpeed, delete a.realTimeTickSpeed, t = !0), void 0 === this.difficultyOptions && (this.difficultyOptions = S.getDefaultDifficultyOptions(this.difficulty), t = !0), t && Ne.info(`Upgrading save from ${e.str} to ${gameVersion}`), this.previousSaveVersion = e, this.saveVersion = gameVersion
+        }
+        upgradePlayer(e, t) {
+            const a = e;
+            let i = !1;
+            if ("containedWithin" in e.inventory && (delete e.inventory.containedWithin, i = !0), "weightCapacity" in e.inventory && (delete e.inventory.weightCapacity, i = !0), void 0 !== a.talent && (a.score = a.talent, a.malignity = a.talent, a.malignity > 64e3 && (a.malignity = 64e3), delete a.talent, i = !0), void 0 !== a.malignityPlus && (a.malignity = a.malignityPlus, delete a.malignityPlus, i = !0), void 0 !== a.malignityNegative && (a.benignity = -1 * a.malignityNegative, delete a.malignityNegative, i = !0), void 0 !== a.gender && (e.customization = {
+                    hairColor: f.HairColor[0 === a.gender ? f.HairColor["#7e4b1c"] : f.HairColor["#b84627"]],
+                    skinColor: f.SkinColor[f.SkinColor["#f0ceab"]],
+                    hairStyle: f.HairStyle[0 === a.gender ? f.HairStyle.Spike : f.HairStyle.Bun]
+                }, delete a.gender, i = !0), void 0 !== a.health) {
+                const t = e.getStat(y.Stat.Health);
+                e.setStat(t, a.health, h.StatChangeReason.Upgrade), t.changeTimer = a.healthTimer, delete a.health, delete a.healthTimer, i = !0
+            }
+            if (void 0 !== a.stamina) {
+                const t = e.getStat(y.Stat.Stamina);
+                e.setStat(t, a.stamina, h.StatChangeReason.Upgrade), t.changeTimer = a.staminaTimer, delete a.health, delete a.staminaTimer, i = !0
+            }
+            if (void 0 !== a.hunger) {
+                const t = e.getStat(y.Stat.Hunger);
+                e.setStat(t, a.hunger, h.StatChangeReason.Upgrade), t.changeTimer = a.hungerTimer, delete a.hunger, delete a.hungerTimer, i = !0
+            }
+            if (void 0 !== a.thirst) {
+                const t = e.getStat(y.Stat.Thirst);
+                e.setStat(t, a.thirst, h.StatChangeReason.Upgrade), t.changeTimer = a.thirstTimer, delete a.thirst, delete a.thirstTimer, i = !0
+            }
+            if (void 0 !== a.stats.health) {
+                const t = e.getStat(y.Stat.Health);
+                e.setStat(t, a.stats.health.value, h.StatChangeReason.Upgrade), t.changeTimer = a.stats.health.timer, delete a.stats.health, i = !0
+            }
+            if (void 0 !== a.stats.stamina) {
+                const t = e.getStat(y.Stat.Stamina);
+                e.setStat(t, a.stats.stamina.value, h.StatChangeReason.Upgrade), t.changeTimer = a.stats.stamina.timer, delete a.stats.stamina, i = !0
+            }
+            if (void 0 !== a.stats.hunger) {
+                const t = e.getStat(y.Stat.Hunger);
+                e.setStat(t, a.stats.hunger.value, h.StatChangeReason.Upgrade), t.changeTimer = a.stats.hunger.timer, delete a.stats.hunger, i = !0
+            }
+            if (void 0 !== a.stats.thirst) {
+                const t = e.getStat(y.Stat.Thirst);
+                e.setStat(t, a.stats.thirst.value, h.StatChangeReason.Upgrade), t.changeTimer = a.stats.thirst.timer, delete a.stats.thirst, i = !0
+            }
+            void 0 !== a.strength && (e.setStatMax(y.Stat.Health, a.strength), delete a.strength, i = !0), void 0 !== a.dexterity && (e.setStatMax(y.Stat.Stamina, a.dexterity), delete a.dexterity, i = !0), void 0 !== a.starvation && (e.setStatMax(y.Stat.Hunger, a.starvation), delete a.starvation, i = !0), void 0 !== a.dehydration && (e.setStatMax(y.Stat.Thirst, a.dehydration), delete a.dehydration, i = !0), void 0 !== a.weight && (e.setStat(y.Stat.Weight, a.weight), delete a.weight, i = !0), void 0 !== a.attack && (e.setStat(y.Stat.Attack, a.attack), delete a.attack, i = !0), void 0 !== a.malignity && (e.setStat(y.Stat.Malignity, a.malignity), delete a.malignity, i = !0), void 0 !== a.benignity && (e.setStat(y.Stat.Benignity, a.benignity), delete a.benignity, i = !0), "number" == typeof a.customization.hairStyle && (e.customization = {
+                hairColor: f.HairColor[a.customization.hairColor],
+                skinColor: f.SkinColor[a.customization.skinColor],
+                hairStyle: f.HairStyle[a.customization.hairStyle]
+            }, i = !0), (e.getMaxHealth() !== e.getStatMax(y.Stat.Health) || t.major <= 2 && t.minor < 7) && (e.setStat(y.Stat.Strength, e.getStatMax(y.Stat.Health), h.StatChangeReason.Upgrade), e.setStatBonus(y.Stat.Strength, K.STRENGTH_BONUS, h.StatChangeReason.Upgrade), i = !0);
+            try {
+                const t = e.getStat(y.Stat.Health),
+                    a = e.getStat(y.Stat.Stamina),
+                    n = e.getStat(y.Stat.Hunger),
+                    o = e.getStat(y.Stat.Thirst);
+                if (t && a && n && o && 0 === t.value && 0 === a.value && 0 === n.value && 0 === o.value) {
+                    const t = 5;
+                    e.setStatMax(a, Oe.default.int(10 + t) + 70), e.setStat(y.Stat.Strength, Oe.default.int(5 + t) + 45, h.StatChangeReason.Upgrade), e.setStatMax(n, Oe.default.int(5 + t) + 15), e.setStatMax(o, Oe.default.int(5 + t) + 15), e.setStat(y.Stat.Stamina, a.max - Oe.default.int(10), h.StatChangeReason.Upgrade), e.setStat(y.Stat.Health, e.getMaxHealth() - Oe.default.int(5), h.StatChangeReason.Upgrade), e.setStat(y.Stat.Hunger, n.max - Oe.default.int(2), h.StatChangeReason.Upgrade), e.setStat(y.Stat.Thirst, o.max - Oe.default.int(2), h.StatChangeReason.Upgrade), i = !0
+                }
+            } catch (e) {}
+            return i = e.messages.pruneMessageHistory() || i, e.identifier || (e.identifier = _e.default.create(), i = !0), a.exploredMapEncodedData && (e.clientStore.get(ye.ClientDataType.ExploredMap).exploredMapEncodedData = a.exploredMapEncodedData, delete a.exploredMapEncodedData, i = !0), i
+        }
+        upgradeSaveMoveProperty(e, t, a, i = a) {
+            const n = e[a];
+            return void 0 !== n && (t[i] = n, delete e[a], !0)
+        }
+        upgradeGlobalSave(e) {
+            let t = !1;
+            const a = game,
+                i = saveDataGlobal.options;
+            if (a.crafted && (saveDataGlobal.gameCrafted = a.crafted, delete a.crafted, t = !0), saveDataGlobal.gameCrafted && "object" == typeof saveDataGlobal.gameCrafted) {
+                const e = Object.keys(saveDataGlobal.gameCrafted);
+                for (const a of e) {
+                    const e = parseInt(a, 10),
+                        i = saveDataGlobal.gameCrafted[e];
+                    "object" != typeof i && (saveDataGlobal.gameCrafted[e] = {
+                        newUnlock: !1,
+                        unlockTime: Date.now()
+                    }, t = !0)
+                }
+            }
+            if (a.options && (saveDataGlobal.options = a.options, delete a.options, t = !0), a.highscores)
+                for (const e of a.highscores) void 0 !== e.talent && (e.score = e.talent, delete e.talent, t = !0);
+            saveDataGlobal.playerMilestoneData || (saveDataGlobal.playerMilestoneData = {}, t = !0), 2 === e.major && e.minor <= 3 && e.patch <= 3 && (t = !0, saveDataGlobal.options.alternateContextMenu = !0, saveDataGlobal.options.rightClickInspect = !0), "boolean" == typeof saveDataGlobal.options.directionTurnDelay && (saveDataGlobal.options.directionTurnDelay = !0 === saveDataGlobal.options.directionTurnDelay ? 13 : 0), a.highscores && (saveDataGlobal.gameHighscores = a.highscores, delete a.highscores, t = !0), void 0 !== a.lastPlayedVersion && (saveDataGlobal.gameLastPlayedVersion = a.lastPlayedVersion, delete a.lastPlayedVersion, t = !0), void 0 !== a.playedCount && (saveDataGlobal.gamePlayedCount = a.playedCount, delete a.playedCount, t = !0);
+            const n = saveDataGlobal.gameHighscores;
+            for (const e of n) e && "boolean" == typeof e.dailyChallenge && (e.difficulty = e.dailyChallenge ? S.Difficulty.Challenge : S.Difficulty.Hardcore, delete e.dailyChallenge, t = !0);
+            "boolean" == typeof i.developerLogging && (saveDataGlobal.options.developerMode = i.developerLogging, delete i.developerLogging, t = !0), "boolean" == typeof i.skipIntro && (saveDataGlobal.options.skipSplash = i.skipIntro, delete i.skipIntro, t = !0), "boolean" == typeof i.hints && (delete i.hints, t = !0), "boolean" == typeof i.openNotesAutomatically && (delete i.openNotesAutomatically, t = !0), "boolean" == typeof i.worldTooltips && (delete i.worldTooltips, t = !0);
+            for (const e of["Doodads", "Items", "NPCs", "Terrain", "Creatures"]) "boolean" == typeof i[`tooltips${e}`] && (delete i[`tooltips${e}`], t = !0);
+            if ("boolean" == typeof i.dropUnderYourself && (saveDataGlobal.options.dropLocation = i.dropUnderYourself ? f.DropLocation.Feet : f.DropLocation.Facing, delete i.dropUnderYourself, t = !0), 2 === e.major && 5 === e.minor && e.patch < 6) {
+                const e = {};
+                for (const t in i.bindings) {
+                    const a = f.Bindable[t];
+                    a && (e[a] = i.bindings[t])
+                }
+                saveDataGlobal.options.bindings = e
+            }
+            const o = saveDataGlobal.gameHighscores.filter(e => "object" == typeof e && "number" == typeof e.score);
+            saveDataGlobal.gameHighscores.length !== o.length && (saveDataGlobal.gameHighscores = o, t = !0), t && Ne.info(`Upgrading global save from ${e.str} to ${gameVersion}`)
+        }
+    }
+    __decorate([Se.SaveProperty()], qe.prototype, "contaminatedWater", void 0), __decorate([Se.SaveProperty()], qe.prototype, "corpses", void 0), __decorate([Se.SaveProperty()], qe.prototype, "creatures", void 0), __decorate([Se.SaveProperty()], qe.prototype, "creatureSpawnTimer", void 0), __decorate([Se.SaveProperty()], qe.prototype, "difficulty", void 0), __decorate([Se.SaveProperty()], qe.prototype, "difficultyOptions", void 0), __decorate([Se.SaveProperty()], qe.prototype, "doodads", void 0), __decorate([Se.SaveProperty()], qe.prototype, "flowFieldSyncCount", void 0), __decorate([Se.SaveProperty()], qe.prototype, "items", void 0), __decorate([Se.SaveProperty()], qe.prototype, "lastCreationIds", void 0), __decorate([Se.SaveProperty()], qe.prototype, "mapGenVersion", void 0), __decorate([Se.SaveProperty()], qe.prototype, "npcs", void 0), __decorate([Se.SaveProperty()], qe.prototype, "turnMode", void 0), __decorate([Se.SaveProperty()], qe.prototype, "tickSpeed", void 0), __decorate([Se.SaveProperty()], qe.prototype, "saveVersion", void 0), __decorate([Se.SaveProperty()], qe.prototype, "seeds", void 0), __decorate([Se.SaveProperty()], qe.prototype, "shouldUpdateTablesAndWeight", void 0), __decorate([Se.SaveProperty()], qe.prototype, "tileContainers", void 0), __decorate([Se.SaveProperty()], qe.prototype, "tileData", void 0), __decorate([Se.SaveProperty()], qe.prototype, "wellData", void 0), __decorate([Se.SaveProperty()], qe.prototype, "tileEvents", void 0), __decorate([Se.SaveProperty()], qe.prototype, "time", void 0), __decorate([Se.SaveProperty()], qe.prototype, "version", void 0), __decorate([Se.SaveProperty()], qe.prototype, "worldId", void 0), __decorate([Le.Bound], qe.prototype, "updateRenderInternal", null), t.default = qe;
+    const Ue = async() => {
+        try {
+            try {
+                steamworks = new ve.default, steamworks.initialize()
+            } catch (e) {
+                Ne.info("Failed to initialize steamworks", e)
+            } finally {
+                void 0 !== e && (window.require = void 0), "undefined" != typeof requirejs && (window.requirejs = void 0)
+            }
+            steamworks.isDedicatedServer() ? (audio = d.audio, renderer = d.worldRenderer, resourceLoader = d.resourceLoader) : (await se.loadShaders(), audio = new a.default, resourceLoader = new he.default), commandManager = new i.default, corpseManager = new n.default, creatureManager = new s.default, doodadManager = new p.default, itemManager = new M.default, languageManager = new G.default, modManager = new O.default, multiplayer = new _.default, multiplayerNetworkingOptions = F.networkingOptions, npcManager = new j.default, saveData = new ge.default, saveDataGlobal = new fe.default, saveManager = new Ie.default, spriteAtlas = new le.default, tileAtlas = new de.default, tileEventManager = new ke.default, Ge.default.initialize(), We.default.loadAndCompileModules(), game = new qe, game.initialize(), ui = new De.default, ui.initialize(), newui = new U.default, ui.onWindowResize(), saveManager.initialize()
+        } catch (e) {
+            Ne.error("Failed to load game", e)
+        }
+    };
+    "complete" === document.readyState ? Ue() : window.onload = Ue, document.addEventListener("visibilitychange", () => {
+        game && (game.visible = "visible" === document.visibilityState)
+    })
+}),
 
 define("newui/component/EnumContextMenu",["require","exports","newui/BindingManager","newui/component/ContextMenu","newui/component/Text","utilities/enum/Enums","utilities/iterable/Collectors","utilities/iterable/Generators"],function(e,t,a,i,n,o,r,s){var l;Object.defineProperty(t,"__esModule",{value:!0}),function(e){e[e.Name=0]="Name",e[e.Id=1]="Id"}(l=t.EnumSort||(t.EnumSort={}));class u{constructor(e,t,a){this.api=e,this.translator=a,this.enumEntries=o.default.entries(t).collect(r.default.toArray)}setTranslator(e){return this.translator=e,this}setSort(e){return this._sort=e,this}async waitForChoice(){const e=newui.getVisibleScreen();if(!e||!this.translator)return;const t=a.bindingManager.getMouse();return this.enumEntries.sort(([,e],[,t])=>{switch(this._sort){case l.Id:return e-t;case l.Name:return n.default.toString(this.translator(e)).localeCompare(n.default.toString(this.translator(t)));default:return this._sort(e,t)}}),new Promise(a=>{new i.default(this.api,...this.enumEntries.map(([e,t])=>s.tuple(e,{translation:this.translator(t),onActivate(){a(t)}}))).addAllDescribedOptions().setPosition(t.x,t.y).schedule(e.setContextMenu).on("Hide",()=>{a(void 0)})})}}t.default=u}),
 
