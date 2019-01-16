@@ -1,6 +1,9 @@
 {
 	"extends": "English",
 	"dictionaries": {
+		"creature" : {
+			"modAddContentsSeaCrab": ["게", "딱딱한 껍질을 가지고있는 갑갑류이며, 바다에 서식합니다."]
+		},
 		"doodad": {
 			"modAddContentsLuminousMushroom": ["Mycena chlorophos", "A tool with which to say hello."]
 		},

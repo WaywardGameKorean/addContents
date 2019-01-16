@@ -1,6 +1,8 @@
-import { DamageType, SkillType, DoodadType, ItemType, ItemTypeGroup, RecipeLevel, EquipType, TerrainType, GrowingStage } from "Enums";
+import { CreatureType, Defense, Resistances, Vulnerabilities, MoveType, DamageType, SkillType, DoodadType, ItemType, ItemTypeGroup, RecipeLevel, EquipType, TerrainType, GrowingStage } from "Enums";
 import { ActionType } from "action/IAction";
+import { AiType } from "entity/IEntity";
 import { itemGroupDescriptions, RecipeComponent } from "item/Items";
+import { SpawnableTiles, SpawnGroup } from "creature/ICreature";
 import Mod from "mod/Mod";
 import Register, { Registry } from "mod/ModRegistry";
 
@@ -15,6 +17,80 @@ export default class AddContents extends Mod {
 	////////////////////////////////////
 	// Items
 	//
+	@Register.item("CrabMeat", { //게살
+		use: [ActionType.Eat],
+		onUse : {
+			[ActionType.Eat]: [1, 1, 1, -4],
+		},
+		skillUse : SkillType.Anatomy,
+		decayMax : 1500,
+		disassemble: false,
+		durability: 10,
+		weight: 0.2,
+		worth : 5
+	})
+	public itemCrabMeat: ItemType;
+
+	@Register.item("CookedCrabMeat", { //구운 게살
+		use: [ActionType.Eat],
+		onUse : {
+			[ActionType.Eat]: [1, 2, 2, -1],
+		},
+		recipe: {
+			components: [
+				RecipeComponent(Registry<AddContents, ItemType>().get("itemCrabMeat"), 1, 1),
+				RecipeComponent(ItemTypeGroup.Tongs, 1, 0)
+			],
+			requiresFire : true,
+			skill: SkillType.Cooking,
+			level: RecipeLevel.Simple,
+			reputation: 15
+		},
+		decayMax : 1500,
+		disassemble: false,
+		durability: 10,
+		weight: 0.2,
+		worth : 5
+	})
+	public itemCookedCrabMeat: ItemType;
+
+	@Register.item("AberrantCrabMeat", { //돌연변이 게살
+		use: [ActionType.Eat],
+		onUse : {
+			[ActionType.Eat]: [1, 1, 1, -4],
+		},
+		skillUse : SkillType.Anatomy,
+		decayMax : 1500,
+		disassemble: false,
+		durability: 10,
+		weight: 0.2,
+		worth : 5
+	})
+	public itemAberrantCrabMeat: ItemType;
+
+	@Register.item("CookedAberrantCrabMeat", { //구운 돌연변이 게살
+		use: [ActionType.Eat],
+		onUse : {
+			[ActionType.Eat]: [1, 3, 3, -1],
+		},
+		recipe: {
+			components: [
+				RecipeComponent(Registry<AddContents, ItemType>().get("itemAberrantCrabMeat"), 1, 1),
+				RecipeComponent(ItemTypeGroup.Tongs, 1, 0)
+			],
+			requiresFire : true,
+			skill: SkillType.Cooking,
+			level: RecipeLevel.Simple,
+			reputation: 15
+		},
+		decayMax : 1500,
+		disassemble: false,
+		durability: 10,
+		weight: 0.2,
+		worth : 5
+	})
+	public itemCookedAberrantCrabMeat: ItemType;
+
 	@Register.item("LuminousMushroom", { //받침애주름버섯
 		use: [ActionType.Eat, ActionType.Plant],
 		onUse : {
@@ -74,16 +150,48 @@ export default class AddContents extends Mod {
 		decayMax:750,
 		isFungi:true,
 		spreadMax:3, 
-		gather: {
-			[GrowingStage.Flowering]:[
-				{type: Registry<AddContents, ItemType>().get("itemLuminousMushroom")},
-			],
-			//[GrowingStage.Ripening]:[
-			//	{type: Registry<AddContents, ItemType>().get("itemLuminousMushroom")}
-			//]
-		}
+		//gather: {
+		//	[GrowingStage.Flowering]:[
+		//		{type: Registry<AddContents, ItemType>().get("itemLuminousMushroom")},
+		//	],
+		//	[GrowingStage.Ripening]:[
+		//		{type: Registry<AddContents, ItemType>().get("itemLuminousMushroom")}
+		//	]
+		//}
 	})
 	public doodadLuminousMushroom: DoodadType;
+
+	////////////////////////////////////
+	// Creatures
+	//
+	@Register.creature("SeaCrab", { // 바닷게
+		minhp: 2,
+		maxhp: 3,
+		minatk: 1,
+		maxatk: 2,
+		defense: new Defense(1,new Resistances(DamageType.Blunt),new Vulnerabilities(DamageType.Slashing)),
+		damageType: DamageType.Slashing,
+		ai: AiType.Scared,
+		moveType: MoveType.WetLand|MoveType.ShallowWater|MoveType.Land,
+		spawnTiles: SpawnableTiles.Wet,
+		reputation: -200,
+		jumpOver: true,
+		tamingDifficulty: 25,
+		noStumble: true,
+		spawnReputation: 8e3,
+		spawnGroup: [SpawnGroup.FreshWater],
+		skipMovementChance: 2
+	},{
+		resource:[
+			{item: Registry<AddContents, ItemType>().get("itemCrabMeat")}
+		],
+		aberrantResource: [
+			{item: Registry<AddContents, ItemType>().get("itemAberrantCrabMeat")}
+		],
+		decay:2200,
+		skill:SkillType.Anatomy
+	})
+	public creatureSeaCrab: CreatureType;
 
 	@Mod.saveData<AddContents>("AddContents")
 	public data: IAddContentsData;
@@ -94,6 +202,7 @@ export default class AddContents extends Mod {
 	 */
 	public onLoad(): void {
 		itemGroupDescriptions[ItemTypeGroup.Food].types.push(this.itemLuminousMushroom)
+		itemGroupDescriptions[ItemTypeGroup.RawMeat].types.push(this.itemCrabMeat)
 	}
 
 	/**

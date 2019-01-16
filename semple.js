@@ -830,11 +830,539 @@ define("player/note/NoteManager",["require","exports","entity/Entity","entity/IE
 
 define("creature/corpse/ICorpse",["require","exports"],function(e,t){Object.defineProperty(t,"__esModule",{value:!0})}),
 
-define("creature/corpse/Corpses",["require","exports","Enums"],function(e,t,a){Object.defineProperty(t,"__esModule",{value:!0}),t.corpseDescriptions=Array(),t.default=t.corpseDescriptions,t.corpseDescriptions[a.CreatureType.Blood]={decay:300,blood:!0},t.corpseDescriptions[a.CreatureType.WaterBlood]={decay:80,blood:!0},t.corpseDescriptions[a.CreatureType.Bear]={resource:[{item:a.ItemType.AnimalPelt},{item:a.ItemType.AnimalClaw},{item:a.ItemType.AnimalFat},{item:a.ItemType.RawMeat},{item:a.ItemType.RawMeat},{item:a.ItemType.AnimalSkull},{item:a.ItemType.Offal},{item:a.ItemType.Bone},{item:a.ItemType.BoneFragments}],decay:2800,skill:a.SkillType.Anatomy},t.corpseDescriptions[a.CreatureType.Rabbit]={resource:[{item:a.ItemType.AnimalPelt},{item:a.ItemType.RawMeat},{item:a.ItemType.Offal},{item:a.ItemType.BoneFragments}],decay:2400,skill:a.SkillType.Anatomy},t.corpseDescriptions[a.CreatureType.GiantRat]={resource:[{item:a.ItemType.AnimalPelt},{item:a.ItemType.AnimalClaw,chance:70},{item:a.ItemType.AnimalFat},{item:a.ItemType.RawTaintedMeat},{item:a.ItemType.Offal},{item:a.ItemType.BoneFragments}],decay:2400,skill:a.SkillType.Anatomy},t.corpseDescriptions[a.CreatureType.GreyWolf]={resource:[{item:a.ItemType.AnimalPelt},{item:a.ItemType.AnimalClaw,chance:80},{item:a.ItemType.AnimalFat},{item:a.ItemType.RawMeat},{item:a.ItemType.Offal},{item:a.ItemType.Bone},{item:a.ItemType.BoneFragments}],decay:2600,skill:a.SkillType.Anatomy},t.corpseDescriptions[a.CreatureType.VampireBat]={resource:[{item:a.ItemType.RawMeat}],decay:2200,skill:a.SkillType.Anatomy},t.corpseDescriptions[a.CreatureType.Snake]={resource:[{item:a.ItemType.Scales},{item:a.ItemType.VenomGland,chance:3},{item:a.ItemType.RawReptileMeat}],decay:2400,skill:a.SkillType.Anatomy},t.corpseDescriptions[a.CreatureType.Slime]={resource:[{item:a.ItemType.SlimeGelatin}],decay:3200},t.corpseDescriptions[a.CreatureType.JellyCube]={resource:[{item:a.ItemType.SlimeGelatin},{item:a.ItemType.SlimeGelatin}],decay:3400},t.corpseDescriptions[a.CreatureType.GiantSpider]={resource:[{item:a.ItemType.SpiderEggs,chance:2},{item:a.ItemType.SpiderMeat}],decay:2400,skill:a.SkillType.Anatomy},t.corpseDescriptions[a.CreatureType.Zombie]={resource:[{item:a.ItemType.RottenMeat},{item:a.ItemType.Bone},{item:a.ItemType.BoneFragments}],decay:600,skill:a.SkillType.Anatomy},t.corpseDescriptions[a.CreatureType.Imp]={resource:[{item:a.ItemType.Scales},{item:a.ItemType.AnimalClaw},{item:a.ItemType.RawTaintedMeat},{item:a.ItemType.FireBladder,chance:2},{item:a.ItemType.BoneFragments}],decay:2600,skill:a.SkillType.Anatomy},t.corpseDescriptions[a.CreatureType.Bogling]={resource:[{item:a.ItemType.PileOfCompost},{item:a.ItemType.RottingVegetation}],decay:1e3,skill:a.SkillType.Botany},t.corpseDescriptions[a.CreatureType.LivingRock]={resource:[{item:a.ItemType.CopperOre,chance:90},{item:a.ItemType.Talc},{item:a.ItemType.IronOre,chance:50},{item:a.ItemType.Limestone}],skill:a.SkillType.Mining},t.corpseDescriptions[a.CreatureType.Shark]={resource:[{item:a.ItemType.SharkFin},{item:a.ItemType.RawFishSteak},{item:a.ItemType.RawFishSteak},{item:a.ItemType.Offal}],decay:800,skill:a.SkillType.Anatomy},t.corpseDescriptions[a.CreatureType.Rat]={resource:[{item:a.ItemType.RawTaintedMeat}],decay:2200,skill:a.SkillType.Anatomy},t.corpseDescriptions[a.CreatureType.Skeleton]={resource:[{item:a.ItemType.Bone},{item:a.ItemType.Bone},{item:a.ItemType.BoneFragments}],skill:a.SkillType.Anatomy},t.corpseDescriptions[a.CreatureType.PirateGhost]={resource:[{item:a.ItemType.Ectoplasm}],decay:100},t.corpseDescriptions[a.CreatureType.TimeSkitter]={resource:[{item:a.ItemType.SpiderMeat},{item:a.ItemType.Offal}],decay:2600,skill:a.SkillType.Anatomy},t.corpseDescriptions[a.CreatureType.Chicken]={resource:[{item:a.ItemType.Feather},{item:a.ItemType.Feather},{item:a.ItemType.TailFeathers,chance:1},{item:a.ItemType.Egg,chance:20},{item:a.ItemType.RawChicken},{item:a.ItemType.BoneFragments}],decay:2400,skill:a.SkillType.Anatomy},t.corpseDescriptions[a.CreatureType.TrapdoorSpider]={resource:[{item:a.ItemType.SpiderEggs,chance:2},{item:a.ItemType.SpiderMeat}],decay:2400,skill:a.SkillType.Anatomy},t.corpseDescriptions[a.CreatureType.FireElemental]={resource:[{item:a.ItemType.Charcoal,chance:25},{item:a.ItemType.Charcoal}],decay:400,skill:a.SkillType.Mining,animated:!0},t.corpseDescriptions[a.CreatureType.Hobgoblin]={resource:[{item:a.ItemType.RawMeat},{item:a.ItemType.Offal},{item:a.ItemType.Bone},{item:a.ItemType.BoneFragments}],decay:2600,skill:a.SkillType.Anatomy},t.corpseDescriptions[a.CreatureType.LivingMushroom]={resource:[{item:a.ItemType.ButtonMushrooms},{item:a.ItemType.ButtonMushrooms}],aberrantResource:[{item:a.ItemType.FlyAmanita},
-    {item:a.ItemType.FlyAmanita}],
-    decay:3200,
-    skill:a.SkillType.Mycology
-},t.corpseDescriptions[a.CreatureType.Kraken]={resource:[{item:a.ItemType.Tentacles},{item:a.ItemType.Tentacles},{item:a.ItemType.Tentacles},{item:a.ItemType.Offal}],decay:3600,skill:a.SkillType.Anatomy},t.corpseDescriptions[a.CreatureType.Harpy]={resource:[{item:a.ItemType.Feather},{item:a.ItemType.Feather},{item:a.ItemType.TailFeathers,chance:3},{item:a.ItemType.RawChicken},{item:a.ItemType.BoneFragments}],decay:2600,skill:a.SkillType.Anatomy},t.corpseDescriptions[a.CreatureType.AcidSpitterDemon]={resource:[{item:a.ItemType.MagicalEssence},{item:a.ItemType.RawTaintedMeat},{item:a.ItemType.BoneFragments}],decay:2600,damage:12,skill:a.SkillType.Anatomy},t.corpseDescriptions[a.CreatureType.SkeletalMage]={resource:[{item:a.ItemType.MageRobe},{item:a.ItemType.Bone},{item:a.ItemType.BoneFragments}],skill:a.SkillType.Anatomy},t.corpseDescriptions[a.CreatureType.ClawWorm]={resource:[{item:a.ItemType.AnimalClaw},{item:a.ItemType.WormMeat}],decay:2400,skill:a.SkillType.Anatomy},t.corpseDescriptions[a.CreatureType.Drake]={resource:[{item:a.ItemType.Scales},{item:a.ItemType.AnimalClaw},{item:a.ItemType.AnimalFat},{item:a.ItemType.RawReptileMeat},{item:a.ItemType.RawReptileMeat},{item:a.ItemType.FireBladder},{item:a.ItemType.AnimalSkull},{item:a.ItemType.Offal},{item:a.ItemType.Bone},{item:a.ItemType.BoneFragments}],decay:3e3,skill:a.SkillType.Anatomy},t.corpseDescriptions[a.CreatureType.Sandcat]={resource:[{item:a.ItemType.AnimalPelt},{item:a.ItemType.AnimalClaw},{item:a.ItemType.AnimalFat},{item:a.ItemType.RawMeat},{item:a.ItemType.Offal},{item:a.ItemType.BoneFragments}],decay:2600,skill:a.SkillType.Anatomy},t.corpseDescriptions[a.CreatureType.LavaBeetle]={resource:[{item:a.ItemType.LavaBeetleHelmet},{item:a.ItemType.Obsidian},{item:a.ItemType.Offal}],decay:2800,skill:a.SkillType.Anatomy,lightSource:!0},t.corpseDescriptions[a.CreatureType.Goat]={resource:[{item:a.ItemType.AnimalPelt},{item:a.ItemType.AnimalFat},{item:a.ItemType.RawMeat},{item:a.ItemType.Offal},{item:a.ItemType.Bone},{item:a.ItemType.BoneFragments}],decay:2600,skill:a.SkillType.Anatomy},t.corpseDescriptions[a.CreatureType.SlitherSucker]={resource:[{item:a.ItemType.WormMeat}],decay:2400,skill:a.SkillType.Anatomy},t.corpseDescriptions[a.CreatureType.Mudskipper]={resource:[{item:a.ItemType.RawFishSteak}],decay:2e3,skill:a.SkillType.Anatomy},t.corpseDescriptions[a.CreatureType.Scorpion]={resource:[{item:a.ItemType.ScorpionStinger,chance:25},{item:a.ItemType.DeadScorpion}],aberrantResource:[{item:a.ItemType.ScorpionStinger},{item:a.ItemType.DeadAberrantScorpion}],decay:2400,skill:a.SkillType.Anatomy},t.corpseDescriptions[a.CreatureType.Rattlesnake]={resource:[{item:a.ItemType.Scales,chance:50},{item:a.ItemType.Scales},{item:a.ItemType.VenomGland,chance:6},{item:a.ItemType.RawReptileMeat,chance:10},{item:a.ItemType.RawReptileMeat}],decay:2400,skill:a.SkillType.Anatomy},t.corpseDescriptions[a.CreatureType.AntelopeJackrabbit]={resource:[{item:a.ItemType.AnimalPelt},{item:a.ItemType.RawMeat},{item:a.ItemType.RawMeat},{item:a.ItemType.Offal},{item:a.ItemType.BoneFragments}],decay:2400,skill:a.SkillType.Anatomy}}),
+define("creature/corpse/Corpses", ["require", "exports", "Enums"], function(e, t, a) {
+    Object.defineProperty(t, "__esModule", {
+        value: !0
+    }
+    ), t.corpseDescriptions=Array(), t.default=t.corpseDescriptions, t.corpseDescriptions[a.CreatureType.Blood]= {
+        decay: 300, blood: !0
+    }
+    , t.corpseDescriptions[a.CreatureType.WaterBlood]= {
+        decay: 80, blood: !0
+    }
+    , t.corpseDescriptions[a.CreatureType.Bear]= {
+        resource:[ {
+            item: a.ItemType.AnimalPelt
+        }
+        , {
+            item: a.ItemType.AnimalClaw
+        }
+        , {
+            item: a.ItemType.AnimalFat
+        }
+        , {
+            item: a.ItemType.RawMeat
+        }
+        , {
+            item: a.ItemType.RawMeat
+        }
+        , {
+            item: a.ItemType.AnimalSkull
+        }
+        , {
+            item: a.ItemType.Offal
+        }
+        , {
+            item: a.ItemType.Bone
+        }
+        , {
+            item: a.ItemType.BoneFragments
+        }
+        ], decay:2800, skill:a.SkillType.Anatomy
+    }
+    , t.corpseDescriptions[a.CreatureType.Rabbit]= {
+        resource:[ {
+            item: a.ItemType.AnimalPelt
+        }
+        , {
+            item: a.ItemType.RawMeat
+        }
+        , {
+            item: a.ItemType.Offal
+        }
+        , {
+            item: a.ItemType.BoneFragments
+        }
+        ], decay:2400, skill:a.SkillType.Anatomy
+    }
+    , t.corpseDescriptions[a.CreatureType.GiantRat]= {
+        resource:[ {
+            item: a.ItemType.AnimalPelt
+        }
+        , {
+            item: a.ItemType.AnimalClaw, chance: 70
+        }
+        , {
+            item: a.ItemType.AnimalFat
+        }
+        , {
+            item: a.ItemType.RawTaintedMeat
+        }
+        , {
+            item: a.ItemType.Offal
+        }
+        , {
+            item: a.ItemType.BoneFragments
+        }
+        ], decay:2400, skill:a.SkillType.Anatomy
+    }
+    , t.corpseDescriptions[a.CreatureType.GreyWolf]= {
+        resource:[ {
+            item: a.ItemType.AnimalPelt
+        }
+        , {
+            item: a.ItemType.AnimalClaw, chance: 80
+        }
+        , {
+            item: a.ItemType.AnimalFat
+        }
+        , {
+            item: a.ItemType.RawMeat
+        }
+        , {
+            item: a.ItemType.Offal
+        }
+        , {
+            item: a.ItemType.Bone
+        }
+        , {
+            item: a.ItemType.BoneFragments
+        }
+        ], decay:2600, skill:a.SkillType.Anatomy
+    }
+    , t.corpseDescriptions[a.CreatureType.VampireBat]= {
+        resource:[ {
+            item: a.ItemType.RawMeat
+        }
+        ], decay:2200, skill:a.SkillType.Anatomy
+    }
+    , t.corpseDescriptions[a.CreatureType.Snake]= {
+        resource:[ {
+            item: a.ItemType.Scales
+        }
+        , {
+            item: a.ItemType.VenomGland, chance: 3
+        }
+        , {
+            item: a.ItemType.RawReptileMeat
+        }
+        ], decay:2400, skill:a.SkillType.Anatomy
+    }
+    , t.corpseDescriptions[a.CreatureType.Slime]= {
+        resource:[ {
+            item: a.ItemType.SlimeGelatin
+        }
+        ], decay:3200
+    }
+    , t.corpseDescriptions[a.CreatureType.JellyCube]= {
+        resource:[ {
+            item: a.ItemType.SlimeGelatin
+        }
+        , {
+            item: a.ItemType.SlimeGelatin
+        }
+        ], decay:3400
+    }
+    , t.corpseDescriptions[a.CreatureType.GiantSpider]= {
+        resource:[ {
+            item: a.ItemType.SpiderEggs, chance: 2
+        }
+        , {
+            item: a.ItemType.SpiderMeat
+        }
+        ], decay:2400, skill:a.SkillType.Anatomy
+    }
+    , t.corpseDescriptions[a.CreatureType.Zombie]= {
+        resource:[ {
+            item: a.ItemType.RottenMeat
+        }
+        , {
+            item: a.ItemType.Bone
+        }
+        , {
+            item: a.ItemType.BoneFragments
+        }
+        ], decay:600, skill:a.SkillType.Anatomy
+    }
+    , t.corpseDescriptions[a.CreatureType.Imp]= {
+        resource:[ {
+            item: a.ItemType.Scales
+        }
+        , {
+            item: a.ItemType.AnimalClaw
+        }
+        , {
+            item: a.ItemType.RawTaintedMeat
+        }
+        , {
+            item: a.ItemType.FireBladder, chance: 2
+        }
+        , {
+            item: a.ItemType.BoneFragments
+        }
+        ], decay:2600, skill:a.SkillType.Anatomy
+    }
+    , t.corpseDescriptions[a.CreatureType.Bogling]= {
+        resource:[ {
+            item: a.ItemType.PileOfCompost
+        }
+        , {
+            item: a.ItemType.RottingVegetation
+        }
+        ], decay:1e3, skill:a.SkillType.Botany
+    }
+    , t.corpseDescriptions[a.CreatureType.LivingRock]= {
+        resource:[ {
+            item: a.ItemType.CopperOre, chance: 90
+        }
+        , {
+            item: a.ItemType.Talc
+        }
+        , {
+            item: a.ItemType.IronOre, chance: 50
+        }
+        , {
+            item: a.ItemType.Limestone
+        }
+        ], skill:a.SkillType.Mining
+    }
+    , t.corpseDescriptions[a.CreatureType.Shark]= {
+        resource:[ {
+            item: a.ItemType.SharkFin
+        }
+        , {
+            item: a.ItemType.RawFishSteak
+        }
+        , {
+            item: a.ItemType.RawFishSteak
+        }
+        , {
+            item: a.ItemType.Offal
+        }
+        ], decay:800, skill:a.SkillType.Anatomy
+    }
+    , t.corpseDescriptions[a.CreatureType.Rat]= {
+        resource:[ {
+            item: a.ItemType.RawTaintedMeat
+        }
+        ], decay:2200, skill:a.SkillType.Anatomy
+    }
+    , t.corpseDescriptions[a.CreatureType.Skeleton]= {
+        resource:[ {
+            item: a.ItemType.Bone
+        }
+        , {
+            item: a.ItemType.Bone
+        }
+        , {
+            item: a.ItemType.BoneFragments
+        }
+        ], skill:a.SkillType.Anatomy
+    }
+    , t.corpseDescriptions[a.CreatureType.PirateGhost]= {
+        resource:[ {
+            item: a.ItemType.Ectoplasm
+        }
+        ], decay:100
+    }
+    , t.corpseDescriptions[a.CreatureType.TimeSkitter]= {
+        resource:[ {
+            item: a.ItemType.SpiderMeat
+        }
+        , {
+            item: a.ItemType.Offal
+        }
+        ], decay:2600, skill:a.SkillType.Anatomy
+    }
+    , t.corpseDescriptions[a.CreatureType.Chicken]= {
+        resource:[ {
+            item: a.ItemType.Feather
+        }
+        , {
+            item: a.ItemType.Feather
+        }
+        , {
+            item: a.ItemType.TailFeathers, chance: 1
+        }
+        , {
+            item: a.ItemType.Egg, chance: 20
+        }
+        , {
+            item: a.ItemType.RawChicken
+        }
+        , {
+            item: a.ItemType.BoneFragments
+        }
+        ], decay:2400, skill:a.SkillType.Anatomy
+    }
+    , t.corpseDescriptions[a.CreatureType.TrapdoorSpider]= {
+        resource:[ {
+            item: a.ItemType.SpiderEggs, chance: 2
+        }
+        , {
+            item: a.ItemType.SpiderMeat
+        }
+        ], decay:2400, skill:a.SkillType.Anatomy
+    }
+    , t.corpseDescriptions[a.CreatureType.FireElemental]= {
+        resource:[ {
+            item: a.ItemType.Charcoal, chance: 25
+        }
+        , {
+            item: a.ItemType.Charcoal
+        }
+        ], decay:400, skill:a.SkillType.Mining, animated:!0
+    }
+    , t.corpseDescriptions[a.CreatureType.Hobgoblin]= {
+        resource:[ {
+            item: a.ItemType.RawMeat
+        }
+        , {
+            item: a.ItemType.Offal
+        }
+        , {
+            item: a.ItemType.Bone
+        }
+        , {
+            item: a.ItemType.BoneFragments
+        }
+        ], decay:2600, skill:a.SkillType.Anatomy
+    }
+    , t.corpseDescriptions[a.CreatureType.LivingMushroom]= {
+        resource:[ {
+            item: a.ItemType.ButtonMushrooms
+        }
+        , {
+            item: a.ItemType.ButtonMushrooms
+        }
+        ], aberrantResource:[ {
+            item: a.ItemType.FlyAmanita
+        }
+        , {
+            item: a.ItemType.FlyAmanita
+        }
+        ], decay:3200, skill:a.SkillType.Mycology
+    }
+    , t.corpseDescriptions[a.CreatureType.Kraken]= {
+        resource:[ {
+            item: a.ItemType.Tentacles
+        }
+        , {
+            item: a.ItemType.Tentacles
+        }
+        , {
+            item: a.ItemType.Tentacles
+        }
+        , {
+            item: a.ItemType.Offal
+        }
+        ], decay:3600, skill:a.SkillType.Anatomy
+    }
+    , t.corpseDescriptions[a.CreatureType.Harpy]= {
+        resource:[ {
+            item: a.ItemType.Feather
+        }
+        , {
+            item: a.ItemType.Feather
+        }
+        , {
+            item: a.ItemType.TailFeathers, chance: 3
+        }
+        , {
+            item: a.ItemType.RawChicken
+        }
+        , {
+            item: a.ItemType.BoneFragments
+        }
+        ], decay:2600, skill:a.SkillType.Anatomy
+    }
+    , t.corpseDescriptions[a.CreatureType.AcidSpitterDemon]= {
+        resource:[ {
+            item: a.ItemType.MagicalEssence
+        }
+        , {
+            item: a.ItemType.RawTaintedMeat
+        }
+        , {
+            item: a.ItemType.BoneFragments
+        }
+        ], decay:2600, damage:12, skill:a.SkillType.Anatomy
+    }
+    , t.corpseDescriptions[a.CreatureType.SkeletalMage]= {
+        resource:[ {
+            item: a.ItemType.MageRobe
+        }
+        , {
+            item: a.ItemType.Bone
+        }
+        , {
+            item: a.ItemType.BoneFragments
+        }
+        ], skill:a.SkillType.Anatomy
+    }
+    , t.corpseDescriptions[a.CreatureType.ClawWorm]= {
+        resource:[ {
+            item: a.ItemType.AnimalClaw
+        }
+        , {
+            item: a.ItemType.WormMeat
+        }
+        ], decay:2400, skill:a.SkillType.Anatomy
+    }
+    , t.corpseDescriptions[a.CreatureType.Drake]= {
+        resource:[ {
+            item: a.ItemType.Scales
+        }
+        , {
+            item: a.ItemType.AnimalClaw
+        }
+        , {
+            item: a.ItemType.AnimalFat
+        }
+        , {
+            item: a.ItemType.RawReptileMeat
+        }
+        , {
+            item: a.ItemType.RawReptileMeat
+        }
+        , {
+            item: a.ItemType.FireBladder
+        }
+        , {
+            item: a.ItemType.AnimalSkull
+        }
+        , {
+            item: a.ItemType.Offal
+        }
+        , {
+            item: a.ItemType.Bone
+        }
+        , {
+            item: a.ItemType.BoneFragments
+        }
+        ], decay:3e3, skill:a.SkillType.Anatomy
+    }
+    , t.corpseDescriptions[a.CreatureType.Sandcat]= {
+        resource:[ {
+            item: a.ItemType.AnimalPelt
+        }
+        , {
+            item: a.ItemType.AnimalClaw
+        }
+        , {
+            item: a.ItemType.AnimalFat
+        }
+        , {
+            item: a.ItemType.RawMeat
+        }
+        , {
+            item: a.ItemType.Offal
+        }
+        , {
+            item: a.ItemType.BoneFragments
+        }
+        ], decay:2600, skill:a.SkillType.Anatomy
+    }
+    , t.corpseDescriptions[a.CreatureType.LavaBeetle]= {
+        resource:[ {
+            item: a.ItemType.LavaBeetleHelmet
+        }
+        , {
+            item: a.ItemType.Obsidian
+        }
+        , {
+            item: a.ItemType.Offal
+        }
+        ], decay:2800, skill:a.SkillType.Anatomy, lightSource:!0
+    }
+    , t.corpseDescriptions[a.CreatureType.Goat]= {
+        resource:[ {
+            item: a.ItemType.AnimalPelt
+        }
+        , {
+            item: a.ItemType.AnimalFat
+        }
+        , {
+            item: a.ItemType.RawMeat
+        }
+        , {
+            item: a.ItemType.Offal
+        }
+        , {
+            item: a.ItemType.Bone
+        }
+        , {
+            item: a.ItemType.BoneFragments
+        }
+        ], decay:2600, skill:a.SkillType.Anatomy
+    }
+    , t.corpseDescriptions[a.CreatureType.SlitherSucker]= {
+        resource:[ {
+            item: a.ItemType.WormMeat
+        }
+        ], decay:2400, skill:a.SkillType.Anatomy
+    }
+    , t.corpseDescriptions[a.CreatureType.Mudskipper]= {
+        resource:[ {
+            item: a.ItemType.RawFishSteak
+        }
+        ], decay:2e3, skill:a.SkillType.Anatomy
+    }
+    , t.corpseDescriptions[a.CreatureType.Scorpion]= {
+        resource:[ {
+            item: a.ItemType.ScorpionStinger, chance: 25
+        }
+        , {
+            item: a.ItemType.DeadScorpion
+        }
+        ], 
+        aberrantResource:[ {
+            item: a.ItemType.ScorpionStinger
+        }
+        , {
+            item: a.ItemType.DeadAberrantScorpion
+        }
+        ], decay:2400, skill:a.SkillType.Anatomy
+    }
+    , t.corpseDescriptions[a.CreatureType.Rattlesnake]= {
+        resource:[ {
+            item: a.ItemType.Scales, chance: 50
+        }
+        , {
+            item: a.ItemType.Scales
+        }
+        , {
+            item: a.ItemType.VenomGland, chance: 6
+        }
+        , {
+            item: a.ItemType.RawReptileMeat, chance: 10
+        }
+        , {
+            item: a.ItemType.RawReptileMeat
+        }
+        ], decay:2400, skill:a.SkillType.Anatomy
+    }
+    , t.corpseDescriptions[a.CreatureType.AntelopeJackrabbit]= {
+        resource:[ {
+            item: a.ItemType.AnimalPelt
+        }
+        , {
+            item: a.ItemType.RawMeat
+        }
+        , {
+            item: a.ItemType.RawMeat
+        }
+        , {
+            item: a.ItemType.Offal
+        }
+        , {
+            item: a.ItemType.BoneFragments
+        }
+        ], decay:2400, skill:a.SkillType.Anatomy
+    }
+}
+
+),
 
 define("tile/ITileEvent",["require","exports"],function(e,t){var a;Object.defineProperty(t,"__esModule",{value:!0}),function(e){e[e.None=0]="None",e[e.Fire=1]="Fire",e[e.HoneyFungus=2]="HoneyFungus",e[e.TumblingTumbleweed=3]="TumblingTumbleweed"}(a=t.TileEventType||(t.TileEventType={}))}),
 
@@ -1129,7 +1657,341 @@ define("newui/screen/IScreen",["require","exports"],function(e,t){var a,i,n;Obje
 
 define("newui/screen/screens/menu/component/IMenu",["require","exports"],function(e,t){var a;Object.defineProperty(t,"__esModule",{value:!0}),function(e){e[e.BACK=-1]="BACK",e[e.NONE=0]="NONE",e[e.CharacterSelection=1]="CharacterSelection",e[e.GameEnd=2]="GameEnd",e[e.Help=3]="Help",e[e.Highscores=4]="Highscores",e[e.Interrupt=5]="Interrupt",e[e.JoinServer=6]="JoinServer",e[e.LoadGame=7]="LoadGame",e[e.Main=8]="Main",e[e.Mods=9]="Mods",e[e.Multiplayer=10]="Multiplayer",e[e.NewGame=11]="NewGame",e[e.Options=12]="Options",e[e.Pause=13]="Pause"}(a=t.MenuId||(t.MenuId={}))}),
 
-define("creature/Creatures",["require","exports","creature/ICreature","entity/IEntity","Enums"],function(e,t,a,i,n){Object.defineProperty(t,"__esModule",{value:!0}),t.spawnableTiles=Array(),t.creatureDescriptions={},t.default=t.creatureDescriptions,t.spawnableTiles[a.SpawnableTiles.None]=[],t.spawnableTiles[a.SpawnableTiles.Default]=[n.TerrainType.Ash,n.TerrainType.Dirt,n.TerrainType.Grass,n.TerrainType.Gravel,n.TerrainType.BeachSand,n.TerrainType.DesertSand,n.TerrainType.Snow,n.TerrainType.Swamp,n.TerrainType.Clay],t.spawnableTiles[a.SpawnableTiles.DefaultWithLava]=[n.TerrainType.Ash,n.TerrainType.Dirt,n.TerrainType.Grass,n.TerrainType.Gravel,n.TerrainType.BeachSand,n.TerrainType.DesertSand,n.TerrainType.Snow,n.TerrainType.Swamp,n.TerrainType.Clay,n.TerrainType.Lava,n.TerrainType.CoolingLava,n.TerrainType.Obsidian],t.spawnableTiles[a.SpawnableTiles.DefaultWithWater]=[n.TerrainType.Ash,n.TerrainType.Dirt,n.TerrainType.Grass,n.TerrainType.Gravel,n.TerrainType.BeachSand,n.TerrainType.DesertSand,n.TerrainType.Snow,n.TerrainType.Swamp,n.TerrainType.Clay,n.TerrainType.ShallowSeawater,n.TerrainType.ShallowFreshWater],t.spawnableTiles[a.SpawnableTiles.DeepWater]=[n.TerrainType.Seawater,n.TerrainType.FreshWater,n.TerrainType.DeepSeawater,n.TerrainType.DeepFreshWater],t.spawnableTiles[a.SpawnableTiles.Water]=[n.TerrainType.Seawater,n.TerrainType.FreshWater,n.TerrainType.DeepSeawater,n.TerrainType.DeepFreshWater,n.TerrainType.ShallowSeawater,n.TerrainType.ShallowFreshWater],t.spawnableTiles[a.SpawnableTiles.Flying]=[n.TerrainType.Ash,n.TerrainType.Dirt,n.TerrainType.Grass,n.TerrainType.Gravel,n.TerrainType.BeachSand,n.TerrainType.DesertSand,n.TerrainType.ShallowSeawater,n.TerrainType.Snow,n.TerrainType.Swamp,n.TerrainType.Clay,n.TerrainType.ShallowFreshWater,n.TerrainType.Lava],t.spawnableTiles[a.SpawnableTiles.Ghost]=[n.TerrainType.Ash,n.TerrainType.Dirt,n.TerrainType.Grass,n.TerrainType.Gravel,n.TerrainType.BeachSand,n.TerrainType.DesertSand,n.TerrainType.ShallowSeawater,n.TerrainType.Snow,n.TerrainType.Swamp,n.TerrainType.Clay,n.TerrainType.ShallowFreshWater,n.TerrainType.Rocks,n.TerrainType.Sandstone,n.TerrainType.Lava],t.spawnableTiles[a.SpawnableTiles.Desert]=[n.TerrainType.DesertSand],t.spawnableTiles[a.SpawnableTiles.Lava]=[n.TerrainType.Lava,n.TerrainType.CoolingLava,n.TerrainType.Obsidian],t.spawnableTiles[a.SpawnableTiles.Wet]=[n.TerrainType.ShallowFreshWater,n.TerrainType.FreshWater,n.TerrainType.DeepFreshWater,n.TerrainType.Dirt,n.TerrainType.FertileSoil,n.TerrainType.Clay],t.spawnableTiles[a.SpawnableTiles.Ground]=[n.TerrainType.Grass,n.TerrainType.Gravel,n.TerrainType.Dirt,n.TerrainType.BeachSand,n.TerrainType.DesertSand,n.TerrainType.Snow,n.TerrainType.Swamp,n.TerrainType.Clay,n.TerrainType.Ash,n.TerrainType.CobblestoneFlooring,n.TerrainType.WoodenFlooring,n.TerrainType.ClayBrickFlooring,n.TerrainType.CaveEntrance,n.TerrainType.RedCarpet,n.TerrainType.FertileSoil,n.TerrainType.CoolingLava,n.TerrainType.Obsidian,n.TerrainType.ShallowSeawater,n.TerrainType.ShallowFreshWater],t.spawnableTiles[a.SpawnableTiles.All]=[n.TerrainType.DeepSeawater,n.TerrainType.Seawater,n.TerrainType.ShallowSeawater,n.TerrainType.DeepFreshWater,n.TerrainType.FreshWater,n.TerrainType.ShallowFreshWater,n.TerrainType.Grass,n.TerrainType.Gravel,n.TerrainType.Dirt,n.TerrainType.BeachSand,n.TerrainType.Snow,n.TerrainType.Swamp,n.TerrainType.Clay,n.TerrainType.Ash,n.TerrainType.Rocks,n.TerrainType.RocksWithIron,n.TerrainType.RocksWithTalc,n.TerrainType.RocksWithCoal,n.TerrainType.RocksWithLimestone,n.TerrainType.CobblestoneFlooring,n.TerrainType.Sandstone,n.TerrainType.SandstoneFlooring,n.TerrainType.SandstoneWithIron,n.TerrainType.SandstoneWithNiter,n.TerrainType.WoodenFlooring,n.TerrainType.ClayBrickFlooring,n.TerrainType.CaveEntrance,n.TerrainType.RedCarpet,n.TerrainType.Lava,n.TerrainType.FertileSoil,n.TerrainType.RocksWithCopper,n.TerrainType.SandstoneWithCopper,n.TerrainType.CoolingLava,n.TerrainType.Obsidian,n.TerrainType.DesertSand],t.creatureDescriptions[n.CreatureType.Slime]={minhp:4,maxhp:8,minatk:1,maxatk:4,defense:new n.Defense(1,new n.Resistances(n.DamageType.Blunt,3),new n.Vulnerabilities),damageType:n.DamageType.Blunt,ai:i.AiType.Neutral,moveType:n.MoveType.Land|n.MoveType.ShallowWater,blood:{r:150,g:255,b:70},aberrantBlood:{r:220,g:0,b:15},spawnTiles:a.SpawnableTiles.Default,spawnReputation:-1e3,makeNoise:!0,jumpOver:!0,reputation:-200,tamingDifficulty:50,spawnGroup:[a.SpawnGroup.Guardians],acceptedItems:[n.ItemType.SlimeGelatin],spawnOnBenignity:!0,canTrample:!0,skipMovementChance:5},t.creatureDescriptions[n.CreatureType.JellyCube]={minhp:12,maxhp:13,minatk:3,maxatk:7,defense:new n.Defense(2,new n.Resistances(n.DamageType.Blunt,8),new n.Vulnerabilities),damageType:n.DamageType.Blunt,ai:i.AiType.Hostile,moveType:n.MoveType.Land|n.MoveType.ShallowWater,blood:{r:150,g:255,b:70},aberrantBlood:{r:220,g:0,b:15},spawnTiles:a.SpawnableTiles.Default,spawnReputation:-8e3,makeNoise:!0,jumpOver:!0,reputation:150,tamingDifficulty:100,spawnGroup:[a.SpawnGroup.Guardians],acceptedItems:[n.ItemType.SlimeGelatin],canTrample:!0},t.creatureDescriptions[n.CreatureType.GiantSpider]={minhp:4,maxhp:8,minatk:1,maxatk:4,defense:new n.Defense(1,new n.Resistances(n.DamageType.Slashing,1),new n.Vulnerabilities(n.DamageType.Blunt,1)),damageType:n.DamageType.Piercing,ai:i.AiType.Hostile,moveType:n.MoveType.Land|n.MoveType.ShallowWater,canCauseStatus:[n.StatusType.Poisoned],loot:[{item:n.ItemType.SpiderSilk}],spawnTiles:a.SpawnableTiles.Default,spawnReputation:0,makeNoise:!0,jumpOver:!0,reputation:150,tamingDifficulty:50,spawnGroup:[a.SpawnGroup.Guardians,a.SpawnGroup.Night,a.SpawnGroup.Cave],acceptedItems:[n.ItemTypeGroup.Bait],skipMovementChance:20,blood:{r:162,g:155,b:37}},t.creatureDescriptions[n.CreatureType.Bear]={minhp:13,maxhp:16,minatk:10,maxatk:15,defense:new n.Defense(3,new n.Resistances(n.DamageType.Piercing,4,n.DamageType.Blunt,2),new n.Vulnerabilities),damageType:n.DamageType.Slashing|n.DamageType.Blunt,ai:i.AiType.Hostile,moveType:n.MoveType.Land|n.MoveType.ShallowWater|n.MoveType.Water|n.MoveType.BreakDoodads,waterAnimations:!0,canCauseStatus:[n.StatusType.Bleeding],spawnTiles:a.SpawnableTiles.DefaultWithWater,spawnReputation:-18e3,makeNoise:!0,reputation:250,tamingDifficulty:200,spawnGroup:[a.SpawnGroup.Guardians],acceptedItems:[n.ItemTypeGroup.Meat,n.ItemTypeGroup.RawMeat,n.ItemTypeGroup.CookedMeat],canTrample:!0,skipMovementChance:1},t.creatureDescriptions[n.CreatureType.Rabbit]={minhp:2,maxhp:3,minatk:1,maxatk:2,defense:new n.Defense(0,new n.Resistances,new n.Vulnerabilities),damageType:n.DamageType.Slashing,ai:i.AiType.Scared,moveType:n.MoveType.Land|n.MoveType.ShallowWater,spawnTiles:a.SpawnableTiles.Default,spawnReputation:0,makeNoise:!0,jumpOver:!0,reputation:-300,spawnOnBenignity:!0,tamingDifficulty:25,acceptedItems:[n.ItemTypeGroup.Seed,n.ItemType.SheafOfHay,n.ItemType.Raspberries,n.ItemType.Beggarticks,n.ItemType.Carrot,n.ItemType.Apple,n.ItemType.Pineapple,n.ItemType.Lettuce]},t.creatureDescriptions[n.CreatureType.Snake]={minhp:3,maxhp:4,minatk:4,maxatk:10,defense:new n.Defense(1,new n.Resistances(n.DamageType.Piercing,2),new n.Vulnerabilities(n.DamageType.Fire,1)),damageType:n.DamageType.Piercing,canCauseStatus:[n.StatusType.Poisoned],ai:i.AiType.Neutral,moveType:n.MoveType.Land|n.MoveType.ShallowWater,spawnTiles:a.SpawnableTiles.Default,spawnReputation:0,jumpOver:!0,reputation:-200,tamingDifficulty:50,acceptedItems:[n.ItemTypeGroup.RawMeat,n.ItemTypeGroup.Bait],noStumble:!0,skipMovementChance:5},t.creatureDescriptions[n.CreatureType.GiantRat]={minhp:3,maxhp:4,minatk:2,maxatk:5,defense:new n.Defense(1,new n.Resistances(n.DamageType.Blunt,1),new n.Vulnerabilities(n.DamageType.Fire,1)),damageType:n.DamageType.Slashing,ai:i.AiType.Hostile,moveType:n.MoveType.Land|n.MoveType.ShallowWater,canCauseStatus:[n.StatusType.Bleeding],spawnTiles:a.SpawnableTiles.Default,spawnReputation:0,makeNoise:!0,jumpOver:!0,reputation:150,tamingDifficulty:75,spawnGroup:[a.SpawnGroup.Guardians,a.SpawnGroup.Night,a.SpawnGroup.Cave],acceptedItems:[n.ItemTypeGroup.Food,n.ItemTypeGroup.Seed],canTrample:!0,skipMovementChance:10},t.creatureDescriptions[n.CreatureType.Rat]={minhp:2,maxhp:3,minatk:1,maxatk:2,defense:new n.Defense(0,new n.Resistances,new n.Vulnerabilities),damageType:n.DamageType.Slashing,ai:i.AiType.Scared,moveType:n.MoveType.Land|n.MoveType.ShallowWater,spawnTiles:a.SpawnableTiles.Default,spawnReputation:0,makeNoise:!0,jumpOver:!0,reputation:-200,spawnOnBenignity:!0,tamingDifficulty:25,spawnGroup:[a.SpawnGroup.Cave],acceptedItems:[n.ItemTypeGroup.Seed],skipMovementChance:2},t.creatureDescriptions[n.CreatureType.VampireBat]={minhp:3,maxhp:6,minatk:2,maxatk:6,defense:new n.Defense(2,new n.Resistances(n.DamageType.Piercing,3),new n.Vulnerabilities(n.DamageType.Fire,3)),damageType:n.DamageType.Piercing,ai:i.AiType.Hostile,moveType:n.MoveType.Flying,canCauseStatus:[n.StatusType.Bleeding],spawnTiles:a.SpawnableTiles.Flying,makeNoise:!0,jumpOver:!0,reputation:250,tamingDifficulty:50,spawnGroup:[a.SpawnGroup.Night,a.SpawnGroup.Cave],acceptedItems:[n.ItemTypeGroup.RawMeat,n.ItemTypeGroup.Fruit],noStumble:!0,skipMovementChance:10},t.creatureDescriptions[n.CreatureType.GreyWolf]={minhp:10,maxhp:14,minatk:7,maxatk:9,defense:new n.Defense(3,new n.Resistances(n.DamageType.Blunt,2),new n.Vulnerabilities),damageType:n.DamageType.Slashing|n.DamageType.Blunt,ai:i.AiType.Hostile,moveType:n.MoveType.Land|n.MoveType.ShallowWater,canCauseStatus:[n.StatusType.Bleeding],spawnTiles:a.SpawnableTiles.Default,spawnReputation:-1e4,makeNoise:!0,jumpOver:!0,reputation:250,tamingDifficulty:150,spawnGroup:[a.SpawnGroup.Guardians],acceptedItems:[n.ItemTypeGroup.Meat,n.ItemTypeGroup.RawMeat,n.ItemTypeGroup.CookedMeat,n.ItemTypeGroup.Bone],canTrample:!0},t.creatureDescriptions[n.CreatureType.Imp]={minhp:14,maxhp:18,minatk:15,maxatk:19,defense:new n.Defense(4,new n.Resistances(n.DamageType.Fire,99),new n.Vulnerabilities),damageType:n.DamageType.Slashing,ai:i.AiType.Hostile,moveType:n.MoveType.Flying|n.MoveType.Fire,loot:[{item:n.ItemType.FlyAmanita},{item:n.ItemType.FlyAmanita,chance:50},{item:n.ItemType.OrbOfInfluence,chance:15}],lootGroup:n.LootGroupType.High,canCauseStatus:[n.StatusType.Bleeding,n.StatusType.Burned],spawnTiles:a.SpawnableTiles.DefaultWithLava,spawnReputation:-24e3,makeNoise:!0,jumpOver:!0,reputation:250,tamingDifficulty:300,spawnGroup:[a.SpawnGroup.Guardians,a.SpawnGroup.Cave,a.SpawnGroup.StrongGuardians],acceptedItems:[n.ItemType.FlyAmanita],noStumble:!0,skipMovementChance:2},t.creatureDescriptions[n.CreatureType.Bogling]={minhp:15,maxhp:17,minatk:8,maxatk:11,defense:new n.Defense(4,new n.Resistances(n.DamageType.Blunt,3,n.DamageType.Fire,5),new n.Vulnerabilities),damageType:n.DamageType.Blunt,ai:i.AiType.Hostile,moveType:n.MoveType.Land|n.MoveType.ShallowWater,loot:[{item:n.ItemType.Peat},{item:n.ItemType.VineWhip,chance:5},{item:n.ItemType.MossCoveredBook,chance:10}],blood:{r:70,g:90,b:20},aberrantBlood:{r:170,g:50,b:45},canCauseStatus:[n.StatusType.Poisoned],lootGroup:n.LootGroupType.Low,spawnTiles:a.SpawnableTiles.Default,spawnReputation:-16e3,makeNoise:!0,reputation:150,tamingDifficulty:300,acceptedItems:[n.ItemType.Peat],helpPlants:!0,skipMovementChance:5},t.creatureDescriptions[n.CreatureType.LivingRock]={minhp:20,maxhp:28,minatk:4,maxatk:6,defense:new n.Defense(5,new n.Resistances(n.DamageType.Piercing,3,n.DamageType.Slashing,3,n.DamageType.Fire,99),new n.Vulnerabilities(n.DamageType.Blunt,2)),damageType:n.DamageType.Blunt,ai:i.AiType.Neutral,moveType:n.MoveType.None,loot:[{item:n.ItemType.LargeRock},{item:n.ItemType.SharpRock}],blood:{r:110,g:110,b:110},spawnTiles:a.SpawnableTiles.Default,spawnReputation:-2e4,jumpOver:!0,reputation:-200,spawnGroup:[a.SpawnGroup.Cave],acceptedItems:[n.ItemType.LargeRock],noStumble:!0},t.creatureDescriptions[n.CreatureType.Shark]={minhp:9,maxhp:11,minatk:6,maxatk:12,defense:new n.Defense(3,new n.Resistances(n.DamageType.Blunt,2,n.DamageType.Fire,99),new n.Vulnerabilities),damageType:n.DamageType.Slashing|n.DamageType.Piercing,ai:i.AiType.Hostile|i.AiType.Fearless,moveType:n.MoveType.Water,canCauseStatus:[n.StatusType.Bleeding],spawnTiles:a.SpawnableTiles.DeepWater,reputation:150,tamingDifficulty:300,spawnGroup:[a.SpawnGroup.Water],acceptedItems:[n.ItemTypeGroup.Meat,n.ItemTypeGroup.RawMeat],noStumble:!0,skipMovementChance:2},t.creatureDescriptions[n.CreatureType.Zombie]={minhp:8,maxhp:14,minatk:6,maxatk:13,defense:new n.Defense(5,new n.Resistances(n.DamageType.Piercing,1,n.DamageType.Blunt,1),new n.Vulnerabilities(n.DamageType.Fire,5,n.DamageType.Slashing,1)),damageType:n.DamageType.Slashing,ai:i.AiType.Hostile,moveType:n.MoveType.Land|n.MoveType.ShallowWater|n.MoveType.BreakDoodads,loot:[{item:n.ItemType.Bone},{item:n.ItemType.TatteredPants,chance:5},{item:n.ItemType.TatteredShirt,chance:5},{item:n.ItemType.Journal,chance:5}],lootGroup:n.LootGroupType.Low,canCauseStatus:[n.StatusType.Poisoned,n.StatusType.Bleeding],spawnTiles:a.SpawnableTiles.Default,spawnReputation:-16e3,makeNoise:!0,respawn:!0,reputation:250,tamingDifficulty:500,spawnGroup:[a.SpawnGroup.Night,a.SpawnGroup.Cave],acceptedItems:[n.ItemTypeGroup.RawMeat],canTrample:!0,skipMovementChance:40},t.creatureDescriptions[n.CreatureType.Skeleton]={minhp:11,maxhp:16,minatk:8,maxatk:12,defense:new n.Defense(4,new n.Resistances(n.DamageType.Piercing,3,n.DamageType.Slashing,3),new n.Vulnerabilities(n.DamageType.Fire,2,n.DamageType.Blunt,2)),damageType:n.DamageType.Blunt|n.DamageType.Piercing,ai:i.AiType.Hostile,moveType:n.MoveType.Land|n.MoveType.ShallowWater,loot:[{item:n.ItemType.Bone},{item:n.ItemType.Bone,chance:25},{item:n.ItemType.GoldenRing,chance:2}],lootGroup:n.LootGroupType.Low,blood:{r:200,g:200,b:200},canCauseStatus:[n.StatusType.Bleeding],spawnTiles:a.SpawnableTiles.Default,makeNoise:!0,respawn:!0,reputation:250,spawnGroup:[a.SpawnGroup.Guardians,a.SpawnGroup.Cave,a.SpawnGroup.StrongGuardians],canTrample:!0,skipMovementChance:20},t.creatureDescriptions[n.CreatureType.PirateGhost]={minhp:18,maxhp:24,minatk:16,maxatk:19,defense:new n.Defense(8,new n.Resistances,new n.Vulnerabilities(n.DamageType.Fire,4)),damageType:n.DamageType.Blunt,ai:i.AiType.Hostile,moveType:n.MoveType.Flying|n.MoveType.Mountain,lootGroup:n.LootGroupType.VeryHigh,blood:{r:250,g:250,b:250},spawnTiles:a.SpawnableTiles.Ghost,spawnReputation:-4e4,jumpOver:!0,reputation:350,tamingDifficulty:500,spawnGroup:[a.SpawnGroup.Cave,a.SpawnGroup.StrongGuardians],acceptedItems:[n.ItemType.Ectoplasm],noStumble:!0,skipMovementChance:1,disableHitching:!0},t.creatureDescriptions[n.CreatureType.TimeSkitter]={minhp:10,maxhp:12,minatk:17,maxatk:21,defense:new n.Defense(8,new n.Resistances,new n.Vulnerabilities(n.DamageType.Blunt,2)),damageType:n.DamageType.Slashing|n.DamageType.Piercing,ai:i.AiType.Hostile,moveType:n.MoveType.Land|n.MoveType.ShallowWater,lootGroup:n.LootGroupType.High,canCauseStatus:[n.StatusType.Bleeding],spawnTiles:a.SpawnableTiles.Default,spawnReputation:-36e3,makeNoise:!0,jumpOver:!0,reputation:250,acceptedItems:[n.ItemType.Sundial],noStumble:!0,canTrample:!0,skipMovementChance:1},t.creatureDescriptions[n.CreatureType.Chicken]={minhp:2,maxhp:3,minatk:1,maxatk:3,defense:new n.Defense(0,new n.Resistances,new n.Vulnerabilities),damageType:n.DamageType.Slashing,ai:i.AiType.Scared,moveType:n.MoveType.Land|n.MoveType.ShallowWater,loot:[{item:n.ItemType.Feather},{item:n.ItemType.Feather,chance:75}],spawnTiles:a.SpawnableTiles.Default,spawnReputation:4e3,makeNoise:!0,jumpOver:!0,reputation:-300,tamingDifficulty:25,acceptedItems:[n.ItemTypeGroup.Seed,n.ItemTypeGroup.Bait],skipMovementChance:1},t.creatureDescriptions[n.CreatureType.TrapdoorSpider]={minhp:2,maxhp:5,minatk:2,maxatk:3,defense:new n.Defense(0,new n.Resistances(n.DamageType.Piercing,2),new n.Vulnerabilities(n.DamageType.Blunt,1)),damageType:n.DamageType.Piercing,ai:i.AiType.Hidden,moveType:n.MoveType.Land,spawnTiles:a.SpawnableTiles.Default,spawnReputation:-2e3,jumpOver:!0,reputation:150,tamingDifficulty:50,acceptedItems:[n.ItemTypeGroup.Bait],blood:{r:162,g:155,b:37}},t.creatureDescriptions[n.CreatureType.FireElemental]={minhp:15,maxhp:19,minatk:14,maxatk:21,defense:new n.Defense(5,new n.Resistances(n.DamageType.Fire,100),new n.Vulnerabilities),damageType:n.DamageType.Fire|n.DamageType.Blunt,ai:i.AiType.Hostile,moveType:n.MoveType.Flying|n.MoveType.Fire,lootGroup:n.LootGroupType.FireElemental,loot:[{item:n.ItemType.PileOfAsh}],blood:{r:205,g:105,b:25},canCauseStatus:[n.StatusType.Burned],spawnTiles:a.SpawnableTiles.DefaultWithLava,spawnReputation:-3e4,makeNoise:!0,reputation:250,tamingDifficulty:300,spawnGroup:[a.SpawnGroup.Guardians,a.SpawnGroup.StrongGuardians],acceptedItems:[n.ItemType.LitPoleTorch,n.ItemType.LitBarkTorch,n.ItemType.LitAnimalFatTorch],lightSource:!0,noStumble:!0,providesFire:!0,canTrample:!0,skipMovementChance:5,disableHitching:!0},t.creatureDescriptions[n.CreatureType.Cod]={minhp:2,maxhp:3,minatk:0,maxatk:1,defense:new n.Defense(0,new n.Resistances(n.DamageType.Fire,99,n.DamageType.Blunt,2,n.DamageType.Slashing,2),new n.Vulnerabilities),damageType:n.DamageType.Blunt,ai:i.AiType.Neutral,moveType:n.MoveType.Water|n.MoveType.ShallowWater,loot:[{item:n.ItemType.RawCod}],spawnTiles:a.SpawnableTiles.Water,jumpOver:!0,noCorpse:!0,fishable:!0,reputation:0,spawnOnBenignity:!0,tamingDifficulty:100,spawnGroup:[a.SpawnGroup.Water],acceptedItems:[n.ItemTypeGroup.Bait],noStumble:!0,skipMovementChance:2},t.creatureDescriptions[n.CreatureType.Hobgoblin]={minhp:15,maxhp:16,minatk:9,maxatk:16,defense:new n.Defense(3,new n.Resistances(n.DamageType.Blunt,2),new n.Vulnerabilities),damageType:n.DamageType.Slashing|n.DamageType.Blunt,ai:i.AiType.Hostile,moveType:n.MoveType.Land|n.MoveType.ShallowWater|n.MoveType.BreakDoodads,loot:[{item:n.ItemType.TatteredPants,chance:5},{item:n.ItemType.OrbOfInfluence,chance:15},{item:n.ItemType.GoldenSword,chance:2},{item:n.ItemType.OrnateBlueBook,chance:5}],lootGroup:n.LootGroupType.Low,spawnTiles:a.SpawnableTiles.Default,spawnReputation:-22e3,makeNoise:!0,reputation:150,tamingDifficulty:500,spawnGroup:[a.SpawnGroup.Guardians],acceptedItems:[n.ItemTypeGroup.Equipment,n.ItemTypeGroup.Weapon,n.ItemTypeGroup.Trap],canTrample:!0,skipMovementChance:2},t.creatureDescriptions[n.CreatureType.LivingMushroom]={minhp:7,maxhp:12,minatk:6,maxatk:10,defense:new n.Defense(2,new n.Resistances(n.DamageType.Fire,4),new n.Vulnerabilities(n.DamageType.Slashing,2)),damageType:n.DamageType.Blunt,ai:i.AiType.Hostile,moveType:n.MoveType.Land|n.MoveType.ShallowWater,loot:[{item:n.ItemType.ButtonMushrooms}],aberrantLoot:[{item:n.ItemType.FlyAmanita}],blood:{r:175,g:155,b:135},aberrantBlood:{r:150,g:45,b:25},spawnTiles:a.SpawnableTiles.Default,makeNoise:!0,reputation:150,tamingDifficulty:150,acceptedItems:[n.ItemType.RottenMeat,n.ItemType.RottingVegetation],canTrample:!0,skipMovementChance:1},t.creatureDescriptions[n.CreatureType.Kraken]={minhp:65,maxhp:75,minatk:24,maxatk:26,defense:new n.Defense(4,new n.Resistances(n.DamageType.Slashing,4),new n.Vulnerabilities(n.DamageType.Fire,2)),damageType:n.DamageType.Blunt,ai:i.AiType.Hostile,moveType:n.MoveType.Land|n.MoveType.ShallowWater|n.MoveType.Water|n.MoveType.BreakDoodads,lootGroup:n.LootGroupType.SeaTreasure,loot:[{item:n.ItemType.OrnateWoodenChest,chance:3}],blood:{r:80,g:150,b:175},aberrantBlood:{r:220,g:30,b:90},spawnTiles:a.SpawnableTiles.Water,spawnReputation:-42e3,makeNoise:!0,reputation:350,tamingDifficulty:1e3,spawnGroup:[a.SpawnGroup.WaterCave,a.SpawnGroup.Water,a.SpawnGroup.StrongGuardians],acceptedItems:[n.ItemTypeGroup.Treasure],noStumble:!0,skipMovementChance:3},t.creatureDescriptions[n.CreatureType.Blindfish]={minhp:2,maxhp:3,minatk:1,maxatk:3,defense:new n.Defense(1,new n.Resistances(n.DamageType.Fire,99,n.DamageType.Blunt,3,n.DamageType.Slashing,3),new n.Vulnerabilities),damageType:n.DamageType.Blunt,ai:i.AiType.Neutral,moveType:n.MoveType.Water|n.MoveType.ShallowWater,loot:[{item:n.ItemType.RawBlindfish}],spawnTiles:a.SpawnableTiles.Water,jumpOver:!0,noCorpse:!0,fishable:!0,reputation:0,spawnOnBenignity:!0,tamingDifficulty:125,spawnGroup:[a.SpawnGroup.WaterCave],acceptedItems:[n.ItemTypeGroup.Bait],noStumble:!0,skipMovementChance:25},t.creatureDescriptions[n.CreatureType.Harpy]={minhp:14,maxhp:17,minatk:9,maxatk:16,defense:new n.Defense(4,new n.Resistances(n.DamageType.Slashing,4),new n.Vulnerabilities(n.DamageType.Fire,2)),damageType:n.DamageType.Slashing,ai:i.AiType.Hostile,moveType:n.MoveType.Flying,canCauseStatus:[n.StatusType.Bleeding],loot:[{item:n.ItemType.Feather},{item:n.ItemType.Feather,chance:75}],lootGroup:n.LootGroupType.Low,spawnTiles:a.SpawnableTiles.Default,spawnReputation:-32e3,makeNoise:!0,reputation:150,tamingDifficulty:300,spawnGroup:[a.SpawnGroup.Guardians,a.SpawnGroup.Cave,a.SpawnGroup.StrongGuardians],noStumble:!0,skipMovementChance:2},t.creatureDescriptions[n.CreatureType.AcidSpitterDemon]={minhp:23,maxhp:29,minatk:26,maxatk:28,defense:new n.Defense(9,new n.Resistances(n.DamageType.Slashing,3,n.DamageType.Blunt,3,n.DamageType.Fire,10,n.DamageType.Piercing,2),new n.Vulnerabilities),damageType:n.DamageType.Slashing|n.DamageType.Piercing,ai:i.AiType.Hostile,moveType:n.MoveType.Land|n.MoveType.ShallowWater,canCauseStatus:[n.StatusType.Bleeding],lootGroup:n.LootGroupType.VeryHigh,loot:[{item:n.ItemType.GoldenChalice,chance:10},{item:n.ItemType.GoldenKey,chance:10}],blood:{r:20,g:180,b:20},spawnTiles:a.SpawnableTiles.Default,spawnReputation:-52e3,makeNoise:!0,reputation:350,canTrample:!0,skipMovementChance:1},t.creatureDescriptions[n.CreatureType.SkeletalMage]={minhp:34,maxhp:36,minatk:18,maxatk:23,defense:new n.Defense(7,new n.Resistances(n.DamageType.Slashing,4,n.DamageType.Fire,4,n.DamageType.Piercing,4),new n.Vulnerabilities(n.DamageType.Blunt,2)),damageType:n.DamageType.Slashing|n.DamageType.Piercing,ai:i.AiType.Hostile,moveType:n.MoveType.Land|n.MoveType.ShallowWater,canCauseStatus:[n.StatusType.Bleeding],lootGroup:n.LootGroupType.VeryHigh,loot:[{item:n.ItemType.SkeletalMageWand},{item:n.ItemType.GoldenChalice,chance:5},{item:n.ItemType.GildedRedBook,chance:5}],blood:{r:200,g:200,b:200},spawnTiles:a.SpawnableTiles.Default,spawnReputation:-44e3,makeNoise:!0,reputation:350,spawnGroup:[a.SpawnGroup.StrongGuardians],canTrample:!0,skipMovementChance:10},t.creatureDescriptions[n.CreatureType.ClawWorm]={minhp:8,maxhp:11,minatk:2,maxatk:3,defense:new n.Defense(1,new n.Resistances(n.DamageType.Piercing,1),new n.Vulnerabilities(n.DamageType.Fire,2)),damageType:n.DamageType.Piercing,ai:i.AiType.Hostile,moveType:n.MoveType.Land|n.MoveType.ShallowWater,spawnTiles:a.SpawnableTiles.Default,makeNoise:!0,jumpOver:!0,reputation:150,tamingDifficulty:25,acceptedItems:[n.ItemTypeGroup.Fruit,n.ItemTypeGroup.Vegetable],noStumble:!0,helpPlants:!0,skipMovementChance:10},t.creatureDescriptions[n.CreatureType.Drake]={minhp:110,maxhp:130,minatk:28,maxatk:34,defense:new n.Defense(10,new n.Resistances(n.DamageType.Slashing,3,n.DamageType.Blunt,3,n.DamageType.Fire,100),new n.Vulnerabilities(n.DamageType.Piercing,2)),damageType:n.DamageType.Slashing|n.DamageType.Piercing|n.DamageType.Blunt,ai:i.AiType.Hostile,moveType:n.MoveType.Land|n.MoveType.Fire|n.MoveType.BreakDoodads,canCauseStatus:[n.StatusType.Bleeding,n.StatusType.Burned],lootGroup:n.LootGroupType.VeryHigh,spawnTiles:a.SpawnableTiles.DefaultWithLava,loot:[{item:n.ItemType.GoldenKey}],spawnReputation:-62e3,makeNoise:!0,reputation:450,tamingDifficulty:1500,acceptedItems:[n.ItemTypeGroup.Treasure],canTrample:!0,skipMovementChance:2},t.creatureDescriptions[n.CreatureType.Sandcat]={minhp:9,maxhp:13,minatk:5,maxatk:8,defense:new n.Defense(3,new n.Resistances(n.DamageType.Blunt,2),new n.Vulnerabilities),damageType:n.DamageType.Slashing|n.DamageType.Piercing,ai:i.AiType.Hostile,moveType:n.MoveType.Land|n.MoveType.ShallowWater,canCauseStatus:[n.StatusType.Bleeding],spawnTiles:a.SpawnableTiles.Desert,spawnReputation:-8e3,makeNoise:!0,jumpOver:!0,reputation:250,tamingDifficulty:50,acceptedItems:[n.ItemTypeGroup.RawMeat,n.ItemTypeGroup.Meat],canTrample:!0,skipMovementChance:4},t.creatureDescriptions[n.CreatureType.LavaBeetle]={minhp:18,maxhp:22,minatk:14,maxatk:17,defense:new n.Defense(4,new n.Resistances(n.DamageType.Fire,100,n.DamageType.Blunt,6,n.DamageType.Slashing,3),new n.Vulnerabilities(n.DamageType.Piercing,2)),damageType:n.DamageType.Blunt|n.DamageType.Piercing,ai:i.AiType.Hostile,blood:{r:230,g:90,b:25},moveType:n.MoveType.Land|n.MoveType.Fire|n.MoveType.BreakDoodads,lootGroup:n.LootGroupType.High,loot:[{item:n.ItemType.Obsidian}],canCauseStatus:[n.StatusType.Burned],spawnTiles:a.SpawnableTiles.Lava,spawnReputation:-26e3,makeNoise:!0,jumpOver:!0,reputation:250,tamingDifficulty:200,acceptedItems:[n.ItemType.MeltedCopal],lightSource:!0,spawnGroup:[a.SpawnGroup.StrongGuardians],providesFire:!0,canTrample:!0},t.creatureDescriptions[n.CreatureType.Goat]={minhp:8,maxhp:13,minatk:2,maxatk:5,defense:new n.Defense(2,new n.Resistances(n.DamageType.Blunt,2),new n.Vulnerabilities),damageType:n.DamageType.Piercing|n.DamageType.Blunt,ai:i.AiType.Neutral,moveType:n.MoveType.Land|n.MoveType.ShallowWater,canCauseStatus:[n.StatusType.Bleeding],spawnTiles:a.SpawnableTiles.Default,spawnReputation:0,makeNoise:!0,jumpOver:!0,reputation:-200,tamingDifficulty:50,acceptedItems:[n.ItemTypeGroup.Vegetable,n.ItemTypeGroup.Seed,n.ItemType.SheafOfHay,n.ItemType.LeatherBoots,n.ItemType.TreeBark,n.ItemType.PlantRoots,n.ItemType.PoisonIvyLeaves,n.ItemType.Leaves,n.ItemType.PalmLeaf,n.ItemTypeGroup.Fruit],spawnOnBenignity:!0,canTrample:!0,skipMovementChance:1},t.creatureDescriptions[n.CreatureType.SlitherSucker]={minhp:20,maxhp:24,minatk:6,maxatk:11,defense:new n.Defense(5,new n.Resistances(n.DamageType.Blunt,4),new n.Vulnerabilities(n.DamageType.Fire,2)),damageType:n.DamageType.Piercing,ai:i.AiType.Hostile,moveType:n.MoveType.Land,canCauseStatus:[n.StatusType.Bleeding],spawnTiles:a.SpawnableTiles.Default,spawnReputation:-2e4,makeNoise:!0,reputation:250,spawnGroup:[a.SpawnGroup.Guardians],blood:{r:255,g:234,b:0},noStumble:!0,canTrample:!0,skipMovementChance:2},t.creatureDescriptions[n.CreatureType.Mudskipper]={minhp:8,maxhp:10,minatk:1,maxatk:2,defense:new n.Defense(4,new n.Resistances(n.DamageType.Piercing,2),new n.Vulnerabilities),damageType:n.DamageType.Blunt,ai:i.AiType.Scared,moveType:n.MoveType.WetLand|n.MoveType.Water|n.MoveType.ShallowWater,spawnTiles:a.SpawnableTiles.Wet,makeNoise:!0,jumpOver:!0,reputation:-50,tamingDifficulty:20,acceptedItems:[n.ItemTypeGroup.Bait,n.ItemType.RawCod,n.ItemType.RawBlindfish,n.ItemType.RawFishSteak],noStumble:!0,spawnReputation:8e3,waterAnimations:!0,particlesOnMove:!0,spawnGroup:[a.SpawnGroup.FreshWater],canTrample:!0,skipMovementChance:4},t.creatureDescriptions[n.CreatureType.Scorpion]={minhp:6,maxhp:12,minatk:1,maxatk:4,defense:new n.Defense(2,new n.Resistances(n.DamageType.Slashing,1,n.DamageType.Piercing,1),new n.Vulnerabilities(n.DamageType.Blunt,2)),damageType:n.DamageType.Piercing|n.DamageType.Slashing|n.DamageType.Blunt,ai:i.AiType.Hostile,moveType:n.MoveType.Land|n.MoveType.ShallowWater,canCauseStatus:[n.StatusType.Poisoned,n.StatusType.Bleeding],spawnTiles:a.SpawnableTiles.Desert,spawnReputation:-3e3,makeNoise:!0,jumpOver:!0,reputation:200,tamingDifficulty:100,acceptedItems:[n.ItemTypeGroup.Bait],blood:{r:162,g:155,b:37},skipMovementChance:2},t.creatureDescriptions[n.CreatureType.Rattlesnake]={minhp:6,maxhp:8,minatk:7,maxatk:9,defense:new n.Defense(6,new n.Resistances(n.DamageType.Piercing,1),new n.Vulnerabilities(n.DamageType.Fire,2)),damageType:n.DamageType.Piercing,canCauseStatus:[n.StatusType.Poisoned],ai:i.AiType.Hostile,moveType:n.MoveType.Land,spawnTiles:a.SpawnableTiles.Desert,spawnReputation:-5e3,makeNoise:!0,jumpOver:!0,reputation:200,tamingDifficulty:100,acceptedItems:[n.ItemTypeGroup.RawMeat,n.ItemTypeGroup.Bait],noStumble:!0,skipMovementChance:10},t.creatureDescriptions[n.CreatureType.AntelopeJackrabbit]={minhp:5,maxhp:7,minatk:1,maxatk:2,defense:new n.Defense(1,new n.Resistances(n.DamageType.Blunt,1),new n.Vulnerabilities),damageType:n.DamageType.Slashing,ai:i.AiType.Scared,moveType:n.MoveType.Land|n.MoveType.ShallowWater,spawnTiles:a.SpawnableTiles.Desert,spawnReputation:0,makeNoise:!0,jumpOver:!0,reputation:-300,spawnOnBenignity:!0,tamingDifficulty:50,acceptedItems:[n.ItemTypeGroup.Seed,n.ItemType.SheafOfHay,n.ItemType.Raspberries,n.ItemType.Beggarticks,n.ItemType.Carrot,n.ItemType.Apple,n.ItemType.Pineapple,n.ItemType.Lettuce,n.ItemType.SaguaroCactusChunk,n.ItemType.Nopal],speed:2}}),
+define("creature/Creatures", ["require", "exports", "creature/ICreature", "entity/IEntity", "Enums"], function(e, t, a, i, n) {
+    Object.defineProperty(t, "__esModule", {
+        value: !0
+    }
+    ), t.spawnableTiles=Array(), t.creatureDescriptions= {}
+    , t.default=t.creatureDescriptions, t.spawnableTiles[a.SpawnableTiles.None]=[], t.spawnableTiles[a.SpawnableTiles.Default]=[n.TerrainType.Ash, n.TerrainType.Dirt, n.TerrainType.Grass, n.TerrainType.Gravel, n.TerrainType.BeachSand, n.TerrainType.DesertSand, n.TerrainType.Snow, n.TerrainType.Swamp, n.TerrainType.Clay], t.spawnableTiles[a.SpawnableTiles.DefaultWithLava]=[n.TerrainType.Ash, n.TerrainType.Dirt, n.TerrainType.Grass, n.TerrainType.Gravel, n.TerrainType.BeachSand, n.TerrainType.DesertSand, n.TerrainType.Snow, n.TerrainType.Swamp, n.TerrainType.Clay, n.TerrainType.Lava, n.TerrainType.CoolingLava, n.TerrainType.Obsidian], t.spawnableTiles[a.SpawnableTiles.DefaultWithWater]=[n.TerrainType.Ash, n.TerrainType.Dirt, n.TerrainType.Grass, n.TerrainType.Gravel, n.TerrainType.BeachSand, n.TerrainType.DesertSand, n.TerrainType.Snow, n.TerrainType.Swamp, n.TerrainType.Clay, n.TerrainType.ShallowSeawater, n.TerrainType.ShallowFreshWater], t.spawnableTiles[a.SpawnableTiles.DeepWater]=[n.TerrainType.Seawater, n.TerrainType.FreshWater, n.TerrainType.DeepSeawater, n.TerrainType.DeepFreshWater], t.spawnableTiles[a.SpawnableTiles.Water]=[n.TerrainType.Seawater, n.TerrainType.FreshWater, n.TerrainType.DeepSeawater, n.TerrainType.DeepFreshWater, n.TerrainType.ShallowSeawater, n.TerrainType.ShallowFreshWater], t.spawnableTiles[a.SpawnableTiles.Flying]=[n.TerrainType.Ash, n.TerrainType.Dirt, n.TerrainType.Grass, n.TerrainType.Gravel, n.TerrainType.BeachSand, n.TerrainType.DesertSand, n.TerrainType.ShallowSeawater, n.TerrainType.Snow, n.TerrainType.Swamp, n.TerrainType.Clay, n.TerrainType.ShallowFreshWater, n.TerrainType.Lava], t.spawnableTiles[a.SpawnableTiles.Ghost]=[n.TerrainType.Ash, n.TerrainType.Dirt, n.TerrainType.Grass, n.TerrainType.Gravel, n.TerrainType.BeachSand, n.TerrainType.DesertSand, n.TerrainType.ShallowSeawater, n.TerrainType.Snow, n.TerrainType.Swamp, n.TerrainType.Clay, n.TerrainType.ShallowFreshWater, n.TerrainType.Rocks, n.TerrainType.Sandstone, n.TerrainType.Lava], t.spawnableTiles[a.SpawnableTiles.Desert]=[n.TerrainType.DesertSand], t.spawnableTiles[a.SpawnableTiles.Lava]=[n.TerrainType.Lava, n.TerrainType.CoolingLava, n.TerrainType.Obsidian], t.spawnableTiles[a.SpawnableTiles.Wet]=[n.TerrainType.ShallowFreshWater, n.TerrainType.FreshWater, n.TerrainType.DeepFreshWater, n.TerrainType.Dirt, n.TerrainType.FertileSoil, n.TerrainType.Clay], t.spawnableTiles[a.SpawnableTiles.Ground]=[n.TerrainType.Grass, n.TerrainType.Gravel, n.TerrainType.Dirt, n.TerrainType.BeachSand, n.TerrainType.DesertSand, n.TerrainType.Snow, n.TerrainType.Swamp, n.TerrainType.Clay, n.TerrainType.Ash, n.TerrainType.CobblestoneFlooring, n.TerrainType.WoodenFlooring, n.TerrainType.ClayBrickFlooring, n.TerrainType.CaveEntrance, n.TerrainType.RedCarpet, n.TerrainType.FertileSoil, n.TerrainType.CoolingLava, n.TerrainType.Obsidian, n.TerrainType.ShallowSeawater, n.TerrainType.ShallowFreshWater], t.spawnableTiles[a.SpawnableTiles.All]=[n.TerrainType.DeepSeawater, n.TerrainType.Seawater, n.TerrainType.ShallowSeawater, n.TerrainType.DeepFreshWater, n.TerrainType.FreshWater, n.TerrainType.ShallowFreshWater, n.TerrainType.Grass, n.TerrainType.Gravel, n.TerrainType.Dirt, n.TerrainType.BeachSand, n.TerrainType.Snow, n.TerrainType.Swamp, n.TerrainType.Clay, n.TerrainType.Ash, n.TerrainType.Rocks, n.TerrainType.RocksWithIron, n.TerrainType.RocksWithTalc, n.TerrainType.RocksWithCoal, n.TerrainType.RocksWithLimestone, n.TerrainType.CobblestoneFlooring, n.TerrainType.Sandstone, n.TerrainType.SandstoneFlooring, n.TerrainType.SandstoneWithIron, n.TerrainType.SandstoneWithNiter, n.TerrainType.WoodenFlooring, n.TerrainType.ClayBrickFlooring, n.TerrainType.CaveEntrance, n.TerrainType.RedCarpet, n.TerrainType.Lava, n.TerrainType.FertileSoil, n.TerrainType.RocksWithCopper, n.TerrainType.SandstoneWithCopper, n.TerrainType.CoolingLava, n.TerrainType.Obsidian, n.TerrainType.DesertSand], t.creatureDescriptions[n.CreatureType.Slime]= {
+        minhp:4, maxhp:8, minatk:1, maxatk:4, defense:new n.Defense(1, new n.Resistances(n.DamageType.Blunt, 3), new n.Vulnerabilities), damageType:n.DamageType.Blunt, ai:i.AiType.Neutral, moveType:n.MoveType.Land|n.MoveType.ShallowWater, blood: {
+            r: 150, g: 255, b: 70
+        }
+        , aberrantBlood: {
+            r: 220, g: 0, b: 15
+        }
+        , spawnTiles:a.SpawnableTiles.Default, spawnReputation:-1e3, makeNoise:!0, jumpOver:!0, reputation:-200, tamingDifficulty:50, spawnGroup:[a.SpawnGroup.Guardians], acceptedItems:[n.ItemType.SlimeGelatin], spawnOnBenignity:!0, canTrample:!0, skipMovementChance:5
+    }
+    , t.creatureDescriptions[n.CreatureType.JellyCube]= {
+        minhp:12, maxhp:13, minatk:3, maxatk:7, defense:new n.Defense(2, new n.Resistances(n.DamageType.Blunt, 8), new n.Vulnerabilities), damageType:n.DamageType.Blunt, ai:i.AiType.Hostile, moveType:n.MoveType.Land|n.MoveType.ShallowWater, blood: {
+            r: 150, g: 255, b: 70
+        }
+        , aberrantBlood: {
+            r: 220, g: 0, b: 15
+        }
+        , spawnTiles:a.SpawnableTiles.Default, spawnReputation:-8e3, makeNoise:!0, jumpOver:!0, reputation:150, tamingDifficulty:100, spawnGroup:[a.SpawnGroup.Guardians], acceptedItems:[n.ItemType.SlimeGelatin], canTrample:!0
+    }
+    , t.creatureDescriptions[n.CreatureType.GiantSpider]= {
+        minhp:4, maxhp:8, minatk:1, maxatk:4, defense:new n.Defense(1, new n.Resistances(n.DamageType.Slashing, 1), new n.Vulnerabilities(n.DamageType.Blunt, 1)), damageType:n.DamageType.Piercing, ai:i.AiType.Hostile, moveType:n.MoveType.Land|n.MoveType.ShallowWater, canCauseStatus:[n.StatusType.Poisoned], loot:[ {
+            item: n.ItemType.SpiderSilk
+        }
+        ], spawnTiles:a.SpawnableTiles.Default, spawnReputation:0, makeNoise:!0, jumpOver:!0, reputation:150, tamingDifficulty:50, spawnGroup:[a.SpawnGroup.Guardians, a.SpawnGroup.Night, a.SpawnGroup.Cave], acceptedItems:[n.ItemTypeGroup.Bait], skipMovementChance:20, blood: {
+            r: 162, g: 155, b: 37
+        }
+    }
+    , t.creatureDescriptions[n.CreatureType.Bear]= {
+        minhp: 13, maxhp: 16, minatk: 10, maxatk: 15, defense: new n.Defense(3, new n.Resistances(n.DamageType.Piercing, 4, n.DamageType.Blunt, 2), new n.Vulnerabilities), damageType: n.DamageType.Slashing|n.DamageType.Blunt, ai: i.AiType.Hostile, moveType: n.MoveType.Land|n.MoveType.ShallowWater|n.MoveType.Water|n.MoveType.BreakDoodads, waterAnimations: !0, canCauseStatus: [n.StatusType.Bleeding], spawnTiles: a.SpawnableTiles.DefaultWithWater, spawnReputation: -18e3, makeNoise: !0, reputation: 250, tamingDifficulty: 200, spawnGroup: [a.SpawnGroup.Guardians], acceptedItems: [n.ItemTypeGroup.Meat, n.ItemTypeGroup.RawMeat, n.ItemTypeGroup.CookedMeat], canTrample: !0, skipMovementChance: 1
+    }
+    , t.creatureDescriptions[n.CreatureType.Rabbit]= {
+        minhp: 2, maxhp: 3, minatk: 1, maxatk: 2, defense: new n.Defense(0, new n.Resistances, new n.Vulnerabilities), damageType: n.DamageType.Slashing, ai: i.AiType.Scared, moveType: n.MoveType.Land|n.MoveType.ShallowWater, spawnTiles: a.SpawnableTiles.Default, spawnReputation: 0, makeNoise: !0, jumpOver: !0, reputation: -300, spawnOnBenignity: !0, tamingDifficulty: 25, acceptedItems: [n.ItemTypeGroup.Seed, n.ItemType.SheafOfHay, n.ItemType.Raspberries, n.ItemType.Beggarticks, n.ItemType.Carrot, n.ItemType.Apple, n.ItemType.Pineapple, n.ItemType.Lettuce]
+    }
+    , t.creatureDescriptions[n.CreatureType.Snake]= {
+        minhp: 3, maxhp: 4, minatk: 4, maxatk: 10, defense: new n.Defense(1, new n.Resistances(n.DamageType.Piercing, 2), new n.Vulnerabilities(n.DamageType.Fire, 1)), damageType: n.DamageType.Piercing, canCauseStatus: [n.StatusType.Poisoned], ai: i.AiType.Neutral, moveType: n.MoveType.Land|n.MoveType.ShallowWater, spawnTiles: a.SpawnableTiles.Default, spawnReputation: 0, jumpOver: !0, reputation: -200, tamingDifficulty: 50, acceptedItems: [n.ItemTypeGroup.RawMeat, n.ItemTypeGroup.Bait], noStumble: !0, skipMovementChance: 5
+    }
+    , t.creatureDescriptions[n.CreatureType.GiantRat]= {
+        minhp: 3, maxhp: 4, minatk: 2, maxatk: 5, defense: new n.Defense(1, new n.Resistances(n.DamageType.Blunt, 1), new n.Vulnerabilities(n.DamageType.Fire, 1)), damageType: n.DamageType.Slashing, ai: i.AiType.Hostile, moveType: n.MoveType.Land|n.MoveType.ShallowWater, canCauseStatus: [n.StatusType.Bleeding], spawnTiles: a.SpawnableTiles.Default, spawnReputation: 0, makeNoise: !0, jumpOver: !0, reputation: 150, tamingDifficulty: 75, spawnGroup: [a.SpawnGroup.Guardians, a.SpawnGroup.Night, a.SpawnGroup.Cave], acceptedItems: [n.ItemTypeGroup.Food, n.ItemTypeGroup.Seed], canTrample: !0, skipMovementChance: 10
+    }
+    , t.creatureDescriptions[n.CreatureType.Rat]= {
+        minhp: 2, 
+        maxhp: 3, 
+        minatk: 1, 
+        maxatk: 2, 
+        defense: new n.Defense(0, new n.Resistances, new n.Vulnerabilities), 
+        damageType: n.DamageType.Slashing, 
+        ai: i.AiType.Scared, 
+        moveType: n.MoveType.Land|n.MoveType.ShallowWater, 
+        spawnTiles: a.SpawnableTiles.Default, 
+        spawnReputation: 0,
+        makeNoise: !0, 
+        jumpOver: !0, 
+        reputation: -200, 
+        spawnOnBenignity: !0, 
+        tamingDifficulty: 25, 
+        spawnGroup: [a.SpawnGroup.Cave], 
+        acceptedItems: [n.ItemTypeGroup.Seed], 
+        skipMovementChance: 2
+    }
+    , t.creatureDescriptions[n.CreatureType.VampireBat]= {
+        minhp: 3, maxhp: 6, minatk: 2, maxatk: 6, defense: new n.Defense(2, new n.Resistances(n.DamageType.Piercing, 3), new n.Vulnerabilities(n.DamageType.Fire, 3)), damageType: n.DamageType.Piercing, ai: i.AiType.Hostile, moveType: n.MoveType.Flying, canCauseStatus: [n.StatusType.Bleeding], spawnTiles: a.SpawnableTiles.Flying, makeNoise: !0, jumpOver: !0, reputation: 250, tamingDifficulty: 50, spawnGroup: [a.SpawnGroup.Night, a.SpawnGroup.Cave], acceptedItems: [n.ItemTypeGroup.RawMeat, n.ItemTypeGroup.Fruit], noStumble: !0, skipMovementChance: 10
+    }
+    , t.creatureDescriptions[n.CreatureType.GreyWolf]= {
+        minhp: 10, maxhp: 14, minatk: 7, maxatk: 9, defense: new n.Defense(3, new n.Resistances(n.DamageType.Blunt, 2), new n.Vulnerabilities), damageType: n.DamageType.Slashing|n.DamageType.Blunt, ai: i.AiType.Hostile, moveType: n.MoveType.Land|n.MoveType.ShallowWater, canCauseStatus: [n.StatusType.Bleeding], spawnTiles: a.SpawnableTiles.Default, spawnReputation: -1e4, makeNoise: !0, jumpOver: !0, reputation: 250, tamingDifficulty: 150, spawnGroup: [a.SpawnGroup.Guardians], acceptedItems: [n.ItemTypeGroup.Meat, n.ItemTypeGroup.RawMeat, n.ItemTypeGroup.CookedMeat, n.ItemTypeGroup.Bone], canTrample: !0
+    }
+    , t.creatureDescriptions[n.CreatureType.Imp]= {
+        minhp:14, maxhp:18, minatk:15, maxatk:19, defense:new n.Defense(4, new n.Resistances(n.DamageType.Fire, 99), new n.Vulnerabilities), damageType:n.DamageType.Slashing, ai:i.AiType.Hostile, moveType:n.MoveType.Flying|n.MoveType.Fire, 
+        loot:[ {
+            item: n.ItemType.FlyAmanita
+        }
+        , {
+            item: n.ItemType.FlyAmanita, chance: 50
+        }
+        , {
+            item: n.ItemType.OrbOfInfluence, chance: 15
+        }
+        ], lootGroup:n.LootGroupType.High, canCauseStatus:[n.StatusType.Bleeding, n.StatusType.Burned], spawnTiles:a.SpawnableTiles.DefaultWithLava, spawnReputation:-24e3, makeNoise:!0, jumpOver:!0, reputation:250, tamingDifficulty:300, spawnGroup:[a.SpawnGroup.Guardians, a.SpawnGroup.Cave, a.SpawnGroup.StrongGuardians], acceptedItems:[n.ItemType.FlyAmanita], noStumble:!0, skipMovementChance:2
+    }
+    , t.creatureDescriptions[n.CreatureType.Bogling]= {
+        minhp:15, maxhp:17, minatk:8, maxatk:11, defense:new n.Defense(4, new n.Resistances(n.DamageType.Blunt, 3, n.DamageType.Fire, 5), new n.Vulnerabilities), damageType:n.DamageType.Blunt, ai:i.AiType.Hostile, moveType:n.MoveType.Land|n.MoveType.ShallowWater, loot:[ {
+            item: n.ItemType.Peat
+        }
+        , {
+            item: n.ItemType.VineWhip, chance: 5
+        }
+        , {
+            item: n.ItemType.MossCoveredBook, chance: 10
+        }
+        ], blood: {
+            r: 70, g: 90, b: 20
+        }
+        , aberrantBlood: {
+            r: 170, g: 50, b: 45
+        }
+        , canCauseStatus:[n.StatusType.Poisoned], lootGroup:n.LootGroupType.Low, spawnTiles:a.SpawnableTiles.Default, spawnReputation:-16e3, makeNoise:!0, reputation:150, tamingDifficulty:300, acceptedItems:[n.ItemType.Peat], helpPlants:!0, skipMovementChance:5
+    }
+    , t.creatureDescriptions[n.CreatureType.LivingRock]= {
+        minhp:20, maxhp:28, minatk:4, maxatk:6, defense:new n.Defense(5, new n.Resistances(n.DamageType.Piercing, 3, n.DamageType.Slashing, 3, n.DamageType.Fire, 99), new n.Vulnerabilities(n.DamageType.Blunt, 2)), damageType:n.DamageType.Blunt, ai:i.AiType.Neutral, moveType:n.MoveType.None, loot:[ {
+            item: n.ItemType.LargeRock
+        }
+        , {
+            item: n.ItemType.SharpRock
+        }
+        ], blood: {
+            r: 110, g: 110, b: 110
+        }
+        , spawnTiles:a.SpawnableTiles.Default, spawnReputation:-2e4, jumpOver:!0, reputation:-200, spawnGroup:[a.SpawnGroup.Cave], acceptedItems:[n.ItemType.LargeRock], noStumble:!0
+    }
+    , t.creatureDescriptions[n.CreatureType.Shark]= {
+        minhp: 9, maxhp: 11, minatk: 6, maxatk: 12, defense: new n.Defense(3, new n.Resistances(n.DamageType.Blunt, 2, n.DamageType.Fire, 99), new n.Vulnerabilities), damageType: n.DamageType.Slashing|n.DamageType.Piercing, ai: i.AiType.Hostile|i.AiType.Fearless, moveType: n.MoveType.Water, canCauseStatus: [n.StatusType.Bleeding], spawnTiles: a.SpawnableTiles.DeepWater, reputation: 150, tamingDifficulty: 300, spawnGroup: [a.SpawnGroup.Water], acceptedItems: [n.ItemTypeGroup.Meat, n.ItemTypeGroup.RawMeat], noStumble: !0, skipMovementChance: 2
+    }
+    , t.creatureDescriptions[n.CreatureType.Zombie]= {
+        minhp:8, maxhp:14, minatk:6, maxatk:13, defense:new n.Defense(5, new n.Resistances(n.DamageType.Piercing, 1, n.DamageType.Blunt, 1), new n.Vulnerabilities(n.DamageType.Fire, 5, n.DamageType.Slashing, 1)), damageType:n.DamageType.Slashing, ai:i.AiType.Hostile, moveType:n.MoveType.Land|n.MoveType.ShallowWater|n.MoveType.BreakDoodads, loot:[ {
+            item: n.ItemType.Bone
+        }
+        , {
+            item: n.ItemType.TatteredPants, chance: 5
+        }
+        , {
+            item: n.ItemType.TatteredShirt, chance: 5
+        }
+        , {
+            item: n.ItemType.Journal, chance: 5
+        }
+        ], lootGroup:n.LootGroupType.Low, canCauseStatus:[n.StatusType.Poisoned, n.StatusType.Bleeding], spawnTiles:a.SpawnableTiles.Default, spawnReputation:-16e3, makeNoise:!0, respawn:!0, reputation:250, tamingDifficulty:500, spawnGroup:[a.SpawnGroup.Night, a.SpawnGroup.Cave], acceptedItems:[n.ItemTypeGroup.RawMeat], canTrample:!0, skipMovementChance:40
+    }
+    , t.creatureDescriptions[n.CreatureType.Skeleton]= {
+        minhp:11, maxhp:16, minatk:8, maxatk:12, defense:new n.Defense(4, new n.Resistances(n.DamageType.Piercing, 3, n.DamageType.Slashing, 3), new n.Vulnerabilities(n.DamageType.Fire, 2, n.DamageType.Blunt, 2)), damageType:n.DamageType.Blunt|n.DamageType.Piercing, ai:i.AiType.Hostile, moveType:n.MoveType.Land|n.MoveType.ShallowWater, loot:[ {
+            item: n.ItemType.Bone
+        }
+        , {
+            item: n.ItemType.Bone, chance: 25
+        }
+        , {
+            item: n.ItemType.GoldenRing, chance: 2
+        }
+        ], lootGroup:n.LootGroupType.Low, blood: {
+            r: 200, g: 200, b: 200
+        }
+        , canCauseStatus:[n.StatusType.Bleeding], spawnTiles:a.SpawnableTiles.Default, makeNoise:!0, respawn:!0, reputation:250, spawnGroup:[a.SpawnGroup.Guardians, a.SpawnGroup.Cave, a.SpawnGroup.StrongGuardians], canTrample:!0, skipMovementChance:20
+    }
+    , t.creatureDescriptions[n.CreatureType.PirateGhost]= {
+        minhp:18, maxhp:24, minatk:16, maxatk:19, defense:new n.Defense(8, new n.Resistances, new n.Vulnerabilities(n.DamageType.Fire, 4)), damageType:n.DamageType.Blunt, ai:i.AiType.Hostile, moveType:n.MoveType.Flying|n.MoveType.Mountain, lootGroup:n.LootGroupType.VeryHigh, blood: {
+            r: 250, g: 250, b: 250
+        }
+        , spawnTiles:a.SpawnableTiles.Ghost, spawnReputation:-4e4, jumpOver:!0, reputation:350, tamingDifficulty:500, spawnGroup:[a.SpawnGroup.Cave, a.SpawnGroup.StrongGuardians], acceptedItems:[n.ItemType.Ectoplasm], noStumble:!0, skipMovementChance:1, disableHitching:!0
+    }
+    , t.creatureDescriptions[n.CreatureType.TimeSkitter]= {
+        minhp: 10, maxhp: 12, minatk: 17, maxatk: 21, defense: new n.Defense(8, new n.Resistances, new n.Vulnerabilities(n.DamageType.Blunt, 2)), damageType: n.DamageType.Slashing|n.DamageType.Piercing, ai: i.AiType.Hostile, moveType: n.MoveType.Land|n.MoveType.ShallowWater, lootGroup: n.LootGroupType.High, canCauseStatus: [n.StatusType.Bleeding], spawnTiles: a.SpawnableTiles.Default, spawnReputation: -36e3, makeNoise: !0, jumpOver: !0, reputation: 250, acceptedItems: [n.ItemType.Sundial], noStumble: !0, canTrample: !0, skipMovementChance: 1
+    }
+    , t.creatureDescriptions[n.CreatureType.Chicken]= {
+        minhp:2, maxhp:3, minatk:1, maxatk:3, defense:new n.Defense(0, new n.Resistances, new n.Vulnerabilities), damageType:n.DamageType.Slashing, ai:i.AiType.Scared, moveType:n.MoveType.Land|n.MoveType.ShallowWater, loot:[ {
+            item: n.ItemType.Feather
+        }
+        , {
+            item: n.ItemType.Feather, chance: 75
+        }
+        ], spawnTiles:a.SpawnableTiles.Default, spawnReputation:4e3, makeNoise:!0, jumpOver:!0, reputation:-300, tamingDifficulty:25, acceptedItems:[n.ItemTypeGroup.Seed, n.ItemTypeGroup.Bait], skipMovementChance:1
+    }
+    , t.creatureDescriptions[n.CreatureType.TrapdoorSpider]= {
+        minhp:2, maxhp:5, minatk:2, maxatk:3, defense:new n.Defense(0, new n.Resistances(n.DamageType.Piercing, 2), new n.Vulnerabilities(n.DamageType.Blunt, 1)), damageType:n.DamageType.Piercing, ai:i.AiType.Hidden, moveType:n.MoveType.Land, spawnTiles:a.SpawnableTiles.Default, spawnReputation:-2e3, jumpOver:!0, reputation:150, tamingDifficulty:50, acceptedItems:[n.ItemTypeGroup.Bait], blood: {
+            r: 162, g: 155, b: 37
+        }
+    }
+    , t.creatureDescriptions[n.CreatureType.FireElemental]= {
+        minhp:15, maxhp:19, minatk:14, maxatk:21, defense:new n.Defense(5, new n.Resistances(n.DamageType.Fire, 100), new n.Vulnerabilities), damageType:n.DamageType.Fire|n.DamageType.Blunt, ai:i.AiType.Hostile, moveType:n.MoveType.Flying|n.MoveType.Fire, lootGroup:n.LootGroupType.FireElemental, loot:[ {
+            item: n.ItemType.PileOfAsh
+        }
+        ], blood: {
+            r: 205, g: 105, b: 25
+        }
+        , canCauseStatus:[n.StatusType.Burned], spawnTiles:a.SpawnableTiles.DefaultWithLava, spawnReputation:-3e4, makeNoise:!0, reputation:250, tamingDifficulty:300, spawnGroup:[a.SpawnGroup.Guardians, a.SpawnGroup.StrongGuardians], acceptedItems:[n.ItemType.LitPoleTorch, n.ItemType.LitBarkTorch, n.ItemType.LitAnimalFatTorch], lightSource:!0, noStumble:!0, providesFire:!0, canTrample:!0, skipMovementChance:5, disableHitching:!0
+    }
+    , t.creatureDescriptions[n.CreatureType.Cod]= {
+        minhp:2, maxhp:3, minatk:0, maxatk:1, defense:new n.Defense(0, new n.Resistances(n.DamageType.Fire, 99, n.DamageType.Blunt, 2, n.DamageType.Slashing, 2), new n.Vulnerabilities), damageType:n.DamageType.Blunt, ai:i.AiType.Neutral, moveType:n.MoveType.Water|n.MoveType.ShallowWater, loot:[ {
+            item: n.ItemType.RawCod
+        }
+        ], spawnTiles:a.SpawnableTiles.Water, jumpOver:!0, noCorpse:!0, fishable:!0, reputation:0, spawnOnBenignity:!0, tamingDifficulty:100, spawnGroup:[a.SpawnGroup.Water], acceptedItems:[n.ItemTypeGroup.Bait], noStumble:!0, skipMovementChance:2
+    }
+    , t.creatureDescriptions[n.CreatureType.Hobgoblin]= {
+        minhp:15, maxhp:16, minatk:9, maxatk:16, defense:new n.Defense(3, new n.Resistances(n.DamageType.Blunt, 2), new n.Vulnerabilities), damageType:n.DamageType.Slashing|n.DamageType.Blunt, ai:i.AiType.Hostile, moveType:n.MoveType.Land|n.MoveType.ShallowWater|n.MoveType.BreakDoodads, loot:[ {
+            item: n.ItemType.TatteredPants, chance: 5
+        }
+        , {
+            item: n.ItemType.OrbOfInfluence, chance: 15
+        }
+        , {
+            item: n.ItemType.GoldenSword, chance: 2
+        }
+        , {
+            item: n.ItemType.OrnateBlueBook, chance: 5
+        }
+        ], lootGroup:n.LootGroupType.Low, spawnTiles:a.SpawnableTiles.Default, spawnReputation:-22e3, makeNoise:!0, reputation:150, tamingDifficulty:500, spawnGroup:[a.SpawnGroup.Guardians], acceptedItems:[n.ItemTypeGroup.Equipment, n.ItemTypeGroup.Weapon, n.ItemTypeGroup.Trap], canTrample:!0, skipMovementChance:2
+    }
+    , t.creatureDescriptions[n.CreatureType.LivingMushroom]= {
+        minhp:7, maxhp:12, minatk:6, maxatk:10, defense:new n.Defense(2, new n.Resistances(n.DamageType.Fire, 4), new n.Vulnerabilities(n.DamageType.Slashing, 2)), damageType:n.DamageType.Blunt, ai:i.AiType.Hostile, moveType:n.MoveType.Land|n.MoveType.ShallowWater, loot:[ {
+            item: n.ItemType.ButtonMushrooms
+        }
+        ], aberrantLoot:[ {
+            item: n.ItemType.FlyAmanita
+        }
+        ], blood: {
+            r: 175, g: 155, b: 135
+        }
+        , aberrantBlood: {
+            r: 150, g: 45, b: 25
+        }
+        , spawnTiles:a.SpawnableTiles.Default, makeNoise:!0, reputation:150, tamingDifficulty:150, acceptedItems:[n.ItemType.RottenMeat, n.ItemType.RottingVegetation], canTrample:!0, skipMovementChance:1
+    }
+    , t.creatureDescriptions[n.CreatureType.Kraken]= {
+        minhp:65, maxhp:75, minatk:24, maxatk:26, defense:new n.Defense(4, new n.Resistances(n.DamageType.Slashing, 4), new n.Vulnerabilities(n.DamageType.Fire, 2)), damageType:n.DamageType.Blunt, ai:i.AiType.Hostile, moveType:n.MoveType.Land|n.MoveType.ShallowWater|n.MoveType.Water|n.MoveType.BreakDoodads, lootGroup:n.LootGroupType.SeaTreasure, loot:[ {
+            item: n.ItemType.OrnateWoodenChest, chance: 3
+        }
+        ], blood: {
+            r: 80, g: 150, b: 175
+        }
+        , aberrantBlood: {
+            r: 220, g: 30, b: 90
+        }
+        , spawnTiles:a.SpawnableTiles.Water, spawnReputation:-42e3, makeNoise:!0, reputation:350, tamingDifficulty:1e3, spawnGroup:[a.SpawnGroup.WaterCave, a.SpawnGroup.Water, a.SpawnGroup.StrongGuardians], acceptedItems:[n.ItemTypeGroup.Treasure], noStumble:!0, skipMovementChance:3
+    }
+    , t.creatureDescriptions[n.CreatureType.Blindfish]= {
+        minhp:2, maxhp:3, minatk:1, maxatk:3, defense:new n.Defense(1, new n.Resistances(n.DamageType.Fire, 99, n.DamageType.Blunt, 3, n.DamageType.Slashing, 3), new n.Vulnerabilities), damageType:n.DamageType.Blunt, ai:i.AiType.Neutral, moveType:n.MoveType.Water|n.MoveType.ShallowWater, loot:[ {
+            item: n.ItemType.RawBlindfish
+        }
+        ], spawnTiles:a.SpawnableTiles.Water, jumpOver:!0, noCorpse:!0, fishable:!0, reputation:0, spawnOnBenignity:!0, tamingDifficulty:125, spawnGroup:[a.SpawnGroup.WaterCave], acceptedItems:[n.ItemTypeGroup.Bait], noStumble:!0, skipMovementChance:25
+    }
+    , t.creatureDescriptions[n.CreatureType.Harpy]= {
+        minhp:14, maxhp:17, minatk:9, maxatk:16, defense:new n.Defense(4, new n.Resistances(n.DamageType.Slashing, 4), new n.Vulnerabilities(n.DamageType.Fire, 2)), damageType:n.DamageType.Slashing, ai:i.AiType.Hostile, moveType:n.MoveType.Flying, canCauseStatus:[n.StatusType.Bleeding], loot:[ {
+            item: n.ItemType.Feather
+        }
+        , {
+            item: n.ItemType.Feather, chance: 75
+        }
+        ], lootGroup:n.LootGroupType.Low, spawnTiles:a.SpawnableTiles.Default, spawnReputation:-32e3, makeNoise:!0, reputation:150, tamingDifficulty:300, spawnGroup:[a.SpawnGroup.Guardians, a.SpawnGroup.Cave, a.SpawnGroup.StrongGuardians], noStumble:!0, skipMovementChance:2
+    }
+    , t.creatureDescriptions[n.CreatureType.AcidSpitterDemon]= {
+        minhp:23, maxhp:29, minatk:26, maxatk:28, defense:new n.Defense(9, new n.Resistances(n.DamageType.Slashing, 3, n.DamageType.Blunt, 3, n.DamageType.Fire, 10, n.DamageType.Piercing, 2), new n.Vulnerabilities), damageType:n.DamageType.Slashing|n.DamageType.Piercing, ai:i.AiType.Hostile, moveType:n.MoveType.Land|n.MoveType.ShallowWater, canCauseStatus:[n.StatusType.Bleeding], lootGroup:n.LootGroupType.VeryHigh, loot:[ {
+            item: n.ItemType.GoldenChalice, chance: 10
+        }
+        , {
+            item: n.ItemType.GoldenKey, chance: 10
+        }
+        ], blood: {
+            r: 20, g: 180, b: 20
+        }
+        , spawnTiles:a.SpawnableTiles.Default, spawnReputation:-52e3, makeNoise:!0, reputation:350, canTrample:!0, skipMovementChance:1
+    }
+    , t.creatureDescriptions[n.CreatureType.SkeletalMage]= {
+        minhp:34, maxhp:36, minatk:18, maxatk:23, defense:new n.Defense(7, new n.Resistances(n.DamageType.Slashing, 4, n.DamageType.Fire, 4, n.DamageType.Piercing, 4), new n.Vulnerabilities(n.DamageType.Blunt, 2)), damageType:n.DamageType.Slashing|n.DamageType.Piercing, ai:i.AiType.Hostile, moveType:n.MoveType.Land|n.MoveType.ShallowWater, canCauseStatus:[n.StatusType.Bleeding], lootGroup:n.LootGroupType.VeryHigh, loot:[ {
+            item: n.ItemType.SkeletalMageWand
+        }
+        , {
+            item: n.ItemType.GoldenChalice, chance: 5
+        }
+        , {
+            item: n.ItemType.GildedRedBook, chance: 5
+        }
+        ], blood: {
+            r: 200, g: 200, b: 200
+        }
+        , spawnTiles:a.SpawnableTiles.Default, spawnReputation:-44e3, makeNoise:!0, reputation:350, spawnGroup:[a.SpawnGroup.StrongGuardians], canTrample:!0, skipMovementChance:10
+    }
+    , t.creatureDescriptions[n.CreatureType.ClawWorm]= {
+        minhp: 8, maxhp: 11, minatk: 2, maxatk: 3, defense: new n.Defense(1, new n.Resistances(n.DamageType.Piercing, 1), new n.Vulnerabilities(n.DamageType.Fire, 2)), damageType: n.DamageType.Piercing, ai: i.AiType.Hostile, moveType: n.MoveType.Land|n.MoveType.ShallowWater, spawnTiles: a.SpawnableTiles.Default, makeNoise: !0, jumpOver: !0, reputation: 150, tamingDifficulty: 25, acceptedItems: [n.ItemTypeGroup.Fruit, n.ItemTypeGroup.Vegetable], noStumble: !0, helpPlants: !0, skipMovementChance: 10
+    }
+    , t.creatureDescriptions[n.CreatureType.Drake]= {
+        minhp:110, maxhp:130, minatk:28, maxatk:34, defense:new n.Defense(10, new n.Resistances(n.DamageType.Slashing, 3, n.DamageType.Blunt, 3, n.DamageType.Fire, 100), new n.Vulnerabilities(n.DamageType.Piercing, 2)), damageType:n.DamageType.Slashing|n.DamageType.Piercing|n.DamageType.Blunt, ai:i.AiType.Hostile, moveType:n.MoveType.Land|n.MoveType.Fire|n.MoveType.BreakDoodads, canCauseStatus:[n.StatusType.Bleeding, n.StatusType.Burned], lootGroup:n.LootGroupType.VeryHigh, spawnTiles:a.SpawnableTiles.DefaultWithLava, loot:[ {
+            item: n.ItemType.GoldenKey
+        }
+        ], spawnReputation:-62e3, makeNoise:!0, reputation:450, tamingDifficulty:1500, acceptedItems:[n.ItemTypeGroup.Treasure], canTrample:!0, skipMovementChance:2
+    }
+    , t.creatureDescriptions[n.CreatureType.Sandcat]= {
+        minhp: 9, maxhp: 13, minatk: 5, maxatk: 8, defense: new n.Defense(3, new n.Resistances(n.DamageType.Blunt, 2), new n.Vulnerabilities), damageType: n.DamageType.Slashing|n.DamageType.Piercing, ai: i.AiType.Hostile, moveType: n.MoveType.Land|n.MoveType.ShallowWater, canCauseStatus: [n.StatusType.Bleeding], spawnTiles: a.SpawnableTiles.Desert, spawnReputation: -8e3, makeNoise: !0, jumpOver: !0, reputation: 250, tamingDifficulty: 50, acceptedItems: [n.ItemTypeGroup.RawMeat, n.ItemTypeGroup.Meat], canTrample: !0, skipMovementChance: 4
+    }
+    , t.creatureDescriptions[n.CreatureType.LavaBeetle]= {
+        minhp:18, maxhp:22, minatk:14, maxatk:17, defense:new n.Defense(4, new n.Resistances(n.DamageType.Fire, 100, n.DamageType.Blunt, 6, n.DamageType.Slashing, 3), new n.Vulnerabilities(n.DamageType.Piercing, 2)), damageType:n.DamageType.Blunt|n.DamageType.Piercing, ai:i.AiType.Hostile, blood: {
+            r: 230, g: 90, b: 25
+        }
+        , moveType:n.MoveType.Land|n.MoveType.Fire|n.MoveType.BreakDoodads, lootGroup:n.LootGroupType.High, loot:[ {
+            item: n.ItemType.Obsidian
+        }
+        ], canCauseStatus:[n.StatusType.Burned], spawnTiles:a.SpawnableTiles.Lava, spawnReputation:-26e3, makeNoise:!0, jumpOver:!0, reputation:250, tamingDifficulty:200, acceptedItems:[n.ItemType.MeltedCopal], lightSource:!0, spawnGroup:[a.SpawnGroup.StrongGuardians], providesFire:!0, canTrample:!0
+    }
+    , t.creatureDescriptions[n.CreatureType.Goat]= {
+        minhp: 8, maxhp: 13, minatk: 2, maxatk: 5, defense: new n.Defense(2, new n.Resistances(n.DamageType.Blunt, 2), new n.Vulnerabilities), damageType: n.DamageType.Piercing|n.DamageType.Blunt, ai: i.AiType.Neutral, moveType: n.MoveType.Land|n.MoveType.ShallowWater, canCauseStatus: [n.StatusType.Bleeding], spawnTiles: a.SpawnableTiles.Default, spawnReputation: 0, makeNoise: !0, jumpOver: !0, reputation: -200, tamingDifficulty: 50, acceptedItems: [n.ItemTypeGroup.Vegetable, n.ItemTypeGroup.Seed, n.ItemType.SheafOfHay, n.ItemType.LeatherBoots, n.ItemType.TreeBark, n.ItemType.PlantRoots, n.ItemType.PoisonIvyLeaves, n.ItemType.Leaves, n.ItemType.PalmLeaf, n.ItemTypeGroup.Fruit], spawnOnBenignity: !0, canTrample: !0, skipMovementChance: 1
+    }
+    , t.creatureDescriptions[n.CreatureType.SlitherSucker]= {
+        minhp:20, maxhp:24, minatk:6, maxatk:11, defense:new n.Defense(5, new n.Resistances(n.DamageType.Blunt, 4), new n.Vulnerabilities(n.DamageType.Fire, 2)), damageType:n.DamageType.Piercing, ai:i.AiType.Hostile, moveType:n.MoveType.Land, canCauseStatus:[n.StatusType.Bleeding], spawnTiles:a.SpawnableTiles.Default, spawnReputation:-2e4, makeNoise:!0, reputation:250, spawnGroup:[a.SpawnGroup.Guardians], blood: {
+            r: 255, g: 234, b: 0
+        }
+        , noStumble:!0, canTrample:!0, skipMovementChance:2
+    }
+    , t.creatureDescriptions[n.CreatureType.Mudskipper]= {
+        minhp: 8, 
+        maxhp: 10, 
+        minatk: 1, 
+        maxatk: 2, 
+        defense: new n.Defense(4, new n.Resistances(n.DamageType.Piercing, 2), new n.Vulnerabilities), 
+        damageType: n.DamageType.Blunt, 
+        ai: i.AiType.Scared, 
+        moveType: n.MoveType.WetLand|n.MoveType.Water|n.MoveType.ShallowWater, 
+        spawnTiles: a.SpawnableTiles.Wet, 
+        makeNoise: !0, 
+        jumpOver: !0, 
+        reputation: -50, 
+        tamingDifficulty: 20, 
+        acceptedItems: [n.ItemTypeGroup.Bait, n.ItemType.RawCod, n.ItemType.RawBlindfish, n.ItemType.RawFishSteak], 
+        noStumble: !0, 
+        spawnReputation: 8e3, 
+        waterAnimations: !0, 
+        particlesOnMove: !0, 
+        spawnGroup: [a.SpawnGroup.FreshWater], 
+        canTrample: !0, 
+        skipMovementChance: 4
+    }
+    , t.creatureDescriptions[n.CreatureType.Scorpion]= {
+        minhp:6, maxhp:12, minatk:1, maxatk:4, defense:new n.Defense(2, new n.Resistances(n.DamageType.Slashing, 1, n.DamageType.Piercing, 1), new n.Vulnerabilities(n.DamageType.Blunt, 2)), damageType:n.DamageType.Piercing|n.DamageType.Slashing|n.DamageType.Blunt, ai:i.AiType.Hostile, moveType:n.MoveType.Land|n.MoveType.ShallowWater, canCauseStatus:[n.StatusType.Poisoned, n.StatusType.Bleeding], spawnTiles:a.SpawnableTiles.Desert, spawnReputation:-3e3, makeNoise:!0, jumpOver:!0, reputation:200, tamingDifficulty:100, acceptedItems:[n.ItemTypeGroup.Bait], blood: {
+            r: 162, g: 155, b: 37
+        }
+        , skipMovementChance:2
+    }
+    , t.creatureDescriptions[n.CreatureType.Rattlesnake]= {
+        minhp: 6, maxhp: 8, minatk: 7, maxatk: 9, defense: new n.Defense(6, new n.Resistances(n.DamageType.Piercing, 1), new n.Vulnerabilities(n.DamageType.Fire, 2)), damageType: n.DamageType.Piercing, canCauseStatus: [n.StatusType.Poisoned], ai: i.AiType.Hostile, moveType: n.MoveType.Land, spawnTiles: a.SpawnableTiles.Desert, spawnReputation: -5e3, makeNoise: !0, jumpOver: !0, reputation: 200, tamingDifficulty: 100, acceptedItems: [n.ItemTypeGroup.RawMeat, n.ItemTypeGroup.Bait], noStumble: !0, skipMovementChance: 10
+    }
+    , t.creatureDescriptions[n.CreatureType.AntelopeJackrabbit]= {
+        minhp: 5, maxhp: 7, minatk: 1, maxatk: 2, defense: new n.Defense(1, new n.Resistances(n.DamageType.Blunt, 1), new n.Vulnerabilities), damageType: n.DamageType.Slashing, ai: i.AiType.Scared, moveType: n.MoveType.Land|n.MoveType.ShallowWater, spawnTiles: a.SpawnableTiles.Desert, spawnReputation: 0, makeNoise: !0, jumpOver: !0, reputation: -300, spawnOnBenignity: !0, tamingDifficulty: 50, acceptedItems: [n.ItemTypeGroup.Seed, n.ItemType.SheafOfHay, n.ItemType.Raspberries, n.ItemType.Beggarticks, n.ItemType.Carrot, n.ItemType.Apple, n.ItemType.Pineapple, n.ItemType.Lettuce, n.ItemType.SaguaroCactusChunk, n.ItemType.Nopal], speed: 2
+    }
+}
+
+),
 
 define("creature/Pathing",["require","exports","Enums","mod/IHookManager","tile/ITileEvent","tile/Terrains","utilities/TileHelpers"],function(e,t,a,i,n,o,r){function s(e,t,a,i,n,o=300){if(u(e,t))return[];let r=[e];const s={},l={},p={},c={},m={},h=e=>`${e.x},${e.y}`,y=h(e);let g;for(c[y]=d(e,t),p[y]=0;r.length>0&&o>0&&(o--,void 0!==(g=(r=r.sort((e,t)=>c[h(e)]<c[h(t)]?1:-1)).pop()));){if(u(g,t)){const e=[];for(;void 0!==g;)e.unshift(g),g=m[h(g)];return e}const e=h(g);l[e]=!0;const o=p[e];for(let e=0;e<4;e++){const u={x:g.x,y:g.y};switch(e){case 0:u.x=game.getWrappedCoord(u.x+1);break;case 1:u.x=game.getWrappedCoord(u.x-1);break;case 2:u.y=game.getWrappedCoord(u.y+1);break;case 3:u.y=game.getWrappedCoord(u.y-1)}const y=h(u);if(l[y])continue;const f=game.getTile(u.x,u.y,a);if(i(f,u))continue;let T=o+1;n&&(T+=n(f,u)),(!s[y]||T<p[y])&&(s[y]=!0,r.push(u),m[y]=g,c[y]=T+d(u,t),p[y]=T)}}}function l(e,t,s,l){const u=r.default.getType(t);if(u===a.TerrainType.CaveEntrance||u===a.TerrainType.Lava||tileEventManager.get(t,n.TileEventType.Fire))return!0;if(fieldOfView&&!fieldOfView.disabled&&l){const t=world.layers[e.z];if(t){const e=t.exploredMap;if(e&&255!==e.get(s.x,s.y))return!0}}const d=o.default[u];if(d&&!d.passable&&!d.water)return!0;if(void 0!==t.creature||void 0!==t.npc)return!0;if(void 0!==t.doodad&&t.doodad.type!==a.DoodadType.WoodenDoor&&t.doodad.type!==a.DoodadType.WoodenDoorOpen&&t.doodad.type!==a.DoodadType.WoodenGate&&t.doodad.type!==a.DoodadType.WoodenGateOpen&&(t.doodad.blocksMove()||t.doodad.isDangerous(e)))return!0;const p=game.getPlayersAtPosition(s.x,s.y,e.z,!1,!0);if(p.length>0)for(const t of p)if(t!==e)return!0;return!!modManager.getHook(i.Hook.IsTileBlocked).call(t)}function u(e,t){return e.x===t.x&&e.y===t.y}function d(e,t){const a=e.x;let i=t.x;const n=t.y;let o=t.y;return a-i>255?i+=game.mapSize:i-a>255&&(i-=game.mapSize),n-o>255?o+=game.mapSize:o-n>255&&(o-=game.mapSize),Math.abs(i-a)+Math.abs(o-n)}Object.defineProperty(t,"__esModule",{value:!0}),t.findPath=s,t.isWalkToTileBlocked=l}),
 
@@ -2976,10 +3838,21 @@ define("item/Items", ["require", "exports", "action/IAction", "creature/ICreatur
         , worth:25
     }
     , o(n.ItemType.CobblestoneFlooring, n.ItemTypeGroup.Housing), t.itemDescriptions[n.ItemType.CookedMeat]= {
-        use:[a.ActionType.Eat], decayMax:4750, decaysInto:n.ItemType.RottenMeat, recipe: {
-            components: [r(n.ItemType.RawMeat, 1, 1), r(n.ItemTypeGroup.CookingEquipment, 1, 0)], skill: n.SkillType.Cooking, level: n.RecipeLevel.Intermediate, requiresFire: !0, reputation: 25
+        use:[a.ActionType.Eat], 
+        decayMax:4750, 
+        decaysInto:n.ItemType.RottenMeat, 
+        recipe: {
+            components: [
+                r(n.ItemType.RawMeat, 1, 1), 
+                r(n.ItemTypeGroup.CookingEquipment, 1, 0)
+            ], 
+            skill: n.SkillType.Cooking, 
+            level: n.RecipeLevel.Intermediate, 
+            requiresFire: !0, 
+            reputation: 25
         }
-        , onBurn:[n.ItemType.PileOfAsh], onUse: {
+        , onBurn:[n.ItemType.PileOfAsh],
+         onUse: {
             [a.ActionType.Eat]: [2, 10, 8, -2]
         }
         , worth:15
@@ -3714,9 +4587,14 @@ define("item/Items", ["require", "exports", "action/IAction", "creature/ICreatur
         }
         , worth:5
     }
-    , o(n.ItemType.RawChicken, n.ItemTypeGroup.Meat, n.ItemTypeGroup.RawMeat), t.itemDescriptions[n.ItemType.CookedChicken]= {
-        use:[a.ActionType.Eat], decayMax:3250, decaysInto:n.ItemType.RottenMeat, recipe: {
-            components: [r(n.ItemType.RawChicken, 1, 1), r(n.ItemTypeGroup.CookingEquipment, 1, 0)], skill: n.SkillType.Cooking, level: n.RecipeLevel.Advanced, requiresFire: !0, reputation: 25
+    , o(n.ItemType.RawChicken, n.ItemTypeGroup.Meat, n.ItemTypeGroup.RawMeat), 
+    
+    t.itemDescriptions[n.ItemType.CookedChicken]= {
+        use:[a.ActionType.Eat], decayMax:3250, decaysInto:n.ItemType.RottenMeat, 
+        recipe: {
+            components: [r(n.ItemType.RawChicken, 1, 1), 
+                r(n.ItemTypeGroup.CookingEquipment, 1, 0)], 
+                skill: n.SkillType.Cooking, level: n.RecipeLevel.Advanced, requiresFire: !0, reputation: 25
         }
         , onBurn:[n.ItemType.PileOfAsh], onUse: {
             [a.ActionType.Eat]: [5, 10, 8, -2]
@@ -5008,17 +5886,33 @@ define("item/Items", ["require", "exports", "action/IAction", "creature/ICreatur
         , worth:5
     }
     , o(n.ItemType.WormMeat, n.ItemTypeGroup.RawMeat, n.ItemTypeGroup.Food, n.ItemTypeGroup.Bait), t.itemDescriptions[n.ItemType.CookedWormMeat]= {
-        use:[a.ActionType.Eat], decayMax:5500, decaysInto:n.ItemType.RottenMeat, recipe: {
-            components: [r(n.ItemType.WormMeat, 1, 1), r(n.ItemTypeGroup.CookingEquipment, 1, 0)], skill: n.SkillType.Cooking, level: n.RecipeLevel.Intermediate, requiresFire: !0, reputation: 25
+        use:[a.ActionType.Eat], 
+        decayMax:5500, 
+        decaysInto:n.ItemType.RottenMeat, 
+        recipe: {
+            components: [
+                    r(n.ItemType.WormMeat, 1, 1), 
+                    r(n.ItemTypeGroup.CookingEquipment, 1, 0)
+            ], 
+            skill: n.SkillType.Cooking, 
+            level: n.RecipeLevel.Intermediate, 
+            requiresFire: !0, 
+            reputation: 25
         }
-        , onBurn:[n.ItemType.PileOfAsh], onUse: {
+        , onBurn:[n.ItemType.PileOfAsh], 
+        onUse: {
             [a.ActionType.Eat]: [1, 4, 5, -1]
-        }
-        , worth:10
+        }, 
+        worth:10
     }
     , o(n.ItemType.CookedWormMeat, n.ItemTypeGroup.Meat, n.ItemTypeGroup.Food, n.ItemTypeGroup.CookedMeat), t.itemDescriptions[n.ItemType.StonePickaxe]= {
-        durability:50, equip:n.EquipType.Held, attack:2, damageType:n.DamageType.Blunt|n.DamageType.Piercing, use:[a.ActionType.Gather], recipe: {
-            components: [r(n.ItemType.String, 1, 1, 1), r(n.ItemTypeGroup.Pole, 1, 1, 1), r(n.ItemTypeGroup.SharpenedRock, 2, 2, 2)], skill: n.SkillType.Tinkering, level: n.RecipeLevel.Intermediate, reputation: -75
+        durability:50, equip:n.EquipType.Held, attack:2, damageType:n.DamageType.Blunt|n.DamageType.Piercing, use:[a.ActionType.Gather], 
+        recipe: {
+            components: [
+                r(n.ItemType.String, 1, 1, 1), 
+                r(n.ItemTypeGroup.Pole, 1, 1, 1), 
+                r(n.ItemTypeGroup.SharpenedRock, 2, 2, 2)], 
+                skill: n.SkillType.Tinkering, level: n.RecipeLevel.Intermediate, reputation: -75
         }
         , disassemble:!0, worth:25, flammable:!0
     }
@@ -6914,7 +7808,586 @@ define("player/note/Corpse",["require","exports","creature/corpse/Corpses","lang
 
 define("player/Player",["require","exports","action/ActionExecutor","action/IAction","creature/Creature","creature/Pathing","entity/Human","entity/IEntity","entity/IStats","entity/StatusEffects","Enums","game/Challenge","game/IGame","item/ItemRecipeRequirementChecker","item/Items","language/Dictionaries","language/dictionary/Message","language/dictionary/Misc","language/dictionary/Note","language/dictionary/UiTranslation","language/Translation","mod/IHookManager","multiplayer/IMultiplayer","multiplayer/packets/client/DisplayInterruptPacket","multiplayer/packets/server/UpdateDialogInfoPacket","multiplayer/packets/server/UpdateQuickSlotInfoPacket","multiplayer/packets/shared/UpdateMovementIntentPacket","multiplayer/packets/shared/UpdateWalkPathPacket","newui/BindingManager","newui/screen/IScreen","newui/screen/screens/menu/component/IMenu","player/Customizations","player/IMessageManager","player/IMilestone","player/IPlayer","player/MessageManager","player/Milestones","player/note/Corpse","player/note/NoteManager","player/quest/quest/IQuest","player/quest/QuestManager","save/ISerializer","tile/ITileEvent","tile/Terrains","utilities/Arrays","utilities/Async","utilities/enum/Enums","utilities/iterable/Collectors","utilities/Log","utilities/math/Math2","utilities/Objects","utilities/Random","utilities/TileHelpers","utilities/TilePosition"],function(e,t,a,i,n,o,r,s,l,u,d,p,c,m,h,y,g,f,T,S,I,v,w,M,b,k,C,D,A,P,G,R,x,B,E,L,O,F,_,H,W,N,q,U,z,V,j,$,Q,Y,J,K,X,Z){var ee;Object.defineProperty(t,"__esModule",{value:!0}),function(e){e[e.None=0]="None",e[e.DangerousObject=1]="DangerousObject",e[e.GatherOnFire=2]="GatherOnFire"}(ee||(ee={}));class te extends r.default{constructor(e){super(),this.entityType=s.EntityType.Player,this.absentLastUsedTime=0,this.containerSortInfo={},this.dialogContainerInfo=[],this.dialogInfo={},this.hintSeen=[],this.isConnecting=!1,this.isMoving=!1,this.movementComplete=!1,this.movementCompleteZ=void 0,this.noInputReceived=!1,this.quickSlotInfo=[],this.realTimeTickActionDelay=0,this.revealedItems={},this.spawnPoint={},this.tamedCreatures=[],this.turns=0,this.walkSoundCounter=4,this.isMovingClientside=!1,this.wasAbsentPlayer=!1,this.nextX=-1,this.nextY=-1,this.movementProgress=1,this.movementFinishTime=0,this.nextMoveTime=0,this._milestoneUpdates=[],this._movementIntent={},e&&(this.identifier=e),this.notes=new _.default({onWriteNote:this.onWriteNote,canWriteInHours:this.canWriteInHours,canWriteNote:this.canWriteNote}),this.messages=new L.default({canSeePosition:(e,t,a)=>this.canSeePosition(e,t,a,!0),shouldDisplayMessage:this.shouldDisplayMessage,onDisplayMessage:this.onDisplayMessage,getMessageStorageMax:()=>this.isLocalPlayer()?5e3:50}),this.quests=new W.default(this),this.on(s.EntityEvent.StatChanged,this.onStatChange),this.on(s.EntityEvent.StatMaxChanged,(e,t,a)=>{t.type===l.Stat.Strength&&this.updateStrength()}),this.on(s.EntityEvent.StatusChange,this.onStatusEffectChanged)}get clientStore(){return saveManager.getClientStore(this)}setOptions(e){super.setOptions(e),this.updateHandToUse()}setStatChangeTimerIgnoreDifficultyOptions(e,t,a){super.setStatChangeTimer(e,t,a)}setStatChangeTimer(e,t,a){const i="number"==typeof e?e:e.type,n=game.getDifficultyOptions().player.stats.get(i);if(n){if(0===n.changeTimerMultiplier){const e=this.getStatInternal(i);return delete e.changeTimer,delete e.nextChangeTimer,void(e.changeAmount=0)}t*=n.changeTimerMultiplier}super.setStatChangeTimer(e,Math.ceil(t),a)}setStatus(e,t,a){const i=game.getDifficultyOptions().player.statusEffects.get(e);a===s.StatusEffectChangeReason.Treated&&i&&i.untreatable||super.setStatus(e,t,a)}startResting(e){super.startResting(e),this.onStaminaUseChanged(),this.isLocalPlayer()&&this.showRestInterrupt(e.type)}cancelResting(e){return!!super.cancelResting(e)&&(this.tick(),!0)}showRestInterrupt(e){e===d.RestType.Resting?newui.interrupt(S.default.GameInterruptLoadingResting,S.default.GameInterruptLoadingRestingDescription).withLoading(void 0,()=>{a.default.get(i.ActionType.Rest).execute(this,void 0,void 0,void 0,!0)},"rest"):newui.showLoadingInterrupt(S.default.GameInterruptLoadingSleeping,S.default.GameInterruptLoadingSleepingDescription,void 0,"rest")}updateStatuses(){for(const e of this.statuses()){const t=u.default[e];if(!t)continue;const a=game.getDifficultyOptions().player.statusEffects.get(e)||{passChanceMultiplier:1,effectMultiplier:1,effectRateMultiplier:1};if(game.time.ticks%Math.floor(20*a.effectRateMultiplier)!=0)return;t.shouldPass(this,a.passChanceMultiplier)?(this.setStatus(e,!1,s.StatusEffectChangeReason.Passed),t.onPassed(this)):t.onTick(this,a.effectMultiplier)}}resetMovementStates(){this.updateMovementIntent({})}setId(e){for(const t of players)if(t.tamedCreatures)for(const a of t.tamedCreatures){const t=game.creatures[a];t&&t.enemy===this.id&&!0===t.enemyIsPlayer&&(t.enemy=e)}this.id=e;for(const e of this.inventory.containedItems)void 0!==e.equippedId&&(e.equippedId=this.id)}setRaft(e){return!!super.setRaft(e)&&(this.raft?this.messages.source(x.Source.Action).send(g.default.BeginUsingRaft):this.messages.source(x.Source.Action).send(g.default.StopUsingRaft),this.updateTablesAndWeight(),!0)}skillGain(e,t,a){this.isGhost()||(super.skillGain(e,t,a),this.isLocalPlayer()&&this.checkSkillMilestones())}checkSkillMilestones(){let e=0;for(const t of j.default.values(d.SkillType)){const a=this.skills[t];a&&(e+=a.core,this.addMilestone(B.MilestoneType.Boundless,this.getSkill(t)))}this.addMilestone(B.MilestoneType.Talented,Y.default.roundNumber(e,1)),this.updateMilestones()}staminaCheck(){const e=this.getStat(l.Stat.Stamina);if(e.value<=0){this.setStat(e,1);const t=this.getMaxHealth(),a=K.default.intInRange(Math.ceil(t/60),Math.ceil(t/40));return this.damage(-1*a,this.swimming?g.default.DeathByDrowning:g.default.DeathByExhaustion,0,!1),this.messages.source(x.Source.Action,x.Source.Wellbeing).type(L.MessageType.Bad).send(this.swimming?g.default.WorkingYourselfIntoExhaustionAndDrowning:g.default.WorkingYourselfIntoExhaustion),this.staminaSyncCheck(),!1}return!0}addMilestone(e,t){this.isLocalPlayer()&&!this.isGhost()&&this._milestoneUpdates.push({milestone:e,data:t})}calculateEquipmentStats(){super.calculateEquipmentStats(),this.isLocalPlayer()&&(fieldOfView&&(this._fovRadius=modManager.getHook(v.Hook.GetPlayerFieldOfViewRadius,this._fovRadius).call(this),fieldOfView.updateRadius(this._fovRadius,this._fovMaxRadius)),this.checkSkillMilestones())}getDefaultCarveTool(){for(const e of itemManager.getItemsInContainer(this.inventory,!0)){const t=h.itemDescriptions[e.type];if(t&&t.use&&-1!==t.use.indexOf(i.ActionType.Carve))return e}}isFacingCarvableTile(){const e=this.getFacingTile();if(e.corpses)return!0;const t=e.doodad;return!(!t||!(t.canPickup(this)||t.canHarvest()||t.canGather()))||!(!e.events||!tileEventManager.canGather(e))}hasTamedCreature(e){return-1!==this.tamedCreatures.indexOf(e.id)}hasHandToUse(){return this.options.leftHand||this.options.rightHand}getAndSwitchHandToUse(){return multiplayer.addSyncCheck(w.MultiplayerSyncCheck.HandToUse,`${this.id},${this.options.leftHand?1:0},${this.options.rightHand?1:0},${this.handToUse}`),this.options.leftHand&&this.options.rightHand?this.handToUse===d.EquipType.LeftHand?(this.handToUse=d.EquipType.RightHand,d.EquipType.LeftHand):(this.handToUse=d.EquipType.LeftHand,d.EquipType.RightHand):this.options.leftHand?d.EquipType.LeftHand:this.options.rightHand?d.EquipType.RightHand:void 0}updateHandToUse(){this.options.leftHand&&this.options.rightHand?void 0===this.handToUse&&(this.handToUse=d.EquipType.LeftHand):this.options.leftHand?this.handToUse=d.EquipType.LeftHand:this.options.rightHand?this.handToUse=d.EquipType.RightHand:this.handToUse=void 0}equip(e,t,a=!1,i=!1){const n=e.description();if(!n)return;const o=n.equip;if(!o)return;if(o!==t){if(o!==d.EquipType.Held)return void this.messages.source(x.Source.Equipment,x.Source.Item).send(g.default.CannotEquipThatThere,e.getName());if(t!==d.EquipType.LeftHand&&t!==d.EquipType.RightHand)return void this.messages.source(x.Source.Equipment,x.Source.Item).send(g.default.CannotEquipThatThere,e.getName())}e.containedWithin!==this.inventory&&itemManager.moveToContainer(this,e,this.inventory),e.isEquipped()&&this.unequip(e,a,a,t===d.EquipType.Held||t===d.EquipType.LeftHand||t===d.EquipType.RightHand),t===d.EquipType.Held&&(t=d.EquipType.LeftHand,void 0!==this.getEquippedItem(t)&&(t=d.EquipType.RightHand));const r=this.getEquippedItem(t);void 0!==r&&this.unequip(r,a,a,i),super.equip(e,t),this.isLocalPlayer()&&ui.setEquipSlot(t,e.id,a),itemManager.checkMilestones(this,e),this.calculateEquipmentStats(),this.updateTablesAndWeight(),modManager.getHook(v.Hook.OnItemEquip).call(this,e,t),a||(this.messages.source(x.Source.Equipment,x.Source.Action,x.Source.Item).send(g.default.YouEquip,e.getName()),this.queueSoundEffect(d.SfxType.PickUp),this.isLocalPlayer()&&o===d.EquipType.Held&&this.defense.parrying>=1&&this.setStat(l.Stat.Defense,0,s.IStatChangeInfo.get(!0)))}unequip(e,t=!1,a=!1,i=!1){const n=e.getEquipSlot();if(void 0===n)return;super.unequip(e);const o=e.description();if(!i&&o&&o.revert&&o.isTorch&&(e.changeInto(o.revert),this.messages.source(x.Source.Equipment,x.Source.Action,x.Source.Item).send(g.default.ExtinguishedTorch)),this.isLocalPlayer()&&ui.removeItemFromEquipSlot(n),a||this.messages.source(x.Source.Equipment,x.Source.Action,x.Source.Item).send(g.default.YouUnequip,e.getName()),e.type===d.ItemType.AberrantSlitherSucker||e.type===d.ItemType.SlitherSucker){const t=e.spawnCreatureOnItem(d.CreatureType.SlitherSucker,e.type===d.ItemType.AberrantSlitherSucker,!0,this);if(t){const a=t.getStat(l.Stat.Health);t.setStatMax(a,e.maxDur?e.maxDur:1),t.setStat(a,a.max),itemManager.remove(e)}}t||(this.queueSoundEffect(d.SfxType.PickUp),this.calculateEquipmentStats(),game.updateView(c.RenderSource.ItemEquip,!(!o||!o.onEquipEffect)))}unequipAll(){let e=!1,t=!1;const a=this.getEquippedItems();for(const i of a){e=!0,this.unequip(i,!0,!0);const a=i.description();a&&a.onEquipEffect&&(t=!0)}e&&(this.calculateEquipmentStats(),this.queueSoundEffect(d.SfxType.PickUp),this.messages.source(x.Source.Equipment,x.Source.Action,x.Source.Item).send(g.default.AllEquipmentUnEquipped),game.updateView(c.RenderSource.ItemUnequip,t))}getMovementIntent(){if(this.walkPath){let e=this.walkPath[0];if(e&&(e.x===this.x&&e.y===this.y&&(this.walkPath.shift(),e=this.walkPath[0]),e&&!o.isWalkToTileBlocked(this,game.getTile(e.x,e.y,this.z),e,!1))){const t=E.getDirectionFromMovement(e.x-this.x,e.y-this.y);return{intent:t,shouldDisableTurnDelay:!0}}this.walkAlongPath(void 0)}return this._movementIntent}updateMovementIntent(e){if((this._movementIntent.intent!==e.intent||this._movementIntent.turnDelay!==e.turnDelay)&&(this._movementIntent.intent=e.intent,this._movementIntent.turnDelay=e.turnDelay,multiplayer.isConnected()&&this.isLocalPlayer())){const t=new C.default;t.intent=e,t.send()}}resetStatTimers(){super.resetStatTimers()}getMaxHealth(){const e=this.getStatInternal(l.Stat.Strength).value;return modManager.getHook(v.Hook.GetPlayerMaxHealth,e).call(e,this)}getMaxWeight(){const e=this.getStatValue(l.Stat.Strength);return modManager.getHook(v.Hook.GetPlayerMaxWeight,e).call(e,this)}setup(e){if(multiplayer.isConnected())this.spawnPoint={x:this.x,y:this.y,z:this.z};else{for(game.spawnCoords.z=d.WorldZ.Overworld;0===game.spawnCoords.x&&0===game.spawnCoords.y;){const e=K.default.int(game.mapSize),t=K.default.int(game.mapSize),a=game.getTile(e,t,d.WorldZ.Overworld),i=U.default[X.default.getType(a)];i&&i.passable&&X.default.getType(a)!==d.TerrainType.ShallowSeawater&&X.default.getType(a)!==d.TerrainType.BeachSand&&(game.spawnCoords.x=e,game.spawnCoords.y=t)}this.x=game.spawnCoords.x,this.y=game.spawnCoords.y,this.spawnPoint=game.spawnCoords}this.customization||(this.customization=R.generateRandomCustomization()),game.isChallenge&&K.default.generator.pushSeed(K.convertStringToSeed(game.seeds.base));const t=game.getDifficultyOptions(),a=t.player.initialItems;!0===a&&(this.equip(this.createItemInInventory(d.ItemType.TatteredShirt),d.EquipType.Chest,!0),this.equip(this.createItemInInventory(d.ItemType.TatteredPants),d.EquipType.Legs,!0));const i=this.getStat(l.Stat.Stamina),n=this.getStat(l.Stat.Health),o=this.getStat(l.Stat.Hunger),r=this.getStat(l.Stat.Thirst),u=game.isChallenge?0:e;this.setStatMax(i,K.default.int(10+u)+70),this.setStat(l.Stat.Strength,K.default.int(5+u)+45),this.setStatMax(o,K.default.int(5+u)+15),this.setStatMax(r,K.default.int(5+u)+15),this.setStat(i,i.max-K.default.int(10)),this.setStat(n,this.getMaxHealth()-K.default.int(5)),this.setStat(o,o.max-K.default.int(2)),this.setStat(r,r.max-K.default.int(2));const c=t.player.stats;for(const[e,t]of c.entries())if(void 0!==t.maxValue&&this.setStatMax(e,t.maxValue),void 0!==t.initialValue){const a=e===l.Stat.Strength?t.initialValue:Math.floor(this.getStatMax(e)*t.initialValue/100);this.setStat(e,a)}for(const[e,t]of c.entries())if(void 0!==t.initialValue){const a=e===l.Stat.Strength?t.initialValue:Math.floor(this.getStatMax(e)*t.initialValue/100);this.setStat(e,a)}if(t.player.randomSkills&&!game.isChallenge){const t=j.default.getRandom(d.SkillType);this.skills[t]&&this.setSkillCore(t,K.default.int(4)+8+(game.isChallenge?0:e))}if(!0===a){this.createItemInInventory(d.ItemType.LeafBedroll);const t=K.default.intInRange(7,10+(game.isChallenge?0:e));for(let e=0;e<t-1;e++)this.createItemInInventory(K.default.getElement(E.setupSpawnItems));this.createItemInInventory(d.ItemType.WoodenPole)}const m=t.player.statusEffects;for(const[e,t]of m.entries())t.startWith&&this.setStatus(e,!0,s.StatusEffectChangeReason.Gained);const h=t.player.reputation;if(h.initialMalignity&&this.setStat(l.Stat.Malignity,h.initialMalignity),h.initialBenignity&&this.setStat(l.Stat.Benignity,h.initialBenignity),game.isChallenge){let e=0;p.isPermanentEffect(d.StatusType.Burned)?e+=2:(p.isPermanentEffect(d.StatusType.Poisoned)||p.isPermanentEffect(d.StatusType.Bleeding))&&(e+=6);const t=this.getReputation();t<=0&&(e+=-1*Math.floor(t/5e3));const a=K.default.intInRange(1,4)+e;for(let e=0;e<a-1;e++)this.createItemInInventory(K.default.getElement(E.setupHealthItems));if(p.isEternalNight()){const e=this.createItemInInventory(K.default.getElement(E.setupLightItems));this.equip(e,d.EquipType.RightHand)}}else e>=1&&(this.messages.source(x.Source.Milestone).type(L.MessageType.Stat).send(g.default.PastExperiencesProvideBenefits),!0===a&&K.default.int(100)-e<=0&&this.createItemInInventory(d.ItemType.OrnateCape));const y=d.Direction.South,f=game.directionToMovement(y);if(this.direction.x=f.x,this.direction.y=f.y,this.facingDirection=y,!0===a&&(this.createItemInInventory(K.default.getElement(E.setupWaterItems)),this.createItemInInventory(K.default.getElement(E.setupToolItems)),this.createItemInInventory(K.default.getElement(E.setupMiscItems)),!game.isChallenge&&e>=1&&this.createItemInInventory(K.default.getElement(E.setupBookItems))),Array.isArray(a))for(const e of a)this.createItemInInventory(e);const S=t.player.skills;for(const[e,t]of S.entries())t.initial&&this.setSkillCore(e,t.initial);this.updateStatsAndAttributes();const v=z.default.random(this.inventory.containedItems,3,!1);this.notes.write(T.default.Stranded,itemManager.getItemTranslations(v).collect(I.default.formatList,!1)),game.isChallenge&&(this.quests.add(H.QuestType.Challenge),K.default.generator.popSeed())}updateReputation(e){super.updateReputation(e),(this.getStatValue(l.Stat.Benignity)>=2500||this.getStatValue(l.Stat.Malignity)>=2500)&&this.notes.write(T.default.Reputation,this.getStatValue(l.Stat.Benignity)>=2500),this.checkReputationMilestones()}checkWeight(){const e=this.getWeightMovementPenalty(),t=this.getWeightStatus();if(t===d.WeightStatus.Overburdened){this.messages.source(x.Source.Wellbeing,x.Source.Item).type(L.MessageType.Bad).send(g.default.CarryingTooMuchWeight);const e=this.getStat(l.Stat.Stamina),t=this.getStat(l.Stat.Weight);if(this.reduceStat(e,Math.ceil((t.value-t.max)/2)),this.staminaSyncCheck(),!this.notes.wasWritten(T.default.Encumbered)){const e=itemManager.getItemsInContainer(this.inventory,!0);e.sort((e,t)=>itemManager.getItemsByWeight(e.id,t.id));const t=e.filter((e,t,a)=>a.map(e=>e.type).indexOf(e.type)===t);t.length>=3&&this.notes.write(T.default.Encumbered,t[0].getName(),t[1].getName(),t[2].getName())}}e>=1&&this.addDelay(e)}getWeightStatus(){let e=modManager.getHook(v.Hook.GetPlayerWeightStatus,d.WeightStatus.None).call(this);if(e!==d.WeightStatus.None)return e;const t=this.getStat(l.Stat.Weight);return t.value>t.max?e=d.WeightStatus.Overburdened:t.value>.9*t.max&&(e=d.WeightStatus.Encumbered),e}getWeightMovementPenalty(){const e=modManager.getHook(v.Hook.GetPlayerWeightMovementPenalty).call(this);if(void 0!==e)return e;const t=this.getWeightStatus(),a=this.getStat(l.Stat.Weight);return t===d.WeightStatus.Overburdened||t===d.WeightStatus.Encumbered?Math.min(Math.ceil((a.value-.9*a.max)/2),d.Delay.LongPause):0}checkForStill(){const e=this.getFacingTile();if(!e)return!1;if(e.doodad){const t=e.doodad,a=t.description();if(a&&void 0!==t.decay&&a.isWaterSource&&-1===t.decay)return!0}return!1}checkForWell(){const e=this.getFacingTile();if(!e)return!1;const{x:t,y:a,z:i}=this.getFacingPoint();if(e.doodad){const n=e.doodad,o=n.description(),r=game.wellData[Z.getTileId(t,a,i)];if(o&&o.group===d.DoodadTypeGroup.Well&&r&&r.waterType===c.WaterType.FreshWater)return!0}return!1}checkForGather(){const e=this.getFacingTile();if(e&&e.doodad){const t=e.doodad.description(),a=e.doodad.getGrowingStage();if(!t||!t.gather||void 0===a||e.doodad.canHarvest())return;if(!e.doodad.canGather())return e.doodad}}updateTables(){const e=this.options.useAdjacentContainers?itemManager.getAdjacentContainers(this):void 0;this.updateCraftTable(e),this.updateDismantleTable(e)}updateCraftTable(e){if(!this.isLocalPlayer())return;const t=[],a=[],i=game.isChallenge?j.default.values(d.ItemType).collect($.default.toArray):Object.keys(game.crafted).map(e=>+e),n=new m.default(this,void 0,!1,!0);n.setAdjacentContainers(e);for(const e of i){const i=h.itemDescriptions[e];if(!i)continue;if(!1===i.craftable)continue;const o=i.recipe;o&&(n.setRecipe(o),n.process()?t.push(e):a.push(e))}ui.updateCraftingDialog(t,a)}updateDismantleTable(e){if(!this.isLocalPlayer())return;const t={},a=[this.inventory];this.options.useAdjacentContainers&&a.push(...e||itemManager.getAdjacentContainers(this));for(const e of a)for(const a of itemManager.getItemsInContainer(e,!0,this.getProtectedItemsOptions())){const e=h.itemDescriptions[a.type];e&&e.dismantle&&!t[a.type]&&(t[a.type]=a.id)}ui.updateDismantleTab(t)}updateTablesAndWeight(){let e=0;multiplayer.addSyncCheck(w.MultiplayerSyncCheck.InventoryCount,`${this.getName().getString()},${this.inventory.containedItems.length}`);for(let t=0;t<this.inventory.containedItems.length;t++){const a=this.inventory.containedItems[t],i=h.itemDescriptions[a.type];i&&(this.raft!==a.id&&(e+=a.weight,a.legendary&&a.legendary.type===d.LegendaryType.ItemWeight&&(e-=a.legendary.value),multiplayer.addSyncCheck(w.MultiplayerSyncCheck.Item,`${this.id}-${t}-${a.id}-${a.weight}-${void 0!==a.minDur?a.minDur:""}-${void 0!==a.maxDur?a.maxDur:""}-${void 0!==a.quickSlot?a.quickSlot:""}`),itemManager.isContainer(a)&&(e+=itemManager.computeContainerWeight(a)*a.getContainerWeightReduction())))}e=Y.default.roundNumber(e,1);const t=modManager.getHook(v.Hook.OnUpdateWeight).call(this,e);void 0!==t&&(e=t),this.setStat(l.Stat.Weight,e),multiplayer.addSyncCheck(w.MultiplayerSyncCheck.Weight,e),this.onStaminaUseChanged(),this.isLocalPlayer()&&this.updateTables()}checkReputationMilestones(){this.addMilestone(B.MilestoneType.Benevolent,this.getStat(l.Stat.Benignity).value),this.addMilestone(B.MilestoneType.Malevolent,this.getStat(l.Stat.Malignity).value)}hurtHands(e,t,a){const i=this.getEquippedItem(d.EquipType.Hands);if(i)return this.messages.source(x.Source.Wellbeing,x.Source.Equipment,x.Source.Item).send(g.default.HandProtectionPreventedInjury),i.damage("HH"),!1;if(10<=K.default.int(100))return!1;t&&(this.messages.source(x.Source.Wellbeing,x.Source.Equipment).type(L.MessageType.Bad).send(g.default.HurtHandsWithNoTool,I.default.message(a||g.default.BothHands),I.default.message(t)),this.notes.write(T.default.ToolUse,I.default.message(e),I.default.message(t)));const n=this.getMaxHealth(),o=K.default.intInRange(n/50,n/25);this.damage(-1*o,I.default.message(g.default.UsingBareHands).addArgs(I.default.message(e)));const r=Math.floor(this.getSkill(d.SkillType.Anatomy)/10),l=K.default.percent();return!this.hasStatus(d.StatusType.Bleeding)&&l<=15-r&&(this.messages.source(x.Source.Wellbeing).send(g.default.BleedingProfusely),this.skillGain(d.SkillType.Anatomy,.1),this.setStatus(d.StatusType.Bleeding,!0,s.StatusEffectChangeReason.Gained),this.notes.write(T.default.Bleeding,!1,I.default.message(e))),!0}setTamedCreatureEnemy(e){if(this.tamedCreatures)for(const t of this.tamedCreatures){const a=game.creatures[t];a&&a.isDefender()&&void 0===a.enemy&&(a.enemy=e.id,a.enemyIsPlayer=e instanceof te,a.enemyAttempts=void 0)}}setPosition(e){this.nextX=game.getWrappedCoord(e.x),this.nextY=game.getWrappedCoord(e.y),super.setPosition(e)}setZ(e){const t=game.getTile(this.x,this.y,e),a=t.creature;a&&(a.stopNextMovement=!0,a.fromX=a.x,a.fromY=a.y,a.moveTo(this.x,this.y,this.z),a.checkUnder()),this.z=e,this.addDelay(d.Delay.LongPause,!0),game.particle.clear(),game.updateView(c.RenderSource.MovementPlayerZPre,this.isLocalPlayer())}isGhost(){return super.isGhost()||this.isServer()}isServer(){return this.state===d.PlayerState.Server}getName(){return new I.default(y.Dictionary.Misc,f.MiscTranslation.HumanName).addArgs(this.isGhost()?I.default.message(g.default.GhostOf).addArgs(this.name):this.name)}canSeePosition(e,t,a,i){return!this.isServer()&&super.canSeePosition(e,t,a,i)}updateQuickSlotInfo(e,t,a){if(void 0===t&&void 0!==a?this.quickSlotInfo[e].action=a:void 0===t?delete this.quickSlotInfo[e]:this.quickSlotInfo[e]={itemType:t,action:a},multiplayer.isConnected()&&multiplayer.isClient()&&this.isLocalPlayer()){const t=new k.default;t.quickSlot=e,t.quickSlotInfo=this.quickSlotInfo[e],multiplayer.syncPacket(t,void 0,!0)}}updateDialogInfo(e){if(multiplayer.isConnected()&&multiplayer.isClient()&&this.isLocalPlayer()){const t=new b.default;t.index=e,t.info="string"==typeof e?this.dialogInfo[e]:this.dialogContainerInfo[e],multiplayer.syncPacket(t,void 0,!0)}"string"==typeof e&&(saveDataGlobal.savedDialogInfo[e]=this.dialogInfo[e])}getDialogInfo(e){let t=this.dialogInfo[e];if(!t){const a=saveDataGlobal.savedDialogInfo[e];a&&(t=this.dialogInfo[e]={x:a.x,y:a.y,width:a.width,height:a.height,open:a.open})}return t}passTurn(e){modManager.getHook(v.Hook.OnTurnStart).call(this),this.processMovement(e),this.isGhost()||this.swimCheck();const t=multiplayer.isConnected()?this.isMoving:this.isMovingClientside;t||modManager.getHook(v.Hook.OnTurnEnd).call(this)}tick(e){if(modManager.getHook(v.Hook.OnPlayerTickStart).call(this),F.default(this,this.getFacingTile()),multiplayer.isConnected()&&(this.noInputReceived&&modManager.getHook(v.Hook.OnNoInputReceived).call(this),this.movementComplete&&(this.movementComplete=!1,modManager.getHook(v.Hook.OnMoveComplete).call(this))),!e&&this.isResting())this.restTick();else if(!this.isGhost()&&!this.isConnecting){this.updateStats(),this.staminaCheck(),this.updateMilestones();const e=game.isChallenge?Y.default.roundNumberToMultiple(0+this.turns/200,5):0;game.isRealTimeMode()?0===this.realTimeTickActionDelay?(this.swimming&&(this.anim=1-this.anim),this.slitherSuckerDamage(),game.isChallenge&&(this.score-=10*e),this.isOnFire()!==d.FireType.None&&this.isOnFire()!==d.FireType.CoolingLava&&this.burn(!1,!!d.FireType.Fire,d.EquipType.Feet),this.realTimeTickActionDelay=3):this.realTimeTickActionDelay--:(this.slitherSuckerDamage(),game.isChallenge&&(this.score-=e))}modManager.getHook(v.Hook.OnPlayerTickEnd).call(this)}kill(){if(!1===modManager.getHook(v.Hook.OnPlayerDeath).call(this))return;this.state=d.PlayerState.Dead;let e=!1;const t=game.getDifficultyOptions().respawn;if(this.messages.source(x.Source.Wellbeing).type(L.MessageType.Bad).send(g.default.YouHaveDied,this.deathBy),L.default.toAll((e,t)=>t!==this&&e.source(x.Source.Multiplayer,x.Source.Allies).type(multiplayer.getOptions().pvp||game.isChallenge?L.MessageType.Good:L.MessageType.Bad).send(g.default.MultiplayerPlayerDied,this.getName(),this.deathBy)),multiplayer.isConnected()&&!this.isLocalPlayer()||t||(e=!0,audio.updateMusicSpeed(1),saveData.gameState=d.PlayerState.Ghost,saveDataGlobal.gameHighscores.push({name:saveData.gameSlotName,score:this.score,turns:this.turns,message:I.default.message(g.default.Killed).addArgs(this.deathBy).serialize(),difficulty:game.getDifficulty(),date:Date.now(),characterName:this.name}),this.addDelay(d.Delay.ReallyLongPause),A.bindingManager.disableBindsUntil(4e3),V.sleep(200).then(async()=>{game.isChallenge||multiplayer.isConnected()||(await game.saveGame(d.SaveType.Death),game.playing=!1),await V.sleep(3e3),newui.interrupt().withMenu(G.MenuId.GameEnd,e=>e.setGameEndData({state:d.PlayerState.Dead,highscore:saveDataGlobal.gameHighscores.collect($.default.last())}))})),this.isLocalPlayer()&&(ui.closeAllContainers(),e?ui.onGameEnd():ui.cancelSorting()),this.lastAttackedBy)if(this.lastAttackedBy instanceof r.default)this.lastAttackedBy.updateReputation(Math.floor(this.getReputation()/4*-1));else if(this.lastAttackedBy instanceof n.default){const e=this.lastAttackedBy.getOwner();e&&e.updateReputation(Math.floor(this.getReputation()/8*-1))}if(itemManager.placeItemsAroundLocation(this.inventory,this.x,this.y,this.z),this.queueSoundEffect(d.SfxType.Death,void 0,void 0,this.isLocalPlayer()),t){this.state=d.PlayerState.None,void 0===this.spawnPoint.z&&(this.spawnPoint.z=d.WorldZ.Overworld);let e=this.spawnPoint&&void 0!==this.spawnPoint.x?X.default.findMatchingTile(this.spawnPoint,X.default.isSuitableSpawnPointTile):void 0;void 0===e&&(e=players[0]),this.x=this.fromX=e.x,this.y=this.fromY=e.y,this.z=e.z;const t=Math.sign(this.getReputation())*Math.round(10*Math.pow(Math.abs(this.getReputation()),.6));this.updateReputation(-1*t)}else this.state=d.PlayerState.Ghost,this.isLocalPlayer()&&(fieldOfView.disabled=!0);if(this.state!==d.PlayerState.Ghost){const e=this.getStat(l.Stat.Stamina),t=this.getStat(l.Stat.Health),a=this.getStat(l.Stat.Hunger),i=this.getStat(l.Stat.Thirst);t.changeTimer=0,this.setStat(t,Math.round(this.getMaxHealth()*(K.default.intInRange(25,50)/100))),t.value<=0&&(this.setStat(t,10),Q.default.info(Q.LogSource.Player)("invalid health value",this.getMaxHealth())),e.changeTimer=0,this.setStat(e,Math.round(e.max*(K.default.intInRange(25,50)/100))),a.changeTimer=0,this.setStat(a,Math.round(a.max*(K.default.intInRange(25,50)/100))),i.changeTimer=0,this.setStat(i,Math.round(i.max*(K.default.intInRange(25,50)/100)))}this.setStatus(d.StatusType.Bleeding,!1,s.StatusEffectChangeReason.Passed),this.setStatus(d.StatusType.Burned,!1,s.StatusEffectChangeReason.Passed),this.setStatus(d.StatusType.Poisoned,!1,s.StatusEffectChangeReason.Passed),this.equipped={},this.isMoving=!1,this.isMovingClientside=!1,this.movementComplete=!1,this.movementCompleteZ=void 0,this.movementProgress=1,this.raft=void 0,this.restData=void 0,this.swimming=!1,this.stopNextMovement=!1,this.walkPath=void 0;for(const e of players)if(e.tamedCreatures)for(const t of e.tamedCreatures){const e=game.creatures[t];e&&e.enemy===this.id&&e.enemyIsPlayer&&(e.enemy=void 0,e.enemyIsPlayer=void 0)}if(this.staminaSyncCheck(),this.updateTablesAndWeight(),this.updateStatsAndAttributes(),this.tick(),this.addDelay(d.Delay.ReallyLongPause),!this.isGhost()){const e=this.getTile(),t=X.default.getType(e),a=U.default[t];a&&a.water&&(this.swimming=!0)}game.updateView(c.RenderSource.PlayerKill,this.isLocalPlayer())}getMovementProgress(){return this.movementProgress}checkUnder(e,t,a=!0,i=!1,n=!1){const o=e?this.getFacingTile():this.getTile();if(o&&(super.checkUnder(e,t,a,i,n),t)){const t=o;if(!this.isGhost()&&(this.options.autoPickup||e||i)&&t.containedItems&&t.containedItems.length>0){const e=t.containedItems[t.containedItems.length-1];itemManager.moveToContainer(this,e,this.inventory)&&this.updateTablesAndWeight(),this.messages.source(x.Source.Action,x.Source.Item).send(g.default.YouPickedUp,e.getName()),this.addDelay(d.Delay.LongPause)}if(a&&!e&&X.default.getType(o)===d.TerrainType.CaveEntrance){const e=this.z===d.WorldZ.Cave?d.WorldZ.Overworld:d.WorldZ.Cave;game.isPlayerAtPosition(this.x,this.z,e)||(this.isMoving=!0,this.isMovingClientside=!0,this.movementCompleteZ=e,this.z===d.WorldZ.Overworld&&this.notes.write(T.default.Caving))}}}hasWalkPath(){return void 0!==this.walkPath}walkAlongPath(e){if(e&&e.length>0){const t=e[0];t.x===this.x&&t.y===this.y||(e=void 0)}if(multiplayer.isConnected())if(multiplayer.isServer()){const t=new D.default;t.pid=this.id,t.path=e,t.sendTo(this)}else if(this.isLocalPlayer()){const t=new D.default;return t.path=e,void multiplayer.syncPacket(t,()=>{this.walkPath=e,modManager.getHook(v.Hook.OnPlayerWalkToTilePath).call(this,this.walkPath)},!0,!0)}this.walkPath=e,modManager.getHook(v.Hook.OnPlayerWalkToTilePath).call(this,this.walkPath)}processInput(){if(!1===modManager.getHook(v.Hook.ProcessInput).call(this))return;if(this.hasDelay()||this.isResting()||this.isLocalPlayer()&&newui.isScreenVisible(P.ScreenId.Interrupt)||multiplayer.isConnected()&&multiplayer.isClient())return;const e=modManager.getHook(v.Hook.GetPlayerMovementIntent,this.getMovementIntent()).call(this),t=E.gameMovement.find(t=>t.moveBind===e.intent);if(void 0===t)"idle"!==e.intent||a.default.get(i.ActionType.Idle).execute(this);else{const n=game.directionToMovement(t.direction);n.x+=this.x,n.y+=this.y;const o=game.getTile(n.x,n.y,this.z),r=X.default.getType(o);if(this.facingDirection!==t.direction)return a.default.get(i.ActionType.UpdateDirection).execute(this,t.direction,e.turnDelay),void this.addDelay(d.Delay.TurnDirection);if(this.nextMoveTime>=game.absoluteTime)return;if(this.options.warnOnDangerousActions&&!this.isGhost()&&this.moveType!==d.MoveType.Flying){let e=!1,n,s=ee.None;const l=o.doodad;if(l&&!o.creature){const t=l.description(),a=l.getGrowingStage();if(t)if(l.isDangerous(this))e=!0,s=ee.DangerousObject,n=l.getName();else if(this.options.autoGatherHarvest&&t.blockMove&&l.canGather()&&void 0!==a&&a>=d.GrowingStage.Budding){const t=this.checkForGatherFire();void 0!==t&&(e=!0,n=t,s=ee.GatherOnFire)}}const u=tileEventManager.get(o,q.TileEventType.Fire);if(u&&!o.creature&&this.getBurnDamage(!0,d.EquipType.Feet)>=1){let t=!1;if(l){const e=l.getGrowingStage(),a=l.description();a&&(a.blockMove&&!a.isTree||a.isTree&&void 0!==e&&e>=d.GrowingStage.Budding)&&(t=!0)}t||(e=!0,s=ee.DangerousObject,n=I.default.nameOf(y.Dictionary.TileEvent,u))}if(r===d.TerrainType.Lava&&!o.creature&&this.getBurnDamage(!0,d.EquipType.Feet)>=1&&(e=!0,s=ee.DangerousObject,n=I.default.nameOf(y.Dictionary.Terrain,d.TerrainType.Lava)),e&&n){this.resetMovementStates();const e=s===ee.GatherOnFire?S.default.GameInterruptConfirmationActionOnFire:S.default.GameInterruptDangerousStep,o=s===ee.GatherOnFire?S.default.GameInterruptConfirmationActionOnFireDescription:S.default.GameInterruptDangerousStepDescription,r=[n.serialize(),I.default.ui(S.default.GameActionGather).serialize()];if(this.hasHandToUse()&&s===ee.GatherOnFire||s===ee.DangerousObject)if(multiplayer.isConnected()&&!this.isLocalPlayer()){this.nextMoveDirection=t.direction;const a=new M.default;a.title=e,a.description=o,a.args=r,a.sendTo(this)}else newui.interrupt(()=>I.default.ui(e).get(...r)).withDescription(()=>I.default.ui(o).get(...r)).withConfirmation().then(e=>{e&&void 0!==t&&a.default.get(i.ActionType.Move).execute(this,t.direction)});return}}a.default.get(i.ActionType.Move).execute(this,t.direction)}}faceDirection(e,t){return!(this.hasDelay()||this.isResting()||this.isLocalPlayer()&&newui.isScreenVisible(P.ScreenId.Interrupt))&&(this.facingDirection!==e&&(a.default.get(i.ActionType.UpdateDirection).execute(this,e,t),this.addDelay(d.Delay.TurnDirection),!0))}revealItem(e){this.revealedItems[e]=!0}getMovementFinishTime(){return game.absoluteTime+(d.Delay.Movement+this.getWeightMovementPenalty())*game.interval}updateMilestones(){const e=this._milestoneUpdates;if(0!==e.length){this._milestoneUpdates=[];for(const t of e){const e=t.milestone,a=t.data,i=O.milestones[e];if(!i)continue;let n=saveDataGlobal.playerMilestoneData[e];if(n){if(-1===n.amount)continue}else n={amount:0},saveDataGlobal.playerMilestoneData[e]=n;switch(i.dataType){case B.MilestoneDataType.Counter:if(void 0===a)throw new Error(`Invalid data for milestone ${B.MilestoneType[e]}`);n.data||(n.data=[]),-1===n.data.indexOf(a)&&(n.data.push(a),n.amount++);break;case B.MilestoneDataType.Check:if(void 0===a)throw new Error(`Invalid data for milestone ${B.MilestoneType[e]}`);a>n.amount&&(n.amount=a);break;default:n.amount++}this.emit("MilestoneUpdate",e,n.amount,i.amount),n.amount>=i.amount&&(n.amount=-1,this.queueSoundEffect(d.SfxType.Exceptional),this.messages.source(x.Source.Milestone).type(L.MessageType.Good).send(g.default.EarnedMilestone,e))}}}healthSyncCheck(){multiplayer.addSyncCheck(w.MultiplayerSyncCheck.HealthChange,`${this.id}-${this.getStat(l.Stat.Health).value}`)}updateStrength(){this.setStatMax(l.Stat.Health,this.getMaxHealth()),this.setStatMax(l.Stat.Weight,this.getMaxWeight()),this.onStaminaUseChanged(),this.updateTablesAndWeight()}calculateStats(){if(this.isGhost())return;super.calculateStats();const e=this.getMaxHealth(),t=this.getStat(l.Stat.Health);if(this.isLocalPlayer()&&(ui.refreshStats(),audio.updateMusicSpeed(t.value/e<=.1?1.5:1)),this.getStat(l.Stat.Stamina).value<=8&&this.notes.write(T.default.StaminaReplenishment),this.getStat(l.Stat.Health).value<=8&&!this.notes.wasWritten(T.default.HealthIssues)){let e=!1,t=!1,a;const i=itemManager.getItemInContainerByGroup(this.inventory,d.ItemTypeGroup.Health);if(i)e=!0,a=i.getName();else{const e=itemManager.getItemInContainer(this.inventory,d.ItemType.TatteredPants);if(e)t=!0;else{const e=itemManager.getItemInContainer(this.inventory,d.ItemType.TatteredShirt);e&&(t=!0)}}this.notes.write(T.default.HealthIssues,{healing:e,healingItemName:a,clothing:t})}this.getStat(l.Stat.Thirst).value<=3&&this.notes.write(T.default.Dehydration),t.value<=0&&this.kill()}swimCheck(){if(super.swimCheck(),this.swimming){const e=this.getSkill(d.SkillType.Swimming);this.addDelay(Math.max(25-e/2,d.Delay.Movement))}}slitherSuckerDamage(){const e=this.getEquippedItem(d.EquipType.Head);if(e&&(e.type===d.ItemType.AberrantSlitherSucker||e.type===d.ItemType.SlitherSucker)){const t=this.getMaxHealth(),a=e.type===d.ItemType.AberrantSlitherSucker?K.default.intInRange(t/20,t/10):K.default.intInRange(t/40,t/20);a&&0===K.default.int(100)&&(this.damage(a,I.default.message(g.default.DeathBy).addArgs(e.getName())),this.messages.source(x.Source.Wellbeing,x.Source.Equipment).type(L.MessageType.Bad).send(g.default.SlitherSuckerConstricts,e.getName()))}}processMovement(e){this.movementFinishTime=this.getMovementFinishTime(),this.fromX=this.x,this.fromY=this.y,-1!==this.nextX&&(this.x=this.nextX,this.y=this.nextY,modManager.getHook(v.Hook.OnTileUpdate).call(game.getTile(this.fromX,this.fromY,this.z),this.fromX,this.fromY,this.z),modManager.getHook(v.Hook.OnTileUpdate).call(this.getTile(),this.x,this.y,this.z),this.nextX=-1,this.nextY=-1,this.isLocalPlayer()&&(this.updateTables(),fieldOfView.compute(!0))),this.fromX===game.mapSize-1&&0===this.x&&(this.fromX=-1),0===this.fromX&&this.x===game.mapSize-1&&(this.fromX=game.mapSize),this.fromY===game.mapSize-1&&0===this.y&&(this.fromY=-1),0===this.fromY&&this.y===game.mapSize-1&&(this.fromY=game.mapSize),e===d.TurnType.DontEnterCaves?this.checkUnder(!1,!1,!1):e===d.TurnType.CheckUnderPlayer?this.checkUnder(!1,!0):e===d.TurnType.ForcePickUp?this.checkUnder(!1,!0,!0,!0):this.checkUnder(),this.anim=1-this.anim,this.turns++,this.addMilestone(B.MilestoneType.Survivor),this.addMilestone(B.MilestoneType.Weathered),this.addMilestone(B.MilestoneType.Seasoned),this.realTimeTickActionDelay=3}onStaminaUseChanged(){const e=this.getStat(l.Stat.Weight);this.isResting()||(this.getStat(l.Stat.Stamina).changeAmount=e.value<=.9*e.max?1:0)}onStatusEffectChanged(e,t,a){const i=!this.hasStatus(d.StatusType.Bleeding)&&!this.hasStatus(d.StatusType.Burned)&&!this.hasStatus(d.StatusType.Poisoned);this.getStat(l.Stat.Health).changeAmount=i?1:0,t===d.StatusType.Burned&&a&&this.notes.write(T.default.Burned)}onStatChange(e,t,a,i){if(i.reason===s.StatChangeReason.Upgrade)return;const n=i.reason===s.StatChangeReason.ChangeTimer;switch(t.type){case l.Stat.Stamina:n&&this.isResting()&&this.restData&&this.restData.type===d.RestType.Resting&&t.value>=t.max&&this.cancelResting(d.RestCancelReason.FullStamina),this.staminaSyncCheck();break;case l.Stat.Health:this.healthSyncCheck();break;case l.Stat.Hunger:n&&t.value<0&&(this.damage(t.value,g.default.DueToStarvation,0,!1),this.increaseStat(l.Stat.Stamina,t.value),this.messages.source(x.Source.Wellbeing).type(L.MessageType.Bad).send(g.default.StarvingToDeath));break;case l.Stat.Thirst:n&&t.value<0&&(this.damage(t.value,g.default.DueToDehydration,0,!1),this.increaseStat(l.Stat.Stamina,t.value),this.messages.source(x.Source.Wellbeing).type(L.MessageType.Bad).send(g.default.DyingOfDehydration));break;case l.Stat.Malignity:case l.Stat.Benignity:this.emit(s.EntityEvent.StatChanged,{type:l.Stat.Reputation,value:this.getReputation()},NaN,i);break;case l.Stat.Strength:this.updateStrength()}}restTick(){const e=this.restData;void 0===e.cycle&&(e.cycle=0);const t=e.type,a=Math.min(30,e.totalCycles-e.cycle),i=I.default.message(t===d.RestType.Resting?g.default.Rest:g.default.Sleep);let n=!1;const o=game.isRealTimeMode();this.anim=1-this.anim,game.updateRender(c.RenderSource.PlayerRest);for(let t=0;t<a;t++){const t=e.cancelReason;if(void 0!==t){switch(t){case d.RestCancelReason.NearbyCreatureDamagedDoodad:this.messages.source(x.Source.Wellbeing,x.Source.Combat).type(L.MessageType.Bad).send(g.default.RestInterrupted,i,I.default.message(g.default.RestInterruptedLoudNoise)),this.queueSoundEffect(d.SfxType.Hit);break;case d.RestCancelReason.FullStamina:this.messages.source(x.Source.Wellbeing).send(g.default.StaminaIsFull);break;case d.RestCancelReason.Damaged:this.messages.source(x.Source.Wellbeing).type(L.MessageType.Bad).send(g.default.RestInterrupted,i,I.default.message(g.default.RestInterruptedPain)),this.queueSoundEffect(d.SfxType.Hurt);break;case d.RestCancelReason.CreatureDamaged:this.messages.source(x.Source.Wellbeing,x.Source.Combat).type(L.MessageType.Bad).send(g.default.RestInterrupted,i,I.default.message(g.default.RestInterruptedDamage)),this.queueSoundEffect(d.SfxType.Hurt);break;case d.RestCancelReason.CreatureNearby:this.messages.source(x.Source.Wellbeing,x.Source.Combat).type(L.MessageType.Bad).send(g.default.RestInterrupted,i,I.default.message(g.default.RestInterruptedStirring)),this.queueSoundEffect(d.SfxType.CreatureNoise)}n=!0;break}if(o?this.tick(!0):game.passTurn(this),!this.isResting())return;e.cycle++}if(n||e.cycle===e.totalCycles){let a;a=t===d.RestType.Resting?g.default.Rested:g.default.Slept;const i=Math.floor(e.cycle/160);if(i<1)this.messages.source(x.Source.Wellbeing).send(g.default.FewMinutes,I.default.message(a));else if(o){let e;e=i<=3?g.default.RestShortTime:i<=6?g.default.RestModerateTime:g.default.RestLongTime,this.messages.source(x.Source.Wellbeing).send(g.default.RestTime,I.default.message(a),I.default.message(e))}else{let e,t=g.default.Hours;switch(i){case 1:t=g.default.Hour,e=g.default.NumberOne;break;case 2:e=g.default.NumberTwo;break;case 3:e=g.default.NumberThree;break;case 4:e=g.default.NumberFour;break;case 5:e=g.default.NumberFive;break;case 6:e=g.default.NumberSix;break;case 7:e=g.default.NumberSeven;break;case 8:e=g.default.NumberEight;break;case 9:e=g.default.NumberNine;break;default:case 10:e=g.default.NumberTen}this.messages.source(x.Source.Wellbeing).send(g.default.AboutHours,I.default.message(a),I.default.message(e),I.default.message(t))}if(this.onStaminaUseChanged(),this.resetStatTimers(),void 0!==e.itemId){const t=game.items[e.itemId];t&&t.damage("PR")}else if(void 0!==e.doodadId){const t=game.doodads[e.doodadId];t&&t.damage(!1,!1,!0)}else this.messages.source(x.Source.Wellbeing).send(g.default.RestingOnGroundNotEffective);this.restData=void 0,this.updateStatsAndAttributes(),game.updateView(c.RenderSource.PlayerRestStop,this.isLocalPlayer()),this.isLocalPlayer()&&newui.hideScreen(P.ScreenId.Interrupt)}}staminaSyncCheck(){multiplayer.addSyncCheck(w.MultiplayerSyncCheck.StaminaChanges,`${this.id}-${this.getStat(l.Stat.Stamina).value}`)}canWriteInHours(){return this.getSkill(d.SkillType.Camping)>=50&&itemManager.isItemInContainer(this.inventory,d.ItemType.Sundial)}canWriteNote(e){return!this.isServer()&&!this.isGhost()&&!1!==modManager.getHook(v.Hook.OnWriteNote).call(this,e)}onWriteNote(e){modManager.getHook(v.Hook.OnWrittenNote).call(this,e),this.addMilestone(B.MilestoneType.Notekeeper,this.notes.notes.length)}shouldDisplayMessage(e,t){return!1!==modManager.getHook(v.Hook.ShouldDisplayMessage).call(this,e,t)}onDisplayMessage(e){modManager.getHook(v.Hook.OnDisplayMessage).call(this,e)}}__decorate([Override],te.prototype,"entityType",void 0),__decorate([N.SaveProperty()],te.prototype,"absentLastUsedTime",void 0),__decorate([N.SaveProperty()],te.prototype,"containerSortInfo",void 0),__decorate([N.SaveProperty()],te.prototype,"dialogContainerInfo",void 0),__decorate([N.SaveProperty()],te.prototype,"dialogInfo",void 0),__decorate([N.SaveProperty()],te.prototype,"hintSeen",void 0),__decorate([N.SaveProperty()],te.prototype,"isConnecting",void 0),__decorate([N.SaveProperty()],te.prototype,"isMoving",void 0),__decorate([N.SaveProperty()],te.prototype,"lastAttackedBy",void 0),__decorate([Override,N.SaveProperty()],te.prototype,"messages",void 0),__decorate([N.SaveProperty()],te.prototype,"movementComplete",void 0),__decorate([N.SaveProperty()],te.prototype,"movementCompleteZ",void 0),__decorate([N.SaveProperty()],te.prototype,"name",void 0),__decorate([N.SaveProperty()],te.prototype,"noInputReceived",void 0),__decorate([Override,N.SaveProperty()],te.prototype,"notes",void 0),__decorate([N.SaveProperty()],te.prototype,"quests",void 0),__decorate([N.SaveProperty()],te.prototype,"quickSlotInfo",void 0),__decorate([N.SaveProperty()],te.prototype,"realTimeTickActionDelay",void 0),__decorate([N.SaveProperty()],te.prototype,"revealedItems",void 0),__decorate([N.SaveProperty()],te.prototype,"spawnPoint",void 0),__decorate([N.SaveProperty()],te.prototype,"tamedCreatures",void 0),__decorate([N.SaveProperty()],te.prototype,"travelData",void 0),__decorate([N.SaveProperty()],te.prototype,"turns",void 0),__decorate([N.SaveProperty()],te.prototype,"walkSoundCounter",void 0),__decorate([Override],te.prototype,"setOptions",null),__decorate([Override],te.prototype,"setStatChangeTimer",null),__decorate([Override],te.prototype,"setStatus",null),__decorate([Override],te.prototype,"startResting",null),__decorate([Override],te.prototype,"cancelResting",null),__decorate([Override],te.prototype,"setRaft",null),__decorate([Override],te.prototype,"skillGain",null),__decorate([Override],te.prototype,"addMilestone",null),__decorate([Override],te.prototype,"calculateEquipmentStats",null),__decorate([Override],te.prototype,"hasHandToUse",null),__decorate([Override],te.prototype,"getAndSwitchHandToUse",null),__decorate([Override],te.prototype,"equip",null),__decorate([Override],te.prototype,"unequip",null),__decorate([Override],te.prototype,"unequipAll",null),__decorate([Override],te.prototype,"resetStatTimers",null),__decorate([Override],te.prototype,"getMaxHealth",null),__decorate([Override],te.prototype,"updateReputation",null),__decorate([Override],te.prototype,"setPosition",null),__decorate([Override],te.prototype,"setZ",null),__decorate([Override],te.prototype,"isGhost",null),__decorate([Override],te.prototype,"getName",null),__decorate([Override],te.prototype,"canSeePosition",null),__decorate([Override],te.prototype,"getMovementProgress",null),__decorate([Override],te.prototype,"checkUnder",null),__decorate([Override],te.prototype,"getMovementFinishTime",null),__decorate([Override],te.prototype,"calculateStats",null),__decorate([Override],te.prototype,"swimCheck",null),__decorate([J.Bound],te.prototype,"onStatusEffectChanged",null),__decorate([J.Bound],te.prototype,"onStatChange",null),__decorate([J.Bound],te.prototype,"canWriteInHours",null),__decorate([J.Bound],te.prototype,"canWriteNote",null),__decorate([J.Bound],te.prototype,"onWriteNote",null),__decorate([J.Bound],te.prototype,"shouldDisplayMessage",null),__decorate([J.Bound],te.prototype,"onDisplayMessage",null),t.default=te}),
 
-define("creature/Creature",["require","exports","creature/corpse/Corpses","creature/Creatures","creature/Pathing","doodad/Doodads","entity/Entity","entity/IEntity","entity/IStats","entity/StatFactory","Enums","flowfield/IFlowFieldManager","item/LootGroups","language/Dictionaries","language/dictionary/Message","language/dictionary/Misc","language/dictionary/Note","language/Messages","language/Translation","mod/IHookManager","multiplayer/IMultiplayer","player/IMessageManager","player/IMilestone","player/MessageManager","player/Player","renderer/particle/IParticle","renderer/particle/Particles","save/ISerializer","tile/ITileEvent","tile/Terrains","utilities/enum/Enums","utilities/math/Vector2","utilities/math/Vector3","utilities/Random","utilities/TileHelpers"],function(e,t,a,i,n,o,r,s,l,u,d,p,c,m,h,y,g,f,T,S,I,v,w,M,b,k,C,D,A,P,G,R,x,B,E){Object.defineProperty(t,"__esModule",{value:!0});const L=Math.pow(10,2);class O extends r.default{constructor(e,t=0,a=0,i=0,n){if(super(),this.entityType=s.EntityType.Creature,void 0===e)return;this.type=e,this.x=t,this.y=a,this.z=i,this.fromX=t,this.fromY=a,this.anim=0,this.facingDirection=d.Direction.South;const o=this.description();if(!o)return;let r=B.default.intInRange(o.minhp,o.maxhp);if(this.ai=o.ai,n){this.aberrant=!0,this.ai|=s.AiType.Hostile,this.ai&=~s.AiType.Scared;let e=game.getMaxHealth();e<=0&&(e=60),r=Math.ceil(r*Math.max(e/15,2))}multiplayer.isConnected()&&(r=Math.ceil(r*Math.max(game.getPlayers().length/3,1.5)));const l=this.aberrant&&o.aberrantLoot?o.aberrantLoot:o.loot;if(l){this.loot=[];for(const e of l){const t=e.chance;t?B.default.percent()<=t&&this.loot.push(e.item):this.loot.push(e.item)}}this.initializeStats(r),this.setMoveType(o.moveType)}initializeStats(e,t){const a=this.description();if(!a)return;let i;this.type!==d.CreatureType.Chicken&&this.type!==d.CreatureType.Goat||(i=new u.default(l.Stat.Produce,this.type===d.CreatureType.Chicken?4e3+B.default.int(1e3):2e3+B.default.int(500)).setChangeTimer(1,-1)),this.stats=u.default.getStats(new u.default(l.Stat.Health,e).setMax(void 0===t?e:t),i)}getName(e,t){return T.default.nameOf(m.Dictionary.Creature,this,t,e).addReformatter(T.default.message(h.default.Aberrant).addArgs(this.aberrant),!0).addReformatter(this.aberrant?new T.default(m.Dictionary.Misc,y.MiscTranslation.Aberrant):void 0)}description(){return this._description||(this._description=i.default[this.type]),this._description}inspect({inspector:e,context:t,inspectEntityHealth:a},i){if(this.isHidden())return;i.border=this.aberrant?"var(--message-type-bad)":void 0,i.add({title:!0,name:!0,text:this.getName()}),i.add(new T.default(m.Dictionary.Creature,this.type,1)),this.aberrant&&i.add({messageType:M.MessageType.Bad,text:T.default.message(h.default.AppearsToBeAberrant).inContext(4).addArgs(T.default.message(h.default.TheCreature))});const n=T.default.message(h.default.TheCreature).addArgs(this.getName(!1));i.addExtra(a(this,n));const o=e.getSkill(d.SkillType.Anatomy);i.addExtra(this.inspectResistancesAndVulnerabilities(e,n,T.default.message(o>50?h.default.ItAlsoReveals:h.default.ItAlsoSeems))),i.add(this.inspectHappiness(e))}isHidden(){return 0!=(this.ai&s.AiType.Hidden)}isDefender(){return 0!=(this.ai&s.AiType.Defender)}checkForBurn(e=this.getMoveType()){const t=this.description();if(!t)return!1;if((e&d.MoveType.Flying)===d.MoveType.Flying)return!1;const a=this.getTile(),i=E.default.getType(a);if(tileEventManager.get(a,A.TileEventType.Fire)||i===d.TerrainType.Lava){const e=B.default.intInRange(4,8);if(this.damage({amount:e,type:d.DamageType.Fire}),!a.creature)return!1}return!0}isTamed(){return 0!=(this.ai&s.AiType.Tamed)}tame(e){if(this.isTamed())return!1;this.ai=s.AiType.Tamed|s.AiType.Follower|s.AiType.Defender,this._owner=e,e.tamedCreatures.push(this.id),this.increaseTamedCount();const t=this.description();t&&new u.default(l.Stat.Happiness,creatureManager.getHappinessLevel(e,this)).setChangeTimer(1,-1).initializeOn(this);const a=this.getStat(l.Stat.Health);if(this.setStatMax(a,Math.floor(a.max/1.15)),this.setStat(a,Math.floor(a.value/1.15)),a.max<=0&&this.setStatMax(a,1),a.value<=0&&this.setStat(a,1),this.hasStat(l.Stat.Produce)){this.getStat(l.Stat.Produce).value<=100&&this.setStat(l.Stat.Produce,50+B.default.int(100));const e=this.getStat(l.Stat.Produce);e&&(e.changeAmount*=2)}return e.addMilestone(w.MilestoneType.Friendly),e.addMilestone(w.MilestoneType.Pacifier,this.type),modManager.getHook(S.Hook.OnCreatureTamed).call(this,e),!0}increaseTamedCount(){this.hasStat(l.Stat.Tamed)?this.increaseStat(l.Stat.Tamed,1):new u.default(l.Stat.Tamed,1).initializeOn(this)}release(){if(!this.isTamed())return!1;this.ai=s.AiType.Neutral,this._owner=void 0;const e=this.id;for(const t of players){const a=t.tamedCreatures.indexOf(e);if(-1!==a){t.tamedCreatures.splice(a,1);break}}if(this.hasStat(l.Stat.Produce)){const e=this.getStat(l.Stat.Produce);e&&(e.changeAmount/=2)}return this.removeStat(l.Stat.Happiness),!0}pet(){return!!this.isTamed()}skipNextUpdate(){this.shouldSkipNextUpdate=!0}getMoveType(){if(void 0===this.moveType){const e=this.description();this.moveType=e?e.moveType:d.MoveType.None}return this.moveType}queueSoundEffect(e,t=0,a=(this.aberrant?.5:1)){super.queueSoundEffect(e,t,a)}update(){const e=this.description();if(!e)return!1;if(this.shouldSkipNextUpdate)return this.shouldSkipNextUpdate=!1,!1;const t=this.getMoveType();this.fromX=this.x,this.fromY=this.y,this.isInFov()&&(this.anim=1-this.anim),this.updateStats();const a=this.getStat(l.Stat.Happiness,!0);a&&a.value<=0&&(this.release(),M.default.toAll(e=>e.ifVisible(this).source(v.Source.Allies,v.Source.Creature).send(h.default.CreatureUntamed,this.getName())));const i=game.getNearestPlayer(this.x,this.y);let n=i;if(void 0!==this.enemy)if(!0===this.enemyIsPlayer){const e=players[this.enemy];e&&this.z===e.z&&!e.isGhost()?n=e:this.enemy=void 0}else{const e=game.creatures[this.enemy];!e||this.z!==e.z||this.isTamed()&&e.isTamed()?this.enemy=void 0:n=e}if(this.isTamed()&&(this.isDefender()?n===this.getOwner()?n=void 0:!(n instanceof b.default)||multiplayer.isConnected()&&multiplayer.getOptions().pvp||(n=void 0):n=void 0),!e.fishable&&n){const a=game.getTile(this.x,this.y,this.z);if(a&&a.doodad&&a.doodad.checkForTrampling(this),this.processAttack(e,t,n))return!1}return!(void 0!==e.skipMovementChance&&B.default.percent()<=e.skipMovementChance)&&this.processMovement(e,t,n,i)}moveTo(e,t,a){const i=this.getTile();delete i.creature,game.updateFlowFieldTile(i,this.x,this.y,this.z);const n=game.getTile(e,t,a);return n.creature=this,this.x=e,this.y=t,this.z=a,game.updateFlowFieldTile(n,this.x,this.y,this.z),this._movementFinishTime=game.getMovementFinishTime(),!0}checkUnder(e=this.x,t=this.y){const a=this.description(),i=game.getTile(e,t,this.z),n=P.default[E.default.getType(i)];if((n&&(n.shallowWater||n.water)&&(this.getMoveType()&d.MoveType.Flying)!==d.MoveType.Flying||n&&a&&a.particlesOnMove)&&game.particle.create(e,t,this.z,n.particles),!this.checkForBurn())return!0;const o=i.doodad;if(o){const a=o.description();if(a&&a.isTrap){const i=B.default.percent();let n=0;if(o.type===d.DoodadType.SetHobgoblinSnare)75>=i-50&&(n=B.default.int(6)+3,this.queueSoundEffect(d.SfxType.CreatureHit));else{const e=game.getSkillPercent(d.SkillType.Trapping);if(e>=i-50){const t=a.trapDamage?a.trapDamage:0;if(n=t+Math.floor(e/10)+B.default.int(3),o.legendary&&o.legendary.type===d.LegendaryType.TrapDamage&&(n+=o.legendary.value),this.queueSoundEffect(d.SfxType.CreatureHit),multiplayer.isConnected()){if(o.ownerIdentifier){const e=game.getPlayerByIdentifier(o.ownerIdentifier);e&&(e.skillGain(d.SkillType.Trapping),e.addMilestone(w.MilestoneType.Trapper))}}else localPlayer.skillGain(d.SkillType.Trapping),localPlayer.addMilestone(w.MilestoneType.Trapper)}}if(n){const a=this.damage({amount:n,type:d.DamageType.Blunt},e,t);return this.getStatValue(l.Stat.Health)<=0&&modManager.getHook(S.Hook.OnEntityKill).call(o,this),this.stopNextMovement=!0,M.default.toAll(e=>e.ifVisible(o).source(v.Source.Combat,v.Source.Creature).type(a?M.MessageType.Attack:M.MessageType.Miss).send(a?h.default.HasBeenHurtByATrap:h.default.HasSetTrapOffNoDamage,this.getName(),a)),o.setOffTrap(),!1}}}if(i.containedItems&&i.containedItems.length>0&&!this.isTamed()&&(!this.hasStat(l.Stat.Happiness)||this.getStat(l.Stat.Happiness).value<=0)){const a=this.offer(i.containedItems);if(void 0!==a){const i=game.getNearestPlayer(e,t,this.z);if(i&&i.canSeePosition(e,t,this.z)){const e=this.hasStat(l.Stat.Tamed)?this.getStatValue(l.Stat.Tamed):void 0;return this.aberrant&&B.default.percent()-Math.floor(i.getSkill(d.SkillType.Taming)/7.5)-(void 0!==e?e:1)>=50?M.default.get(i).source(v.Source.Creature).send(h.default.YouNoticeTakeFromGround,this.getName(),a.getName()):(this.tame(i),M.default.get(i).source(v.Source.Allies,v.Source.Creature).send(h.default.TakenFromGroundBecomeTamed,this.getName(),a.getName())),i.skillGain(d.SkillType.Taming),this.queueSoundEffect(d.SfxType.CreatureNoise),itemManager.remove(a),!1}}}return!0}canSwapWith(e){return 0===this.checkCreatureMove(e.x,e.y,e.z,e.getTile(),this.getMoveType(),!1,e)}getOwner(){if(this.isTamed()){if(this._owner)return this._owner;for(const e of players)if(e.hasTamedCreature(this))return this._owner=e,e}}damage(e,t=this.x,i=this.y,n=this.z){const o=this.description();if(!o)return;const r=game.damage(this,e);if(this.getStat(l.Stat.Health).value>0)return e.human&&void 0===this.enemy&&(this.isTamed()&&this.isDefender()||game.getDifficultyOptions().peaceful)&&(this.enemy=e.human.id,this.enemyIsPlayer=!0,this.enemyAttempts=void 0),r;for(const e of game.getPlayersThatSeePosition(t,i,n))e.notes.write(g.default.CreatureTaming,this.getName(!1));if(void 0!==this.hitchedTo){const e=game.doodads[this.hitchedTo];e&&(e.hitchedCreature=void 0)}if(e.weaponName&&M.default.get(e.human).source(v.Source.Combat,v.Source.Action,v.Source.Creature).send(h.default.YouHaveKilled,this.getName()),e.skipMilestones||!e.human||this.respawned||(e.human.addMilestone(w.MilestoneType.Hunter),e.human.addMilestone(w.MilestoneType.Exterminator),e.human.addMilestone(w.MilestoneType.Huntsman,this.type)),!this.respawned){const a=this.loot;if(a)for(let e=0;e<a.length;e++){const o=itemManager.getRandomQuality(a[e],this.aberrant?560:200);itemManager.create(a[e],itemManager.getTileContainer(t,i,n),o)}if(void 0!==o.lootGroup){const e=c.default[o.lootGroup];if(e){const a=B.default.getElement(e),o=itemManager.getRandomQuality(a,this.aberrant?560:200);itemManager.create(a,itemManager.getTileContainer(t,i,n),o)}}this.aberrant&&e.human&&e.human.addMilestone(w.MilestoneType.Abnormalizer)}const s=a.default[this.type];return this.type!==d.CreatureType.Cod&&this.type!==d.CreatureType.Blindfish&&s&&corpseManager.create(this.type,t,i,n,s.decay,this.aberrant,this.renamed),this.type===d.CreatureType.JellyCube?creatureManager.spawn(d.CreatureType.Slime,t,i,n):this.type===d.CreatureType.Drake&&e.human&&e.human.addMilestone(w.MilestoneType.DragonSlayer),this.aberrant&&o.reputation<0?game.updateReputation(Math.floor(-1*o.reputation/2)):game.updateReputation(o.reputation),modManager.getHook(S.Hook.OnCreatureDeath).call(this),creatureManager.remove(this),r}onUnserialized(){this.description()}offer(e){const t=this.description();if(!t)return;const a=t.acceptedItems;if(a)for(const t of e){const e=t.description();if(e)for(const i of a)if(!e.recipe||t.ownerIdentifier){if(i===t.type)return t;if(itemManager.isGroup(i)&&itemManager.isInGroup(t.type,i))return t}}}inspectResistancesAndVulnerabilities(e,t=this.getName(),a){const i=this.description();if(!i)return;const n=i.defense.resist,o=i.defense.vulnerable,r=e.getSkill(d.SkillType.Anatomy),s=[],l=[],u=new T.default(m.Dictionary.Skill,d.SkillType.Anatomy);if(r<=25){a=a||T.default.message(h.default.YourLowSkill).addArgs(u);const e=Object.keys(n),i=Object.keys(o);return T.default.message(h.default.RevealsSomeResistancesAndVulnerabilities).inContext(4).addArgs(a,t,e.length,i.length)}for(const e of G.default.values(d.DamageType))n[e]&&s.push(e),o[e]&&l.push(e);if(r<=50)return a=a||T.default.message(h.default.YourModerateSkill).addArgs(u),T.default.message(h.default.RevealsNumberOfResistancesAndVulnerabilities).inContext(4).addArgs(a,t,f.fullDamageType(s),f.fullDamageType(l));{a=a||T.default.message(h.default.YourHighSkill).addArgs(u);const e=f.fullDamageType(s,e=>T.default.message(99===n[e]||100===n[e]?h.default.ResistOrVulnAll:h.default.ResistOrVuln).addArgs(n[e]).inContext(1)),i=f.fullDamageType(l,e=>T.default.message(99===o[e]||100===o[e]?h.default.ResistOrVulnAll:h.default.ResistOrVuln).addArgs(o[e]).inContext(1));return T.default.message(h.default.RevealsResistancesAndVulnerabilities).inContext(4).addArgs(a,t,e,i)}}inspectHappiness(e){if(!this.isTamed()||!this.hasStat(l.Stat.Happiness))return;let t,a=M.MessageType.Good;const i=creatureManager.getHappinessLevel(e,this),n=this.getStat(l.Stat.Happiness);return n.value/i<=.25?(t=h.default.TamedAppearsAngered,a=M.MessageType.Bad):t=n.value/i<=.5?h.default.TamedAppearsUpset:n.value/i<=.75?h.default.TamedAppearsContended:h.default.TamedAppearsHappy,{messageType:a,text:T.default.message(h.default.TamedCreature).addArgs(T.default.message(t))}}findPath(e){const t=this.getMoveType(),a=(a,i)=>0!==this.checkCreatureMove(i.x,i.y,this.z,a,t,i.x===e.x&&i.y===e.y);return n.findPath(this,e,this.z,a)}checkCreatureMove(e,t,a,i,n,o=!1,r){const s=this.description();if(!s)return-1;const l=modManager.getHook(S.Hook.CanCreatureMove).call(this,i,e,t,a,n);if(!1===l)return 1;if(!0===l)return 0;if(n===d.MoveType.None)return 2;if(!s.fishable)for(const i of game.getPlayers(!1,!0))if(i!==r&&e===i.x&&t===i.y&&a===i.z)return 3;const u=creatureManager.getMovePenalty(n,i,o);return u>=p.blockedPenalty?4:0}findPlayersWithinRadius(e,t,a,i){const n=[];for(const o of game.getPlayers())o.z===a&&o.x>=e-i&&o.x<=e+i&&o.y>=t-i&&o.y<=t+i&&n.push(o);return n}processAttack(e,t,a){const i=this.getStat(l.Stat.Health);(i.value/e.maxhp<=.1||i.value<=1)&&t!==d.MoveType.None&&(this.ai|=s.AiType.Scared,this.ai&=~s.AiType.Hostile);let n=!1;if(a){let e;e=0===B.default.int(20)?this.findPlayersWithinRadius(this.x,this.y,this.z,3):this.findPlayersWithinRadius(this.x,this.y,this.z,2);for(const t of e)t.cancelResting(d.RestCancelReason.CreatureNearby)}if(a&&this.z===a.z&&Math.abs(this.x-a.x)+Math.abs(this.y-a.y)===1&&(this.isDefender()||t===d.MoveType.None?n=!0:(0==(this.ai&s.AiType.Hostile)||game.getDifficultyOptions().peaceful&&(void 0===this.enemy||this.enemy!==a.id))&&((this.ai&s.AiType.Scared)!==s.AiType.Scared&&this.ai!==s.AiType.Neutral||0!==B.default.int(3))||(n=!0)),n&&(t&d.MoveType.Flying)!==d.MoveType.Flying){const t=this.getTile();tileEventManager.get(t,A.TileEventType.Fire)&&100!==e.defense.resist[d.DamageType.Fire]&&(n=!1)}if(!n||!a||!1===modManager.getHook(S.Hook.CanCreatureAttack).call(this,a))return!1;let o=B.default.intInRange(e.minatk,e.maxatk),r=1;if(this.aberrant&&(a instanceof b.default?(r=Math.max(a.skills[d.SkillType.Parrying].core/35,2),o=Math.ceil(o*r)):o*=2,o>75&&(o=75),this.isTamed()||(this.ai|=s.AiType.Hostile,this.ai&=~s.AiType.Scared)),this.fromX=this.x+(a.x-this.x)/3,this.fromY=this.y+(a.y-this.y)/3,this.facingDirection=Math.ceil((Math.atan2(a.y-this.y,this.x-a.x)+Math.PI)/(Math.PI/2))%4,this.isHidden())return this.ai|=s.AiType.Hostile,this.ai&=~s.AiType.Hidden,!0;let u=0,p=0,c;if(a instanceof b.default){u+=a.defense.base;for(const t of G.default.values(d.DamageType))e.damageType&t&&(u+=a.defenses[t]*r,p+=a.defenses[t])}p>0?c=T.default.message(h.default.ArmorAppeared).addArgs(T.default.message(h.default.Resistant)):p<0&&(c=T.default.message(h.default.ArmorAppeared).addArgs(T.default.message(h.default.Vulnerable)));let m=0;if(a instanceof b.default){if(m=a.defense.parrying+u,m=u/3+B.default.int(m),0!=(this.ai&s.AiType.Hostile)){const t=e.defense.resist,i=e.defense.vulnerable,n=[],o=[];for(const e of G.default.values(d.DamageType))t[e]&&n.push(e),i[e]&&o.push(e);a.notes.write(g.default.Combat,this.getName(),f.fullDamageType(n),f.fullDamageType(o))}a.damageRandomEquipment()}if(o=Math.ceil(o-m),this.type===d.CreatureType.LavaBeetle&&0===B.default.int(10)){const e=game.getTile(a.x,a.y,a.z);if(void 0===e.doodad){game.changeTile(d.TerrainType.Lava,a.x,a.y,a.z,!1),game.particle.create(a.x,a.y,a.z,C.default[k.ParticleType.Fire]),a.queueSoundEffect(d.SfxType.Water),M.default.toAll(e=>e.ifVisible(a).source(v.Source.Combat,v.Source.Creature).send(h.default.YouSeeSpewLava,this.getName()));const t=e;(t.containedItems||void 0!==e.corpses)&&(tileEventManager.get(e,A.TileEventType.Fire)||tileEventManager.create(A.TileEventType.Fire,a.x,a.y,a.z))}}else if(this.type===d.CreatureType.Drake&&0===B.default.int(6))game.fireBreath(this.x,this.y,this.z,this.facingDirection),M.default.toAll(e=>e.ifVisible(this).source(v.Source.Combat,v.Source.Creature).send(h.default.YouSeeEngulfFire,this.getName()));else if(a instanceof b.default&&this.type===d.CreatureType.SlitherSucker&&0===B.default.int(6)){const e=itemManager.create(this.aberrant?d.ItemType.AberrantSlitherSucker:d.ItemType.SlitherSucker,a.inventory),t=a.getEquippedItem(d.EquipType.Head);return t&&a.unequip(t,!0,!0),e.maxDur=i.max,e.minDur=i.value,a.equip(e,d.EquipType.Head,!0),a.messages.source(v.Source.Equipment,v.Source.Combat,v.Source.Wellbeing,v.Source.Creature).send(h.default.SlitherSuckerJumpedOnHead,this.getName()),creatureManager.remove(this),!0}if(o>0||o<=0&&0===B.default.int(8))if(o<=0&&(o=1),a instanceof b.default){let t;game.particle.create(a.x,a.y,a.z,C.default[k.ParticleType.Blood]),0===B.default.int(15)&&corpseManager.createBlood(a.x,a.y,a.z),a.defense.parrying>0&&a.skillGain(d.SkillType.Parrying,.1),a.messages.source(v.Source.Wellbeing,v.Source.Combat,v.Source.Creature).type(M.MessageType.Bad).send(h.default.HasHitYouForDamage,this.getName(),o,c);const i=this.aberrant?16:8,n=Math.floor(a.getSkill(d.SkillType.Anatomy)/(this.aberrant?10:20));if(e.canCauseStatus)for(const o of e.canCauseStatus)switch(o){case d.StatusType.Bleeding:a.hasStatus(d.StatusType.Bleeding)||(t=B.default.percent())<=i-n&&(a.messages.source(v.Source.Wellbeing,v.Source.Combat).send(h.default.BleedingProfusely),a.skillGain(d.SkillType.Anatomy,.1),a.setStatus(d.StatusType.Bleeding,!0,s.StatusEffectChangeReason.Gained),a.notes.write(g.default.Bleeding,this.getName()));break;case d.StatusType.Poisoned:a.hasStatus(d.StatusType.Poisoned)||(t=B.default.percent())<=i-n&&(a.messages.source(v.Source.Combat,v.Source.Wellbeing).type(M.MessageType.Bad).send(h.default.BeenPoisoned),a.skillGain(d.SkillType.Anatomy,.1),a.setStatus(d.StatusType.Poisoned,!0,s.StatusEffectChangeReason.Gained),a.notes.write(g.default.Poisoned,this.getName()));break;case d.StatusType.Burned:if(!a.hasStatus(d.StatusType.Burned)&&(t=B.default.percent())<=i-n){const e=a.burn(!1,!1,void 0,!0);e&&a.skillGain(d.SkillType.Anatomy,.1)}}a.damage({amount:o,type:d.DamageType.True,creature:this,damageMessage:T.default.message(h.default.DeathBy).addArgs(this.getName()),soundDelay:6,legacy:!0}),a.getStat(l.Stat.Health).value<=0&&0!=(this.ai&s.AiType.Hostile)&&0==(this.ai&s.AiType.Fearless)&&(this.ai|=s.AiType.Random,this.ai&=~s.AiType.Hostile)}else a instanceof O&&(a.damage({amount:o,type:e.damageType,creature:this,skipMilestones:!0}),a.enemy=this.id,a.enemyIsPlayer=!1,a.enemyAttempts=void 0);else a instanceof b.default&&(a.defense.parrying>0&&a.skillGain(d.SkillType.Parrying),this.queueSoundEffect(d.SfxType.Miss,6),a.messages.source(v.Source.Combat,v.Source.Wellbeing,v.Source.Creature).type(M.MessageType.Miss).send(h.default.DealtNoDamageToYou,this.getName()));return a instanceof b.default&&(a.defense.parrying>0?a.staminaReduction(d.SkillType.Parrying):a.staminaReduction(d.SkillType.Tactics),multiplayer.isConnected()||a.addDelay(d.Delay.ShortPause),a.setTamedCreatureEnemy(this)),this.checkForBurn(t),!0}processMovement(e,t,a,i){if(!this.isInFov()){const e=this.getStat(l.Stat.Health);return!this.renamed&&!this.isTamed()&&e.value>=e.max&&(0===B.default.int(19e3)||0===B.default.int(1e4)&&this.type===d.CreatureType.Shark||this.z!==d.WorldZ.Cave&&game.time.getTime()<.65&&(this.type===d.CreatureType.VampireBat||this.type===d.CreatureType.Zombie))&&creatureManager.remove(this),!1}if(this.z===d.WorldZ.Cave||this.type!==d.CreatureType.VampireBat&&this.type!==d.CreatureType.Zombie||(game.time.getTime()<.65&&0!=(this.ai&s.AiType.Hostile)?(this.ai|=s.AiType.Scared,this.ai&=~s.AiType.Hostile):game.time.getTime()>=.65&&0!=(this.ai&s.AiType.Scared)&&(this.ai|=s.AiType.Hostile,this.ai&=~s.AiType.Scared)),this.stopNextMovement)return this.stopNextMovement=!1,!1;if(void 0!==this.hitchedTo){this.facingDirection=B.default.choice(d.Direction.North,d.Direction.East,d.Direction.South,d.Direction.West);const e=game.doodads[this.hitchedTo];return e&&this.breakDoodad(e,t),!1}if(t===d.MoveType.None)return!1;this.processAiChanges(i);let n=this.x,o=this.y,r=this.z,u;multiplayer.addSyncCheck(I.MultiplayerSyncCheck.CreatureNearestPlayer,i?i.id:-1);let p=0!=(this.ai&s.AiType.Hostile)&&!game.getDifficultyOptions().peaceful;if(!p&&0!=(this.ai&s.AiType.Follower)){let e=i;for(const t of game.getPlayers())if(t.hasTamedCreature(this)){e=t;break}void 0!==e&&(Math.abs(n-e.x)>2||Math.abs(o-e.y)>2)&&(p=!0)}let c=!1;if(a&&(a instanceof O||this.isTamed())&&!e.fishable){const e=this.findPath(a);e&&e.length>=2?(c=!0,n=e[1].x,o=e[1].y,this.enemyAttempts=void 0):this.enemy&&(void 0===this.enemyAttempts&&(this.enemyAttempts=0),this.enemyAttempts++,this.enemyAttempts>=4&&(this.enemy=void 0,this.enemyAttempts=void 0))}const m=this.getTile();if(!m)return!1;const h=E.default.getType(m);let y;if(h&&h===d.TerrainType.CaveEntrance&&void 0!==i&&i.z!==this.z&&(e.spawnReputation&&game.getReputation()<=e.spawnReputation||this.isTamed())&&(c=!0,n=this.x,o=this.y,r=this.z===d.WorldZ.Cave?d.WorldZ.Overworld:d.WorldZ.Cave),!c){let a;if(a=((t&d.MoveType.Flying)===d.MoveType.Flying||!tileEventManager.get(m,A.TileEventType.Fire)||100===e.defense.resist[d.DamageType.Fire])&&flowFieldManager.isInFlowField(this),multiplayer.addSyncCheck(I.MultiplayerSyncCheck.CreatureIsInFlowField,a),h===d.TerrainType.CaveEntrance&&void 0!==i&&i.z!==this.z&&(e.spawnReputation&&game.getReputation()<=e.spawnReputation||this.isTamed()))c=!0,n=this.x,o=this.y,r=this.z===d.WorldZ.Cave?d.WorldZ.Overworld:d.WorldZ.Cave;else if(p&&a){const e=flowFieldManager.getMoveDirection(this.x,this.y,this.z,t);switch(multiplayer.addSyncCheck(I.MultiplayerSyncCheck.CreatureMoveDirection,e),e){case d.Direction.West:n-=1;break;case d.Direction.East:n+=1;break;case d.Direction.North:o-=1;break;case d.Direction.South:o+=1}}else if(0!=(this.ai&s.AiType.Fleeing)&&a&&0!==B.default.int(8)){const e=flowFieldManager.getOpposingMoveDirection(this.x,this.y,this.z,t);multiplayer.addSyncCheck(I.MultiplayerSyncCheck.CreatureMoveDirection,e),e===d.Direction.West?n+=1:e===d.Direction.East?n-=1:e===d.Direction.North?o+=1:e===d.Direction.South&&(o-=1)}else{const a=B.default.shuffle([0,1,2,3,4]);for(let i=0;i<4;i++){switch(a[i]){case 0:n=this.x+1,o=this.y;break;case 1:n=this.x,o=this.y+1;break;case 2:n=this.x-1,o=this.y;break;case 3:n=this.x,o=this.y-1;break;case 4:n=this.x,o=this.y}if(this.type===d.CreatureType.TimeSkitter||this.type===d.CreatureType.SkeletalMage?0===B.default.int(9)&&(n=this.x+B.default.int(6)-3,o=this.y+B.default.int(6)-3):e.fishable&&0===B.default.int(4)&&(n=this.x+B.default.int(3)-1,o=this.y+B.default.int(3)-1),n=game.getWrappedCoord(n),o=game.getWrappedCoord(o),y=game.getTile(n,o,r),0===this.checkCreatureMove(n,o,r,y,t))break}}}this.facingDirection=Math.ceil((Math.atan2(o-this.fromY,this.fromX-n)+Math.PI)/(Math.PI/2))%4;const g=e.speed||1;let f,T;for(let e=0;e<g&&(0===e||B.default.chance(.5));e++){f=n,T=o,e&&(this.facingDirection===d.Direction.West?n-=1:this.facingDirection===d.Direction.East?n+=1:this.facingDirection===d.Direction.North?o-=1:this.facingDirection===d.Direction.South&&(o+=1)),n=game.getWrappedCoord(n),o=game.getWrappedCoord(o);const a=(y=game.getTile(n,o,r)).doodad,i=a&&a.blocksMove()&&(t&d.MoveType.Flying)!==d.MoveType.Flying;if(a&&(this.type!==d.CreatureType.Hobgoblin||a.type!==d.DoodadType.WoodenDoor&&a.type!==d.DoodadType.WoodenGate||(a.type===d.DoodadType.WoodenDoor?a.changeType(d.DoodadType.WoodenDoorOpen):a.type===d.DoodadType.WoodenGate&&a.changeType(d.DoodadType.WoodenGateOpen),world.updateTile(a.x,a.y,a.z,y))),0!==this.checkCreatureMove(n,o,r,y,t)||i){n=f,o=T,a&&i&&this.breakDoodad(a,t);break}if(a&&a.checkForTrampling(this),u=y,!this.checkUnder(n,o))break}return game.creatures[this.id]!==this||(this.processSpecialAbilities(a),void 0!==u&&this.originalMoveType&&0===this.checkCreatureMove(n,o,r,u,this.originalMoveType)&&(this.setMoveType(this.originalMoveType),this.originalMoveType=void 0),void 0!==u?this.moveTo(n,o,r):(this.checkUnder(),!0))}breakDoodad(e,t){const a=e.description();if(a&&a.canBreak&&(t&d.MoveType.BreakDoodads)===d.MoveType.BreakDoodads&&0===B.default.int(12)){e.damage();const t=this.findPlayersWithinRadius(e.x,e.y,e.z,0===B.default.int(10)?5:0===B.default.int(5)?4:3);for(const e of t)e.cancelResting(d.RestCancelReason.NearbyCreatureDamagedDoodad);a.particles&&game.particle.create(e.x,e.y,e.z,a.particles)}}processAiChanges(e){const t=B.default.int(30);if(0!=(this.ai&s.AiType.Hostile)&&t>=0&&t<=3&&0==(this.ai&s.AiType.Fearless)&&(this.ai|=s.AiType.Random,this.ai&=~s.AiType.Hostile),0!=(this.ai&s.AiType.Hostile)&&0!=(this.ai&s.AiType.Fearless)&&0===t&&(this.ai|=s.AiType.Random,this.ai&=~s.AiType.Hostile),(0!=(this.ai&s.AiType.Random)&&t>=4&&t<=15||0!=(this.ai&s.AiType.Random)&&0!=(this.ai&s.AiType.Fearless)&&t>=1&&t<=15)&&(this.ai|=s.AiType.Hostile,this.ai&=~s.AiType.Random),void 0!==e&&0!=(this.ai&s.AiType.Scared)){const t=0!=(this.ai&s.AiType.Fleeing),a=R.default.squaredDistance(this,e)<L;t&&!a?this.ai&=~s.AiType.Fleeing:!t&&a&&(this.ai|=s.AiType.Fleeing)}}processSpecialAbilities(e){switch(this.type){case d.CreatureType.FireElemental:if(0===B.default.int(40)){const e=this.x+B.default.int(6)-3,t=this.y+B.default.int(6)-3,a=game.getTile(e,t,this.z);if(a){const i=P.default[E.default.getType(a)];let n;a.doodad&&(n=a.doodad.description()),(i&&i.flammable&&void 0===a.doodad||n&&(n.isFlammable||n.providesFire))&&void 0===a.creature&&!tileEventManager.get(a,A.TileEventType.Fire)&&(tileEventManager.create(A.TileEventType.Fire,e,t,this.z),game.particle.create(e,t,this.z,C.default[k.ParticleType.Fire]),audio.queueEffect(d.SfxType.Throw,e,t,this.z),M.default.toAll(a=>a.ifVisible(new x.default(e,t,this.z)).source(v.Source.Creature).send(h.default.YouSeeEngulfFire,this.getName())))}}break;case d.CreatureType.AcidSpitterDemon:if(0===B.default.int(30)){const e=this.x+B.default.int(6)-3,t=this.y+B.default.int(6)-3;multiplayer.addSyncCheck(I.MultiplayerSyncCheck.Random,`ASD:${e},${t}`),game.isPositionEmpty(e,t,this.z)&&(doodadManager.create(d.DoodadType.Acid,e,t,this.z),audio.queueEffect(d.SfxType.Water,e,t,this.z),M.default.toAll(a=>a.ifVisible(new x.default(e,t,this.z)).source(v.Source.Creature).send(h.default.YouSeeSpitAcid,this.getName())))}break;case d.CreatureType.SkeletalMage:if(void 0!==e&&0===B.default.int(80)){const t=e.x+B.default.int(3)-1,a=e.y+B.default.int(3)-1;if(multiplayer.addSyncCheck(I.MultiplayerSyncCheck.Random,`SM:${t},${a}`),game.isPositionEmpty(t,a,this.z)&&game.canASeeB(this.x,this.y,this.z,t,a,e.z)){doodadManager.create(d.DoodadType.SkeletalRemains,t,a,this.z);const e=o.default[d.DoodadType.SkeletalRemains];e&&e.particles&&game.particle.create(t,a,this.z,e.particles),audio.queueEffect(d.SfxType.Bow,t,a,this.z),M.default.toAll(e=>e.ifVisible(new x.default(t,a,this.z)).source(v.Source.Creature).send(h.default.YouSeeSummon,this.getName(),T.default.nameOf(m.Dictionary.Doodad,d.DoodadType.SkeletalRemains)))}}break;case d.CreatureType.Bogling:if(0===B.default.int(40)){const e=this.getTile();if(e&&E.default.getType(e)!==d.TerrainType.Swamp){game.changeTile(d.TerrainType.Swamp,this.x,this.y,this.z,!0);const e=P.default[d.TerrainType.Swamp];e&&game.particle.create(this.x,this.y,this.z,e.particles),audio.queueEffect(d.SfxType.Water,this.x,this.y,this.z),M.default.toAll(e=>e.ifVisible(this).source(v.Source.Creature).send(h.default.YouSeeSwampFlood,this.getName()))}}break;case d.CreatureType.Hobgoblin:if(0===B.default.int(150)){const e=this.x+B.default.int(2)-1,t=this.y+B.default.int(2)-1;multiplayer.addSyncCheck(I.MultiplayerSyncCheck.Random,`HG:${e},${t}`),game.isPositionEmpty(e,t,this.z)&&(doodadManager.create(d.DoodadType.SetHobgoblinSnare,e,t,this.z),audio.queueEffect(d.SfxType.PickUp,e,t,this.z),M.default.toAll(a=>a.ifVisible(new x.default(e,t,this.z)).source(v.Source.Combat,v.Source.Creature).send(h.default.YouSeeLayingTrap,this.getName())))}break;case d.CreatureType.Chicken:case d.CreatureType.Harpy:0!==B.default.int(750)||game.isPositionFull(this.x,this.y,this.z)||(itemManager.create(d.ItemType.Feather,itemManager.getTileContainer(this.x,this.y,this.z),d.ItemQuality.Random),M.default.toAll(e=>e.ifVisible(this).source(v.Source.Creature,v.Source.Item).send(h.default.YouSeeDrop,T.default.nameOf(m.Dictionary.Item,d.ItemType.Feather),this.getName())));const t=this.getStat(l.Stat.Produce,!0);this.isTamed()&&t&&t.value<=0&&!game.isPositionFull(this.x,this.y,this.z)&&(itemManager.create(d.ItemType.Egg,itemManager.getTileContainer(this.x,this.y,this.z),d.ItemQuality.Random),M.default.toAll(e=>e.ifVisible(this).source(v.Source.Creature,v.Source.Item).send(h.default.YouSeeLay,this.getName(),T.default.nameOf(m.Dictionary.Item,d.ItemType.Egg))),this.setStat(l.Stat.Produce,5e3+B.default.int(1e3)))}}}__decorate([Override],O.prototype,"entityType",void 0),__decorate([D.SaveProperty()],O.prototype,"aberrant",void 0),__decorate([D.SaveProperty()],O.prototype,"ai",void 0),__decorate([D.SaveProperty()],O.prototype,"enemy",void 0),__decorate([D.SaveProperty()],O.prototype,"enemyAttempts",void 0),__decorate([D.SaveProperty()],O.prototype,"enemyIsPlayer",void 0),__decorate([D.SaveProperty()],O.prototype,"loot",void 0),__decorate([D.SaveProperty()],O.prototype,"respawned",void 0),__decorate([D.SaveProperty()],O.prototype,"shouldSkipNextUpdate",void 0),__decorate([D.SaveProperty()],O.prototype,"type",void 0),__decorate([D.SaveProperty()],O.prototype,"originalMoveType",void 0),__decorate([D.SaveProperty()],O.prototype,"hitchedTo",void 0),__decorate([Override],O.prototype,"getName",null),__decorate([Override],O.prototype,"getMoveType",null),__decorate([Override],O.prototype,"queueSoundEffect",null),t.default=O}),
+define("creature/Creature", ["require", "exports", "creature/corpse/Corpses", "creature/Creatures", "creature/Pathing", "doodad/Doodads", "entity/Entity", "entity/IEntity", "entity/IStats", "entity/StatFactory", "Enums", "flowfield/IFlowFieldManager", "item/LootGroups", "language/Dictionaries", "language/dictionary/Message", "language/dictionary/Misc", "language/dictionary/Note", "language/Messages", "language/Translation", "mod/IHookManager", "multiplayer/IMultiplayer", "player/IMessageManager", "player/IMilestone", "player/MessageManager", "player/Player", "renderer/particle/IParticle", "renderer/particle/Particles", "save/ISerializer", "tile/ITileEvent", "tile/Terrains", "utilities/enum/Enums", "utilities/math/Vector2", "utilities/math/Vector3", "utilities/Random", "utilities/TileHelpers"], function(e, t, a, i, n, o, r, s, l, u, d, p, c, m, h, y, g, f, T, S, I, v, w, M, b, k, C, D, A, P, G, R, x, B, E) {
+    Object.defineProperty(t, "__esModule", {
+        value: !0
+    });
+    const L = Math.pow(10, 2);
+    class O extends r.default {
+        constructor(e, t = 0, a = 0, i = 0, n) {
+            if (super(), this.entityType = s.EntityType.Creature, void 0 === e) return;
+            this.type = e, this.x = t, this.y = a, this.z = i, this.fromX = t, this.fromY = a, this.anim = 0, this.facingDirection = d.Direction.South;
+            const o = this.description();
+            if (!o) return;
+            let r = B.default.intInRange(o.minhp, o.maxhp);
+            if (this.ai = o.ai, n) {
+                this.aberrant = !0, this.ai |= s.AiType.Hostile, this.ai &= ~s.AiType.Scared;
+                let e = game.getMaxHealth();
+                e <= 0 && (e = 60), r = Math.ceil(r * Math.max(e / 15, 2))
+            }
+            multiplayer.isConnected() && (r = Math.ceil(r * Math.max(game.getPlayers().length / 3, 1.5)));
+            const l = this.aberrant && o.aberrantLoot ? o.aberrantLoot : o.loot;
+            if (l) {
+                this.loot = [];
+                for (const e of l) {
+                    const t = e.chance;
+                    t ? B.default.percent() <= t && this.loot.push(e.item) : this.loot.push(e.item)
+                }
+            }
+            this.initializeStats(r), this.setMoveType(o.moveType)
+        }
+        initializeStats(e, t) {
+            const a = this.description();
+            if (!a) return;
+            let i;
+            this.type !== d.CreatureType.Chicken && this.type !== d.CreatureType.Goat || (i = new u.default(l.Stat.Produce, this.type === d.CreatureType.Chicken ? 4e3 + B.default.int(1e3) : 2e3 + B.default.int(500)).setChangeTimer(1, -1)), this.stats = u.default.getStats(new u.default(l.Stat.Health, e).setMax(void 0 === t ? e : t), i)
+        }
+        getName(e, t) {
+            return T.default.nameOf(m.Dictionary.Creature, this, t, e).addReformatter(T.default.message(h.default.Aberrant).addArgs(this.aberrant), !0).addReformatter(this.aberrant ? new T.default(m.Dictionary.Misc, y.MiscTranslation.Aberrant) : void 0)
+        }
+        description() {
+            return this._description || (this._description = i.default[this.type]), this._description
+        }
+        inspect({
+            inspector: e,
+            context: t,
+            inspectEntityHealth: a
+        }, i) {
+            if (this.isHidden()) return;
+            i.border = this.aberrant ? "var(--message-type-bad)" : void 0, i.add({
+                title: !0,
+                name: !0,
+                text: this.getName()
+            }), i.add(new T.default(m.Dictionary.Creature, this.type, 1)), this.aberrant && i.add({
+                messageType: M.MessageType.Bad,
+                text: T.default.message(h.default.AppearsToBeAberrant).inContext(4).addArgs(T.default.message(h.default.TheCreature))
+            });
+            const n = T.default.message(h.default.TheCreature).addArgs(this.getName(!1));
+            i.addExtra(a(this, n));
+            const o = e.getSkill(d.SkillType.Anatomy);
+            i.addExtra(this.inspectResistancesAndVulnerabilities(e, n, T.default.message(o > 50 ? h.default.ItAlsoReveals : h.default.ItAlsoSeems))), i.add(this.inspectHappiness(e))
+        }
+        isHidden() {
+            return 0 != (this.ai & s.AiType.Hidden)
+        }
+        isDefender() {
+            return 0 != (this.ai & s.AiType.Defender)
+        }
+        checkForBurn(e = this.getMoveType()) {
+            const t = this.description();
+            if (!t) return !1;
+            if ((e & d.MoveType.Flying) === d.MoveType.Flying) return !1;
+            const a = this.getTile(),
+                i = E.default.getType(a);
+            if (tileEventManager.get(a, A.TileEventType.Fire) || i === d.TerrainType.Lava) {
+                const e = B.default.intInRange(4, 8);
+                if (this.damage({
+                        amount: e,
+                        type: d.DamageType.Fire
+                    }), !a.creature) return !1
+            }
+            return !0
+        }
+        isTamed() {
+            return 0 != (this.ai & s.AiType.Tamed)
+        }
+        tame(e) {
+            if (this.isTamed()) return !1;
+            this.ai = s.AiType.Tamed | s.AiType.Follower | s.AiType.Defender, this._owner = e, e.tamedCreatures.push(this.id), this.increaseTamedCount();
+            const t = this.description();
+            t && new u.default(l.Stat.Happiness, creatureManager.getHappinessLevel(e, this)).setChangeTimer(1, -1).initializeOn(this);
+            const a = this.getStat(l.Stat.Health);
+            if (this.setStatMax(a, Math.floor(a.max / 1.15)), this.setStat(a, Math.floor(a.value / 1.15)), a.max <= 0 && this.setStatMax(a, 1), a.value <= 0 && this.setStat(a, 1), this.hasStat(l.Stat.Produce)) {
+                this.getStat(l.Stat.Produce).value <= 100 && this.setStat(l.Stat.Produce, 50 + B.default.int(100));
+                const e = this.getStat(l.Stat.Produce);
+                e && (e.changeAmount *= 2)
+            }
+            return e.addMilestone(w.MilestoneType.Friendly), e.addMilestone(w.MilestoneType.Pacifier, this.type), modManager.getHook(S.Hook.OnCreatureTamed).call(this, e), !0
+        }
+        increaseTamedCount() {
+            this.hasStat(l.Stat.Tamed) ? this.increaseStat(l.Stat.Tamed, 1) : new u.default(l.Stat.Tamed, 1).initializeOn(this)
+        }
+        release() {
+            if (!this.isTamed()) return !1;
+            this.ai = s.AiType.Neutral, this._owner = void 0;
+            const e = this.id;
+            for (const t of players) {
+                const a = t.tamedCreatures.indexOf(e);
+                if (-1 !== a) {
+                    t.tamedCreatures.splice(a, 1);
+                    break
+                }
+            }
+            if (this.hasStat(l.Stat.Produce)) {
+                const e = this.getStat(l.Stat.Produce);
+                e && (e.changeAmount /= 2)
+            }
+            return this.removeStat(l.Stat.Happiness), !0
+        }
+        pet() {
+            return !!this.isTamed()
+        }
+        skipNextUpdate() {
+            this.shouldSkipNextUpdate = !0
+        }
+        getMoveType() {
+            if (void 0 === this.moveType) {
+                const e = this.description();
+                this.moveType = e ? e.moveType : d.MoveType.None
+            }
+            return this.moveType
+        }
+        queueSoundEffect(e, t = 0, a = (this.aberrant ? .5 : 1)) {
+            super.queueSoundEffect(e, t, a)
+        }
+        update() {
+            const e = this.description();
+            if (!e) return !1;
+            if (this.shouldSkipNextUpdate) return this.shouldSkipNextUpdate = !1, !1;
+            const t = this.getMoveType();
+            this.fromX = this.x, this.fromY = this.y, this.isInFov() && (this.anim = 1 - this.anim), this.updateStats();
+            const a = this.getStat(l.Stat.Happiness, !0);
+            a && a.value <= 0 && (this.release(), M.default.toAll(e => e.ifVisible(this).source(v.Source.Allies, v.Source.Creature).send(h.default.CreatureUntamed, this.getName())));
+            const i = game.getNearestPlayer(this.x, this.y);
+            let n = i;
+            if (void 0 !== this.enemy)
+                if (!0 === this.enemyIsPlayer) {
+                    const e = players[this.enemy];
+                    e && this.z === e.z && !e.isGhost() ? n = e : this.enemy = void 0
+                } else {
+                    const e = game.creatures[this.enemy];
+                    !e || this.z !== e.z || this.isTamed() && e.isTamed() ? this.enemy = void 0 : n = e
+                }
+            if (this.isTamed() && (this.isDefender() ? n === this.getOwner() ? n = void 0 : !(n instanceof b.default) || multiplayer.isConnected() && multiplayer.getOptions().pvp || (n = void 0) : n = void 0), !e.fishable && n) {
+                const a = game.getTile(this.x, this.y, this.z);
+                if (a && a.doodad && a.doodad.checkForTrampling(this), this.processAttack(e, t, n)) return !1
+            }
+            return !(void 0 !== e.skipMovementChance && B.default.percent() <= e.skipMovementChance) && this.processMovement(e, t, n, i)
+        }
+        moveTo(e, t, a) {
+            const i = this.getTile();
+            delete i.creature, game.updateFlowFieldTile(i, this.x, this.y, this.z);
+            const n = game.getTile(e, t, a);
+            return n.creature = this, this.x = e, this.y = t, this.z = a, game.updateFlowFieldTile(n, this.x, this.y, this.z), this._movementFinishTime = game.getMovementFinishTime(), !0
+        }
+        checkUnder(e = this.x, t = this.y) {
+            const a = this.description(),
+                i = game.getTile(e, t, this.z),
+                n = P.default[E.default.getType(i)];
+            if ((n && (n.shallowWater || n.water) && (this.getMoveType() & d.MoveType.Flying) !== d.MoveType.Flying || n && a && a.particlesOnMove) && game.particle.create(e, t, this.z, n.particles), !this.checkForBurn()) return !0;
+            const o = i.doodad;
+            if (o) {
+                const a = o.description();
+                if (a && a.isTrap) {
+                    const i = B.default.percent();
+                    let n = 0;
+                    if (o.type === d.DoodadType.SetHobgoblinSnare) 75 >= i - 50 && (n = B.default.int(6) + 3, this.queueSoundEffect(d.SfxType.CreatureHit));
+                    else {
+                        const e = game.getSkillPercent(d.SkillType.Trapping);
+                        if (e >= i - 50) {
+                            const t = a.trapDamage ? a.trapDamage : 0;
+                            if (n = t + Math.floor(e / 10) + B.default.int(3), o.legendary && o.legendary.type === d.LegendaryType.TrapDamage && (n += o.legendary.value), this.queueSoundEffect(d.SfxType.CreatureHit), multiplayer.isConnected()) {
+                                if (o.ownerIdentifier) {
+                                    const e = game.getPlayerByIdentifier(o.ownerIdentifier);
+                                    e && (e.skillGain(d.SkillType.Trapping), e.addMilestone(w.MilestoneType.Trapper))
+                                }
+                            } else localPlayer.skillGain(d.SkillType.Trapping), localPlayer.addMilestone(w.MilestoneType.Trapper)
+                        }
+                    }
+                    if (n) {
+                        const a = this.damage({
+                            amount: n,
+                            type: d.DamageType.Blunt
+                        }, e, t);
+                        return this.getStatValue(l.Stat.Health) <= 0 && modManager.getHook(S.Hook.OnEntityKill).call(o, this), this.stopNextMovement = !0, M.default.toAll(e => e.ifVisible(o).source(v.Source.Combat, v.Source.Creature).type(a ? M.MessageType.Attack : M.MessageType.Miss).send(a ? h.default.HasBeenHurtByATrap : h.default.HasSetTrapOffNoDamage, this.getName(), a)), o.setOffTrap(), !1
+                    }
+                }
+            }
+            if (i.containedItems && i.containedItems.length > 0 && !this.isTamed() && (!this.hasStat(l.Stat.Happiness) || this.getStat(l.Stat.Happiness).value <= 0)) {
+                const a = this.offer(i.containedItems);
+                if (void 0 !== a) {
+                    const i = game.getNearestPlayer(e, t, this.z);
+                    if (i && i.canSeePosition(e, t, this.z)) {
+                        const e = this.hasStat(l.Stat.Tamed) ? this.getStatValue(l.Stat.Tamed) : void 0;
+                        return this.aberrant && B.default.percent() - Math.floor(i.getSkill(d.SkillType.Taming) / 7.5) - (void 0 !== e ? e : 1) >= 50 ? M.default.get(i).source(v.Source.Creature).send(h.default.YouNoticeTakeFromGround, this.getName(), a.getName()) : (this.tame(i), M.default.get(i).source(v.Source.Allies, v.Source.Creature).send(h.default.TakenFromGroundBecomeTamed, this.getName(), a.getName())), i.skillGain(d.SkillType.Taming), this.queueSoundEffect(d.SfxType.CreatureNoise), itemManager.remove(a), !1
+                    }
+                }
+            }
+            return !0
+        }
+        canSwapWith(e) {
+            return 0 === this.checkCreatureMove(e.x, e.y, e.z, e.getTile(), this.getMoveType(), !1, e)
+        }
+        getOwner() {
+            if (this.isTamed()) {
+                if (this._owner) return this._owner;
+                for (const e of players)
+                    if (e.hasTamedCreature(this)) return this._owner = e, e
+            }
+        }
+        damage(e, t = this.x, i = this.y, n = this.z) {
+            const o = this.description();
+            if (!o) return;
+            const r = game.damage(this, e);
+            if (this.getStat(l.Stat.Health).value > 0) return e.human && void 0 === this.enemy && (this.isTamed() && this.isDefender() || game.getDifficultyOptions().peaceful) && (this.enemy = e.human.id, this.enemyIsPlayer = !0, this.enemyAttempts = void 0), r;
+            for (const e of game.getPlayersThatSeePosition(t, i, n)) e.notes.write(g.default.CreatureTaming, this.getName(!1));
+            if (void 0 !== this.hitchedTo) {
+                const e = game.doodads[this.hitchedTo];
+                e && (e.hitchedCreature = void 0)
+            }
+            if (e.weaponName && M.default.get(e.human).source(v.Source.Combat, v.Source.Action, v.Source.Creature).send(h.default.YouHaveKilled, this.getName()), e.skipMilestones || !e.human || this.respawned || (e.human.addMilestone(w.MilestoneType.Hunter), e.human.addMilestone(w.MilestoneType.Exterminator), e.human.addMilestone(w.MilestoneType.Huntsman, this.type)), !this.respawned) {
+                const a = this.loot;
+                if (a)
+                    for (let e = 0; e < a.length; e++) {
+                        const o = itemManager.getRandomQuality(a[e], this.aberrant ? 560 : 200);
+                        itemManager.create(a[e], itemManager.getTileContainer(t, i, n), o)
+                    }
+                if (void 0 !== o.lootGroup) {
+                    const e = c.default[o.lootGroup];
+                    if (e) {
+                        const a = B.default.getElement(e),
+                            o = itemManager.getRandomQuality(a, this.aberrant ? 560 : 200);
+                        itemManager.create(a, itemManager.getTileContainer(t, i, n), o)
+                    }
+                }
+                this.aberrant && e.human && e.human.addMilestone(w.MilestoneType.Abnormalizer)
+            }
+            const s = a.default[this.type];
+            return this.type !== d.CreatureType.Cod && this.type !== d.CreatureType.Blindfish && s && corpseManager.create(this.type, t, i, n, s.decay, this.aberrant, this.renamed), this.type === d.CreatureType.JellyCube ? creatureManager.spawn(d.CreatureType.Slime, t, i, n) : this.type === d.CreatureType.Drake && e.human && e.human.addMilestone(w.MilestoneType.DragonSlayer), this.aberrant && o.reputation < 0 ? game.updateReputation(Math.floor(-1 * o.reputation / 2)) : game.updateReputation(o.reputation), modManager.getHook(S.Hook.OnCreatureDeath).call(this), creatureManager.remove(this), r
+        }
+        onUnserialized() {
+            this.description()
+        }
+        offer(e) {
+            const t = this.description();
+            if (!t) return;
+            const a = t.acceptedItems;
+            if (a)
+                for (const t of e) {
+                    const e = t.description();
+                    if (e)
+                        for (const i of a)
+                            if (!e.recipe || t.ownerIdentifier) {
+                                if (i === t.type) return t;
+                                if (itemManager.isGroup(i) && itemManager.isInGroup(t.type, i)) return t
+                            }
+                }
+        }
+        inspectResistancesAndVulnerabilities(e, t = this.getName(), a) {
+            const i = this.description();
+            if (!i) return;
+            const n = i.defense.resist,
+                o = i.defense.vulnerable,
+                r = e.getSkill(d.SkillType.Anatomy),
+                s = [],
+                l = [],
+                u = new T.default(m.Dictionary.Skill, d.SkillType.Anatomy);
+            if (r <= 25) {
+                a = a || T.default.message(h.default.YourLowSkill).addArgs(u);
+                const e = Object.keys(n),
+                    i = Object.keys(o);
+                return T.default.message(h.default.RevealsSomeResistancesAndVulnerabilities).inContext(4).addArgs(a, t, e.length, i.length)
+            }
+            for (const e of G.default.values(d.DamageType)) n[e] && s.push(e), o[e] && l.push(e);
+            if (r <= 50) return a = a || T.default.message(h.default.YourModerateSkill).addArgs(u), T.default.message(h.default.RevealsNumberOfResistancesAndVulnerabilities).inContext(4).addArgs(a, t, f.fullDamageType(s), f.fullDamageType(l)); {
+                a = a || T.default.message(h.default.YourHighSkill).addArgs(u);
+                const e = f.fullDamageType(s, e => T.default.message(99 === n[e] || 100 === n[e] ? h.default.ResistOrVulnAll : h.default.ResistOrVuln).addArgs(n[e]).inContext(1)),
+                    i = f.fullDamageType(l, e => T.default.message(99 === o[e] || 100 === o[e] ? h.default.ResistOrVulnAll : h.default.ResistOrVuln).addArgs(o[e]).inContext(1));
+                return T.default.message(h.default.RevealsResistancesAndVulnerabilities).inContext(4).addArgs(a, t, e, i)
+            }
+        }
+        inspectHappiness(e) {
+            if (!this.isTamed() || !this.hasStat(l.Stat.Happiness)) return;
+            let t, a = M.MessageType.Good;
+            const i = creatureManager.getHappinessLevel(e, this),
+                n = this.getStat(l.Stat.Happiness);
+            return n.value / i <= .25 ? (t = h.default.TamedAppearsAngered, a = M.MessageType.Bad) : t = n.value / i <= .5 ? h.default.TamedAppearsUpset : n.value / i <= .75 ? h.default.TamedAppearsContended : h.default.TamedAppearsHappy, {
+                messageType: a,
+                text: T.default.message(h.default.TamedCreature).addArgs(T.default.message(t))
+            }
+        }
+        findPath(e) {
+            const t = this.getMoveType(),
+                a = (a, i) => 0 !== this.checkCreatureMove(i.x, i.y, this.z, a, t, i.x === e.x && i.y === e.y);
+            return n.findPath(this, e, this.z, a)
+        }
+        checkCreatureMove(e, t, a, i, n, o = !1, r) {
+            const s = this.description();
+            if (!s) return -1;
+            const l = modManager.getHook(S.Hook.CanCreatureMove).call(this, i, e, t, a, n);
+            if (!1 === l) return 1;
+            if (!0 === l) return 0;
+            if (n === d.MoveType.None) return 2;
+            if (!s.fishable)
+                for (const i of game.getPlayers(!1, !0))
+                    if (i !== r && e === i.x && t === i.y && a === i.z) return 3;
+            const u = creatureManager.getMovePenalty(n, i, o);
+            return u >= p.blockedPenalty ? 4 : 0
+        }
+        findPlayersWithinRadius(e, t, a, i) {
+            const n = [];
+            for (const o of game.getPlayers()) o.z === a && o.x >= e - i && o.x <= e + i && o.y >= t - i && o.y <= t + i && n.push(o);
+            return n
+        }
+        processAttack(e, t, a) {
+            const i = this.getStat(l.Stat.Health);
+            (i.value / e.maxhp <= .1 || i.value <= 1) && t !== d.MoveType.None && (this.ai |= s.AiType.Scared, this.ai &= ~s.AiType.Hostile);
+            let n = !1;
+            if (a) {
+                let e;
+                e = 0 === B.default.int(20) ? this.findPlayersWithinRadius(this.x, this.y, this.z, 3) : this.findPlayersWithinRadius(this.x, this.y, this.z, 2);
+                for (const t of e) t.cancelResting(d.RestCancelReason.CreatureNearby)
+            }
+            if (a && this.z === a.z && Math.abs(this.x - a.x) + Math.abs(this.y - a.y) === 1 && (this.isDefender() || t === d.MoveType.None ? n = !0 : (0 == (this.ai & s.AiType.Hostile) || game.getDifficultyOptions().peaceful && (void 0 === this.enemy || this.enemy !== a.id)) && ((this.ai & s.AiType.Scared) !== s.AiType.Scared && this.ai !== s.AiType.Neutral || 0 !== B.default.int(3)) || (n = !0)), n && (t & d.MoveType.Flying) !== d.MoveType.Flying) {
+                const t = this.getTile();
+                tileEventManager.get(t, A.TileEventType.Fire) && 100 !== e.defense.resist[d.DamageType.Fire] && (n = !1)
+            }
+            if (!n || !a || !1 === modManager.getHook(S.Hook.CanCreatureAttack).call(this, a)) return !1;
+            let o = B.default.intInRange(e.minatk, e.maxatk),
+                r = 1;
+            if (this.aberrant && (a instanceof b.default ? (r = Math.max(a.skills[d.SkillType.Parrying].core / 35, 2), o = Math.ceil(o * r)) : o *= 2, o > 75 && (o = 75), this.isTamed() || (this.ai |= s.AiType.Hostile, this.ai &= ~s.AiType.Scared)), this.fromX = this.x + (a.x - this.x) / 3, this.fromY = this.y + (a.y - this.y) / 3, this.facingDirection = Math.ceil((Math.atan2(a.y - this.y, this.x - a.x) + Math.PI) / (Math.PI / 2)) % 4, this.isHidden()) return this.ai |= s.AiType.Hostile, this.ai &= ~s.AiType.Hidden, !0;
+            let u = 0,
+                p = 0,
+                c;
+            if (a instanceof b.default) {
+                u += a.defense.base;
+                for (const t of G.default.values(d.DamageType)) e.damageType & t && (u += a.defenses[t] * r, p += a.defenses[t])
+            }
+            p > 0 ? c = T.default.message(h.default.ArmorAppeared).addArgs(T.default.message(h.default.Resistant)) : p < 0 && (c = T.default.message(h.default.ArmorAppeared).addArgs(T.default.message(h.default.Vulnerable)));
+            let m = 0;
+            if (a instanceof b.default) {
+                if (m = a.defense.parrying + u, m = u / 3 + B.default.int(m), 0 != (this.ai & s.AiType.Hostile)) {
+                    const t = e.defense.resist,
+                        i = e.defense.vulnerable,
+                        n = [],
+                        o = [];
+                    for (const e of G.default.values(d.DamageType)) t[e] && n.push(e), i[e] && o.push(e);
+                    a.notes.write(g.default.Combat, this.getName(), f.fullDamageType(n), f.fullDamageType(o))
+                }
+                a.damageRandomEquipment()
+            }
+            if (o = Math.ceil(o - m), this.type === d.CreatureType.LavaBeetle && 0 === B.default.int(10)) {
+                const e = game.getTile(a.x, a.y, a.z);
+                if (void 0 === e.doodad) {
+                    game.changeTile(d.TerrainType.Lava, a.x, a.y, a.z, !1), game.particle.create(a.x, a.y, a.z, C.default[k.ParticleType.Fire]), a.queueSoundEffect(d.SfxType.Water), M.default.toAll(e => e.ifVisible(a).source(v.Source.Combat, v.Source.Creature).send(h.default.YouSeeSpewLava, this.getName()));
+                    const t = e;
+                    (t.containedItems || void 0 !== e.corpses) && (tileEventManager.get(e, A.TileEventType.Fire) || tileEventManager.create(A.TileEventType.Fire, a.x, a.y, a.z))
+                }
+            } else if (this.type === d.CreatureType.Drake && 0 === B.default.int(6)) game.fireBreath(this.x, this.y, this.z, this.facingDirection), M.default.toAll(e => e.ifVisible(this).source(v.Source.Combat, v.Source.Creature).send(h.default.YouSeeEngulfFire, this.getName()));
+            else if (a instanceof b.default && this.type === d.CreatureType.SlitherSucker && 0 === B.default.int(6)) {
+                const e = itemManager.create(this.aberrant ? d.ItemType.AberrantSlitherSucker : d.ItemType.SlitherSucker, a.inventory),
+                    t = a.getEquippedItem(d.EquipType.Head);
+                return t && a.unequip(t, !0, !0), e.maxDur = i.max, e.minDur = i.value, a.equip(e, d.EquipType.Head, !0), a.messages.source(v.Source.Equipment, v.Source.Combat, v.Source.Wellbeing, v.Source.Creature).send(h.default.SlitherSuckerJumpedOnHead, this.getName()), creatureManager.remove(this), !0
+            }
+            if (o > 0 || o <= 0 && 0 === B.default.int(8))
+                if (o <= 0 && (o = 1), a instanceof b.default) {
+                    let t;
+                    game.particle.create(a.x, a.y, a.z, C.default[k.ParticleType.Blood]), 0 === B.default.int(15) && corpseManager.createBlood(a.x, a.y, a.z), a.defense.parrying > 0 && a.skillGain(d.SkillType.Parrying, .1), a.messages.source(v.Source.Wellbeing, v.Source.Combat, v.Source.Creature).type(M.MessageType.Bad).send(h.default.HasHitYouForDamage, this.getName(), o, c);
+                    const i = this.aberrant ? 16 : 8,
+                        n = Math.floor(a.getSkill(d.SkillType.Anatomy) / (this.aberrant ? 10 : 20));
+                    if (e.canCauseStatus)
+                        for (const o of e.canCauseStatus) switch (o) {
+                            case d.StatusType.Bleeding:
+                                a.hasStatus(d.StatusType.Bleeding) || (t = B.default.percent()) <= i - n && (a.messages.source(v.Source.Wellbeing, v.Source.Combat).send(h.default.BleedingProfusely), a.skillGain(d.SkillType.Anatomy, .1), a.setStatus(d.StatusType.Bleeding, !0, s.StatusEffectChangeReason.Gained), a.notes.write(g.default.Bleeding, this.getName()));
+                                break;
+                            case d.StatusType.Poisoned:
+                                a.hasStatus(d.StatusType.Poisoned) || (t = B.default.percent()) <= i - n && (a.messages.source(v.Source.Combat, v.Source.Wellbeing).type(M.MessageType.Bad).send(h.default.BeenPoisoned), a.skillGain(d.SkillType.Anatomy, .1), a.setStatus(d.StatusType.Poisoned, !0, s.StatusEffectChangeReason.Gained), a.notes.write(g.default.Poisoned, this.getName()));
+                                break;
+                            case d.StatusType.Burned:
+                                if (!a.hasStatus(d.StatusType.Burned) && (t = B.default.percent()) <= i - n) {
+                                    const e = a.burn(!1, !1, void 0, !0);
+                                    e && a.skillGain(d.SkillType.Anatomy, .1)
+                                }
+                        }
+                    a.damage({
+                        amount: o,
+                        type: d.DamageType.True,
+                        creature: this,
+                        damageMessage: T.default.message(h.default.DeathBy).addArgs(this.getName()),
+                        soundDelay: 6,
+                        legacy: !0
+                    }), a.getStat(l.Stat.Health).value <= 0 && 0 != (this.ai & s.AiType.Hostile) && 0 == (this.ai & s.AiType.Fearless) && (this.ai |= s.AiType.Random, this.ai &= ~s.AiType.Hostile)
+                } else a instanceof O && (a.damage({
+                    amount: o,
+                    type: e.damageType,
+                    creature: this,
+                    skipMilestones: !0
+                }), a.enemy = this.id, a.enemyIsPlayer = !1, a.enemyAttempts = void 0);
+            else a instanceof b.default && (a.defense.parrying > 0 && a.skillGain(d.SkillType.Parrying), this.queueSoundEffect(d.SfxType.Miss, 6), a.messages.source(v.Source.Combat, v.Source.Wellbeing, v.Source.Creature).type(M.MessageType.Miss).send(h.default.DealtNoDamageToYou, this.getName()));
+            return a instanceof b.default && (a.defense.parrying > 0 ? a.staminaReduction(d.SkillType.Parrying) : a.staminaReduction(d.SkillType.Tactics), multiplayer.isConnected() || a.addDelay(d.Delay.ShortPause), a.setTamedCreatureEnemy(this)), this.checkForBurn(t), !0
+        }
+        processMovement(e, t, a, i) {
+            if (!this.isInFov()) {
+                const e = this.getStat(l.Stat.Health);
+                return !this.renamed && !this.isTamed() && e.value >= e.max && (0 === B.default.int(19e3) || 0 === B.default.int(1e4) && this.type === d.CreatureType.Shark || this.z !== d.WorldZ.Cave && game.time.getTime() < .65 && (this.type === d.CreatureType.VampireBat || this.type === d.CreatureType.Zombie)) && creatureManager.remove(this), !1
+            }
+            if (this.z === d.WorldZ.Cave || this.type !== d.CreatureType.VampireBat && this.type !== d.CreatureType.Zombie || (game.time.getTime() < .65 && 0 != (this.ai & s.AiType.Hostile) ? (this.ai |= s.AiType.Scared, this.ai &= ~s.AiType.Hostile) : game.time.getTime() >= .65 && 0 != (this.ai & s.AiType.Scared) && (this.ai |= s.AiType.Hostile, this.ai &= ~s.AiType.Scared)), this.stopNextMovement) return this.stopNextMovement = !1, !1;
+            if (void 0 !== this.hitchedTo) {
+                this.facingDirection = B.default.choice(d.Direction.North, d.Direction.East, d.Direction.South, d.Direction.West);
+                const e = game.doodads[this.hitchedTo];
+                return e && this.breakDoodad(e, t), !1
+            }
+            if (t === d.MoveType.None) return !1;
+            this.processAiChanges(i);
+            let n = this.x,
+                o = this.y,
+                r = this.z,
+                u;
+            multiplayer.addSyncCheck(I.MultiplayerSyncCheck.CreatureNearestPlayer, i ? i.id : -1);
+            let p = 0 != (this.ai & s.AiType.Hostile) && !game.getDifficultyOptions().peaceful;
+            if (!p && 0 != (this.ai & s.AiType.Follower)) {
+                let e = i;
+                for (const t of game.getPlayers())
+                    if (t.hasTamedCreature(this)) {
+                        e = t;
+                        break
+                    }
+                void 0 !== e && (Math.abs(n - e.x) > 2 || Math.abs(o - e.y) > 2) && (p = !0)
+            }
+            let c = !1;
+            if (a && (a instanceof O || this.isTamed()) && !e.fishable) {
+                const e = this.findPath(a);
+                e && e.length >= 2 ? (c = !0, n = e[1].x, o = e[1].y, this.enemyAttempts = void 0) : this.enemy && (void 0 === this.enemyAttempts && (this.enemyAttempts = 0), this.enemyAttempts++, this.enemyAttempts >= 4 && (this.enemy = void 0, this.enemyAttempts = void 0))
+            }
+            const m = this.getTile();
+            if (!m) return !1;
+            const h = E.default.getType(m);
+            let y;
+            if (h && h === d.TerrainType.CaveEntrance && void 0 !== i && i.z !== this.z && (e.spawnReputation && game.getReputation() <= e.spawnReputation || this.isTamed()) && (c = !0, n = this.x, o = this.y, r = this.z === d.WorldZ.Cave ? d.WorldZ.Overworld : d.WorldZ.Cave), !c) {
+                let a;
+                if (a = ((t & d.MoveType.Flying) === d.MoveType.Flying || !tileEventManager.get(m, A.TileEventType.Fire) || 100 === e.defense.resist[d.DamageType.Fire]) && flowFieldManager.isInFlowField(this), multiplayer.addSyncCheck(I.MultiplayerSyncCheck.CreatureIsInFlowField, a), h === d.TerrainType.CaveEntrance && void 0 !== i && i.z !== this.z && (e.spawnReputation && game.getReputation() <= e.spawnReputation || this.isTamed())) c = !0, n = this.x, o = this.y, r = this.z === d.WorldZ.Cave ? d.WorldZ.Overworld : d.WorldZ.Cave;
+                else if (p && a) {
+                    const e = flowFieldManager.getMoveDirection(this.x, this.y, this.z, t);
+                    switch (multiplayer.addSyncCheck(I.MultiplayerSyncCheck.CreatureMoveDirection, e), e) {
+                        case d.Direction.West:
+                            n -= 1;
+                            break;
+                        case d.Direction.East:
+                            n += 1;
+                            break;
+                        case d.Direction.North:
+                            o -= 1;
+                            break;
+                        case d.Direction.South:
+                            o += 1
+                    }
+                } else if (0 != (this.ai & s.AiType.Fleeing) && a && 0 !== B.default.int(8)) {
+                    const e = flowFieldManager.getOpposingMoveDirection(this.x, this.y, this.z, t);
+                    multiplayer.addSyncCheck(I.MultiplayerSyncCheck.CreatureMoveDirection, e), e === d.Direction.West ? n += 1 : e === d.Direction.East ? n -= 1 : e === d.Direction.North ? o += 1 : e === d.Direction.South && (o -= 1)
+                } else {
+                    const a = B.default.shuffle([0, 1, 2, 3, 4]);
+                    for (let i = 0; i < 4; i++) {
+                        switch (a[i]) {
+                            case 0:
+                                n = this.x + 1, o = this.y;
+                                break;
+                            case 1:
+                                n = this.x, o = this.y + 1;
+                                break;
+                            case 2:
+                                n = this.x - 1, o = this.y;
+                                break;
+                            case 3:
+                                n = this.x, o = this.y - 1;
+                                break;
+                            case 4:
+                                n = this.x, o = this.y
+                        }
+                        if (this.type === d.CreatureType.TimeSkitter || this.type === d.CreatureType.SkeletalMage ? 0 === B.default.int(9) && (n = this.x + B.default.int(6) - 3, o = this.y + B.default.int(6) - 3) : e.fishable && 0 === B.default.int(4) && (n = this.x + B.default.int(3) - 1, o = this.y + B.default.int(3) - 1), n = game.getWrappedCoord(n), o = game.getWrappedCoord(o), y = game.getTile(n, o, r), 0 === this.checkCreatureMove(n, o, r, y, t)) break
+                    }
+                }
+            }
+            this.facingDirection = Math.ceil((Math.atan2(o - this.fromY, this.fromX - n) + Math.PI) / (Math.PI / 2)) % 4;
+            const g = e.speed || 1;
+            let f, T;
+            for (let e = 0; e < g && (0 === e || B.default.chance(.5)); e++) {
+                f = n, T = o, e && (this.facingDirection === d.Direction.West ? n -= 1 : this.facingDirection === d.Direction.East ? n += 1 : this.facingDirection === d.Direction.North ? o -= 1 : this.facingDirection === d.Direction.South && (o += 1)), n = game.getWrappedCoord(n), o = game.getWrappedCoord(o);
+                const a = (y = game.getTile(n, o, r)).doodad,
+                    i = a && a.blocksMove() && (t & d.MoveType.Flying) !== d.MoveType.Flying;
+                if (a && (this.type !== d.CreatureType.Hobgoblin || a.type !== d.DoodadType.WoodenDoor && a.type !== d.DoodadType.WoodenGate || (a.type === d.DoodadType.WoodenDoor ? a.changeType(d.DoodadType.WoodenDoorOpen) : a.type === d.DoodadType.WoodenGate && a.changeType(d.DoodadType.WoodenGateOpen), world.updateTile(a.x, a.y, a.z, y))), 0 !== this.checkCreatureMove(n, o, r, y, t) || i) {
+                    n = f, o = T, a && i && this.breakDoodad(a, t);
+                    break
+                }
+                if (a && a.checkForTrampling(this), u = y, !this.checkUnder(n, o)) break
+            }
+            return game.creatures[this.id] !== this || (this.processSpecialAbilities(a), void 0 !== u && this.originalMoveType && 0 === this.checkCreatureMove(n, o, r, u, this.originalMoveType) && (this.setMoveType(this.originalMoveType), this.originalMoveType = void 0), void 0 !== u ? this.moveTo(n, o, r) : (this.checkUnder(), !0))
+        }
+        breakDoodad(e, t) {
+            const a = e.description();
+            if (a && a.canBreak && (t & d.MoveType.BreakDoodads) === d.MoveType.BreakDoodads && 0 === B.default.int(12)) {
+                e.damage();
+                const t = this.findPlayersWithinRadius(e.x, e.y, e.z, 0 === B.default.int(10) ? 5 : 0 === B.default.int(5) ? 4 : 3);
+                for (const e of t) e.cancelResting(d.RestCancelReason.NearbyCreatureDamagedDoodad);
+                a.particles && game.particle.create(e.x, e.y, e.z, a.particles)
+            }
+        }
+        processAiChanges(e) {
+            const t = B.default.int(30);
+            if (0 != (this.ai & s.AiType.Hostile) && t >= 0 && t <= 3 && 0 == (this.ai & s.AiType.Fearless) && (this.ai |= s.AiType.Random, this.ai &= ~s.AiType.Hostile), 0 != (this.ai & s.AiType.Hostile) && 0 != (this.ai & s.AiType.Fearless) && 0 === t && (this.ai |= s.AiType.Random, this.ai &= ~s.AiType.Hostile), (0 != (this.ai & s.AiType.Random) && t >= 4 && t <= 15 || 0 != (this.ai & s.AiType.Random) && 0 != (this.ai & s.AiType.Fearless) && t >= 1 && t <= 15) && (this.ai |= s.AiType.Hostile, this.ai &= ~s.AiType.Random), void 0 !== e && 0 != (this.ai & s.AiType.Scared)) {
+                const t = 0 != (this.ai & s.AiType.Fleeing),
+                    a = R.default.squaredDistance(this, e) < L;
+                t && !a ? this.ai &= ~s.AiType.Fleeing : !t && a && (this.ai |= s.AiType.Fleeing)
+            }
+        }
+        processSpecialAbilities(e) {
+            switch (this.type) {
+                case d.CreatureType.FireElemental:
+                    if (0 === B.default.int(40)) {
+                        const e = this.x + B.default.int(6) - 3,
+                            t = this.y + B.default.int(6) - 3,
+                            a = game.getTile(e, t, this.z);
+                        if (a) {
+                            const i = P.default[E.default.getType(a)];
+                            let n;
+                            a.doodad && (n = a.doodad.description()), (i && i.flammable && void 0 === a.doodad || n && (n.isFlammable || n.providesFire)) && void 0 === a.creature && !tileEventManager.get(a, A.TileEventType.Fire) && (tileEventManager.create(A.TileEventType.Fire, e, t, this.z), game.particle.create(e, t, this.z, C.default[k.ParticleType.Fire]), audio.queueEffect(d.SfxType.Throw, e, t, this.z), M.default.toAll(a => a.ifVisible(new x.default(e, t, this.z)).source(v.Source.Creature).send(h.default.YouSeeEngulfFire, this.getName())))
+                        }
+                    }
+                    break;
+                case d.CreatureType.AcidSpitterDemon:
+                    if (0 === B.default.int(30)) {
+                        const e = this.x + B.default.int(6) - 3,
+                            t = this.y + B.default.int(6) - 3;
+                        multiplayer.addSyncCheck(I.MultiplayerSyncCheck.Random, `ASD:${e},${t}`), game.isPositionEmpty(e, t, this.z) && (doodadManager.create(d.DoodadType.Acid, e, t, this.z), audio.queueEffect(d.SfxType.Water, e, t, this.z), M.default.toAll(a => a.ifVisible(new x.default(e, t, this.z)).source(v.Source.Creature).send(h.default.YouSeeSpitAcid, this.getName())))
+                    }
+                    break;
+                case d.CreatureType.SkeletalMage:
+                    if (void 0 !== e && 0 === B.default.int(80)) {
+                        const t = e.x + B.default.int(3) - 1,
+                            a = e.y + B.default.int(3) - 1;
+                        if (multiplayer.addSyncCheck(I.MultiplayerSyncCheck.Random, `SM:${t},${a}`), game.isPositionEmpty(t, a, this.z) && game.canASeeB(this.x, this.y, this.z, t, a, e.z)) {
+                            doodadManager.create(d.DoodadType.SkeletalRemains, t, a, this.z);
+                            const e = o.default[d.DoodadType.SkeletalRemains];
+                            e && e.particles && game.particle.create(t, a, this.z, e.particles), audio.queueEffect(d.SfxType.Bow, t, a, this.z), M.default.toAll(e => e.ifVisible(new x.default(t, a, this.z)).source(v.Source.Creature).send(h.default.YouSeeSummon, this.getName(), T.default.nameOf(m.Dictionary.Doodad, d.DoodadType.SkeletalRemains)))
+                        }
+                    }
+                    break;
+                case d.CreatureType.Bogling:
+                    if (0 === B.default.int(40)) {
+                        const e = this.getTile();
+                        if (e && E.default.getType(e) !== d.TerrainType.Swamp) {
+                            game.changeTile(d.TerrainType.Swamp, this.x, this.y, this.z, !0);
+                            const e = P.default[d.TerrainType.Swamp];
+                            e && game.particle.create(this.x, this.y, this.z, e.particles), audio.queueEffect(d.SfxType.Water, this.x, this.y, this.z), M.default.toAll(e => e.ifVisible(this).source(v.Source.Creature).send(h.default.YouSeeSwampFlood, this.getName()))
+                        }
+                    }
+                    break;
+                case d.CreatureType.Hobgoblin:
+                    if (0 === B.default.int(150)) {
+                        const e = this.x + B.default.int(2) - 1,
+                            t = this.y + B.default.int(2) - 1;
+                        multiplayer.addSyncCheck(I.MultiplayerSyncCheck.Random, `HG:${e},${t}`), game.isPositionEmpty(e, t, this.z) && (doodadManager.create(d.DoodadType.SetHobgoblinSnare, e, t, this.z), audio.queueEffect(d.SfxType.PickUp, e, t, this.z), M.default.toAll(a => a.ifVisible(new x.default(e, t, this.z)).source(v.Source.Combat, v.Source.Creature).send(h.default.YouSeeLayingTrap, this.getName())))
+                    }
+                    break;
+                case d.CreatureType.Chicken:
+                case d.CreatureType.Harpy:
+                    0 !== B.default.int(750) || game.isPositionFull(this.x, this.y, this.z) || (itemManager.create(d.ItemType.Feather, itemManager.getTileContainer(this.x, this.y, this.z), d.ItemQuality.Random), M.default.toAll(e => e.ifVisible(this).source(v.Source.Creature, v.Source.Item).send(h.default.YouSeeDrop, T.default.nameOf(m.Dictionary.Item, d.ItemType.Feather), this.getName())));
+                    const t = this.getStat(l.Stat.Produce, !0);
+                    this.isTamed() && t && t.value <= 0 && !game.isPositionFull(this.x, this.y, this.z) && (itemManager.create(d.ItemType.Egg, itemManager.getTileContainer(this.x, this.y, this.z), d.ItemQuality.Random), M.default.toAll(e => e.ifVisible(this).source(v.Source.Creature, v.Source.Item).send(h.default.YouSeeLay, this.getName(), T.default.nameOf(m.Dictionary.Item, d.ItemType.Egg))), this.setStat(l.Stat.Produce, 5e3 + B.default.int(1e3)))
+            }
+        }
+    }
+    __decorate([Override], O.prototype, "entityType", void 0), __decorate([D.SaveProperty()], O.prototype, "aberrant", void 0), __decorate([D.SaveProperty()], O.prototype, "ai", void 0), __decorate([D.SaveProperty()], O.prototype, "enemy", void 0), __decorate([D.SaveProperty()], O.prototype, "enemyAttempts", void 0), __decorate([D.SaveProperty()], O.prototype, "enemyIsPlayer", void 0), __decorate([D.SaveProperty()], O.prototype, "loot", void 0), __decorate([D.SaveProperty()], O.prototype, "respawned", void 0), __decorate([D.SaveProperty()], O.prototype, "shouldSkipNextUpdate", void 0), __decorate([D.SaveProperty()], O.prototype, "type", void 0), __decorate([D.SaveProperty()], O.prototype, "originalMoveType", void 0), __decorate([D.SaveProperty()], O.prototype, "hitchedTo", void 0), __decorate([Override], O.prototype, "getName", null), __decorate([Override], O.prototype, "getMoveType", null), __decorate([Override], O.prototype, "queueSoundEffect", null), t.default = O
+}),
 
 define("npc/npcs/IMerchant",["require","exports"],function(e,t){Object.defineProperty(t,"__esModule",{value:!0})}),
 
