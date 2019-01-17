@@ -203,6 +203,9 @@ export default class AddContents extends Mod {
 	public onLoad(): void {
 		itemGroupDescriptions[ItemTypeGroup.Food].types.push(this.itemLuminousMushroom)
 		itemGroupDescriptions[ItemTypeGroup.RawMeat].types.push(this.itemCrabMeat)
+		itemGroupDescriptions[ItemTypeGroup.RawMeat].types.push(this.itemAberrantCrabMeat)
+		itemGroupDescriptions[ItemTypeGroup.Food].types.push(this.itemCookedCrabMeat)
+		itemGroupDescriptions[ItemTypeGroup.Food].types.push(this.itemCookedAberrantCrabMeat)
 	}
 
 	/**
@@ -210,6 +213,11 @@ export default class AddContents extends Mod {
 	 */
 	public onUnload(): void {
 		const foodItems = itemGroupDescriptions[ItemTypeGroup.Food].types;
+		const rawMeatItems = itemGroupDescriptions[ItemTypeGroup.RawMeat].types;
 		foodItems.splice(foodItems.indexOf(this.itemLuminousMushroom), 1);
+		foodItems.splice(foodItems.indexOf(this.itemCookedCrabMeat), 1);
+		foodItems.splice(foodItems.indexOf(this.itemCookedAberrantCrabMeat), 1);
+		rawMeatItems.splice(foodItems.indexOf(this.itemCrabMeat), 1);
+		rawMeatItems.splice(foodItems.indexOf(this.itemAberrantCrabMeat), 1);
 	}
 }
