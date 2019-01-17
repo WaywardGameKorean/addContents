@@ -106,7 +106,7 @@ export default class AddContents extends Mod {
 	})
 	public itemLuminousMushroom: ItemType;
 
-	@Register.item("LuminousMushroomLamp", { //받침애주름버섯
+	@Register.item("LuminousMushroomLamp", { //받침애주름버섯 램프
 		attack : 1,
 		damageType : DamageType.Blunt,
 		decayMax : 50000,
