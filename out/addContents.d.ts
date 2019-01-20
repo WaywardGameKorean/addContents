@@ -14,6 +14,7 @@ export default class AddContents extends Mod {
     itemPillow: ItemType;
     itemWoodenBed: ItemType;
     itemPomegranate: ItemType;
+    itemPomegranateSeeds: ItemType;
     doodadMycenaChlorophos: DoodadType;
     creatureSeaCrab: CreatureType;
     data: IAddContentsData;

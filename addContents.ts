@@ -200,6 +200,19 @@ export default class AddContents extends Mod {
 	})
 	public itemPomegranate: ItemType;
 
+	@Register.item("PomegranateSeeds", { //석류 씨앗
+		use: [ActionType.Eat, ActionType.Plant],
+		onUse : {
+			[ActionType.Eat]: [0, 1, 1, -1],
+			//[ActionType.Plant]: Registry<AddContents, DoodadType>().get("doodadMycenaChlorophos")
+		},
+		disassemble: false,
+		weight: 0.1,
+		worth : 15,
+		groups : [ItemTypeGroup.Seed]
+	})
+	public itemPomegranateSeeds: ItemType;
+
 	////////////////////////////////////
 	// Doodads
 	//
