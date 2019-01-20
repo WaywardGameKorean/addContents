@@ -1,6 +1,6 @@
 {
 	"name": "Add Contents",
-	"description": "dtd",
+	"description": "We support languages \"English\", \"Full-korean\", \"Japanese\".\n ",
 	"version": "0.0.1",
 	"author": "Your Name Here",
 	"compatibleMinorVersions": [
@@ -10,7 +10,8 @@
 	"file": "out/addContents.js",
 	"languages": [
 		"lang/english",
-		"lang/korean"
+		"lang/korean",
+		"lang/japanese"
 	],
 	"tags": [
 		"Item"

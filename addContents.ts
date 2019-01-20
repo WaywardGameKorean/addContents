@@ -1,7 +1,7 @@
 import { OnEquipType, CreatureType, Defense, Resistances, Vulnerabilities, MoveType, DamageType, SkillType, DoodadType, ItemType, ItemTypeGroup, RecipeLevel, EquipType, TerrainType, GrowingStage, DoodadTypeGroup } from "Enums";
 import { ActionType } from "action/IAction";
 import { AiType } from "entity/IEntity";
-import { itemGroupDescriptions, RecipeComponent } from "item/Items";
+import { RecipeComponent } from "item/Items";
 import { SpawnableTiles, SpawnGroup } from "creature/ICreature";
 import Mod from "mod/Mod";
 import Register, { Registry } from "mod/ModRegistry";
@@ -11,8 +11,8 @@ interface IAddContentsData {
 }
 
 export default class AddContents extends Mod {
-	@Mod.instance<AddContents>("AddContents")
-	public static readonly INSTANCE: AddContents;
+	//@Mod.instance<AddContents>("AddContents")
+	//public static readonly INSTANCE: AddContents;
 
 	////////////////////////////////////
 	// Items
@@ -47,12 +47,12 @@ export default class AddContents extends Mod {
 			level: RecipeLevel.Simple,
 			reputation: 15
 		},
-		decayMax : 1500,
+		decayMax : 8000,
 		disassemble: false,
 		durability: 10,
 		weight: 0.2,
 		worth : 5,
-		groups : [ItemTypeGroup.Meat]
+		groups : [ItemTypeGroup.CookedMeat]
 	})
 	public itemCookedCrabMeat: ItemType;
 
@@ -86,14 +86,60 @@ export default class AddContents extends Mod {
 			level: RecipeLevel.Simple,
 			reputation: 15
 		},
-		decayMax : 1500,
+		decayMax : 8000,
 		disassemble: false,
 		durability: 10,
 		weight: 0.2,
 		worth : 5,
-		groups : [ItemTypeGroup.Meat]
+		groups : [ItemTypeGroup.CookedMeat]
 	})
 	public itemCookedAberrantCrabMeat: ItemType;
+
+	@Register.item("Mud", { //뻘
+		disassemble: false,
+		durability: 10,
+		weight: 0.5,
+		worth : 5,
+	})
+	public itemMud: ItemType;
+
+	@Register.item("Scallop", { //가리비
+		use: [ActionType.Eat],
+		onUse : {
+			[ActionType.Eat]: [0, 1, 4, -4],
+		},
+		decayMax : 2000,
+		disassemble: false,
+		durability: 10,
+		weight: 0.2,
+		worth : 5,
+		groups : [ItemTypeGroup.RawMeat]
+	})
+	public itemScallop: ItemType;
+
+	@Register.item("CookedScallop", { //가리비구이
+		use: [ActionType.Eat],
+		onUse : {
+			[ActionType.Eat]: [1, 10, 8, -1],
+		},
+		recipe: {
+			components: [
+				RecipeComponent(Registry<AddContents, ItemType>().get("itemScallop"), 1, 1),
+				RecipeComponent(ItemTypeGroup.Tongs, 1, 0)
+			],
+			requiresFire : true,
+			skill: SkillType.Cooking,
+			level: RecipeLevel.Simple,
+			reputation: 15
+		},
+		decayMax : 8000,
+		disassemble: false,
+		durability: 10,
+		weight: 0.2,
+		worth : 5,
+		groups : [ItemTypeGroup.CookedMeat]
+	})
+	public itemCookedScallop: ItemType;
 
 	@Register.item("MycenaChlorophos", { //받침애주름버섯
 		use: [ActionType.Eat, ActionType.Plant],
@@ -172,6 +218,7 @@ export default class AddContents extends Mod {
 		flammable: true,
 		durability: 500,
 		groups : [ItemTypeGroup.Bedding],
+		weight: 10,
 		worth : 400,
 		doodad : {
 			isFlammable: true,
@@ -186,8 +233,9 @@ export default class AddContents extends Mod {
 		onUse : {
 			[ActionType.Eat]: [1, 5, 8, 4]
 		},
+		returnOnUse: [Registry<AddContents, ItemType>().get("itemPomegranateSeeds"), true],
 		dismantle: {
-			items: [[ItemType.AppleSeeds, 1]],
+			items: [[Registry<AddContents, ItemType>().get("itemPomegranateSeeds"), 1]],
 			skill: SkillType.Botany,
 			required: ItemTypeGroup.Sharpened
 		},
@@ -204,8 +252,9 @@ export default class AddContents extends Mod {
 		use: [ActionType.Eat, ActionType.Plant],
 		onUse : {
 			[ActionType.Eat]: [0, 1, 1, -1],
-			//[ActionType.Plant]: Registry<AddContents, DoodadType>().get("doodadMycenaChlorophos")
+			[ActionType.Plant]: Registry<AddContents, DoodadType>().get("doodadPomegranateTree")
 		},
+		skillUse : SkillType.Botany,
 		disassemble: false,
 		weight: 0.1,
 		worth : 15,
@@ -233,7 +282,6 @@ export default class AddContents extends Mod {
 		canGrowInCaves:true,
 		isFlammable:true,
 		graphicVariation:true,
-		particles: {r: 202, g: 16, b: 16},
 		canGrow:true,
 		decayMax:20000,
 		isFungi:true,
@@ -241,6 +289,72 @@ export default class AddContents extends Mod {
 		providesLight : 1
 	})
 	public doodadMycenaChlorophos: DoodadType;
+
+	@Register.doodad("PomegranateTree", { //석류 나무
+		blockLos: true,
+		blockMove: true,
+		isFlammable: true,
+		graphicVariation: true,
+		reduceDurabilityOnGather: true,
+		skillUse: SkillType.Botany,
+		gatherSkillUse: SkillType.Lumberjacking,
+		isTall: true,
+		gather: {
+			[GrowingStage.Seedling]: [
+				{type: ItemType.Branch},
+				{type: ItemType.PlantRoots}
+			],
+			[GrowingStage.Vegetative]: [
+				{type: ItemType.Leaves},
+				{type: ItemType.Branch},
+				{type: ItemType.PlantRoots}
+			],
+			[GrowingStage.Budding]: [
+				{type: ItemType.Leaves},
+				{type: ItemType.Twigs},
+				{type: ItemType.Branch},
+				{type: ItemType.TreeBark}
+			],
+			[GrowingStage.Flowering]: [
+				{type: ItemType.Leaves},
+				{type: ItemType.Twigs},
+				{type: ItemType.Branch},
+				{type: ItemType.TreeBark}
+			],
+			[GrowingStage.Ripening]: [
+				{type: Registry<AddContents, ItemType>().get("itemPomegranate")},
+				{type: Registry<AddContents, ItemType>().get("itemPomegranate")},
+				{type: Registry<AddContents, ItemType>().get("itemPomegranate")},
+				{type: ItemType.Leaves},
+				{type: ItemType.Twigs},
+				{type: ItemType.Branch,chance: 5},
+				{type: ItemType.Branch},
+				{type: ItemType.TreeBark}
+			],
+			[GrowingStage.Dead]: [
+				{type: ItemType.Log},
+				{type: ItemType.Branch},
+				{type: ItemType.Log,chance: 50},
+				{type: ItemType.Log,chance: 10},
+				{type: ItemType.Log}
+			]
+		},
+		harvest: {
+			[GrowingStage.Ripening]: [
+				{type: Registry<AddContents, ItemType>().get("itemPomegranate")},
+				{type: Registry<AddContents, ItemType>().get("itemPomegranate")},
+				{type: Registry<AddContents, ItemType>().get("itemPomegranate")}
+			]
+		},
+		canGrow: true,
+		spawnOnTerrain: [TerrainType.Dirt, TerrainType.Grass],
+		allowedTiles: [TerrainType.Dirt, TerrainType.Grass, TerrainType.FertileSoil],
+		decayMax: 4000,
+		spreadMax: 3,
+		isTree: true,
+		gatherCanHurtHands: true
+	})
+	public doodadPomegranateTree: DoodadType;
 
 	////////////////////////////////////
 	// Creatures
@@ -274,19 +388,33 @@ export default class AddContents extends Mod {
 	})
 	public creatureSeaCrab: CreatureType;
 
-	@Mod.saveData<AddContents>("AddContents")
+	////////////////////////////////////
+	// Terrain
+	//
+	@Register.terrain("MudFlat", {
+		passable: true,
+		particles: { r: 171, g: 176, b: 179 },
+		//terrainType: Registry<AddContents, TerrainType>().get("terrainMudFlat"),
+		//leftOver: Registry<AddContents, TerrainType>().get("terrainMudFlat"),
+		resources: [
+			{ type: Registry<AddContents, ItemType>().get("itemMud"), chance: 2},
+			{ type: Registry<AddContents, ItemType>().get("itemScallop"), chance: 5},
+			{ type: Registry<AddContents, ItemType>().get("itemMud"), chance: 60},
+		]
+	})
+	public terrainMudFlat: TerrainType;
+
+	//@Mod.saveData<AddContents>("AddContents")
 	public data: IAddContentsData;
-	public firstLoad = true;
+	//public firstLoad = true;
 
 	/**
 	 * Executed when a save is loaded.
 	 */
-	public onLoad(): void {
-	}
+	//public onLoad(): void {}
 
 	/**
 	 * Executed when a save is unloaded.
 	 */
-	public onUnload(): void {
-	}
+	//public onUnload(): void {}
 }
