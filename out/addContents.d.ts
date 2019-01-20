@@ -9,9 +9,12 @@ export default class AddContents extends Mod {
     itemCookedCrabMeat: ItemType;
     itemAberrantCrabMeat: ItemType;
     itemCookedAberrantCrabMeat: ItemType;
-    itemLuminousMushroom: ItemType;
-    itemLuminousMushroomLamp: ItemType;
-    doodadLuminousMushroom: DoodadType;
+    itemMycenaChlorophos: ItemType;
+    itemMycenaChlorophosLamp: ItemType;
+    itemPillow: ItemType;
+    itemWoodenBed: ItemType;
+    itemPomegranate: ItemType;
+    doodadMycenaChlorophos: DoodadType;
     creatureSeaCrab: CreatureType;
     data: IAddContentsData;
     firstLoad: boolean;

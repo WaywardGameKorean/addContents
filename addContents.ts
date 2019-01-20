@@ -1,4 +1,4 @@
-import { CreatureType, Defense, Resistances, Vulnerabilities, MoveType, DamageType, SkillType, DoodadType, ItemType, ItemTypeGroup, RecipeLevel, EquipType, TerrainType, GrowingStage } from "Enums";
+import { OnEquipType, CreatureType, Defense, Resistances, Vulnerabilities, MoveType, DamageType, SkillType, DoodadType, ItemType, ItemTypeGroup, RecipeLevel, EquipType, TerrainType, GrowingStage, DoodadTypeGroup } from "Enums";
 import { ActionType } from "action/IAction";
 import { AiType } from "entity/IEntity";
 import { itemGroupDescriptions, RecipeComponent } from "item/Items";
@@ -27,7 +27,8 @@ export default class AddContents extends Mod {
 		disassemble: false,
 		durability: 10,
 		weight: 0.2,
-		worth : 5
+		worth : 5,
+		groups : [ItemTypeGroup.RawMeat]
 	})
 	public itemCrabMeat: ItemType;
 
@@ -50,7 +51,8 @@ export default class AddContents extends Mod {
 		disassemble: false,
 		durability: 10,
 		weight: 0.2,
-		worth : 5
+		worth : 5,
+		groups : [ItemTypeGroup.Meat]
 	})
 	public itemCookedCrabMeat: ItemType;
 
@@ -64,7 +66,8 @@ export default class AddContents extends Mod {
 		disassemble: false,
 		durability: 10,
 		weight: 0.2,
-		worth : 5
+		worth : 5,
+		groups : [ItemTypeGroup.RawMeat]
 	})
 	public itemAberrantCrabMeat: ItemType;
 
@@ -87,34 +90,36 @@ export default class AddContents extends Mod {
 		disassemble: false,
 		durability: 10,
 		weight: 0.2,
-		worth : 5
+		worth : 5,
+		groups : [ItemTypeGroup.Meat]
 	})
 	public itemCookedAberrantCrabMeat: ItemType;
 
-	@Register.item("LuminousMushroom", { //받침애주름버섯
+	@Register.item("MycenaChlorophos", { //받침애주름버섯
 		use: [ActionType.Eat, ActionType.Plant],
 		onUse : {
 			[ActionType.Eat]: [-2, 2, 2, -2],
-			[ActionType.Plant]: Registry<AddContents, DoodadType>().get("doodadLuminousMushroom")
+			[ActionType.Plant]: Registry<AddContents, DoodadType>().get("doodadMycenaChlorophos")
 		},
 		skillUse : SkillType.Mycology,
-		decayMax : 20000,
+		decayMax : 50000,
 		disassemble: false,
 		durability: 15,
 		weight: 0.3,
-		worth : 5
+		worth : 5,
+		groups : [ItemTypeGroup.Food]
 	})
-	public itemLuminousMushroom: ItemType;
+	public itemMycenaChlorophos: ItemType;
 
-	@Register.item("LuminousMushroomLamp", { //형광버섯램프
+	@Register.item("MycenaChlorophosLamp", { //형광버섯램프
 		attack : 1,
 		damageType : DamageType.Blunt,
-		decayMax : 50000,
+		decayMax : 100000,
 		use: [ActionType.Build],
 		equip : EquipType.Held,
 		recipe: {
 			components: [
-				RecipeComponent(Registry<AddContents, ItemType>().get("itemLuminousMushroom"), 2, 2, 2),
+				RecipeComponent(Registry<AddContents, ItemType>().get("itemMycenaChlorophos"), 2, 2, 2),
 				RecipeComponent(ItemType.GlassBottle, 1, 1, 1),
 				RecipeComponent(ItemTypeGroup.Pulp, 1, 1, 1)
 			],
@@ -122,44 +127,107 @@ export default class AddContents extends Mod {
 			level: RecipeLevel.Intermediate,
 			reputation: 10
 		},
-		onEquipEffect : [0, 0],
+		onEquipEffect : [OnEquipType.LightSource, 1],
 		durability: 50,
 		weight: 0.8,
 		worth : 50
 	})
-	public itemLuminousMushroomLamp: ItemType;
+	public itemMycenaChlorophosLamp: ItemType;
 
-	// @Register.item("Pomegranate", { //석류
-	// 	use : []
-	// })
-	// public itemPomegranate: ItemType;
+	@Register.item("Pillow", { //베게
+		recipe : {
+			components: [
+				RecipeComponent(ItemType.Cotton, 4, 4, 4),
+				RecipeComponent(ItemType.Feather, 4, 4, 4),
+				RecipeComponent(ItemType.CottonFabric, 2, 2, 2),
+				RecipeComponent(ItemType.String, 2, 2, 2),
+				RecipeComponent(ItemTypeGroup.Needle, 1, 0, 0),
+			],
+			skill: SkillType.Tailoring,
+			level: RecipeLevel.Advanced,
+			reputation: 5
+		},
+		durability: 25,
+		weight: 1,
+		worth : 100
+	})
+	public itemPillow: ItemType;
+
+	@Register.item("WoodenBed", { //나무 침대
+		use: [ActionType.Rest, ActionType.Sleep, ActionType.PlaceDown],
+		recipe : {
+			components: [
+				RecipeComponent(Registry<AddContents, ItemType>().get("itemPillow"), 1, 1, 1),
+				RecipeComponent(ItemType.CottonBedroll, 1, 1, 1),
+				RecipeComponent(ItemType.Log, 3, 3, 3),
+				RecipeComponent(ItemType.WoodenDowels, 4, 4, 4),
+				RecipeComponent(ItemTypeGroup.Hammer, 1, 0, 0),
+			],
+			skill: SkillType.Woodworking,
+			level: RecipeLevel.Expert,
+			reputation: 100
+		},
+		disassemble: true,
+		hasSleepImage: true,
+		flammable: true,
+		durability: 500,
+		groups : [ItemTypeGroup.Bedding],
+		worth : 400,
+		doodad : {
+			isFlammable: true,
+			repairItem: Registry<AddContents, ItemType>().get("itemWoodenBed"),
+			reduceDurabilityOnGather: true
+		}
+	})
+	public itemWoodenBed: ItemType;
+
+	@Register.item("Pomegranate", { //석류
+		use: [ActionType.Eat],
+		onUse : {
+			[ActionType.Eat]: [1, 5, 8, 4]
+		},
+		dismantle: {
+			items: [[ItemType.AppleSeeds, 1]],
+			skill: SkillType.Botany,
+			required: ItemTypeGroup.Sharpened
+		},
+		decayMax : 10000,
+		disassemble: true,
+		durability: 15,
+		weight: 0.5,
+		worth : 5,
+		groups : [ItemTypeGroup.Food]
+	})
+	public itemPomegranate: ItemType;
 
 	////////////////////////////////////
 	// Doodads
 	//
 
-	@Register.doodad("LuminousMushroom", { //받침에주름버섯 - gather 에러
+	@Register.doodad("MycenaChlorophos", { //받침에주름버섯
+		spreadMax: 3,
+		gather: {
+			[GrowingStage.Flowering]:[
+				{type: Registry<AddContents, ItemType>().get("itemMycenaChlorophos")},
+			],
+			[GrowingStage.Ripening]:[
+				{type: Registry<AddContents, ItemType>().get("itemMycenaChlorophos")},
+			]
+		},
 		skillUse:SkillType.Mycology,
 		allowedTiles:[TerrainType.Dirt, TerrainType.FertileSoil, TerrainType.Grass, TerrainType.WoodenFlooring],
 		canTrampleWhenMature:true,
 		canGrowInCaves:true,
 		isFlammable:true,
 		graphicVariation:true,
-		particles: {r: 243, g: 219, b: 202},
+		particles: {r: 202, g: 16, b: 16},
 		canGrow:true,
-		decayMax:750,
+		decayMax:20000,
 		isFungi:true,
-		spreadMax:3, 
-		//gather: {
-		//	[GrowingStage.Flowering]:[
-		//		{type: Registry<AddContents, ItemType>().get("itemLuminousMushroom")},
-		//	],
-		//	[GrowingStage.Ripening]:[
-		//		{type: Registry<AddContents, ItemType>().get("itemLuminousMushroom")}
-		//	]
-		//}
+		group : DoodadTypeGroup.GatheredPlant,
+		providesLight : 1
 	})
-	public doodadLuminousMushroom: DoodadType;
+	public doodadMycenaChlorophos: DoodadType;
 
 	////////////////////////////////////
 	// Creatures
@@ -201,15 +269,11 @@ export default class AddContents extends Mod {
 	 * Executed when a save is loaded.
 	 */
 	public onLoad(): void {
-		itemGroupDescriptions[ItemTypeGroup.Food].types.push(this.itemLuminousMushroom)
-		itemGroupDescriptions[ItemTypeGroup.RawMeat].types.push(this.itemCrabMeat)
 	}
 
 	/**
 	 * Executed when a save is unloaded.
 	 */
 	public onUnload(): void {
-		const foodItems = itemGroupDescriptions[ItemTypeGroup.Food].types;
-		foodItems.splice(foodItems.indexOf(this.itemLuminousMushroom), 1);
 	}
 }

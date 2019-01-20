@@ -5,11 +5,18 @@
 			"modAddContentsSeaCrab": ["게", "딱딱한 껍질을 가지고있는 갑갑류이며, 바다에 서식합니다."]
 		},
 		"doodad": {
-			"modAddContentsLuminousMushroom": ["받침애주름버섯", "밝게 빛나고 있는 버섯입니다.\n먹을수 있는지는 모르겟습니다."]
+			"modAddContentsMycenaChlorophos": ["받침애주름버섯", "밝게 빛나고 있는 버섯입니다.\n먹을수 있는지는 모르겟습니다."]
+		},
+		"doodadItem": {
+			"modAddContentsWoodenBed": [null, "123"]
 		},
 		"item": {
-			"modAddContentsLuminousMushroom": ["받침애주름버섯", "심으면 밝은 빛이 나는 버섯입니다."],
-			"modAddContentsLuminousMushroomLamp": ["발광버섯램프", "옅게 빛이 나고있습니다."],
+			"modAddContentsMycenaChlorophos": ["받침애주름버섯", "심으면 밝은 빛이 나는 버섯입니다."],
+			"modAddContentsMycenaChlorophosLamp": ["받침애주름버섯 램프", "옅게 빛이 나고있습니다."],
+			"modAddContentsPillow": ["베개", "123"],
+			"modAddContentsWoodenBed": ["나무침대", "123"],
+			"modAddContentsPomegranate": ["석류", "123"],
+			"modAddContentsPomegranateSeed": ["석류씨앗", "123"],
 			"modAddContentsCrabMeat": ["게살", "게살임."],
 			"modAddContentsCookedCrabMeat": ["구운 게살", "구운 게살임."],
 			"modAddContentsAberrantCrabMeat": ["돌연변이 게살", "돌연변이 게살임"],
