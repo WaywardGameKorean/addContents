@@ -17,6 +17,34 @@ export default class AddContents extends Mod {
 	////////////////////////////////////
 	// Items
 	//
+	@Register.item("HardShell", { //단단한 껍질
+		disassemble: false,
+		durability: 10,
+		weight: 0.5,
+		worth : 5,
+		groups : [ItemTypeGroup.Other]
+	})
+	public itemHardShell: ItemType;
+
+	@Register.item("HardShellPowder", { //단단한 껍질 가루
+		recipe: {
+			components: [
+				RecipeComponent(Registry<AddContents, ItemType>().get("itemHardShell"), 1, 1),
+				RecipeComponent(ItemTypeGroup.MortarAndPestle, 1, 0)
+			],
+			requiresFire : false,
+			skill: SkillType.Chemistry,
+			level: RecipeLevel.Simple,
+			reputation: 5
+		},
+		disassemble: false,
+		durability: 10,
+		weight: 0.2,
+		worth : 5,
+		groups : [ItemTypeGroup.Powder,ItemTypeGroup.Compost]
+	})
+	public itemHardShellPowder: ItemType;
+
 	@Register.item("CrabMeat", { //게살
 		use: [ActionType.Eat],
 		onUse : {
@@ -102,6 +130,97 @@ export default class AddContents extends Mod {
 		worth : 5,
 	})
 	public itemMud: ItemType;
+
+	@Register.item("PearlOyster", { //진주조개
+		disassemble: true,
+		dismantle: {
+			items: [
+				[Registry<AddContents, ItemType>().get("itemHardShell"), 1],
+				[Registry<AddContents, ItemType>().get("itemPearl"), 1]
+			],
+			required: ItemTypeGroup.Sharpened,
+			skill: SkillType.Anatomy
+		},
+		durability: 10,
+		weight: 1,
+		worth : 500,
+	})
+	public itemPearlOyster: ItemType;
+
+	@Register.item("Pearl", { //진주
+		disassemble: false,
+		durability: 10,
+		weight: 0.8,
+		worth : 1000,
+	})
+	public itemPearl: ItemType;
+
+	@Register.item("SnailMucus", { //달팽이 점액
+		decayMax : 2000,
+		disassemble: false,
+		durability: 10,
+		weight: 0.2,
+		worth : 5
+	})
+	public itemSnailMucus: ItemType;
+
+	@Register.item("SnailSalveBand", { //달팽이 연고 밴드
+		recipe: {
+			components: [
+				RecipeComponent(Registry<AddContents, ItemType>().get("itemSnailMucus"), 1, 1),
+				RecipeComponent(ItemType.Bandage, 1, 0),
+				RecipeComponent(ItemTypeGroup.Medicinal, 2, 0),
+				RecipeComponent(ItemTypeGroup.MortarAndPestle, 1, 0)
+			],
+			requiresFire : true,
+			skill: SkillType.Tinkering,
+			level: RecipeLevel.Intermediate,
+			reputation: 25
+		},
+		disassemble: false,
+		durability: 15,
+		weight: 0.5,
+		worth : 50
+	})
+	public itemSnailSalveBand: ItemType;
+
+	@Register.item("SnailMeat", { //달팽이 고기
+		use: [ActionType.Eat],
+		onUse : {
+			[ActionType.Eat]: [-2, 0, 2, -2],
+		},
+		decayMax : 8000,
+		disassemble: false,
+		durability: 10,
+		weight: 0.2,
+		worth : 5,
+		groups : [ItemTypeGroup.RawMeat]
+	})
+	public itemSnailMeat: ItemType;
+
+	@Register.item("CookedSnailMeat", { //조리된 달팽이 고기
+		use: [ActionType.Eat],
+		onUse : {
+			[ActionType.Eat]: [-1, 1, 1, -1],
+		},
+		recipe: {
+			components: [
+				RecipeComponent(Registry<AddContents, ItemType>().get("itemSnailMeat"), 1, 1),
+				RecipeComponent(ItemTypeGroup.Tongs, 1, 0)
+			],
+			requiresFire : true,
+			skill: SkillType.Cooking,
+			level: RecipeLevel.Simple,
+			reputation: 15
+		},
+		decayMax : 12000,
+		disassemble: false,
+		durability: 10,
+		weight: 0.2,
+		worth : 5,
+		groups : [ItemTypeGroup.CookedMeat]
+	})
+	public itemCookedSnailMeat: ItemType;
 
 	@Register.item("Scallop", { //가리비
 		use: [ActionType.Eat],
@@ -364,23 +483,26 @@ export default class AddContents extends Mod {
 		maxhp: 3,
 		minatk: 1,
 		maxatk: 2,
-		defense: new Defense(1,new Resistances(DamageType.Blunt),new Vulnerabilities(DamageType.Slashing)),
+		defense: new Defense(1,new Resistances(DamageType.Blunt, 1),new Vulnerabilities(DamageType.Slashing, 1)),
 		damageType: DamageType.Slashing,
 		ai: AiType.Scared,
 		moveType: MoveType.WetLand|MoveType.ShallowWater|MoveType.Land,
+		blood: {r: 150,g: 255,b: 70},
 		spawnTiles: SpawnableTiles.Wet,
 		reputation: -200,
 		jumpOver: true,
 		tamingDifficulty: 25,
 		noStumble: true,
-		spawnReputation: 8e3,
+		spawnReputation: 2e3,
 		spawnGroup: [SpawnGroup.FreshWater],
-		skipMovementChance: 2
+		//skipMovementChance: 2
 	},{
 		resource:[
+			{item: Registry<AddContents, ItemType>().get("itemHardShell")},
 			{item: Registry<AddContents, ItemType>().get("itemCrabMeat")}
 		],
 		aberrantResource: [
+			{item: Registry<AddContents, ItemType>().get("itemHardShell")},
 			{item: Registry<AddContents, ItemType>().get("itemAberrantCrabMeat")}
 		],
 		decay:2200,
@@ -388,16 +510,48 @@ export default class AddContents extends Mod {
 	})
 	public creatureSeaCrab: CreatureType;
 
+	@Register.creature("GreenSnail", { // 달팽이
+		minhp: 1,
+		maxhp: 2,
+		minatk: 1,
+		maxatk: 1,
+		defense: new Defense(0,new Resistances(DamageType.Blunt, 1),new Vulnerabilities(DamageType.Slashing, 1)),
+		damageType: DamageType.True,
+		ai: AiType.Neutral,
+		moveType: MoveType.WetLand|MoveType.ShallowWater|MoveType.Land,
+		spawnTiles: SpawnableTiles.Wet,
+		blood: {r: 150,g: 255,b: 70},
+		reputation: -200,
+		jumpOver: true,
+		tamingDifficulty: 25,
+		noStumble: true,
+		acceptedItems : [ItemTypeGroup.WaterskinOfPotableWater, ItemTypeGroup.ClayJugOfPotableWater, ItemTypeGroup.CoconutContainerOfPotableWater, ItemTypeGroup.ContainerOfDesalinatedWater, ItemTypeGroup.ContainerOfMedicinalWater, ItemTypeGroup.ContainerOfPurifiedFreshWater, ItemTypeGroup.ContainerOfUnpurifiedFreshWater, ItemTypeGroup.GlassBottleOfPotableWater],
+		spawnReputation: 1e3,
+		spawnGroup: [SpawnGroup.Any],
+	},{
+		resource:[
+			{item: Registry<AddContents, ItemType>().get("itemSnailMucus")},
+			{item: Registry<AddContents, ItemType>().get("itemSnailMeat")},
+			{item: Registry<AddContents, ItemType>().get("itemHardShell")}
+		],
+		aberrantResource: [
+			{item: Registry<AddContents, ItemType>().get("itemSnailMucus")},
+			{item: Registry<AddContents, ItemType>().get("itemSnailMeat")},
+			{item: Registry<AddContents, ItemType>().get("itemHardShell")}
+		],
+		decay:2200,
+		skill:SkillType.Anatomy
+	})
+	public creatureGreenSnail: CreatureType;
+
 	////////////////////////////////////
 	// Terrain
 	//
 	@Register.terrain("MudFlat", {
 		passable: true,
 		particles: { r: 171, g: 176, b: 179 },
-		//terrainType: Registry<AddContents, TerrainType>().get("terrainMudFlat"),
-		//leftOver: Registry<AddContents, TerrainType>().get("terrainMudFlat"),
 		resources: [
-			{ type: Registry<AddContents, ItemType>().get("itemMud"), chance: 2},
+			{ type: Registry<AddContents, ItemType>().get("itemPearlOyster"), chance: 2},
 			{ type: Registry<AddContents, ItemType>().get("itemScallop"), chance: 5},
 			{ type: Registry<AddContents, ItemType>().get("itemMud"), chance: 60},
 		]

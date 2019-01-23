@@ -4,11 +4,19 @@ interface IAddContentsData {
     seed: number;
 }
 export default class AddContents extends Mod {
+    itemHardShell: ItemType;
+    itemHardShellPowder: ItemType;
     itemCrabMeat: ItemType;
     itemCookedCrabMeat: ItemType;
     itemAberrantCrabMeat: ItemType;
     itemCookedAberrantCrabMeat: ItemType;
     itemMud: ItemType;
+    itemPearlOyster: ItemType;
+    itemPearl: ItemType;
+    itemSnailMucus: ItemType;
+    itemSnailSalveBand: ItemType;
+    itemSnailMeat: ItemType;
+    itemCookedSnailMeat: ItemType;
     itemScallop: ItemType;
     itemCookedScallop: ItemType;
     itemMycenaChlorophos: ItemType;
@@ -20,6 +28,7 @@ export default class AddContents extends Mod {
     doodadMycenaChlorophos: DoodadType;
     doodadPomegranateTree: DoodadType;
     creatureSeaCrab: CreatureType;
+    creatureGreenSnail: CreatureType;
     terrainMudFlat: TerrainType;
     data: IAddContentsData;
 }

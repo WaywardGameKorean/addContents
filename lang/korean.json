@@ -2,7 +2,8 @@
 	"extends": "Full-Korean",
 	"dictionaries": {
 		"creature" : {
-			"modAddContentsSeaCrab": ["게", "딱딱한 껍질을 가지고있는 갑갑류이며, 바다에 서식합니다."]
+			"modAddContentsSeaCrab": ["게", "딱딱한 껍질을 가지고있는 갑갑류이며, 바다에 서식합니다."],
+			"modAddContentsGreenSnail": ["달팽이", "123"]
 		},
 		"doodad": {
 			"modAddContentsMycenaChlorophos": ["받침애주름버섯", "밝게 빛나고 있는 버섯입니다.\n먹을수 있는지는 모르겟습니다."],
@@ -19,8 +20,16 @@
 			"modAddContentsWoodenBed": ["나무침대", "123"],
 			"modAddContentsPomegranate": ["석류", "123"],
 			"modAddContentsPomegranateSeeds": ["석류씨앗", "123"],
+			"modAddContentsHardShell": ["단단한 껍질", "123"],
+			"modAddContentsHardShellPowder": ["단단한 껍질 가루", "123"],
+			"modAddContentsPearlOyster": ["진주조개", "123"],
+			"modAddContentsPearl": ["진주", "123"],
 			"modAddContentsScallop": ["가리비", "123"],
 			"modAddContentsCookedScallop": ["가리비 구이", "123"],
+			"modAddContentsSnailSalveBand": ["달팽이 연고 밴드", "123"],
+			"modAddContentsSnailMucus": ["달팽이 점액", "123"],
+			"modAddContentsSnailMeat": ["달팽이 고기", "123"],
+			"modAddContentsCookedSnailMeat": ["조리된 달팽이 고기", "123"],
 			"modAddContentsCrabMeat": ["게살", "게살임."],
 			"modAddContentsCookedCrabMeat": ["구운 게살", "구운 게살임."],
 			"modAddContentsAberrantCrabMeat": ["돌연변이 게살", "돌연변이 게살임"],
