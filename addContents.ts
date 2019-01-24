@@ -17,6 +17,26 @@ export default class AddContents extends Mod {
 	////////////////////////////////////
 	// Items
 	//
+	@Register.item("RabbitRobe", { //토끼로브
+		equip : EquipType.Back,
+		defense: new Defense(4,new Resistances(DamageType.Blunt, 2, DamageType.Slashing, 2),new Vulnerabilities(DamageType.Piercing, 1)),
+		showOverHair : true,
+		hideHelmet : true,
+		durability: 120,
+		weight: 1.2,
+		worth : 200
+	})
+	public itemRabbitRobe: ItemType;
+
+	@Register.item("CloakCoveredWithMucus", { //점액범벅 망토
+		equip : EquipType.Back,
+		defense: new Defense(4,new Resistances(DamageType.Fire, 2, DamageType.Slashing, 2),new Vulnerabilities(DamageType.Piercing, 1)),
+		durability: 120,
+		weight: 1.2,
+		worth : 200
+	})
+	public itemCloakCoveredWithMucus: ItemType;
+
 	@Register.item("HardShell", { //단단한 껍질
 		disassemble: false,
 		durability: 10,
@@ -510,7 +530,7 @@ export default class AddContents extends Mod {
 	})
 	public creatureSeaCrab: CreatureType;
 
-	@Register.creature("GreenSnail", { // 달팽이
+	@Register.creature("Snail", { // 달팽이
 		minhp: 1,
 		maxhp: 2,
 		minatk: 1,
@@ -537,12 +557,13 @@ export default class AddContents extends Mod {
 		aberrantResource: [
 			{item: Registry<AddContents, ItemType>().get("itemSnailMucus")},
 			{item: Registry<AddContents, ItemType>().get("itemSnailMeat")},
-			{item: Registry<AddContents, ItemType>().get("itemHardShell")}
+			{item: Registry<AddContents, ItemType>().get("itemHardShell")},
+			{item: Registry<AddContents, ItemType>().get("itemCloakCoveredWithMucus"), chance: 1}
 		],
 		decay:2200,
 		skill:SkillType.Anatomy
 	})
-	public creatureGreenSnail: CreatureType;
+	public creatureSnail: CreatureType;
 
 	////////////////////////////////////
 	// Terrain

@@ -3,7 +3,7 @@
 	"dictionaries": {
 		"creature" : {
 			"modAddContentsSeaCrab": ["게", "딱딱한 껍질을 가지고있는 갑갑류이며, 바다에 서식합니다."],
-			"modAddContentsGreenSnail": ["달팽이", "123"]
+			"modAddContentsSnail": ["달팽이", "123"]
 		},
 		"doodad": {
 			"modAddContentsMycenaChlorophos": ["받침애주름버섯", "밝게 빛나고 있는 버섯입니다.\n먹을수 있는지는 모르겟습니다."],
@@ -13,6 +13,8 @@
 			"modAddContentsWoodenBed": [null, "123"]
 		},
 		"item": {
+			"modAddContentsRabbitRobe": ["토끼로브", "123"],
+			"modAddContentscloakcoveredwithmucus": ["점액범벅 망토", "123"],
 			"modAddContentsMud": ["뻘", "123"],
 			"modAddContentsMycenaChlorophos": ["받침애주름버섯", "심으면 밝은 빛이 나는 버섯입니다."],
 			"modAddContentsMycenaChlorophosLamp": ["받침애주름버섯 램프", "옅게 빛이 나고있습니다."],
