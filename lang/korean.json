@@ -2,43 +2,43 @@
 	"extends": "Full-Korean",
 	"dictionaries": {
 		"creature" : {
-			"modAddContentsSeaCrab": ["게", "딱딱한 껍질을 가지고있는 갑갑류이며, 바다에 서식합니다."],
-			"modAddContentsSnail": ["달팽이", "123"]
+			"modAddContentsSeaCrab": ["게", "얕은 물가에서 서식하는 갑각류입니다.단단한 껍데기로 덮여 있으며 다리에 관절이 있습니다.크기에 비해 먹을 수 있는 살이 적어서 고급요리에 쓰입니다."],
+			"modAddContentsSnail": ["달팽이", "단단한 집을 가지고 있는 느린 생물입니다.식용이나 치료 목적 등 다양하게 쓰인다고 알려져있습니다."]
 		},
 		"doodad": {
-			"modAddContentsMycenaChlorophos": ["받침애주름버섯", "밝게 빛나고 있는 버섯입니다.\n먹을수 있는지는 모르겟습니다."],
-			"modAddContentsPomegranateTree": ["석류 나무", "123"]
+			"modAddContentsMycenaChlorophos": ["받침애주름버섯", "하얀 버섯입니다.밤에는 옅은 초록빛으로 빛을 냅니다. 식용으로 사용할순 없습니다."],
+			"modAddContentsPomegranateTree": ["석류 나무", "낙엽소교목으로 가뭄과 건조, 서리에 강한 나무입니다. 과실수로 키우나 관상용으로도 많이 기릅니다."]
 		},
 		"doodadItem": {
-			"modAddContentsWoodenBed": [null, "123"]
+			"modAddContentsWoodenBed": [null, "올라가서 수면을 취하기 위한 가구입니다. 단단한 목재위에 부드러운 면이불을 덮어두어 아주 편하게 휴식을 취하거나 잠을 잘 수 있습니다."]
 		},
 		"item": {
-			"modAddContentsRabbitRobe": ["토끼로브", "123"],
-			"modAddContentscloakcoveredwithmucus": ["점액범벅 망토", "123"],
-			"modAddContentsMud": ["뻘", "123"],
-			"modAddContentsMycenaChlorophos": ["받침애주름버섯", "심으면 밝은 빛이 나는 버섯입니다."],
-			"modAddContentsMycenaChlorophosLamp": ["받침애주름버섯 램프", "옅게 빛이 나고있습니다."],
-			"modAddContentsPillow": ["베개", "123"],
-			"modAddContentsWoodenBed": ["나무침대", "123"],
-			"modAddContentsPomegranate": ["석류", "123"],
-			"modAddContentsPomegranateSeeds": ["석류씨앗", "123"],
-			"modAddContentsHardShell": ["단단한 껍질", "123"],
-			"modAddContentsHardShellPowder": ["단단한 껍질 가루", "123"],
-			"modAddContentsPearlOyster": ["진주조개", "123"],
-			"modAddContentsPearl": ["진주", "123"],
-			"modAddContentsScallop": ["가리비", "123"],
-			"modAddContentsCookedScallop": ["가리비 구이", "123"],
-			"modAddContentsSnailSalveBand": ["달팽이 연고 밴드", "123"],
-			"modAddContentsSnailMucus": ["달팽이 점액", "123"],
-			"modAddContentsSnailMeat": ["달팽이 고기", "123"],
-			"modAddContentsCookedSnailMeat": ["조리된 달팽이 고기", "123"],
-			"modAddContentsCrabMeat": ["게살", "게살임."],
-			"modAddContentsCookedCrabMeat": ["구운 게살", "구운 게살임."],
-			"modAddContentsAberrantCrabMeat": ["돌연변이 게살", "돌연변이 게살임"],
-			"modAddContentsCookedAberrantCrabMeat": ["구운 돌연변이 게살", "구운 돌연변이 게살임"]
+			"modAddContentsRabbitRobe": ["토끼로브", "분홍색의 깜찍한 로브. 취향이...?"],
+			"modAddContentsCloakCoveredWithMucus": ["점액범벅 망토", "점액질에 절여져 빛바랜 망토. 미끌거리고 축축합니다."],
+			"modAddContentsMud": ["뻘", "갯벌에서 얻은 진흙입니다."],
+			"modAddContentsMycenaChlorophos": ["받침애주름버섯", "표면은 젤라틴으로 덮여 강한 점성이 있으며 방사상 줄이 보이는 버섯입니다. 루시퍼 레이스라는 발광 물질을 가지고 있어 어두우면 빛이 납니다."],
+			"modAddContentsMycenaChlorophosLamp": ["받침애주름버섯 램프", "받침애주름버섯을 넣어 테라리움처럼 만든 램프입니다."],
+			"modAddContentsPillow": ["베개", "잘 때 머리와 목을 받치는 도구입니다. 면과 깃털로 만들어 푹신푹신 합니다."],
+			"modAddContentsWoodenBed": ["나무침대", "올라가서 수면을 취하기 위한 가구입니다. 단단한 목재위에 부드러운 면이불을 덮어두어 아주 편하게 휴식을 취하거나 잠을 잘 수 있습니다."],
+			"modAddContentsPomegranate": ["석류", "겉이 빨갛고 갈라진 사이로 알갱이가 가득 차있습니다. 시면서 청량감있는 과즙을 가지고 있습니다."],
+			"modAddContentsPomegranateSeeds": ["석류씨앗", "석류 나무의 씨앗. 작고 조금 길쭉합니다."],
+			"modAddContentsHardShell": ["단단한 껍질", "갑갑류의 단단한 외피를 도려낸 것입니다."],
+			"modAddContentsHardShellPowder": ["단단한 껍질 가루", "단단한 껍질을 간 가루입니다. 식물 성장에 좋아 비료에 섞어 쓰입니다."],
+			"modAddContentsPearlOyster": ["진주조개", "아름다운 진주를 품고 있는 진주 조개입니다. 식용으로 먹을 수는 없을 것 같습니다."],
+			"modAddContentsPearl": ["진주", "진주조개가 만드는 백색 광이 나는 동그란 보석입니다."],
+			"modAddContentsScallop": ["가리비", "전 세계의 바다에 비교적 고르게 분포하고 있는 조개입니다.연안에서 깊은 바다까지 널리 서식하고 있습니다."],
+			"modAddContentsCookedScallop": ["가리비 구이", "가리비를 구운 것으로 풍미가 일품입니다."],
+			"modAddContentsSnailSalveBand": ["달팽이 연고 밴드", "달팽이의 점액과 약재를 섞어 만든 연고를 바른 밴드입니다. 치료 효과가 뛰어납니다."],
+			"modAddContentsSnailMucus": ["달팽이 점액", "미끌거리는 점액질. 곰팡이와 세균을 억제하는 성분이 있습니다."],
+			"modAddContentsSnailMeat": ["달팽이 고기", "약간 냄새가 나는 달팽이의 살점입니다. 익히지 않고 먹으면 탈이 날 것 같습니다."],
+			"modAddContentsCookedSnailMeat": ["조리된 달팽이 고기", "익혀서 조금 먹을만 해졌지만 그래도 의심스럽습니다."],
+			"modAddContentsCrabMeat": ["게살", "반투명하고 흐물흐물한 게살입니다. 이대로도 먹을 수도 있습니다."],
+			"modAddContentsCookedCrabMeat": ["구운 게살", "담백하고 맛있게 구워진 게살입니다."],
+			"modAddContentsAberrantCrabMeat": ["돌연변이 게살", "반투명하고 흐물흐물한 돌연변이 게살입니다. 이대로도 먹을 수도 있습니다."],
+			"modAddContentsCookedAberrantCrabMeat": ["구운 돌연변이 게살", "담백하고 맛있게 구워진 돌연변이 게살입니다."]
 		},
 		"terrain": {
-			"modAddContentsMudFlat": ["갯벌", "123"]
+			"modAddContentsMudFlat": "갯벌"
 		}
 	}
 }

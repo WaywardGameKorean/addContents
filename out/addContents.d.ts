@@ -1,8 +1,5 @@
 import { CreatureType, DoodadType, ItemType, TerrainType } from "Enums";
 import Mod from "mod/Mod";
-interface IAddContentsData {
-    seed: number;
-}
 export default class AddContents extends Mod {
     itemRabbitRobe: ItemType;
     itemCloakCoveredWithMucus: ItemType;
@@ -32,6 +29,4 @@ export default class AddContents extends Mod {
     creatureSeaCrab: CreatureType;
     creatureSnail: CreatureType;
     terrainMudFlat: TerrainType;
-    data: IAddContentsData;
 }
-export {};

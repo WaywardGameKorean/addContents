@@ -2,10 +2,11 @@
 	"name": "Add Contents",
 	"description": "We support languages \"English\", \"Full-korean\", \"Japanese\".\n ",
 	"version": "0.0.1",
-	"author": "Your Name Here",
+	"author": "Lovefield",
 	"compatibleMinorVersions": [
 		7
 	],
+	"multiplayerCompatible": true,
 	"unloadable": true,
 	"file": "out/addContents.js",
 	"languages": [
@@ -14,6 +15,8 @@
 		"lang/japanese"
 	],
 	"tags": [
-		"Item"
-	]
+		"Item",
+		"Content"
+	],
+	"publishedFileId": "1636548250"
 }

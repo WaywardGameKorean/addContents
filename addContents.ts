@@ -6,9 +6,9 @@ import { SpawnableTiles, SpawnGroup } from "creature/ICreature";
 import Mod from "mod/Mod";
 import Register, { Registry } from "mod/ModRegistry";
 
-interface IAddContentsData {
-	seed: number;
-}
+//interface IAddContentsData {
+//	seed: number;
+//}
 
 export default class AddContents extends Mod {
 	//@Mod.instance<AddContents>("AddContents")
@@ -185,6 +185,11 @@ export default class AddContents extends Mod {
 	public itemSnailMucus: ItemType;
 
 	@Register.item("SnailSalveBand", { //달팽이 연고 밴드
+		use: [ActionType.Heal, ActionType.HealOther],
+		onUse: {
+			[ActionType.Heal]: [30, 0, 0, 0],
+			[ActionType.HealOther]: 30
+		},
 		recipe: {
 			components: [
 				RecipeComponent(Registry<AddContents, ItemType>().get("itemSnailMucus"), 1, 1),
@@ -339,7 +344,7 @@ export default class AddContents extends Mod {
 	public itemPillow: ItemType;
 
 	@Register.item("WoodenBed", { //나무 침대
-		use: [ActionType.Rest, ActionType.Sleep, ActionType.PlaceDown],
+		use: [ActionType.Rest, ActionType.Sleep /*, ActionType.PlaceDown */],
 		recipe : {
 			components: [
 				RecipeComponent(Registry<AddContents, ItemType>().get("itemPillow"), 1, 1, 1),
@@ -359,11 +364,11 @@ export default class AddContents extends Mod {
 		groups : [ItemTypeGroup.Bedding],
 		weight: 10,
 		worth : 400,
-		doodad : {
-			isFlammable: true,
-			repairItem: Registry<AddContents, ItemType>().get("itemWoodenBed"),
-			reduceDurabilityOnGather: true
-		}
+		//doodad : {
+		//	isFlammable: true,
+		//	repairItem: Registry<AddContents, ItemType>().get("itemWoodenBed"),
+		//	reduceDurabilityOnGather: true
+		//}
 	})
 	public itemWoodenBed: ItemType;
 
@@ -388,7 +393,7 @@ export default class AddContents extends Mod {
 	public itemPomegranate: ItemType;
 
 	@Register.item("PomegranateSeeds", { //석류 씨앗
-		use: [ActionType.Eat, ActionType.Plant],
+		use: [ActionType.Plant, ActionType.Eat],
 		onUse : {
 			[ActionType.Eat]: [0, 1, 1, -1],
 			[ActionType.Plant]: Registry<AddContents, DoodadType>().get("doodadPomegranateTree")
@@ -580,7 +585,7 @@ export default class AddContents extends Mod {
 	public terrainMudFlat: TerrainType;
 
 	//@Mod.saveData<AddContents>("AddContents")
-	public data: IAddContentsData;
+	//public data: IAddContentsData;
 	//public firstLoad = true;
 
 	/**
