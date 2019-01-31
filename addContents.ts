@@ -420,17 +420,18 @@ export default class AddContents extends Mod {
 				{type: Registry<AddContents, ItemType>().get("itemMycenaChlorophos")},
 			]
 		},
-		skillUse:SkillType.Mycology,
-		allowedTiles:[TerrainType.Dirt, TerrainType.FertileSoil, TerrainType.Grass, TerrainType.WoodenFlooring],
-		canTrampleWhenMature:true,
-		canGrowInCaves:true,
-		isFlammable:true,
-		graphicVariation:true,
-		canGrow:true,
-		decayMax:20000,
-		isFungi:true,
-		group : DoodadTypeGroup.GatheredPlant,
-		providesLight : 1
+		skillUse: SkillType.Mycology,
+		allowedTiles: [TerrainType.Dirt, TerrainType.FertileSoil, TerrainType.Grass, TerrainType.WoodenFlooring],
+		canTrampleWhenMature: true,
+		canGrowInCaves: true,
+		isFlammable: true,
+		graphicVariation: true,
+		particles: {r: 202,g: 16,b: 16},
+		canGrow: true,
+		decayMax: 750,
+		isFungi: true,
+		group : DoodadTypeGroup.GatheredPlant
+		//providesLight : 1
 	})
 	public doodadMycenaChlorophos: DoodadType;
 
@@ -574,6 +575,7 @@ export default class AddContents extends Mod {
 	// Terrain
 	//
 	@Register.terrain("MudFlat", {
+		tillable : true,
 		passable: true,
 		particles: { r: 171, g: 176, b: 179 },
 		resources: [
