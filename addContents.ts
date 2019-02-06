@@ -301,7 +301,7 @@ export default class AddContents extends Mod {
 	})
 	public itemMycenaChlorophos: ItemType;
 
-	@Register.item("MycenaChlorophosLamp", { //형광버섯램프
+	@Register.item("MycenaChlorophosLamp", { //받침애주름버섯 램프
 		attack : 1,
 		damageType : DamageType.Blunt,
 		decayMax : 100000,
