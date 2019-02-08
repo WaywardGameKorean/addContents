@@ -344,7 +344,7 @@ export default class AddContents extends Mod {
 	public itemPillow: ItemType;
 
 	@Register.item("WoodenBed", { //나무 침대
-		use: [ActionType.Rest, ActionType.Sleep /*, ActionType.PlaceDown */],
+		use: [ActionType.Rest, ActionType.Sleep , ActionType.PlaceDown],
 		recipe : {
 			components: [
 				RecipeComponent(Registry<AddContents, ItemType>().get("itemPillow"), 1, 1, 1),
@@ -364,11 +364,11 @@ export default class AddContents extends Mod {
 		groups : [ItemTypeGroup.Bedding],
 		weight: 10,
 		worth : 400,
-		//doodad : {
-		//	isFlammable: true,
-		//	repairItem: Registry<AddContents, ItemType>().get("itemWoodenBed"),
-		//	reduceDurabilityOnGather: true
-		//}
+		doodad : {
+			isFlammable: true,
+			repairItem: Registry<AddContents, ItemType>().get("itemWoodenBed"),
+			reduceDurabilityOnGather: true
+		}
 	})
 	public itemWoodenBed: ItemType;
 
