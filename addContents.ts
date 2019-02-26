@@ -6,9 +6,9 @@ import { SpawnableTiles, SpawnGroup } from "creature/ICreature";
 import Mod from "mod/Mod";
 import Register, { Registry } from "mod/ModRegistry";
 
-interface IAddContentsData {
-	seed: number;
-}
+//interface IAddContentsData {
+//	seed: number;
+//}
 
 export default class AddContents extends Mod {
 	//@Mod.instance<AddContents>("AddContents")
@@ -17,6 +17,26 @@ export default class AddContents extends Mod {
 	////////////////////////////////////
 	// Items
 	//
+	@Register.item("RabbitRobe", { //토끼로브
+		equip : EquipType.Back,
+		defense: new Defense(4,new Resistances(DamageType.Blunt, 2, DamageType.Slashing, 2),new Vulnerabilities(DamageType.Piercing, 1)),
+		showOverHair : true,
+		hideHelmet : true,
+		durability: 120,
+		weight: 1.2,
+		worth : 200
+	})
+	public itemRabbitRobe: ItemType;
+
+	@Register.item("CloakCoveredWithMucus", { //점액범벅 망토
+		equip : EquipType.Back,
+		defense: new Defense(4,new Resistances(DamageType.Fire, 2, DamageType.Slashing, 2),new Vulnerabilities(DamageType.Piercing, 1)),
+		durability: 120,
+		weight: 1.2,
+		worth : 200
+	})
+	public itemCloakCoveredWithMucus: ItemType;
+
 	@Register.item("HardShell", { //단단한 껍질
 		disassemble: false,
 		durability: 10,
@@ -165,6 +185,11 @@ export default class AddContents extends Mod {
 	public itemSnailMucus: ItemType;
 
 	@Register.item("SnailSalveBand", { //달팽이 연고 밴드
+		use: [ActionType.Heal, ActionType.HealOther],
+		onUse: {
+			[ActionType.Heal]: [30, 0, 0, 0],
+			[ActionType.HealOther]: 30
+		},
 		recipe: {
 			components: [
 				RecipeComponent(Registry<AddContents, ItemType>().get("itemSnailMucus"), 1, 1),
@@ -276,7 +301,7 @@ export default class AddContents extends Mod {
 	})
 	public itemMycenaChlorophos: ItemType;
 
-	@Register.item("MycenaChlorophosLamp", { //형광버섯램프
+	@Register.item("MycenaChlorophosLamp", { //받침애주름버섯 램프
 		attack : 1,
 		damageType : DamageType.Blunt,
 		decayMax : 100000,
@@ -319,7 +344,7 @@ export default class AddContents extends Mod {
 	public itemPillow: ItemType;
 
 	@Register.item("WoodenBed", { //나무 침대
-		use: [ActionType.Rest, ActionType.Sleep, ActionType.PlaceDown],
+		use: [ActionType.Rest, ActionType.Sleep , ActionType.PlaceDown],
 		recipe : {
 			components: [
 				RecipeComponent(Registry<AddContents, ItemType>().get("itemPillow"), 1, 1, 1),
@@ -368,7 +393,7 @@ export default class AddContents extends Mod {
 	public itemPomegranate: ItemType;
 
 	@Register.item("PomegranateSeeds", { //석류 씨앗
-		use: [ActionType.Eat, ActionType.Plant],
+		use: [ActionType.Plant, ActionType.Eat],
 		onUse : {
 			[ActionType.Eat]: [0, 1, 1, -1],
 			[ActionType.Plant]: Registry<AddContents, DoodadType>().get("doodadPomegranateTree")
@@ -395,17 +420,18 @@ export default class AddContents extends Mod {
 				{type: Registry<AddContents, ItemType>().get("itemMycenaChlorophos")},
 			]
 		},
-		skillUse:SkillType.Mycology,
-		allowedTiles:[TerrainType.Dirt, TerrainType.FertileSoil, TerrainType.Grass, TerrainType.WoodenFlooring],
-		canTrampleWhenMature:true,
-		canGrowInCaves:true,
-		isFlammable:true,
-		graphicVariation:true,
-		canGrow:true,
-		decayMax:20000,
-		isFungi:true,
-		group : DoodadTypeGroup.GatheredPlant,
-		providesLight : 1
+		skillUse: SkillType.Mycology,
+		allowedTiles: [TerrainType.Dirt, TerrainType.FertileSoil, TerrainType.Grass, TerrainType.WoodenFlooring],
+		canTrampleWhenMature: true,
+		canGrowInCaves: true,
+		isFlammable: true,
+		graphicVariation: true,
+		particles: {r: 202,g: 16,b: 16},
+		canGrow: true,
+		decayMax: 750,
+		isFungi: true,
+		group : DoodadTypeGroup.GatheredPlant
+		//providesLight : 1
 	})
 	public doodadMycenaChlorophos: DoodadType;
 
@@ -510,7 +536,7 @@ export default class AddContents extends Mod {
 	})
 	public creatureSeaCrab: CreatureType;
 
-	@Register.creature("GreenSnail", { // 달팽이
+	@Register.creature("Snail", { // 달팽이
 		minhp: 1,
 		maxhp: 2,
 		minatk: 1,
@@ -537,17 +563,19 @@ export default class AddContents extends Mod {
 		aberrantResource: [
 			{item: Registry<AddContents, ItemType>().get("itemSnailMucus")},
 			{item: Registry<AddContents, ItemType>().get("itemSnailMeat")},
-			{item: Registry<AddContents, ItemType>().get("itemHardShell")}
+			{item: Registry<AddContents, ItemType>().get("itemHardShell")},
+			{item: Registry<AddContents, ItemType>().get("itemCloakCoveredWithMucus"), chance: 1}
 		],
 		decay:2200,
 		skill:SkillType.Anatomy
 	})
-	public creatureGreenSnail: CreatureType;
+	public creatureSnail: CreatureType;
 
 	////////////////////////////////////
 	// Terrain
 	//
 	@Register.terrain("MudFlat", {
+		tillable : true,
 		passable: true,
 		particles: { r: 171, g: 176, b: 179 },
 		resources: [
@@ -559,7 +587,7 @@ export default class AddContents extends Mod {
 	public terrainMudFlat: TerrainType;
 
 	//@Mod.saveData<AddContents>("AddContents")
-	public data: IAddContentsData;
+	//public data: IAddContentsData;
 	//public firstLoad = true;
 
 	/**
