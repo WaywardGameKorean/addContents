@@ -28,5 +28,6 @@ export default class AddContents extends Mod {
     doodadPomegranateTree: DoodadType;
     creatureSeaCrab: CreatureType;
     creatureSnail: CreatureType;
+    creatureNessie: CreatureType;
     terrainMudFlat: TerrainType;
 }

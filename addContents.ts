@@ -1,4 +1,4 @@
-import { OnEquipType, CreatureType, Defense, Resistances, Vulnerabilities, MoveType, DamageType, SkillType, DoodadType, ItemType, ItemTypeGroup, RecipeLevel, EquipType, TerrainType, GrowingStage, DoodadTypeGroup } from "Enums";
+import { LootGroupType, OnEquipType, CreatureType, Defense, Resistances, Vulnerabilities, MoveType, DamageType, SkillType, DoodadType, ItemType, ItemTypeGroup, RecipeLevel, EquipType, TerrainType, GrowingStage, DoodadTypeGroup } from "Enums";
 import { ActionType } from "action/IAction";
 import { AiType } from "entity/IEntity";
 import { RecipeComponent } from "item/Items";
@@ -144,6 +144,10 @@ export default class AddContents extends Mod {
 	public itemCookedAberrantCrabMeat: ItemType;
 
 	@Register.item("Mud", { //뻘
+		use : [ActionType.SetDown],
+		onUse : {
+			[ActionType.SetDown] : Registry<AddContents, TerrainType>().get("terrainMudFlat")
+		},
 		disassemble: false,
 		durability: 10,
 		weight: 0.5,
@@ -293,6 +297,7 @@ export default class AddContents extends Mod {
 		},
 		skillUse : SkillType.Mycology,
 		decayMax : 50000,
+		decaysInto: ItemType.RottingVegetation,
 		disassemble: false,
 		durability: 15,
 		weight: 0.3,
@@ -305,7 +310,8 @@ export default class AddContents extends Mod {
 		attack : 1,
 		damageType : DamageType.Blunt,
 		decayMax : 100000,
-		use: [ActionType.Build],
+		decaysInto : ItemType.GlassBottle,
+		//use: [ActionType.Build],
 		equip : EquipType.Held,
 		recipe: {
 			components: [
@@ -344,7 +350,7 @@ export default class AddContents extends Mod {
 	public itemPillow: ItemType;
 
 	@Register.item("WoodenBed", { //나무 침대
-		use: [ActionType.Rest, ActionType.Sleep , ActionType.PlaceDown],
+		use: [ActionType.Rest, ActionType.Sleep ,/* ActionType.PlaceDown */],
 		recipe : {
 			components: [
 				RecipeComponent(Registry<AddContents, ItemType>().get("itemPillow"), 1, 1, 1),
@@ -364,11 +370,11 @@ export default class AddContents extends Mod {
 		groups : [ItemTypeGroup.Bedding],
 		weight: 10,
 		worth : 400,
-		doodad : {
-			isFlammable: true,
-			repairItem: Registry<AddContents, ItemType>().get("itemWoodenBed"),
-			reduceDurabilityOnGather: true
-		}
+		//doodad : {
+		//	isFlammable: true,
+		//	repairItem: Registry<AddContents, ItemType>().get("itemWoodenBed"),
+		//	reduceDurabilityOnGather: true
+		//}
 	})
 	public itemWoodenBed: ItemType;
 
@@ -571,6 +577,44 @@ export default class AddContents extends Mod {
 	})
 	public creatureSnail: CreatureType;
 
+	@Register.creature("Nessie", { // 네시
+		minhp: 75,
+		maxhp: 80,
+		minatk: 26,
+		maxatk: 28,
+		defense: new Defense(5,new Resistances(DamageType.Slashing, 5),new Vulnerabilities(DamageType.Fire, 2)),
+		damageType: DamageType.Blunt,
+		ai: AiType.Hostile,
+		moveType: MoveType.Land|MoveType.ShallowWater|MoveType.Water|MoveType.BreakDoodads,
+		lootGroup: LootGroupType.SeaTreasure,
+		loot: [{
+			item: ItemType.OrnateWoodenChest,
+			chance: 3
+		}],
+		blood: {r: 80,g: 150,b: 175},
+		aberrantBlood: {r: 220,g: 30,b: 90},
+		spawnTiles: SpawnableTiles.Water,
+		spawnReputation : -42e3,
+		makeNoise : true,
+		reputation: 350,
+		tamingDifficulty: 1e3,
+		spawnGroup: [SpawnGroup.CaveWater, SpawnGroup.Seawater, SpawnGroup.StrongGuardians],
+		noStumble: true,
+		acceptedItems: [ItemTypeGroup.Treasure],
+		skipMovementChance: 3,
+		waterAnimations : true
+	},{
+		resource:[
+			
+		],
+		aberrantResource: [
+			//{item: Registry<AddContents, ItemType>().get("itemSnailMucus")},
+		],
+		decay:12200,
+		skill:SkillType.Anatomy
+	})
+	public creatureNessie: CreatureType;
+
 	////////////////////////////////////
 	// Terrain
 	//
@@ -581,7 +625,7 @@ export default class AddContents extends Mod {
 		resources: [
 			{ type: Registry<AddContents, ItemType>().get("itemPearlOyster"), chance: 2},
 			{ type: Registry<AddContents, ItemType>().get("itemScallop"), chance: 5},
-			{ type: Registry<AddContents, ItemType>().get("itemMud"), chance: 60},
+			{ type: Registry<AddContents, ItemType>().get("itemMud"), chance: 30, tileChange : TerrainType.Dirt},
 		]
 	})
 	public terrainMudFlat: TerrainType;

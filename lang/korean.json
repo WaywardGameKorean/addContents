@@ -3,7 +3,8 @@
 	"dictionaries": {
 		"creature" : {
 			"modAddContentsSeaCrab": ["게", "얕은 물가에서 서식하는 갑각류입니다.단단한 껍데기로 덮여 있으며 다리에 관절이 있습니다.크기에 비해 먹을 수 있는 살이 적어서 고급요리에 쓰입니다."],
-			"modAddContentsSnail": ["달팽이", "단단한 집을 가지고 있는 느린 생물입니다.식용이나 치료 목적 등 다양하게 쓰인다고 알려져있습니다."]
+			"modAddContentsSnail": ["달팽이", "단단한 집을 가지고 있는 느린 생물입니다.식용이나 치료 목적 등 다양하게 쓰인다고 알려져있습니다."],
+			"modAddContentsNessie": ["네시", "호수괴물"]
 		},
 		"doodad": {
 			"modAddContentsMycenaChlorophos": ["받침애주름버섯", "하얀 버섯입니다.밤에는 옅은 초록빛으로 빛을 냅니다. 식용으로 사용할순 없습니다."],
