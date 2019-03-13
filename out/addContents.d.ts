@@ -1,10 +1,18 @@
 import { CreatureType, DoodadType, ItemType, TerrainType } from "Enums";
 import Mod from "mod/Mod";
+import { IItem } from "item/IItem";
+import { ITile } from "tile/ITerrain";
+import { IDoodad } from "doodad/IDoodad";
+import IPlayer from "player/IPlayer";
+interface saveItemData {
+    [key: string]: any;
+}
 export default class AddContents extends Mod {
     itemRabbitRobe: ItemType;
     itemCloakCoveredWithMucus: ItemType;
     itemHardShell: ItemType;
     itemHardShellPowder: ItemType;
+    itemSmoothSkin: ItemType;
     itemCrabMeat: ItemType;
     itemCookedCrabMeat: ItemType;
     itemAberrantCrabMeat: ItemType;
@@ -20,14 +28,26 @@ export default class AddContents extends Mod {
     itemCookedScallop: ItemType;
     itemMycenaChlorophos: ItemType;
     itemMycenaChlorophosLamp: ItemType;
+    itemMycenaChlorophosStreetlamp: ItemType;
+    itemMycenaChlorophosIronStreetlamp: ItemType;
     itemPillow: ItemType;
     itemWoodenBed: ItemType;
     itemPomegranate: ItemType;
     itemPomegranateSeeds: ItemType;
+    itemCamelliaJaponicaFruit: ItemType;
+    itemCamelliaJaponicaSeeds: ItemType;
     doodadMycenaChlorophos: DoodadType;
+    doodadMycenaChlorophosLamp: DoodadType;
+    doodadMycenaChlorophosStreetlamp: DoodadType;
+    doodadMycenaChlorophosIronStreetlamp: DoodadType;
     doodadPomegranateTree: DoodadType;
+    doodadCamelliaJaponica: DoodadType;
     creatureSeaCrab: CreatureType;
     creatureSnail: CreatureType;
     creatureNessie: CreatureType;
     terrainMudFlat: TerrainType;
+    itemData: saveItemData;
+    onBuild(human: Human, item: IItem, tile: ITile, doodad: IDoodad): void;
+    onPickupDoodad(player: IPlayer, doodad: IDoodad): void;
 }
+export {};

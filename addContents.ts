@@ -5,10 +5,19 @@ import { RecipeComponent } from "item/Items";
 import { SpawnableTiles, SpawnGroup } from "creature/ICreature";
 import Mod from "mod/Mod";
 import Register, { Registry } from "mod/ModRegistry";
+import { HookMethod } from "mod/IHookHost";
+import { IContainer, IItem } from "item/IItem";
+import { ITile } from "tile/ITerrain";
+import { IDoodad } from "doodad/IDoodad";
+import IPlayer, { IMovementIntent } from "player/IPlayer";
 
 //interface IAddContentsData {
 //	seed: number;
 //}
+
+interface saveItemData {
+	[key: string]: any
+}
 
 export default class AddContents extends Mod {
 	//@Mod.instance<AddContents>("AddContents")
@@ -64,6 +73,15 @@ export default class AddContents extends Mod {
 		groups : [ItemTypeGroup.Powder,ItemTypeGroup.Compost]
 	})
 	public itemHardShellPowder: ItemType;
+
+	@Register.item("SmoothSkin", { // 매끄러운 가죽
+		skillUse : SkillType.Anatomy,
+		disassemble: false,
+		durability: 10,
+		weight: 0.2,
+		worth : 200
+	})
+	public itemSmoothSkin: ItemType;
 
 	@Register.item("CrabMeat", { //게살
 		use: [ActionType.Eat],
@@ -311,7 +329,10 @@ export default class AddContents extends Mod {
 		damageType : DamageType.Blunt,
 		decayMax : 100000,
 		decaysInto : ItemType.GlassBottle,
-		//use: [ActionType.Build],
+		use: [ActionType.Build],
+		onUse : {
+			[ActionType.Build] : Registry<AddContents, DoodadType>().get("doodadMycenaChlorophosLamp")
+		},
 		equip : EquipType.Held,
 		recipe: {
 			components: [
@@ -326,9 +347,63 @@ export default class AddContents extends Mod {
 		onEquipEffect : [OnEquipType.LightSource, 1],
 		durability: 50,
 		weight: 0.8,
-		worth : 50
+		worth : 50,
+		groups : [ItemTypeGroup.LightSource]
 	})
 	public itemMycenaChlorophosLamp: ItemType;
+
+	@Register.item("MycenaChlorophosStreetlamp", { //받침애주름버섯 나무 가로등
+		decayMax : 100000,
+		decaysInto : ItemType.GlassBottle,
+		use: [ActionType.Build],
+		onUse : {
+			[ActionType.Build] : Registry<AddContents, DoodadType>().get("doodadMycenaChlorophosStreetlamp")
+		},
+		recipe: {
+			components: [
+				RecipeComponent(Registry<AddContents, ItemType>().get("itemMycenaChlorophosLamp"), 1, 1, 1),
+				RecipeComponent(ItemType.Log, 2, 2, 2),
+				RecipeComponent(ItemType.WoodenPole, 1, 1, 1),
+				RecipeComponent(ItemType.String, 2, 2, 2),
+				RecipeComponent(ItemType.WoodenDowels, 4, 4, 4),
+				RecipeComponent(ItemTypeGroup.Hammer, 1, 0, 0),
+			],
+			skill: SkillType.Woodworking,
+			level: RecipeLevel.Expert,
+			reputation: 100
+		},
+		durability: 150,
+		weight: 0.5,
+		worth : 150,
+		groups : [ItemTypeGroup.LightSource]
+	})
+	public itemMycenaChlorophosStreetlamp: ItemType;
+
+	@Register.item("MycenaChlorophosIronStreetlamp", { //받침애주름버섯 철제 가로등
+		decayMax : 100000,
+		decaysInto : ItemType.GlassBottle,
+		use: [ActionType.Build],
+		onUse : {
+			[ActionType.Build] : Registry<AddContents, DoodadType>().get("doodadMycenaChlorophosIronStreetlamp")
+		},
+		recipe: {
+			components: [
+				RecipeComponent(Registry<AddContents, ItemType>().get("itemMycenaChlorophosLamp"), 1, 1, 1),
+				RecipeComponent(ItemType.IronIngot, 4, 4, 4),
+				RecipeComponent(ItemTypeGroup.Hammer, 1, 0, 0),
+			],
+			skill: SkillType.Blacksmithing,
+			requiresFire : true,
+			requiredDoodad: DoodadTypeGroup.Anvil,
+			level: RecipeLevel.Expert,
+			reputation: 100
+		},
+		durability: 150,
+		weight: 4.5,
+		worth : 150,
+		groups : [ItemTypeGroup.LightSource]
+	})
+	public itemMycenaChlorophosIronStreetlamp: ItemType;
 
 	@Register.item("Pillow", { //베게
 		recipe : {
@@ -412,6 +487,35 @@ export default class AddContents extends Mod {
 	})
 	public itemPomegranateSeeds: ItemType;
 
+	@Register.item("CamelliaJaponicaFruit", { //동백 열매
+		dismantle: {
+			items: [[Registry<AddContents, ItemType>().get("itemCamelliaJaponicaSeeds"), 3]],
+			skill: SkillType.Botany,
+			required: ItemTypeGroup.Sharpened
+		},
+		decayMax : 10000,
+		disassemble: true,
+		durability: 10,
+		weight: 0.2,
+		worth : 5,
+		groups : [ItemTypeGroup.Food]
+	})
+	public itemCamelliaJaponicaFruit: ItemType;
+
+	@Register.item("CamelliaJaponicaSeeds", { //동백 씨앗
+		use: [ActionType.Plant, ActionType.Eat],
+		onUse : {
+			[ActionType.Eat]: [0, 1, 1, -1],
+			[ActionType.Plant]: Registry<AddContents, DoodadType>().get("doodadCamelliaJaponica")
+		},
+		skillUse : SkillType.Botany,
+		disassemble: false,
+		weight: 0.1,
+		worth : 15,
+		groups : [ItemTypeGroup.Seed]
+	})
+	public itemCamelliaJaponicaSeeds: ItemType;
+
 	////////////////////////////////////
 	// Doodads
 	//
@@ -436,10 +540,38 @@ export default class AddContents extends Mod {
 		canGrow: true,
 		decayMax: 750,
 		isFungi: true,
-		group : DoodadTypeGroup.GatheredPlant
-		//providesLight : 1
+		group : DoodadTypeGroup.GatheredPlant,
+		providesLight : -1
 	})
 	public doodadMycenaChlorophos: DoodadType;
+
+	@Register.doodad("MycenaChlorophosLamp", { //받침에주름버섯 램프
+		pickUp: [Registry<AddContents, ItemType>().get("itemMycenaChlorophosLamp")],
+		decayMax : 100000,
+		reduceDurabilityOnGather: true,
+		providesLight : 1
+	})
+	public doodadMycenaChlorophosLamp: DoodadType;
+
+	@Register.doodad("MycenaChlorophosStreetlamp", { //받침에주름버섯 램프 나무 가로등
+		isTall : true,
+		blockMove : true,
+		pickUp: [Registry<AddContents, ItemType>().get("itemMycenaChlorophosStreetlamp")],
+		decayMax : 100000,
+		reduceDurabilityOnGather: true,
+		providesLight : 2
+	})
+	public doodadMycenaChlorophosStreetlamp: DoodadType;
+
+	@Register.doodad("MycenaChlorophosIronStreetlamp", { //받침에주름버섯 램프 철제 가로등
+		isTall : true,
+		blockMove : true,
+		pickUp: [Registry<AddContents, ItemType>().get("itemMycenaChlorophosIronStreetlamp")],
+		decayMax : 100000,
+		reduceDurabilityOnGather: true,
+		providesLight : 2
+	})
+	public doodadMycenaChlorophosIronStreetlamp: DoodadType;
 
 	@Register.doodad("PomegranateTree", { //석류 나무
 		blockLos: true,
@@ -506,6 +638,72 @@ export default class AddContents extends Mod {
 		gatherCanHurtHands: true
 	})
 	public doodadPomegranateTree: DoodadType;
+
+	@Register.doodad("CamelliaJaponica", { //동백 나무
+		blockLos: true,
+		blockMove: true,
+		isFlammable: true,
+		graphicVariation: true,
+		reduceDurabilityOnGather: true,
+		skillUse: SkillType.Botany,
+		gatherSkillUse: SkillType.Lumberjacking,
+		isTall: true,
+		gather: {
+			[GrowingStage.Seedling]: [
+				{type: ItemType.Branch},
+				{type: ItemType.PlantRoots}
+			],
+			[GrowingStage.Vegetative]: [
+				{type: ItemType.Leaves},
+				{type: ItemType.Branch},
+				{type: ItemType.PlantRoots}
+			],
+			[GrowingStage.Budding]: [
+				{type: ItemType.Leaves},
+				{type: ItemType.Twigs},
+				{type: ItemType.Branch},
+				{type: ItemType.TreeBark}
+			],
+			[GrowingStage.Flowering]: [
+				{type: ItemType.Leaves},
+				{type: ItemType.Twigs},
+				{type: ItemType.Branch},
+				{type: ItemType.TreeBark}
+			],
+			[GrowingStage.Ripening]: [
+				{type: Registry<AddContents, ItemType>().get("itemCamelliaJaponicaFruit")},
+				{type: Registry<AddContents, ItemType>().get("itemCamelliaJaponicaFruit")},
+				{type: Registry<AddContents, ItemType>().get("itemCamelliaJaponicaFruit")},
+				{type: ItemType.Leaves},
+				{type: ItemType.Twigs},
+				{type: ItemType.Branch,chance: 5},
+				{type: ItemType.Branch},
+				{type: ItemType.TreeBark}
+			],
+			[GrowingStage.Dead]: [
+				{type: ItemType.Log},
+				{type: ItemType.Branch},
+				{type: ItemType.Log,chance: 50},
+				{type: ItemType.Log,chance: 10},
+				{type: ItemType.Log}
+			]
+		},
+		harvest: {
+			[GrowingStage.Ripening]: [
+				{type: Registry<AddContents, ItemType>().get("itemCamelliaJaponicaFruit")},
+				{type: Registry<AddContents, ItemType>().get("itemCamelliaJaponicaFruit")},
+				{type: Registry<AddContents, ItemType>().get("itemCamelliaJaponicaFruit")}
+			]
+		},
+		canGrow: true,
+		spawnOnTerrain: [TerrainType.Dirt, TerrainType.Grass],
+		allowedTiles: [TerrainType.Dirt, TerrainType.Grass, TerrainType.FertileSoil],
+		decayMax: 4000,
+		spreadMax: 3,
+		isTree: true,
+		gatherCanHurtHands: true
+	})
+	public doodadCamelliaJaponica: DoodadType;
 
 	////////////////////////////////////
 	// Creatures
@@ -600,15 +798,21 @@ export default class AddContents extends Mod {
 		tamingDifficulty: 1e3,
 		spawnGroup: [SpawnGroup.CaveWater, SpawnGroup.Seawater, SpawnGroup.StrongGuardians],
 		noStumble: true,
-		acceptedItems: [ItemTypeGroup.Treasure],
+		acceptedItems: [ItemType.RawCod, ItemType.RawBlindfish],
 		skipMovementChance: 3,
 		waterAnimations : true
 	},{
 		resource:[
-			
+			{item: Registry<AddContents, ItemType>().get("itemSmoothSkin")},
+			{item: ItemType.RawMeat},
+			{item: ItemType.Offal},
+			{item: ItemType.AnimalFat}
 		],
 		aberrantResource: [
-			//{item: Registry<AddContents, ItemType>().get("itemSnailMucus")},
+			{item: Registry<AddContents, ItemType>().get("itemSmoothSkin")},
+			{item: ItemType.RawMeat},
+			{item: ItemType.Offal},
+			{item: ItemType.AnimalFat}
 		],
 		decay:12200,
 		skill:SkillType.Anatomy
@@ -643,4 +847,30 @@ export default class AddContents extends Mod {
 	 * Executed when a save is unloaded.
 	 */
 	//public onUnload(): void {}
+
+	////////////////////////////////////
+	// Hook
+	//
+	public itemData: saveItemData = {};
+	@HookMethod
+	public onBuild(human: Human, item: IItem, tile: ITile, doodad: IDoodad) {
+		let itemId = item.id;
+		let itemDecay = item.decay;
+		let doodadId = doodad.id;
+
+		this.itemData[doodadId] = {
+			'doodadId' : doodadId,
+			'itemId' : itemId
+		};
+		doodad.decay = itemDecay;
+	}
+
+	@HookMethod
+	public onPickupDoodad(player: IPlayer, doodad: IDoodad) {
+		let id = doodad.id;
+		let decay = doodad.decay;
+		let itemId = this.itemData[id].itemId;
+		game.items[itemId].decay = decay;
+		//delete this.itemData[id];
+	};
 }
