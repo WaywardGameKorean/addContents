@@ -1,27 +1,48 @@
+import { Action } from "action/Action";
 import { LootGroupType, OnEquipType, CreatureType, Defense, Resistances, Vulnerabilities, MoveType, DamageType, SkillType, DoodadType, ItemType, ItemTypeGroup, RecipeLevel, EquipType, TerrainType, GrowingStage, DoodadTypeGroup } from "Enums";
-import { ActionType } from "action/IAction";
-import { AiType } from "entity/IEntity";
+import { ActionArgument, ActionType } from "action/IAction";
+import { AiType, EntityType } from "entity/IEntity";
 import { RecipeComponent } from "item/Items";
-import { SpawnableTiles, SpawnGroup } from "creature/ICreature";
+import { SpawnableTiles, SpawnGroup, TileGroup } from "creature/ICreature";
 import Mod from "mod/Mod";
 import Register, { Registry } from "mod/ModRegistry";
 import { HookMethod } from "mod/IHookHost";
 import { IContainer, IItem } from "item/IItem";
 import { ITile } from "tile/ITerrain";
 import { IDoodad } from "doodad/IDoodad";
-import IPlayer, { IMovementIntent } from "player/IPlayer";
+import IPlayer from "player/IPlayer";
 
 //interface IAddContentsData {
-//	seed: number;
+//	[ket:string] : any;
 //}
 
-interface saveItemData {
-	[key: string]: any
-}
-
 export default class AddContents extends Mod {
+
 	//@Mod.instance<AddContents>("AddContents")
 	//public static readonly INSTANCE: AddContents;
+
+	////////////////////////////////////
+	// action
+	//
+	@Register.action("LightUp", new Action(ActionArgument.ItemInventory)
+	.setUsableBy(EntityType.Player)
+	.setHandler((action, item) => {
+		let player = action.executor;
+		let hasClayJug = itemManager.getItemInContainer(player.inventory, this.itemClayJugOfCamelliaJaponicaOil);
+		let hasGlassBottle = itemManager.getItemInContainer(player.inventory, this.itemGlassBottleOfCamelliaJaponicaOil);
+		console.log(itemManager.getItemInContainer(player.inventory, ItemType.IronIngot));
+		console.log(player.inventory, Registry<AddContents, ItemType>().get("itemClayJugOfCamelliaJaponicaOil"));
+		console.log(hasClayJug, hasGlassBottle);
+		console.log(player, item);
+	}))
+	public readonly actionLightUp: ActionType;
+
+	@Register.action("AddOil", new Action(ActionArgument.ItemInventory)
+	.setUsableBy(EntityType.Player)
+	.setHandler((action, item) => {
+		console.log(action.executor, item);
+	}))
+	public readonly actionAddOil: ActionType;
 
 	////////////////////////////////////
 	// Items
@@ -354,7 +375,6 @@ export default class AddContents extends Mod {
 
 	@Register.item("MycenaChlorophosStreetlamp", { //받침애주름버섯 나무 가로등
 		decayMax : 100000,
-		decaysInto : ItemType.GlassBottle,
 		use: [ActionType.Build],
 		onUse : {
 			[ActionType.Build] : Registry<AddContents, DoodadType>().get("doodadMycenaChlorophosStreetlamp")
@@ -381,7 +401,6 @@ export default class AddContents extends Mod {
 
 	@Register.item("MycenaChlorophosIronStreetlamp", { //받침애주름버섯 철제 가로등
 		decayMax : 100000,
-		decaysInto : ItemType.GlassBottle,
 		use: [ActionType.Build],
 		onUse : {
 			[ActionType.Build] : Registry<AddContents, DoodadType>().get("doodadMycenaChlorophosIronStreetlamp")
@@ -405,6 +424,29 @@ export default class AddContents extends Mod {
 	})
 	public itemMycenaChlorophosIronStreetlamp: ItemType;
 
+	@Register.item("StoneCompressionMachine", { //압착기
+		use: [ActionType.Build],
+		onUse : {
+			[ActionType.Build] : Registry<AddContents, DoodadType>().get("doodadStoneCompressionMachine")
+		},
+		recipe: {
+			components: [
+				RecipeComponent(ItemType.LargeRock, 3, 3, 3),
+				RecipeComponent(ItemType.Log, 4, 4, 4),
+				RecipeComponent(ItemType.WoodenDowels, 4, 4, 4),
+				RecipeComponent(ItemTypeGroup.Hammer, 1, 0, 0),
+			],
+			skill: SkillType.Stonecrafting,
+			level: RecipeLevel.Intermediate,
+			reputation: 100
+		},
+		durability: 150,
+		weight: 5,
+		worth : 50,
+		groups : [ItemTypeGroup.Tool]
+	})
+	public itemStoneCompressionMachine: ItemType;
+
 	@Register.item("Pillow", { //베게
 		recipe : {
 			components: [
@@ -425,7 +467,7 @@ export default class AddContents extends Mod {
 	public itemPillow: ItemType;
 
 	@Register.item("WoodenBed", { //나무 침대
-		use: [ActionType.Rest, ActionType.Sleep ,/* ActionType.PlaceDown */],
+		use: [ActionType.Rest, ActionType.Sleep /*, ActionType.PlaceDown*/],
 		recipe : {
 			components: [
 				RecipeComponent(Registry<AddContents, ItemType>().get("itemPillow"), 1, 1, 1),
@@ -516,6 +558,82 @@ export default class AddContents extends Mod {
 	})
 	public itemCamelliaJaponicaSeeds: ItemType;
 
+	@Register.item("ClayJugOfCamelliaJaponicaOil", { //동백 기름이 담긴 호리병
+		recipe : {
+			components: [
+				RecipeComponent(Registry<AddContents, ItemType>().get("itemCamelliaJaponicaSeeds"), 10, 10, 10),
+				RecipeComponent(ItemType.ClayJug, 1, 1, 1),
+			],
+			skill: SkillType.Tinkering,
+			requiredDoodad: Registry<AddContents, DoodadType>().get("doodadStoneCompressionMachine"),
+			level: RecipeLevel.Simple,
+			reputation: -100
+		},
+		disassemble: false,
+		weight: 1,
+		worth : 100,
+		groups : [ItemTypeGroup.Fuel]
+	})
+	public itemClayJugOfCamelliaJaponicaOil: ItemType;
+
+	@Register.item("GlassBottleOfCamelliaJaponicaOil", { //동백 기름이 담긴 유리병
+		recipe : {
+			components: [
+				RecipeComponent(Registry<AddContents, ItemType>().get("itemCamelliaJaponicaSeeds"), 10, 10, 10),
+				RecipeComponent(ItemType.GlassBottle, 1, 1, 1),
+			],
+			skill: SkillType.Tinkering,
+			requiredDoodad: Registry<AddContents, DoodadType>().get("doodadStoneCompressionMachine"),
+			level: RecipeLevel.Simple,
+			reputation: -100
+		},
+		disassemble: false,
+		weight: 1,
+		worth : 100,
+		groups : [ItemTypeGroup.Fuel]
+	})
+	public itemGlassBottleOfCamelliaJaponicaOil: ItemType;
+
+	@Register.item("Ice", { //얼음
+		use: [ActionType.Eat],
+		onUse : {
+			[ActionType.Eat]: [1, -1, 0, 5],
+		},
+		disassemble: false,
+		weight: 0.3,
+		worth : 100,
+		groups : [ItemTypeGroup.Food]
+	})
+	public itemIce: ItemType;
+
+	@Register.item("Lantern", { //랜턴
+		attack : 1,
+		damageType : DamageType.Blunt,
+		decaysInto : ItemType.GlassBottle,
+		use: [ Registry<AddContents, ActionType>().get("actionLightUp") ,ActionType.Build],
+		onUse : {
+			[ActionType.Build] : Registry<AddContents, DoodadType>().get("doodadLantern")
+		},
+		equip : EquipType.Held,
+		recipe: {
+			components: [
+				RecipeComponent(ItemType.IronIngot, 3, 3, 3),
+				RecipeComponent(ItemType.SheetOfGlass, 1, 1, 1),
+				RecipeComponent(ItemType.String, 2, 2, 2)
+			],
+			requiresFire : true,
+			requiredDoodad : DoodadTypeGroup.Anvil,
+			skill: SkillType.Blacksmithing,
+			level: RecipeLevel.Intermediate,
+			reputation: 10
+		},
+		durability: 50,
+		weight: 0.8,
+		worth : 50,
+		groups : [ItemTypeGroup.LightSource]
+	})
+	public itemLantern: ItemType;
+
 	////////////////////////////////////
 	// Doodads
 	//
@@ -572,6 +690,20 @@ export default class AddContents extends Mod {
 		providesLight : 2
 	})
 	public doodadMycenaChlorophosIronStreetlamp: DoodadType;
+
+	@Register.doodad("Lantern", { //랜턴
+		pickUp: [Registry<AddContents, ItemType>().get("itemLantern")],
+		reduceDurabilityOnGather: true
+	})
+	public doodadLantern: DoodadType;
+
+	@Register.doodad("StoneCompressionMachine", { //압착기
+		isTall : true,
+		blockMove : true,
+		pickUp: [Registry<AddContents, ItemType>().get("itemStoneCompressionMachine")],
+		reduceDurabilityOnGather: true
+	})
+	public doodadStoneCompressionMachine: DoodadType;
 
 	@Register.doodad("PomegranateTree", { //석류 나무
 		blockLos: true,
@@ -804,12 +936,14 @@ export default class AddContents extends Mod {
 	},{
 		resource:[
 			{item: Registry<AddContents, ItemType>().get("itemSmoothSkin")},
+			{item: Registry<AddContents, ItemType>().get("itemRabbitRobe"), chance: 1},
 			{item: ItemType.RawMeat},
 			{item: ItemType.Offal},
 			{item: ItemType.AnimalFat}
 		],
 		aberrantResource: [
 			{item: Registry<AddContents, ItemType>().get("itemSmoothSkin")},
+			{item: Registry<AddContents, ItemType>().get("itemRabbitRobe"), chance: 1},
 			{item: ItemType.RawMeat},
 			{item: ItemType.Offal},
 			{item: ItemType.AnimalFat}
@@ -818,6 +952,81 @@ export default class AddContents extends Mod {
 		skill:SkillType.Anatomy
 	})
 	public creatureNessie: CreatureType;
+
+	@Register.creature("IceElemental", { // 얼음정령
+		minhp: 15,
+		maxhp: 19,
+		minatk: 14,
+		maxatk: 21,
+		defense: new Defense(5,new Resistances(DamageType.Blunt, 50),new Vulnerabilities(DamageType.Fire, 10)),
+		damageType: DamageType.Blunt,
+		ai: AiType.Hostile,
+		moveType: MoveType.Flying,
+		lootGroup: LootGroupType.FireElemental,
+		spawnTiles: SpawnableTiles.All,
+		spawnReputation : -3e4,
+		makeNoise : true,
+		reputation: 250,
+		tamingDifficulty: 300,
+		spawnGroup: [SpawnGroup.Guardians, SpawnGroup.StrongGuardians],
+		noStumble: true,
+		acceptedItems: [Registry<AddContents, ItemType>().get("itemIce")],
+		skipMovementChance: 5,
+		tileMissChance : {
+			[TileGroup.Wet]: 0.5
+		}
+	},{
+		resource:[
+			{item: Registry<AddContents, ItemType>().get("itemIce")},
+			{item: Registry<AddContents, ItemType>().get("itemRabbitRobe"), chance: 1}
+		],
+		aberrantResource: [
+			{item: Registry<AddContents, ItemType>().get("itemIce")},
+			{item: Registry<AddContents, ItemType>().get("itemRabbitRobe"), chance: 1}
+		],
+		decay:12200,
+		skill:SkillType.Anatomy,
+		animated : true
+	})
+	public creatureIceElemental: CreatureType;
+
+	@Register.creature("SnowMan", { // 눈사람
+		minhp: 15,
+		maxhp: 19,
+		minatk: 14,
+		maxatk: 21,
+		defense: new Defense(5,new Resistances(),new Vulnerabilities(DamageType.Slashing, 50)),
+		damageType: DamageType.Blunt,
+		ai: AiType.Hostile,
+		moveType: MoveType.Land,
+		lootGroup: LootGroupType.FireElemental,
+		spawnTiles: SpawnableTiles.All,
+		spawnReputation : -3e4,
+		makeNoise : true,
+		reputation: 250,
+		tamingDifficulty: 300,
+		spawnGroup: [SpawnGroup.Guardians, SpawnGroup.StrongGuardians],
+		noStumble: true,
+		acceptedItems: [ItemType.PileOfSnow],
+		skipMovementChance: 5,
+		tileMissChance : {
+			[TileGroup.Wet]: 0.5
+		}
+	},{
+		resource:[
+			{item: ItemType.PileOfSnow},
+			{item: ItemType.Branch},
+			{item: ItemType.Carrot}
+		],
+		aberrantResource: [
+			{item: ItemType.PileOfSnow},
+			{item: ItemType.Branch},
+			{item: ItemType.Carrot}
+		],
+		decay:12200,
+		skill:SkillType.Anatomy
+	})
+	public creatureSnowMan: CreatureType;
 
 	////////////////////////////////////
 	// Terrain
@@ -834,43 +1043,52 @@ export default class AddContents extends Mod {
 	})
 	public terrainMudFlat: TerrainType;
 
+	////////////////////////////////////
+	// Fields
+	//
 	//@Mod.saveData<AddContents>("AddContents")
 	//public data: IAddContentsData;
 	//public firstLoad = true;
+//
+	//public initializeSaveData(data?: IAddContentsData) {
+	//	if (data) {
+	//		console.log('one');
+	//		this.firstLoad = false;
+	//		return data;
+	//	}
+	//	console.log('one');
+//
+	//	this.firstLoad = true;
+	//	return {
+	//		object: {'test':1}
+	//	};
+	//}
 
-	/**
-	 * Executed when a save is loaded.
-	 */
-	//public onLoad(): void {}
 
-	/**
-	 * Executed when a save is unloaded.
-	 */
-	//public onUnload(): void {}
-
+	
 	////////////////////////////////////
 	// Hook
 	//
-	public itemData: saveItemData = {};
+	public data: any;
 	@HookMethod
 	public onBuild(human: Human, item: IItem, tile: ITile, doodad: IDoodad) {
-		let itemId = item.id;
-		let itemDecay = item.decay;
-		let doodadId = doodad.id;
-
-		this.itemData[doodadId] = {
-			'doodadId' : doodadId,
-			'itemId' : itemId
-		};
-		doodad.decay = itemDecay;
+		if(item.decay !== undefined){
+			doodad.decay = item.decay;
+		}
 	}
 
 	@HookMethod
 	public onPickupDoodad(player: IPlayer, doodad: IDoodad) {
-		let id = doodad.id;
-		let decay = doodad.decay;
-		let itemId = this.itemData[id].itemId;
-		game.items[itemId].decay = decay;
-		//delete this.itemData[id];
+		if(doodad.decay !== undefined){
+			game.items[this.data].decay = doodad.decay;
+		}
+	};
+
+	@HookMethod
+	public onInventoryItemAdd(player: IPlayer | undefined,item: IItem, container: IContainer) {
+		if(item.decay !== undefined){
+			let id = item.id;
+			this.data = id;
+		}
 	};
 }

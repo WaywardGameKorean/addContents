@@ -1,13 +1,13 @@
 import { CreatureType, DoodadType, ItemType, TerrainType } from "Enums";
+import { ActionType } from "action/IAction";
 import Mod from "mod/Mod";
-import { IItem } from "item/IItem";
+import { IContainer, IItem } from "item/IItem";
 import { ITile } from "tile/ITerrain";
 import { IDoodad } from "doodad/IDoodad";
 import IPlayer from "player/IPlayer";
-interface saveItemData {
-    [key: string]: any;
-}
 export default class AddContents extends Mod {
+    readonly actionLightUp: ActionType;
+    readonly actionAddOil: ActionType;
     itemRabbitRobe: ItemType;
     itemCloakCoveredWithMucus: ItemType;
     itemHardShell: ItemType;
@@ -30,24 +30,33 @@ export default class AddContents extends Mod {
     itemMycenaChlorophosLamp: ItemType;
     itemMycenaChlorophosStreetlamp: ItemType;
     itemMycenaChlorophosIronStreetlamp: ItemType;
+    itemStoneCompressionMachine: ItemType;
     itemPillow: ItemType;
     itemWoodenBed: ItemType;
     itemPomegranate: ItemType;
     itemPomegranateSeeds: ItemType;
     itemCamelliaJaponicaFruit: ItemType;
     itemCamelliaJaponicaSeeds: ItemType;
+    itemClayJugOfCamelliaJaponicaOil: ItemType;
+    itemGlassBottleOfCamelliaJaponicaOil: ItemType;
+    itemIce: ItemType;
+    itemLantern: ItemType;
     doodadMycenaChlorophos: DoodadType;
     doodadMycenaChlorophosLamp: DoodadType;
     doodadMycenaChlorophosStreetlamp: DoodadType;
     doodadMycenaChlorophosIronStreetlamp: DoodadType;
+    doodadLantern: DoodadType;
+    doodadStoneCompressionMachine: DoodadType;
     doodadPomegranateTree: DoodadType;
     doodadCamelliaJaponica: DoodadType;
     creatureSeaCrab: CreatureType;
     creatureSnail: CreatureType;
     creatureNessie: CreatureType;
+    creatureIceElemental: CreatureType;
+    creatureSnowMan: CreatureType;
     terrainMudFlat: TerrainType;
-    itemData: saveItemData;
+    data: any;
     onBuild(human: Human, item: IItem, tile: ITile, doodad: IDoodad): void;
     onPickupDoodad(player: IPlayer, doodad: IDoodad): void;
+    onInventoryItemAdd(player: IPlayer | undefined, item: IItem, container: IContainer): void;
 }
-export {};

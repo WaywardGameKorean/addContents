@@ -1,18 +1,26 @@
 {
 	"extends": "Full-Korean",
 	"dictionaries": {
+		"action" : {
+			"modAddContentsLightUp": ["불 켜기", ""],
+			"modAddContentsAddOil": ["기름보충", ""]
+		},
 		"creature" : {
 			"modAddContentsSeaCrab": ["게", "얕은 물가에서 서식하는 갑각류입니다.단단한 껍데기로 덮여 있으며 다리에 관절이 있습니다.크기에 비해 먹을 수 있는 살이 적어서 고급요리에 쓰입니다."],
 			"modAddContentsSnail": ["달팽이", "단단한 집을 가지고 있는 느린 생물입니다.식용이나 치료 목적 등 다양하게 쓰인다고 알려져있습니다."],
+			"modAddContentsIceElemental": ["얼음정령", ""],
+			"modAddContentsSnowMan": ["눈사람", ""],
 			"modAddContentsNessie": ["네시", "호수괴물"]
 		},
 		"doodad": {
 			"modAddContentsMycenaChlorophos": ["받침애주름버섯", "하얀 버섯입니다.밤에는 옅은 초록빛으로 빛을 냅니다. 식용으로 사용할순 없습니다."],
 			"modAddContentsPomegranateTree": ["석류 나무", "낙엽소교목으로 가뭄과 건조, 서리에 강한 나무입니다. 과실수로 키우나 관상용으로도 많이 기릅니다."],
 			"modAddContentsCamelliaJaponica": ["동백 나무", "추운 곳에서도 잘 사는 붉은 꽃이 피는 나무. 씨앗에서 기름을 추출할 수 있다."],
+			"modAddContentsStoneCompressionMachine": ["압착기", "압착기"],
 			"modAddContentsMycenaChlorophosLamp": ["받침애주름버섯 램프", "받침애주름버섯을 넣어 테라리움처럼 만든 램프입니다."],
 			"modAddContentsMycenaChlorophosStreetlamp": ["나무 가로등", "받침애주름버섯 램프를 이용해 만든 가로등입니다. 주변을 비춰줍니다."],
-			"modAddContentsMycenaChlorophosIronStreetlamp": ["철제 가로등", "받침애주름버섯 램프를 이용해 만든 가로등입니다. 주변을 비춰줍니다."]
+			"modAddContentsMycenaChlorophosIronStreetlamp": ["철제 가로등", "받침애주름버섯 램프를 이용해 만든 가로등입니다. 주변을 비춰줍니다."],
+			"modAddContentsLantern": ["랜턴", ""]
 		},
 		"doodadItem": {
 			"modAddContentsWoodenBed": [null, "올라가서 수면을 취하기 위한 가구입니다. 단단한 목재위에 부드러운 면이불을 덮어두어 아주 편하게 휴식을 취하거나 잠을 잘 수 있습니다."]
@@ -41,11 +49,16 @@
 			"modAddContentsSnailMucus": ["달팽이 점액", "미끌거리는 점액질. 곰팡이와 세균을 억제하는 성분이 있습니다."],
 			"modAddContentsSnailMeat": ["달팽이 고기", "약간 냄새가 나는 달팽이의 살점입니다. 익히지 않고 먹으면 탈이 날 것 같습니다."],
 			"modAddContentsCookedSnailMeat": ["조리된 달팽이 고기", "익혀서 조금 먹을만 해졌지만 그래도 의심스럽습니다."],
+			"modAddContentsStoneCompressionMachine": ["압착기", "압착기"],
 			"modAddContentsSmoothSkin": ["매끄러운 가죽", "네시의 가죽으로 매우 부드럽습니다."],
 			"modAddContentsCrabMeat": ["게살", "반투명하고 흐물흐물한 게살입니다. 이대로도 먹을 수도 있습니다."],
 			"modAddContentsCookedCrabMeat": ["구운 게살", "담백하고 맛있게 구워진 게살입니다."],
 			"modAddContentsAberrantCrabMeat": ["돌연변이 게살", "반투명하고 흐물흐물한 돌연변이 게살입니다. 이대로도 먹을 수도 있습니다."],
-			"modAddContentsCookedAberrantCrabMeat": ["구운 돌연변이 게살", "담백하고 맛있게 구워진 돌연변이 게살입니다."]
+			"modAddContentsCookedAberrantCrabMeat": ["구운 돌연변이 게살", "담백하고 맛있게 구워진 돌연변이 게살입니다."],
+			"modAddContentsLantern": ["렌턴", ""],
+			"modAddContentsIce": ["얼음", ""],
+			"modAddContentsClayJugOfCamelliaJaponicaOil": ["동백 기름이 담긴 호리병", ""],
+			"modAddContentsGlassBottleOfCamelliaJaponicaOil": ["동백 기름이 담긴 유리병", ""]
 		},
 		"terrain": {
 			"modAddContentsMudFlat": "갯벌"
