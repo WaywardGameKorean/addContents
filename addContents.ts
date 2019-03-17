@@ -594,6 +594,7 @@ export default class Addcontents extends Mod {
 	public itemGlassBottleOfCamelliaJaponicaOil: ItemType;
 
 	@Register.item("Ice", { //얼음
+		decayMax : 1000,
 		use: [ActionType.Eat],
 		onUse : {
 			[ActionType.Eat]: [1, -1, 0, 5],
@@ -608,7 +609,6 @@ export default class Addcontents extends Mod {
 	@Register.item("Lantern", { //랜턴
 		attack : 1,
 		damageType : DamageType.Blunt,
-		decaysInto : ItemType.GlassBottle,
 		use: [ Registry<Addcontents, ActionType>().get("actionLightUp") ,ActionType.Build],
 		onUse : {
 			[ActionType.Build] : Registry<Addcontents, DoodadType>().get("doodadLantern")
@@ -633,6 +633,69 @@ export default class Addcontents extends Mod {
 	})
 	public itemLantern: ItemType;
 
+	@Register.item("LitLantern", { //불이 켜진 랜턴
+		attack : 1,
+		damageType : DamageType.Blunt,
+		decayMax : 200000,
+		decaysInto : ItemType.GlassBottle,
+		use: [ActionType.Build],
+		onUse : {
+			[ActionType.Build] : Registry<Addcontents, DoodadType>().get("doodadLitLantern")
+		},
+		equip : EquipType.Held,
+		onEquipEffect : [OnEquipType.LightSource, 4],
+		durability: 50,
+		weight: 0.8,
+		worth : 50,
+		groups : [ItemTypeGroup.LightSource]
+	})
+	public itemLitLantern: ItemType;
+
+	@Register.item("WroughtIronLantern", { //연철랜턴
+		attack : 1,
+		damageType : DamageType.Blunt,
+		decaysInto : ItemType.GlassBottle,
+		use: [ Registry<Addcontents, ActionType>().get("actionLightUp") ,ActionType.Build],
+		onUse : {
+			[ActionType.Build] : Registry<Addcontents, DoodadType>().get("doodadWroughtIronLantern")
+		},
+		equip : EquipType.Held,
+		recipe: {
+			components: [
+				RecipeComponent(ItemType.WroughtIron, 3, 3, 3),
+				RecipeComponent(ItemType.SheetOfGlass, 1, 1, 1),
+				RecipeComponent(ItemType.String, 2, 2, 2)
+			],
+			requiresFire : true,
+			requiredDoodad : DoodadTypeGroup.Anvil,
+			skill: SkillType.Blacksmithing,
+			level: RecipeLevel.Intermediate,
+			reputation: -50
+		},
+		durability: 50,
+		weight: 0.8,
+		worth : 50,
+		groups : [ItemTypeGroup.LightSource]
+	})
+	public itemWroughtIronLantern: ItemType;
+
+	@Register.item("LitWroughtIronLantern", { //불이 켜진 연철 랜턴
+		attack : 1,
+		damageType : DamageType.Blunt,
+		decayMax : 200000,
+		decaysInto : ItemType.GlassBottle,
+		use: [ActionType.Build],
+		onUse : {
+			[ActionType.Build] : Registry<Addcontents, DoodadType>().get("doodadLitWroughtIronLantern")
+		},
+		equip : EquipType.Held,
+		onEquipEffect : [OnEquipType.LightSource, 4],
+		durability: 50,
+		weight: 0.8,
+		worth : 50,
+		groups : [ItemTypeGroup.LightSource]
+	})
+	public itemLitWroughtIronLantern: ItemType;
 	////////////////////////////////////
 	// Doodads
 	//
@@ -695,6 +758,30 @@ export default class Addcontents extends Mod {
 		reduceDurabilityOnGather: true
 	})
 	public doodadLantern: DoodadType;
+
+	@Register.doodad("LitLantern", { //불이 켜진 랜턴
+		isAnimated: true,
+		decayMax : 500000,
+		pickUp: [Registry<Addcontents, ItemType>().get("itemLitLantern")],
+		reduceDurabilityOnGather: true,
+		providesLight : 4
+	})
+	public doodadLitLantern: DoodadType;
+
+	@Register.doodad("WroughtIronLantern", { //연철랜턴
+		pickUp: [Registry<Addcontents, ItemType>().get("itemWroughtIronLantern")],
+		reduceDurabilityOnGather: true
+	})
+	public doodadWroughtIronLantern: DoodadType;
+
+	@Register.doodad("LitWroughtIronLantern", { //불이 켜진 연철 랜턴
+		isAnimated: true,
+		decayMax : 500000,
+		pickUp: [Registry<Addcontents, ItemType>().get("itemLitWroughtIronLantern")],
+		reduceDurabilityOnGather: true,
+		providesLight : 4
+	})
+	public doodadLitWroughtIronLantern: DoodadType;
 
 	@Register.doodad("StoneCompressionMachine", { //압착기
 		isTall : true,

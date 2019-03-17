@@ -20,7 +20,9 @@
 			"modAddContentsMycenaChlorophosLamp": ["받침애주름버섯 램프", "받침애주름버섯을 넣어 테라리움처럼 만든 램프입니다."],
 			"modAddContentsMycenaChlorophosStreetlamp": ["나무 가로등", "받침애주름버섯 램프를 이용해 만든 가로등입니다. 주변을 비춰줍니다."],
 			"modAddContentsMycenaChlorophosIronStreetlamp": ["철제 가로등", "받침애주름버섯 램프를 이용해 만든 가로등입니다. 주변을 비춰줍니다."],
-			"modAddContentsLantern": ["랜턴", ""]
+			"modAddContentsLantern": ["랜턴", ""],
+			"modAddContentsLitLantern": ["불이 켜진 랜턴", ""],
+			"modAddContentsWroughtIronLantern": ["연철랜턴", ""]
 		},
 		"doodadItem": {
 			"modAddContentsWoodenBed": [null, "올라가서 수면을 취하기 위한 가구입니다. 단단한 목재위에 부드러운 면이불을 덮어두어 아주 편하게 휴식을 취하거나 잠을 잘 수 있습니다."]
@@ -56,6 +58,8 @@
 			"modAddContentsAberrantCrabMeat": ["돌연변이 게살", "반투명하고 흐물흐물한 돌연변이 게살입니다. 이대로도 먹을 수도 있습니다."],
 			"modAddContentsCookedAberrantCrabMeat": ["구운 돌연변이 게살", "담백하고 맛있게 구워진 돌연변이 게살입니다."],
 			"modAddContentsLantern": ["렌턴", ""],
+			"modAddContentsLitLantern": ["불이 켜진 렌턴", ""],
+			"modAddContentsWroughtIronLantern": ["연철렌턴", ""],
 			"modAddContentsIce": ["얼음", ""],
 			"modAddContentsClayJugOfCamelliaJaponicaOil": ["동백 기름이 담긴 호리병", ""],
 			"modAddContentsGlassBottleOfCamelliaJaponicaOil": ["동백 기름이 담긴 유리병", ""]

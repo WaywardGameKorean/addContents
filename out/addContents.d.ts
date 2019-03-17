@@ -46,11 +46,17 @@ export default class Addcontents extends Mod {
     itemGlassBottleOfCamelliaJaponicaOil: ItemType;
     itemIce: ItemType;
     itemLantern: ItemType;
+    itemLitLantern: ItemType;
+    itemWroughtIronLantern: ItemType;
+    itemLitWroughtIronLantern: ItemType;
     doodadMycenaChlorophos: DoodadType;
     doodadMycenaChlorophosLamp: DoodadType;
     doodadMycenaChlorophosStreetlamp: DoodadType;
     doodadMycenaChlorophosIronStreetlamp: DoodadType;
     doodadLantern: DoodadType;
+    doodadLitLantern: DoodadType;
+    doodadWroughtIronLantern: DoodadType;
+    doodadLitWroughtIronLantern: DoodadType;
     doodadStoneCompressionMachine: DoodadType;
     doodadPomegranateTree: DoodadType;
     doodadCamelliaJaponica: DoodadType;
