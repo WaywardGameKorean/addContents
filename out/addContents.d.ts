@@ -5,7 +5,12 @@ import { IContainer, IItem } from "item/IItem";
 import { ITile } from "tile/ITerrain";
 import { IDoodad } from "doodad/IDoodad";
 import IPlayer from "player/IPlayer";
-export default class AddContents extends Mod {
+import IWorld from "renderer/IWorld";
+interface IAddcontentsData {
+    seed: number;
+}
+export default class Addcontents extends Mod {
+    static readonly INSTANCE: Addcontents;
     readonly actionLightUp: ActionType;
     readonly actionAddOil: ActionType;
     itemRabbitRobe: ItemType;
@@ -55,8 +60,14 @@ export default class AddContents extends Mod {
     creatureIceElemental: CreatureType;
     creatureSnowMan: CreatureType;
     terrainMudFlat: TerrainType;
-    data: any;
+    data: IAddcontentsData;
+    firstLoad: boolean;
+    initializeSaveData(data?: IAddcontentsData): IAddcontentsData;
+    onCreateWorld(world: IWorld): void;
+    preLoadWorldDifferences(generateNewWorld: boolean): void;
+    itemData: any;
     onBuild(human: Human, item: IItem, tile: ITile, doodad: IDoodad): void;
     onPickupDoodad(player: IPlayer, doodad: IDoodad): void;
     onInventoryItemAdd(player: IPlayer | undefined, item: IItem, container: IContainer): void;
 }
+export {};

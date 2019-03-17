@@ -7,8 +7,7 @@
 		7
 	],
 	"multiplayerCompatible": true,
-	"unloadable": true,
-	"file": "out/addContents.js",
+	"file": "out/Addcontents.js",
 	"languages": [
 		"lang/english",
 		"lang/korean",

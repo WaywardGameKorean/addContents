@@ -11,30 +11,28 @@ import { IContainer, IItem } from "item/IItem";
 import { ITile } from "tile/ITerrain";
 import { IDoodad } from "doodad/IDoodad";
 import IPlayer from "player/IPlayer";
+import Random from "utilities/Random";
+import IWorld from "renderer/IWorld"
 
-//interface IAddContentsData {
-//	[ket:string] : any;
-//}
+interface IAddcontentsData {
+	seed: number;
+}
 
-export default class AddContents extends Mod {
+export default class Addcontents extends Mod {
 
-	//@Mod.instance<AddContents>("AddContents")
-	//public static readonly INSTANCE: AddContents;
+	@Mod.instance<Addcontents>("Addcontents")
+	public static readonly INSTANCE: Addcontents;
 
 	////////////////////////////////////
-	// action
+	// Action Registrations
 	//
 	@Register.action("LightUp", new Action(ActionArgument.ItemInventory)
-	.setUsableBy(EntityType.Player)
-	.setHandler((action, item) => {
-		let player = action.executor;
-		let hasClayJug = itemManager.getItemInContainer(player.inventory, this.itemClayJugOfCamelliaJaponicaOil);
-		let hasGlassBottle = itemManager.getItemInContainer(player.inventory, this.itemGlassBottleOfCamelliaJaponicaOil);
-		console.log(itemManager.getItemInContainer(player.inventory, ItemType.IronIngot));
-		console.log(player.inventory, Registry<AddContents, ItemType>().get("itemClayJugOfCamelliaJaponicaOil"));
-		console.log(hasClayJug, hasGlassBottle);
-		console.log(player, item);
-	}))
+		.setUsableBy(EntityType.Player)
+		.setHandler((action, item) => {
+			let player = action.executor;
+			console.log(player, item);
+			console.log(itemManager.getItemInInventoryByGroup(player, ItemTypeGroup.Fuel, ItemType.Log));
+		}))
 	public readonly actionLightUp: ActionType;
 
 	@Register.action("AddOil", new Action(ActionArgument.ItemInventory)
@@ -79,7 +77,7 @@ export default class AddContents extends Mod {
 	@Register.item("HardShellPowder", { //단단한 껍질 가루
 		recipe: {
 			components: [
-				RecipeComponent(Registry<AddContents, ItemType>().get("itemHardShell"), 1, 1),
+				RecipeComponent(Registry<Addcontents, ItemType>().get("itemHardShell"), 1, 1),
 				RecipeComponent(ItemTypeGroup.MortarAndPestle, 1, 0)
 			],
 			requiresFire : false,
@@ -126,7 +124,7 @@ export default class AddContents extends Mod {
 		},
 		recipe: {
 			components: [
-				RecipeComponent(Registry<AddContents, ItemType>().get("itemCrabMeat"), 1, 1),
+				RecipeComponent(Registry<Addcontents, ItemType>().get("itemCrabMeat"), 1, 1),
 				RecipeComponent(ItemTypeGroup.Tongs, 1, 0)
 			],
 			requiresFire : true,
@@ -165,7 +163,7 @@ export default class AddContents extends Mod {
 		},
 		recipe: {
 			components: [
-				RecipeComponent(Registry<AddContents, ItemType>().get("itemAberrantCrabMeat"), 1, 1),
+				RecipeComponent(Registry<Addcontents, ItemType>().get("itemAberrantCrabMeat"), 1, 1),
 				RecipeComponent(ItemTypeGroup.Tongs, 1, 0)
 			],
 			requiresFire : true,
@@ -185,7 +183,7 @@ export default class AddContents extends Mod {
 	@Register.item("Mud", { //뻘
 		use : [ActionType.SetDown],
 		onUse : {
-			[ActionType.SetDown] : Registry<AddContents, TerrainType>().get("terrainMudFlat")
+			[ActionType.SetDown] : Registry<Addcontents, TerrainType>().get("terrainMudFlat")
 		},
 		disassemble: false,
 		durability: 10,
@@ -198,8 +196,8 @@ export default class AddContents extends Mod {
 		disassemble: true,
 		dismantle: {
 			items: [
-				[Registry<AddContents, ItemType>().get("itemHardShell"), 1],
-				[Registry<AddContents, ItemType>().get("itemPearl"), 1]
+				[Registry<Addcontents, ItemType>().get("itemHardShell"), 1],
+				[Registry<Addcontents, ItemType>().get("itemPearl"), 1]
 			],
 			required: ItemTypeGroup.Sharpened,
 			skill: SkillType.Anatomy
@@ -235,7 +233,7 @@ export default class AddContents extends Mod {
 		},
 		recipe: {
 			components: [
-				RecipeComponent(Registry<AddContents, ItemType>().get("itemSnailMucus"), 1, 1),
+				RecipeComponent(Registry<Addcontents, ItemType>().get("itemSnailMucus"), 1, 1),
 				RecipeComponent(ItemType.Bandage, 1, 0),
 				RecipeComponent(ItemTypeGroup.Medicinal, 2, 0),
 				RecipeComponent(ItemTypeGroup.MortarAndPestle, 1, 0)
@@ -273,7 +271,7 @@ export default class AddContents extends Mod {
 		},
 		recipe: {
 			components: [
-				RecipeComponent(Registry<AddContents, ItemType>().get("itemSnailMeat"), 1, 1),
+				RecipeComponent(Registry<Addcontents, ItemType>().get("itemSnailMeat"), 1, 1),
 				RecipeComponent(ItemTypeGroup.Tongs, 1, 0)
 			],
 			requiresFire : true,
@@ -311,7 +309,7 @@ export default class AddContents extends Mod {
 		},
 		recipe: {
 			components: [
-				RecipeComponent(Registry<AddContents, ItemType>().get("itemScallop"), 1, 1),
+				RecipeComponent(Registry<Addcontents, ItemType>().get("itemScallop"), 1, 1),
 				RecipeComponent(ItemTypeGroup.Tongs, 1, 0)
 			],
 			requiresFire : true,
@@ -332,7 +330,7 @@ export default class AddContents extends Mod {
 		use: [ActionType.Eat, ActionType.Plant],
 		onUse : {
 			[ActionType.Eat]: [-2, 2, 2, -2],
-			[ActionType.Plant]: Registry<AddContents, DoodadType>().get("doodadMycenaChlorophos")
+			[ActionType.Plant]: Registry<Addcontents, DoodadType>().get("doodadMycenaChlorophos")
 		},
 		skillUse : SkillType.Mycology,
 		decayMax : 50000,
@@ -352,12 +350,12 @@ export default class AddContents extends Mod {
 		decaysInto : ItemType.GlassBottle,
 		use: [ActionType.Build],
 		onUse : {
-			[ActionType.Build] : Registry<AddContents, DoodadType>().get("doodadMycenaChlorophosLamp")
+			[ActionType.Build] : Registry<Addcontents, DoodadType>().get("doodadMycenaChlorophosLamp")
 		},
 		equip : EquipType.Held,
 		recipe: {
 			components: [
-				RecipeComponent(Registry<AddContents, ItemType>().get("itemMycenaChlorophos"), 2, 2, 2),
+				RecipeComponent(Registry<Addcontents, ItemType>().get("itemMycenaChlorophos"), 2, 2, 2),
 				RecipeComponent(ItemType.GlassBottle, 1, 1, 1),
 				RecipeComponent(ItemTypeGroup.Pulp, 1, 1, 1)
 			],
@@ -377,11 +375,11 @@ export default class AddContents extends Mod {
 		decayMax : 100000,
 		use: [ActionType.Build],
 		onUse : {
-			[ActionType.Build] : Registry<AddContents, DoodadType>().get("doodadMycenaChlorophosStreetlamp")
+			[ActionType.Build] : Registry<Addcontents, DoodadType>().get("doodadMycenaChlorophosStreetlamp")
 		},
 		recipe: {
 			components: [
-				RecipeComponent(Registry<AddContents, ItemType>().get("itemMycenaChlorophosLamp"), 1, 1, 1),
+				RecipeComponent(Registry<Addcontents, ItemType>().get("itemMycenaChlorophosLamp"), 1, 1, 1),
 				RecipeComponent(ItemType.Log, 2, 2, 2),
 				RecipeComponent(ItemType.WoodenPole, 1, 1, 1),
 				RecipeComponent(ItemType.String, 2, 2, 2),
@@ -403,11 +401,11 @@ export default class AddContents extends Mod {
 		decayMax : 100000,
 		use: [ActionType.Build],
 		onUse : {
-			[ActionType.Build] : Registry<AddContents, DoodadType>().get("doodadMycenaChlorophosIronStreetlamp")
+			[ActionType.Build] : Registry<Addcontents, DoodadType>().get("doodadMycenaChlorophosIronStreetlamp")
 		},
 		recipe: {
 			components: [
-				RecipeComponent(Registry<AddContents, ItemType>().get("itemMycenaChlorophosLamp"), 1, 1, 1),
+				RecipeComponent(Registry<Addcontents, ItemType>().get("itemMycenaChlorophosLamp"), 1, 1, 1),
 				RecipeComponent(ItemType.IronIngot, 4, 4, 4),
 				RecipeComponent(ItemTypeGroup.Hammer, 1, 0, 0),
 			],
@@ -427,7 +425,7 @@ export default class AddContents extends Mod {
 	@Register.item("StoneCompressionMachine", { //압착기
 		use: [ActionType.Build],
 		onUse : {
-			[ActionType.Build] : Registry<AddContents, DoodadType>().get("doodadStoneCompressionMachine")
+			[ActionType.Build] : Registry<Addcontents, DoodadType>().get("doodadStoneCompressionMachine")
 		},
 		recipe: {
 			components: [
@@ -467,10 +465,10 @@ export default class AddContents extends Mod {
 	public itemPillow: ItemType;
 
 	@Register.item("WoodenBed", { //나무 침대
-		use: [ActionType.Rest, ActionType.Sleep /*, ActionType.PlaceDown*/],
+		use: [ActionType.Rest, ActionType.Sleep , ActionType.PlaceDown],
 		recipe : {
 			components: [
-				RecipeComponent(Registry<AddContents, ItemType>().get("itemPillow"), 1, 1, 1),
+				RecipeComponent(Registry<Addcontents, ItemType>().get("itemPillow"), 1, 1, 1),
 				RecipeComponent(ItemType.CottonBedroll, 1, 1, 1),
 				RecipeComponent(ItemType.Log, 3, 3, 3),
 				RecipeComponent(ItemType.WoodenDowels, 4, 4, 4),
@@ -487,11 +485,11 @@ export default class AddContents extends Mod {
 		groups : [ItemTypeGroup.Bedding],
 		weight: 10,
 		worth : 400,
-		//doodad : {
-		//	isFlammable: true,
-		//	repairItem: Registry<AddContents, ItemType>().get("itemWoodenBed"),
-		//	reduceDurabilityOnGather: true
-		//}
+		doodad : {
+			isFlammable: true,
+			repairItem: Registry<Addcontents, ItemType>().get("itemWoodenBed"),
+			reduceDurabilityOnGather: true
+		}
 	})
 	public itemWoodenBed: ItemType;
 
@@ -500,9 +498,9 @@ export default class AddContents extends Mod {
 		onUse : {
 			[ActionType.Eat]: [1, 5, 8, 4]
 		},
-		returnOnUse: [Registry<AddContents, ItemType>().get("itemPomegranateSeeds"), true],
+		returnOnUse: [Registry<Addcontents, ItemType>().get("itemPomegranateSeeds"), true],
 		dismantle: {
-			items: [[Registry<AddContents, ItemType>().get("itemPomegranateSeeds"), 1]],
+			items: [[Registry<Addcontents, ItemType>().get("itemPomegranateSeeds"), 1]],
 			skill: SkillType.Botany,
 			required: ItemTypeGroup.Sharpened
 		},
@@ -519,7 +517,7 @@ export default class AddContents extends Mod {
 		use: [ActionType.Plant, ActionType.Eat],
 		onUse : {
 			[ActionType.Eat]: [0, 1, 1, -1],
-			[ActionType.Plant]: Registry<AddContents, DoodadType>().get("doodadPomegranateTree")
+			[ActionType.Plant]: Registry<Addcontents, DoodadType>().get("doodadPomegranateTree")
 		},
 		skillUse : SkillType.Botany,
 		disassemble: false,
@@ -531,7 +529,7 @@ export default class AddContents extends Mod {
 
 	@Register.item("CamelliaJaponicaFruit", { //동백 열매
 		dismantle: {
-			items: [[Registry<AddContents, ItemType>().get("itemCamelliaJaponicaSeeds"), 3]],
+			items: [[Registry<Addcontents, ItemType>().get("itemCamelliaJaponicaSeeds"), 3]],
 			skill: SkillType.Botany,
 			required: ItemTypeGroup.Sharpened
 		},
@@ -548,7 +546,7 @@ export default class AddContents extends Mod {
 		use: [ActionType.Plant, ActionType.Eat],
 		onUse : {
 			[ActionType.Eat]: [0, 1, 1, -1],
-			[ActionType.Plant]: Registry<AddContents, DoodadType>().get("doodadCamelliaJaponica")
+			[ActionType.Plant]: Registry<Addcontents, DoodadType>().get("doodadCamelliaJaponica")
 		},
 		skillUse : SkillType.Botany,
 		disassemble: false,
@@ -559,13 +557,14 @@ export default class AddContents extends Mod {
 	public itemCamelliaJaponicaSeeds: ItemType;
 
 	@Register.item("ClayJugOfCamelliaJaponicaOil", { //동백 기름이 담긴 호리병
+		use : [Registry<Addcontents, ActionType>().get("actionAddOil")],
 		recipe : {
 			components: [
-				RecipeComponent(Registry<AddContents, ItemType>().get("itemCamelliaJaponicaSeeds"), 10, 10, 10),
+				RecipeComponent(Registry<Addcontents, ItemType>().get("itemCamelliaJaponicaSeeds"), 10, 10, 10),
 				RecipeComponent(ItemType.ClayJug, 1, 1, 1),
 			],
 			skill: SkillType.Tinkering,
-			requiredDoodad: Registry<AddContents, DoodadType>().get("doodadStoneCompressionMachine"),
+			requiredDoodad: Registry<Addcontents, DoodadType>().get("doodadStoneCompressionMachine"),
 			level: RecipeLevel.Simple,
 			reputation: -100
 		},
@@ -579,11 +578,11 @@ export default class AddContents extends Mod {
 	@Register.item("GlassBottleOfCamelliaJaponicaOil", { //동백 기름이 담긴 유리병
 		recipe : {
 			components: [
-				RecipeComponent(Registry<AddContents, ItemType>().get("itemCamelliaJaponicaSeeds"), 10, 10, 10),
+				RecipeComponent(Registry<Addcontents, ItemType>().get("itemCamelliaJaponicaSeeds"), 10, 10, 10),
 				RecipeComponent(ItemType.GlassBottle, 1, 1, 1),
 			],
 			skill: SkillType.Tinkering,
-			requiredDoodad: Registry<AddContents, DoodadType>().get("doodadStoneCompressionMachine"),
+			requiredDoodad: Registry<Addcontents, DoodadType>().get("doodadStoneCompressionMachine"),
 			level: RecipeLevel.Simple,
 			reputation: -100
 		},
@@ -610,9 +609,9 @@ export default class AddContents extends Mod {
 		attack : 1,
 		damageType : DamageType.Blunt,
 		decaysInto : ItemType.GlassBottle,
-		use: [ Registry<AddContents, ActionType>().get("actionLightUp") ,ActionType.Build],
+		use: [ Registry<Addcontents, ActionType>().get("actionLightUp") ,ActionType.Build],
 		onUse : {
-			[ActionType.Build] : Registry<AddContents, DoodadType>().get("doodadLantern")
+			[ActionType.Build] : Registry<Addcontents, DoodadType>().get("doodadLantern")
 		},
 		equip : EquipType.Held,
 		recipe: {
@@ -625,7 +624,7 @@ export default class AddContents extends Mod {
 			requiredDoodad : DoodadTypeGroup.Anvil,
 			skill: SkillType.Blacksmithing,
 			level: RecipeLevel.Intermediate,
-			reputation: 10
+			reputation: -50
 		},
 		durability: 50,
 		weight: 0.8,
@@ -642,10 +641,10 @@ export default class AddContents extends Mod {
 		spreadMax: 3,
 		gather: {
 			[GrowingStage.Flowering]:[
-				{type: Registry<AddContents, ItemType>().get("itemMycenaChlorophos")},
+				{type: Registry<Addcontents, ItemType>().get("itemMycenaChlorophos")},
 			],
 			[GrowingStage.Ripening]:[
-				{type: Registry<AddContents, ItemType>().get("itemMycenaChlorophos")},
+				{type: Registry<Addcontents, ItemType>().get("itemMycenaChlorophos")},
 			]
 		},
 		skillUse: SkillType.Mycology,
@@ -664,7 +663,7 @@ export default class AddContents extends Mod {
 	public doodadMycenaChlorophos: DoodadType;
 
 	@Register.doodad("MycenaChlorophosLamp", { //받침에주름버섯 램프
-		pickUp: [Registry<AddContents, ItemType>().get("itemMycenaChlorophosLamp")],
+		pickUp: [Registry<Addcontents, ItemType>().get("itemMycenaChlorophosLamp")],
 		decayMax : 100000,
 		reduceDurabilityOnGather: true,
 		providesLight : 1
@@ -674,7 +673,7 @@ export default class AddContents extends Mod {
 	@Register.doodad("MycenaChlorophosStreetlamp", { //받침에주름버섯 램프 나무 가로등
 		isTall : true,
 		blockMove : true,
-		pickUp: [Registry<AddContents, ItemType>().get("itemMycenaChlorophosStreetlamp")],
+		pickUp: [Registry<Addcontents, ItemType>().get("itemMycenaChlorophosStreetlamp")],
 		decayMax : 100000,
 		reduceDurabilityOnGather: true,
 		providesLight : 2
@@ -684,7 +683,7 @@ export default class AddContents extends Mod {
 	@Register.doodad("MycenaChlorophosIronStreetlamp", { //받침에주름버섯 램프 철제 가로등
 		isTall : true,
 		blockMove : true,
-		pickUp: [Registry<AddContents, ItemType>().get("itemMycenaChlorophosIronStreetlamp")],
+		pickUp: [Registry<Addcontents, ItemType>().get("itemMycenaChlorophosIronStreetlamp")],
 		decayMax : 100000,
 		reduceDurabilityOnGather: true,
 		providesLight : 2
@@ -692,7 +691,7 @@ export default class AddContents extends Mod {
 	public doodadMycenaChlorophosIronStreetlamp: DoodadType;
 
 	@Register.doodad("Lantern", { //랜턴
-		pickUp: [Registry<AddContents, ItemType>().get("itemLantern")],
+		pickUp: [Registry<Addcontents, ItemType>().get("itemLantern")],
 		reduceDurabilityOnGather: true
 	})
 	public doodadLantern: DoodadType;
@@ -700,7 +699,7 @@ export default class AddContents extends Mod {
 	@Register.doodad("StoneCompressionMachine", { //압착기
 		isTall : true,
 		blockMove : true,
-		pickUp: [Registry<AddContents, ItemType>().get("itemStoneCompressionMachine")],
+		pickUp: [Registry<Addcontents, ItemType>().get("itemStoneCompressionMachine")],
 		reduceDurabilityOnGather: true
 	})
 	public doodadStoneCompressionMachine: DoodadType;
@@ -737,9 +736,9 @@ export default class AddContents extends Mod {
 				{type: ItemType.TreeBark}
 			],
 			[GrowingStage.Ripening]: [
-				{type: Registry<AddContents, ItemType>().get("itemPomegranate")},
-				{type: Registry<AddContents, ItemType>().get("itemPomegranate")},
-				{type: Registry<AddContents, ItemType>().get("itemPomegranate")},
+				{type: Registry<Addcontents, ItemType>().get("itemPomegranate")},
+				{type: Registry<Addcontents, ItemType>().get("itemPomegranate")},
+				{type: Registry<Addcontents, ItemType>().get("itemPomegranate")},
 				{type: ItemType.Leaves},
 				{type: ItemType.Twigs},
 				{type: ItemType.Branch,chance: 5},
@@ -756,9 +755,9 @@ export default class AddContents extends Mod {
 		},
 		harvest: {
 			[GrowingStage.Ripening]: [
-				{type: Registry<AddContents, ItemType>().get("itemPomegranate")},
-				{type: Registry<AddContents, ItemType>().get("itemPomegranate")},
-				{type: Registry<AddContents, ItemType>().get("itemPomegranate")}
+				{type: Registry<Addcontents, ItemType>().get("itemPomegranate")},
+				{type: Registry<Addcontents, ItemType>().get("itemPomegranate")},
+				{type: Registry<Addcontents, ItemType>().get("itemPomegranate")}
 			]
 		},
 		canGrow: true,
@@ -803,9 +802,9 @@ export default class AddContents extends Mod {
 				{type: ItemType.TreeBark}
 			],
 			[GrowingStage.Ripening]: [
-				{type: Registry<AddContents, ItemType>().get("itemCamelliaJaponicaFruit")},
-				{type: Registry<AddContents, ItemType>().get("itemCamelliaJaponicaFruit")},
-				{type: Registry<AddContents, ItemType>().get("itemCamelliaJaponicaFruit")},
+				{type: Registry<Addcontents, ItemType>().get("itemCamelliaJaponicaFruit")},
+				{type: Registry<Addcontents, ItemType>().get("itemCamelliaJaponicaFruit")},
+				{type: Registry<Addcontents, ItemType>().get("itemCamelliaJaponicaFruit")},
 				{type: ItemType.Leaves},
 				{type: ItemType.Twigs},
 				{type: ItemType.Branch,chance: 5},
@@ -822,9 +821,9 @@ export default class AddContents extends Mod {
 		},
 		harvest: {
 			[GrowingStage.Ripening]: [
-				{type: Registry<AddContents, ItemType>().get("itemCamelliaJaponicaFruit")},
-				{type: Registry<AddContents, ItemType>().get("itemCamelliaJaponicaFruit")},
-				{type: Registry<AddContents, ItemType>().get("itemCamelliaJaponicaFruit")}
+				{type: Registry<Addcontents, ItemType>().get("itemCamelliaJaponicaFruit")},
+				{type: Registry<Addcontents, ItemType>().get("itemCamelliaJaponicaFruit")},
+				{type: Registry<Addcontents, ItemType>().get("itemCamelliaJaponicaFruit")}
 			]
 		},
 		canGrow: true,
@@ -860,12 +859,12 @@ export default class AddContents extends Mod {
 		//skipMovementChance: 2
 	},{
 		resource:[
-			{item: Registry<AddContents, ItemType>().get("itemHardShell")},
-			{item: Registry<AddContents, ItemType>().get("itemCrabMeat")}
+			{item: Registry<Addcontents, ItemType>().get("itemHardShell")},
+			{item: Registry<Addcontents, ItemType>().get("itemCrabMeat")}
 		],
 		aberrantResource: [
-			{item: Registry<AddContents, ItemType>().get("itemHardShell")},
-			{item: Registry<AddContents, ItemType>().get("itemAberrantCrabMeat")}
+			{item: Registry<Addcontents, ItemType>().get("itemHardShell")},
+			{item: Registry<Addcontents, ItemType>().get("itemAberrantCrabMeat")}
 		],
 		decay:2200,
 		skill:SkillType.Anatomy
@@ -892,15 +891,15 @@ export default class AddContents extends Mod {
 		spawnGroup: [SpawnGroup.Any],
 	},{
 		resource:[
-			{item: Registry<AddContents, ItemType>().get("itemSnailMucus")},
-			{item: Registry<AddContents, ItemType>().get("itemSnailMeat")},
-			{item: Registry<AddContents, ItemType>().get("itemHardShell")}
+			{item: Registry<Addcontents, ItemType>().get("itemSnailMucus")},
+			{item: Registry<Addcontents, ItemType>().get("itemSnailMeat")},
+			{item: Registry<Addcontents, ItemType>().get("itemHardShell")}
 		],
 		aberrantResource: [
-			{item: Registry<AddContents, ItemType>().get("itemSnailMucus")},
-			{item: Registry<AddContents, ItemType>().get("itemSnailMeat")},
-			{item: Registry<AddContents, ItemType>().get("itemHardShell")},
-			{item: Registry<AddContents, ItemType>().get("itemCloakCoveredWithMucus"), chance: 1}
+			{item: Registry<Addcontents, ItemType>().get("itemSnailMucus")},
+			{item: Registry<Addcontents, ItemType>().get("itemSnailMeat")},
+			{item: Registry<Addcontents, ItemType>().get("itemHardShell")},
+			{item: Registry<Addcontents, ItemType>().get("itemCloakCoveredWithMucus"), chance: 1}
 		],
 		decay:2200,
 		skill:SkillType.Anatomy
@@ -935,15 +934,15 @@ export default class AddContents extends Mod {
 		waterAnimations : true
 	},{
 		resource:[
-			{item: Registry<AddContents, ItemType>().get("itemSmoothSkin")},
-			{item: Registry<AddContents, ItemType>().get("itemRabbitRobe"), chance: 1},
+			{item: Registry<Addcontents, ItemType>().get("itemSmoothSkin")},
+			{item: Registry<Addcontents, ItemType>().get("itemRabbitRobe"), chance: 1},
 			{item: ItemType.RawMeat},
 			{item: ItemType.Offal},
 			{item: ItemType.AnimalFat}
 		],
 		aberrantResource: [
-			{item: Registry<AddContents, ItemType>().get("itemSmoothSkin")},
-			{item: Registry<AddContents, ItemType>().get("itemRabbitRobe"), chance: 1},
+			{item: Registry<Addcontents, ItemType>().get("itemSmoothSkin")},
+			{item: Registry<Addcontents, ItemType>().get("itemRabbitRobe"), chance: 1},
 			{item: ItemType.RawMeat},
 			{item: ItemType.Offal},
 			{item: ItemType.AnimalFat}
@@ -970,19 +969,19 @@ export default class AddContents extends Mod {
 		tamingDifficulty: 300,
 		spawnGroup: [SpawnGroup.Guardians, SpawnGroup.StrongGuardians],
 		noStumble: true,
-		acceptedItems: [Registry<AddContents, ItemType>().get("itemIce")],
+		acceptedItems: [Registry<Addcontents, ItemType>().get("itemIce")],
 		skipMovementChance: 5,
 		tileMissChance : {
 			[TileGroup.Wet]: 0.5
 		}
 	},{
 		resource:[
-			{item: Registry<AddContents, ItemType>().get("itemIce")},
-			{item: Registry<AddContents, ItemType>().get("itemRabbitRobe"), chance: 1}
+			{item: Registry<Addcontents, ItemType>().get("itemIce")},
+			{item: Registry<Addcontents, ItemType>().get("itemRabbitRobe"), chance: 1}
 		],
 		aberrantResource: [
-			{item: Registry<AddContents, ItemType>().get("itemIce")},
-			{item: Registry<AddContents, ItemType>().get("itemRabbitRobe"), chance: 1}
+			{item: Registry<Addcontents, ItemType>().get("itemIce")},
+			{item: Registry<Addcontents, ItemType>().get("itemRabbitRobe"), chance: 1}
 		],
 		decay:12200,
 		skill:SkillType.Anatomy,
@@ -1036,9 +1035,9 @@ export default class AddContents extends Mod {
 		passable: true,
 		particles: { r: 171, g: 176, b: 179 },
 		resources: [
-			{ type: Registry<AddContents, ItemType>().get("itemPearlOyster"), chance: 2},
-			{ type: Registry<AddContents, ItemType>().get("itemScallop"), chance: 5},
-			{ type: Registry<AddContents, ItemType>().get("itemMud"), chance: 30, tileChange : TerrainType.Dirt},
+			{ type: Registry<Addcontents, ItemType>().get("itemPearlOyster"), chance: 2},
+			{ type: Registry<Addcontents, ItemType>().get("itemScallop"), chance: 5},
+			{ type: Registry<Addcontents, ItemType>().get("itemMud"), chance: 30, tileChange : TerrainType.Dirt},
 		]
 	})
 	public terrainMudFlat: TerrainType;
@@ -1046,49 +1045,55 @@ export default class AddContents extends Mod {
 	////////////////////////////////////
 	// Fields
 	//
-	//@Mod.saveData<AddContents>("AddContents")
-	//public data: IAddContentsData;
-	//public firstLoad = true;
-//
-	//public initializeSaveData(data?: IAddContentsData) {
-	//	if (data) {
-	//		console.log('one');
-	//		this.firstLoad = false;
-	//		return data;
-	//	}
-	//	console.log('one');
-//
-	//	this.firstLoad = true;
-	//	return {
-	//		object: {'test':1}
-	//	};
-	//}
+	@Mod.saveData<Addcontents>("Addcontents")
+	public data: IAddcontentsData;
+	public firstLoad = true;
 
+	public initializeSaveData(data?: IAddcontentsData) {
+		if (data) {
+			this.firstLoad = false;
+			return data;
+		}
 
-	
+		this.firstLoad = true;
+		return {
+			seed: new Date().getTime()
+		};
+	}
+
 	////////////////////////////////////
 	// Hook
 	//
-	public data: any;
 	@HookMethod
-	public onBuild(human: Human, item: IItem, tile: ITile, doodad: IDoodad) {
+	public onCreateWorld(world: IWorld): void {
+		//world.addLayer(Troposphere.troposphereZ);
+	}
+
+	@HookMethod
+	public preLoadWorldDifferences(generateNewWorld: boolean) {
+		Random.generator.setSeed(this.data.seed);
+	}
+
+	public itemData: any;
+	@HookMethod
+	public onBuild(human: Human, item: IItem, tile: ITile, doodad: IDoodad) { //build
 		if(item.decay !== undefined){
 			doodad.decay = item.decay;
 		}
 	}
 
 	@HookMethod
-	public onPickupDoodad(player: IPlayer, doodad: IDoodad) {
+	public onPickupDoodad(player: IPlayer, doodad: IDoodad) { //get end
 		if(doodad.decay !== undefined){
-			game.items[this.data].decay = doodad.decay;
+			game.items[this.itemData].decay = doodad.decay;
 		}
 	};
 
 	@HookMethod
-	public onInventoryItemAdd(player: IPlayer | undefined,item: IItem, container: IContainer) {
+	public onInventoryItemAdd(player: IPlayer | undefined,item: IItem, container: IContainer) { //get first
 		if(item.decay !== undefined){
 			let id = item.id;
-			this.data = id;
+			this.itemData = id;
 		}
 	};
 }
